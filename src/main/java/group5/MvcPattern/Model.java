@@ -27,4 +27,8 @@ public class Model {
     public void addView(View v) {
         this.views.add(v);
     }
+    
+    public View getUI(){
+        return this.views.get(0);
+    }
 }

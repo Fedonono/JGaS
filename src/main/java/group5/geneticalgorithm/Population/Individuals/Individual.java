@@ -65,4 +65,9 @@ public abstract class Individual extends Model {
     public void evaluate(){
         this.score = this.evaluationOperator.evaluate(this);
     }
+    
+    @Override
+    public IndividualUI getUI(){
+        return (IndividualUI)super.getUI();
+    }
 }

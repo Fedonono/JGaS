@@ -5,6 +5,7 @@
 package group5.geneticalgorithm.Population.Individuals;
 
 import group5.MvcPattern.View;
+import javax.swing.JPanel;
 
 
 
@@ -14,6 +15,6 @@ import group5.MvcPattern.View;
  *
  * @author simonneau
  */
-public abstract class IndividualUI implements View{
+public abstract class IndividualUI extends JPanel implements View{
     
 }
