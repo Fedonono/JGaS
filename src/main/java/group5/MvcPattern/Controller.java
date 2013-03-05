@@ -10,5 +10,5 @@ package group5.MvcPattern;
  */
 public abstract class Controller {
 
-    public abstract void applyChanges(ControlEvent event);
+    public abstract void applyChanges(UserEvent event);
 }

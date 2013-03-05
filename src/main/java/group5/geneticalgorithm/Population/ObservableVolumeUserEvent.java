@@ -4,18 +4,18 @@
  */
 package group5.geneticalgorithm.Population;
 
-import group5.MvcPattern.ControlEvent;
+import group5.MvcPattern.UserEvent;
 import group5.MvcPattern.View;
 
 /**
  *
  * @author simonneau
  */
-public class PopulationControlEvent extends ControlEvent{
+public class ObservableVolumeUserEvent extends UserEvent{
     
     int value;
     
-    public PopulationControlEvent(View source, int value){
+    public ObservableVolumeUserEvent(View source, int value){
         super(source);
     }
 

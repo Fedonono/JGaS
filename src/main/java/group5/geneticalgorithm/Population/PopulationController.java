@@ -4,7 +4,7 @@
  */
 package group5.geneticalgorithm.Population;
 
-import group5.MvcPattern.ControlEvent;
+import group5.MvcPattern.UserEvent;
 import group5.MvcPattern.Controller;
 
 /**
@@ -20,9 +20,9 @@ public class PopulationController extends Controller{
     }
     
     @Override
-    public void applyChanges(ControlEvent event) {
-        if(event instanceof PopulationControlEvent){
-            PopulationControlEvent ev = (PopulationControlEvent)event;
+    public void applyChanges(UserEvent event) {
+        if(event instanceof ObservableVolumeUserEvent){
+            ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
             model.setObservableVolume(ev.getValue());
         }
     }

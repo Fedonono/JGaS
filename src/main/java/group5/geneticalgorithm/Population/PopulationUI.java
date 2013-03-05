@@ -61,7 +61,7 @@ public class PopulationUI extends JPanel implements View, Observer {
         if (ev instanceof OptionLineEvent) {
             
             OptionLineEvent event = (OptionLineEvent) ev;
-            this.controller.applyChanges(new PopulationControlEvent(this, event.getValue()));
+            this.controller.applyChanges(new ObservableVolumeUserEvent(this, event.getValue()));
         }
     }
 }

@@ -8,11 +8,11 @@ package group5.MvcPattern;
  *
  * @author simonneau
  */
-public class ControlEvent {
+public class UserEvent {
 
     private View source;
     
-    public ControlEvent(View source){
+    public UserEvent(View source){
         this.source = source;
     }
 
