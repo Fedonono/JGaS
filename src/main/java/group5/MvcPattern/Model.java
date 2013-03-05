@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package group5.geneticalgorithm.MvcPattern;
+package group5.MvcPattern;
 
 import java.util.LinkedList;
 
@@ -10,21 +10,21 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public  class Model {
+public class Model {
 
     private LinkedList<View> views = new LinkedList<>();
-    
-    protected void notifyViews(RefreshEvent ev){
-        for(View v : views){
+
+    protected void notifyViews(RefreshEvent ev) {
+        for (View v : views) {
             v.refresh(ev);
         }
     }
-    
-    public void notifyViews(){
+
+    public void notifyViews() {
         this.notifyViews(new RefreshEvent(this));
     }
-    
-    public void addView(View v){
+
+    public void addView(View v) {
         this.views.add(v);
     }
 }

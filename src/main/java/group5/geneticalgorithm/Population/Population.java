@@ -4,7 +4,7 @@
  */
 package group5.geneticalgorithm.Population;
 
-import group5.geneticalgorithm.MvcPattern.Model;
+import group5.MvcPattern.Model;
 import group5.geneticalgorithm.Operators.Selection.SelectionOperator;
 import group5.geneticalgorithm.Population.Individuals.Individual;
 import java.util.ArrayList;
@@ -19,19 +19,42 @@ public class Population extends Model {
 
     private ArrayList<Individual> individuals;
     private SelectionOperator selectionOperator;
+    private int observableVolume = 1;
+
+    public Population() {
+        this(null);
+    }
 
     public Population(SelectionOperator sop) {
+        this(sop, 1);
+    }
+
+    public Population(SelectionOperator sop, int observableVolume) {
         this.selectionOperator = sop;
         this.individuals = new ArrayList<>();
+        this.observableVolume = observableVolume;
     }
 
     /**
      * Adds an individual to the 'this' Population.
-     * @param s 
+     *
+     * @param s
      */
     public void add(Individual s) {
         this.individuals.add(s);
-        
+
+    }
+
+    public void setSelectionOperator(SelectionOperator selectionOperator) {
+        this.selectionOperator = selectionOperator;
+    }
+
+    public void setObservableVolume(int observableVolume) {
+        this.observableVolume = observableVolume;
+    }
+
+    public int getObservableVolume() {
+        return observableVolume;
     }
 
     /**
@@ -43,9 +66,9 @@ public class Population extends Model {
         }
     }
 
-    
     /**
-     * Selects the survivals of the current generation using the selected selection operator.
+     * Selects the survivals of the current generation using the selected
+     * selection operator.
      */
     public void buildNextGeneration() {
         this.evaluationStep();
@@ -58,9 +81,9 @@ public class Population extends Model {
         this.individuals.addAll(population.individuals);
     }
 
-    
     /**
-     * Randomly crosses Individuals between them using the selected cross over operator.
+     * Randomly crosses Individuals between them using the selected cross over
+     * operator.
      */
     public void crossOverStep() {
         LinkedList<Individual> crossQueue = new LinkedList<>();
@@ -102,9 +125,9 @@ public class Population extends Model {
         }
     }
 
-    
     /**
-     * Randomly makes some individual victim of mutations using the selected mutation operator.
+     * Randomly makes some individual victim of mutations using the selected
+     * mutation operator.
      */
     public void mutationStep() {
         for (Individual individual : individuals) {
@@ -113,10 +136,9 @@ public class Population extends Model {
             }
         }
     }
-    
-    
+
     @Override
-    public void notifyViews(){
+    public void notifyViews() {
         //TODO
     }
 }

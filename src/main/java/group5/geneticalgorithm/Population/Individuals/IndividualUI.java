@@ -4,12 +4,16 @@
  */
 package group5.geneticalgorithm.Population.Individuals;
 
-import group5.geneticalgorithm.MvcPattern.View;
+import group5.MvcPattern.View;
+
+
+
+
 
 /**
  *
  * @author simonneau
  */
-public abstract class IndividualUI extends View{
+public abstract class IndividualUI implements View{
     
 }

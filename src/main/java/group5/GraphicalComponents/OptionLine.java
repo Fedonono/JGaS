@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class CustomOptionLine extends JPanel implements Observer, Observable {
+public class OptionLine extends JPanel implements Observer, Observable {
 
     private LinkedList<Observer> observers = new LinkedList<>();
     
@@ -24,7 +24,7 @@ public class CustomOptionLine extends JPanel implements Observer, Observable {
     private CustomTextField textField;
     private String label;
 
-    public CustomOptionLine(String text, int min, int max, int value) {
+    public OptionLine(String text, int min, int max, int value) {
 
         if (min > max) {
             throw new MinMaxValueException(max, min);
@@ -108,5 +108,9 @@ public class CustomOptionLine extends JPanel implements Observer, Observable {
     
     public String getLabel(){
         return this.label;
+    }
+    
+    int getValue(){
+        return this.value;
     }
 }

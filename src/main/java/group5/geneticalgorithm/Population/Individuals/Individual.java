@@ -4,7 +4,8 @@
  */
 package group5.geneticalgorithm.Population.Individuals;
 
-import group5.geneticalgorithm.MvcPattern.Model;
+
+import group5.MvcPattern.Model;
 import group5.geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import group5.geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import group5.geneticalgorithm.Operators.Mutation.MutationOperator;

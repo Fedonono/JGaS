@@ -4,7 +4,7 @@
  */
 package group5.geneticalgorithm.Problems;
 
-import group5.geneticalgorithm.MvcPattern.Model;
+import group5.MvcPattern.Model;
 import group5.geneticalgorithm.Population.Population;
 
 /**

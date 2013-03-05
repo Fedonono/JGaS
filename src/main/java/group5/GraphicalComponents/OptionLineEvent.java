@@ -17,7 +17,7 @@ public class OptionLineEvent extends ObservationEvent{
      * @param source
      * @param value
      */
-    public OptionLineEvent(CustomOptionLine source, int value){
+    public OptionLineEvent(OptionLine source, int value){
         super(source);
         this.value = value;
     }
