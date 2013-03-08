@@ -27,6 +27,8 @@ public abstract class Problem extends Model {
     private LinkedList<EvaluationOperator> availableEvaluationOperator;
     
     private int maxStepCount;
+    
+    private String label;
       
     
     private MutationOperator selectedMutationOperator;
