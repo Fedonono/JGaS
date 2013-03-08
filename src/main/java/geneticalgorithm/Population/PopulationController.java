@@ -11,7 +11,7 @@ import MvcPattern.Controller;
  *
  * @author simonneau
  */
-public class PopulationController extends Controller{
+public class PopulationController implements Controller{
     
     Population model;
 

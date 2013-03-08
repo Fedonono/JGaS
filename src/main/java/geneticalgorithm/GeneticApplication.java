@@ -4,13 +4,11 @@ package geneticalgorithm;
  * Hello world!
  *
  */
-public class App {
+public class GeneticApplication {
 
     public static void main(String[] args) {
 
- 
+        
    
     }
-
-   
 }

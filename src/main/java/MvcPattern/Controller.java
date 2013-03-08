@@ -8,7 +8,7 @@ package MvcPattern;
  *
  * @author simonneau
  */
-public abstract class Controller {
+public interface Controller {
 
-    public abstract void applyChanges(UserEvent event);
+    public void applyChanges(UserEvent event);
 }
