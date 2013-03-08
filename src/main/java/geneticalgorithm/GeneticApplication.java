@@ -7,8 +7,6 @@ package geneticalgorithm;
 public class GeneticApplication {
 
     public static void main(String[] args) {
-
-        
-   
+         
     }
 }

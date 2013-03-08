@@ -5,7 +5,12 @@
 package geneticalgorithm.Problems;
 
 import MvcPattern.Model;
+import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
+import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
+import geneticalgorithm.Operators.Mutation.MutationOperator;
+import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Population.Population;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,21 +18,19 @@ import geneticalgorithm.Population.Population;
  */
 public abstract class Problem extends Model {
 
-    public enum availableMutationOperators {
-    }
+    private LinkedList<MutationOperator> availableMutationOperators;
+    
+    private LinkedList<CrossOverOperator> availableCrossOverOperators;
 
-    public enum availableCrossOverOperators {
-    }
+    private LinkedList<SelectionOperator> availableSelectionOperators;
 
-    public enum availableSelectionOperators {
-    }
-
-    public enum availableEvaluationOperator {
-    }
-    private Class selectedMutationOperator;
-    private Class selectedCrossOverOperation;
-    private Class selectedSelectionOperator;
-    private Class selectedEvaluationOperator;
+    private LinkedList<EvaluationOperator> availableEvaluationOperator;
+    
+    
+    private MutationOperator selectedMutationOperator;
+    private CrossOverOperator selectedCrossOverOperation;
+    private SelectionOperator selectedSelectionOperator;
+    private EvaluationOperator selectedEvaluationOperator;
 
     public abstract Population createInitialPopulation();
 }
