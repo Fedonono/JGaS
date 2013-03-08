@@ -54,6 +54,10 @@ public class PopulationUI extends JPanel implements View, Observer {
         }
         
     }
+    
+    public void setController(PopulationController controller) {
+        this.controller = controller;
+    }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
