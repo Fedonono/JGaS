@@ -66,9 +66,9 @@ public class Population extends Model {
      * Evaluate all the individuals using their evaluation method.
      */
     private void evaluationStep() {
-        
+
         for (Individual individual : individuals) {
-            
+
             individual.evaluate();
         }
     }
@@ -78,7 +78,7 @@ public class Population extends Model {
      * selection operator.
      */
     public void buildNextGeneration() {
-        
+
         this.evaluationStep();
         Population population = this.selectionOperator.buildNextGeneration(this);
         this.setSolutions(population);
@@ -95,11 +95,11 @@ public class Population extends Model {
      */
     public void crossOverStep() {
         LinkedList<Individual> crossQueue = new LinkedList<>();
-        
+
         for (Individual individual : individuals) {
-            
+
             if (Math.random() < individual.getCrossOverProbability()) {
-                
+
                 crossQueue.add(individual);
             }
         }
@@ -119,19 +119,19 @@ public class Population extends Model {
             boolean done = false;
 
             while (nbCandidates > 0 && !done) {
-                
+
                 Iterator<Individual> solutionIterator = crossQueue.iterator();
                 female = solutionIterator.next();
                 sexAppeal = 1 / nbCandidates;
 
                 if (Math.random() < sexAppeal) {
-                    
+
                     solutionIterator.remove();
                     queueSize--;
                     done = true;
 
                 } else {
-                    
+
                     nbCandidates--;
                 }
             }
@@ -144,11 +144,11 @@ public class Population extends Model {
      * mutation operator.
      */
     public void mutationStep() {
-        
+
         for (Individual individual : individuals) {
-            
+
             if (Math.random() < individual.getMutationProbability()) {
-                
+
                 individual.mutate();
             }
         }
@@ -156,7 +156,7 @@ public class Population extends Model {
 
     @Override
     public void notifyViews() {
-        
+
         LinkedList<IndividualUI> visualSample = new LinkedList<>();
         LinkedList<Individual> candidates = new LinkedList<>();
         candidates.addAll(this.individuals);
@@ -165,11 +165,27 @@ public class Population extends Model {
 
 
         for (int i = 0; i < this.observableVolume; i++) {
-            
+
             index = (int) (Math.random() * candidates.size());
             visualSample.add(candidates.remove(index).getUI());
         }
-        
+
         super.notifyViews(new PopulationRefreshEvent(this, visualSample));
+    }
+
+    public Individual bestIndividual() {
+
+        Iterator<Individual> individualIterator = this.individuals.iterator();
+        Individual bestIndividual = individualIterator.next();
+        Individual currentIndividual;
+
+        while (individualIterator.hasNext()) {
+            currentIndividual = individualIterator.next();
+
+            if (currentIndividual.getScore() > bestIndividual.getScore()) {
+                bestIndividual = currentIndividual;
+            }
+        }
+        return bestIndividual;
     }
 }
