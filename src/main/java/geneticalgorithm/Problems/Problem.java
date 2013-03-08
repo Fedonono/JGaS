@@ -26,6 +26,8 @@ public abstract class Problem extends Model {
 
     private LinkedList<EvaluationOperator> availableEvaluationOperator;
     
+    private int maxStepCount;
+      
     
     private MutationOperator selectedMutationOperator;
     private CrossOverOperator selectedCrossOverOperation;
