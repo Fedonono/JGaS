@@ -6,12 +6,13 @@ package geneticalgorithm;
 
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import javax.swing.JPanel;
 
 /**
  *
  * @author simonneau
  */
-public class MainUI implements View {
+public class MainUI extends JPanel implements View {
 
     @Override
     public void refresh(RefreshEvent ev) {
