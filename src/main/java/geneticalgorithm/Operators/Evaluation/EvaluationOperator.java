@@ -4,13 +4,14 @@
  */
 package geneticalgorithm.Operators.Evaluation;
 
+import geneticalgorithm.Operators.Operator;
 import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public interface EvaluationOperator {
+public abstract class EvaluationOperator extends Operator {
 
-    public double evaluate(Individual individual);
+    public abstract double evaluate(Individual individual);
 }

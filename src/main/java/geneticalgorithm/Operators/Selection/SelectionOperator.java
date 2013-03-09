@@ -4,12 +4,13 @@
  */
 package geneticalgorithm.Operators.Selection;
 
+import geneticalgorithm.Operators.Operator;
 import geneticalgorithm.Population.Population;
 
 /**
  *
  * @author simonneau
  */
-public interface SelectionOperator {
-    public Population buildNextGeneration(Population population);
+public abstract class SelectionOperator extends Operator {
+    public abstract Population buildNextGeneration(Population population);
 }

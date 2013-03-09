@@ -4,12 +4,13 @@
  */
 package geneticalgorithm.Operators.Mutation;
 
+import geneticalgorithm.Operators.Operator;
 import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public interface MutationOperator {
-    public Individual mutate(Individual individual);
+public abstract class MutationOperator extends Operator {
+    public abstract Individual mutate(Individual individual);
 }

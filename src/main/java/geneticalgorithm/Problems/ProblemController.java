@@ -12,10 +12,21 @@ import MvcPattern.UserEvent;
  * @author simonneau
  */
 public class ProblemController implements Controller{
+    
+    private Problem problem;
 
     @Override
     public void applyChanges(UserEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        if(event instanceof MutationProbabilityUserEvent){
+            MutationProbabilityUserEvent ev = (MutationProbabilityUserEvent)event;
+            problem.setMutationProbability(ev.getValue());
+            
+        }else if(event instanceof CrossProbabilityUserEvent){
+            CrossProbabilityUserEvent ev = (CrossProbabilityUserEvent)event;
+            problem.setCrossProbability(ev.getValue());
+            
+        }
     }
     
 }

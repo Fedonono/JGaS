@@ -4,17 +4,18 @@
  */
 package geneticalgorithm;
 
-import MvcPattern.Controller;
-import MvcPattern.UserEvent;
+import MvcPattern.RefreshEvent;
+import MvcPattern.View;
+import javax.swing.JPanel;
 
 /**
  *
  * @author simonneau
  */
-public class MainController implements Controller {
+public class GeneticEngineUI extends JPanel implements View{
 
     @Override
-    public void applyChanges(UserEvent event) {
+    public void refresh(RefreshEvent ev) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

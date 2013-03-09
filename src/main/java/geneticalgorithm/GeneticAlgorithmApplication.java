@@ -12,5 +12,6 @@ public class GeneticAlgorithmApplication {
     
     public static void main(String[] args) {
         
+        
     }
 }
