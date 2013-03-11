@@ -23,6 +23,10 @@ public class ProblemUI extends JPanel implements View, Observer {
     private static String mutationProbabilityLabel = "mutation Probability";
     private OptionLine crossProbability;
     private static String crossProbabilityLabel = "cross Probability";
+    //private TrucGraphique populationSize;
+    private static String poplationSizeLabel = "population size";
+    //private trucGraphique maxStepCount;
+    private static String maxStepCountLabel = "max number of generation steps";
 
     public ProblemUI() {
 

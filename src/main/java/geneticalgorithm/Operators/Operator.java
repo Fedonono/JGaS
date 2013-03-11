@@ -8,12 +8,17 @@ package geneticalgorithm.Operators;
  *
  * @author simonneau
  */
-public class Operator {
+public class Operator{
 
-    protected static Operator instance;
     protected String label;
-
+    protected static Operator instance;
+    
     public String getLabel() {
-        return label;
+        return this.label;
+    }
+    
+    @Override
+    public String toString(){
+        return this.getLabel();
     }
 }

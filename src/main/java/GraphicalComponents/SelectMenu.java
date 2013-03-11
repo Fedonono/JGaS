@@ -5,7 +5,7 @@
 package GraphicalComponents;
 
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
+import java.util.LinkedList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,23 +14,38 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class SelectMenu extends JPanel implements Observable {
+public class SelectMenu<E> extends JPanel implements Observable {
+    
+    private LinkedList<Observer> observers = new LinkedList<>();
+    private JComboBox<E> comboBox;
 
-    public SelectMenu(String text, String[] modes) {
+    public SelectMenu(String label) {
+
         super(new FlowLayout());
-        this.add(new JLabel(text));
-        final JComboBox comboBox = new JComboBox(modes);
+        this.add(new JLabel(label));
+        
+        comboBox = new JComboBox<>();
+        
         this.add(comboBox, FlowLayout.CENTER);
     }
 
     @Override
     public void addObserver(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.observers.add(o);
     }
+    
+    public void addItem(E item){
+        this.comboBox.addItem(item);
+    }
+    
+    public E getSelectedItem(){
+        return (E)(this.comboBox.getModel().getSelectedItem());
+    }
+    
+    
 
     @Override
     public void notifyObserver() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

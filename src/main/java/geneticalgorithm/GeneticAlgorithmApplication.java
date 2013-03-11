@@ -11,7 +11,6 @@ public class GeneticAlgorithmApplication {
     private GeneticEngine geneticEngine;
     
     public static void main(String[] args) {
-        
-        
+                                                                                
     }
 }
