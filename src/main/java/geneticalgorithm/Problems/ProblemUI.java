@@ -8,8 +8,13 @@ import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.OptionLine;
 import GraphicalComponents.OptionLineEvent;
+import GraphicalComponents.SelectMenu;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
+import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
+import geneticalgorithm.Operators.Mutation.MutationOperator;
+import geneticalgorithm.Operators.Selection.SelectionOperator;
 import javax.swing.JPanel;
 
 /**
@@ -27,11 +32,25 @@ public class ProblemUI extends JPanel implements View, Observer {
     private static String poplationSizeLabel = "population size";
     //private trucGraphique maxStepCount;
     private static String maxStepCountLabel = "max number of generation steps";
+    
+    private SelectMenu<CrossOverOperator> availableCrossOverOperators;
+    private static String availableCrossOverOperatorsLabel = "available cross over operators";
+    
+    private SelectMenu<MutationOperator> availableMutationOperators;
+    private static String availableMutationOperatorsLabel = "available mutation operators";
+    
+    private SelectMenu<SelectionOperator> availableSelectionOperators;
+    private static String availableSelectionOperatorsLabel = "available selection operators";
+    
+    private SelectMenu<EvaluationOperator> availableEvaluationOperators;
+    private static String availableEvaluationOperatorsLabel = "available evaluation operators";
+    
 
     public ProblemUI() {
 
         this.mutationProbability = new OptionLine(mutationProbabilityLabel, 0, 1, 0);
         this.crossProbability = new OptionLine(crossProbabilityLabel, 0, 1, 0);
+        //Ajouter les SelectMenu
 
         this.mutationProbability.addObserver(this);
         this.crossProbability.addObserver(this);
