@@ -45,6 +45,8 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
 
     @Override
     public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for(Observer o : observers){
+            o.reactToChanges(new SelectMenuEvent<>(this, this.getSelectedItem()));
+        }
     }
 }

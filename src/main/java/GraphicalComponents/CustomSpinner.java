@@ -16,26 +16,25 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     private LinkedList<Observer> observers = new LinkedList<>();
     private Spinner spinner;
 
-    
-    public CustomSpinner(){
+    public CustomSpinner() {
         this(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
-    
-    public CustomSpinner(int min, int max){
+
+    public CustomSpinner(int min, int max) {
         this(min, max, 0);
     }
-    
+
     public CustomSpinner(int min, int max, int defaultValue) {
-        this.spinner = new Spinner(min,max,defaultValue);
+        this.spinner = new Spinner(min, max, defaultValue);
         this.spinner.addObserver(this);
     }
 
     public void setValue(int v) {
         this.spinner.setValue(v);
     }
-    
-    public int getValue(){
-        return (int)this.spinner.getValue();
+
+    public int getValue() {
+        return (int) this.spinner.getValue();
     }
 
     @Override
@@ -45,19 +44,18 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
 
     @Override
     public void notifyObserver() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Observer o : observers) {
+            o.reactToChanges(new SpinnerEvent(spinner, this.getValue()));
+        }
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.notifyObserver();
     }
 
-    
-    
-    private class Spinner extends JSpinner implements Observable{
-        
-        
+    private class Spinner extends JSpinner implements Observable {
+
         Observer observer;
         private int max;
         private int min;
@@ -65,10 +63,10 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
         public Spinner(int min, int max, int defaultValue) {
             this.min = min;
             this.max = max;
-            
+
             if (defaultValue <= max && defaultValue >= min) {
                 super.setValue(defaultValue);
-                
+
             } else {
                 throw new MinMaxValueException(min, max);
             }
@@ -92,7 +90,7 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
 
         @Override
         public void notifyObserver() {
-            this.observer.reactToChanges(null);
+            this.observer.reactToChanges(new ObservationEvent(this));
         }
     }
 }
