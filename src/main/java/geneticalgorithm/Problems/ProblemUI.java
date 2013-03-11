@@ -22,8 +22,12 @@ import javax.swing.JPanel;
  * @author simonneau
  */
 public class ProblemUI extends JPanel implements View, Observer {
+    //TODO recuperer les identifiants des composants pour identifier les evenements.
+    //TODO ajouter lescomposant restants.
+    
 
     private ProblemController controller;
+    
     private OptionLine mutationProbability;
     private static String mutationProbabilityLabel = "mutation Probability";
     private OptionLine crossProbability;
