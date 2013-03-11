@@ -8,13 +8,12 @@ import java.awt.FlowLayout;
 import java.util.LinkedList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
  * @author nono
  */
-public class SelectMenu<E> extends JPanel implements Observable {
+public class SelectMenu<E> extends IdentifiableComponent implements Observable {
     
     private LinkedList<Observer> observers = new LinkedList<>();
     private JComboBox<E> comboBox;

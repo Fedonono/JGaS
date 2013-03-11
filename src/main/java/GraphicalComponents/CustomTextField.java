@@ -13,13 +13,15 @@ import javax.swing.JTextField;
  *
  * @author simonneau
  */
-public class CustomTextField extends JTextField implements Observable, Observer, ActionListener {
+public class CustomTextField extends IdentifiableComponent implements Observable, Observer, ActionListener {
 
     private LinkedList<Observer> observers = new LinkedList<>();
+    
+    private JTextField textField;
 
     public CustomTextField(String text) {
-        super(text, 3);
-        this.addActionListener(this);
+        this.textField = new JTextField(text, 3);
+        this.textField.addActionListener(this);
     }
 
     @Override
@@ -31,14 +33,14 @@ public class CustomTextField extends JTextField implements Observable, Observer,
     public void notifyObserver() {
 
         for (Observer o : this.observers) {
-            o.reactToChanges(new CustomTextFieldEvent(this, this.getText()));
+            o.reactToChanges(new CustomTextFieldEvent(this, this.textField.getText()));
         }
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
         CustomTextFieldEvent event = (CustomTextFieldEvent) ev;
-        this.setText(event.getValue());
+        this.textField.setText(event.getValue());
     }
 
     @Override

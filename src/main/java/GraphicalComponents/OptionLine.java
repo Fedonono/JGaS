@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class OptionLine extends JPanel implements Observer, Observable {
+public class OptionLine extends IdentifiableComponent implements Observer, Observable {
 
     private LinkedList<Observer> observers = new LinkedList<>();
     

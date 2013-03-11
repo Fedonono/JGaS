@@ -13,13 +13,17 @@ import javax.swing.JCheckBox;
  *
  * @author simonneau
  */
-public class CustomCheckBox extends JCheckBox implements Observable, ActionListener{
+public class CustomCheckBox extends IdentifiableComponent implements Observable, ActionListener{
+    
+    private JCheckBox checkBox;
     
     private LinkedList<Observer> observers = new LinkedList<>();
     
-    public CustomCheckBox(String text, boolean checked) {
-        super(text, checked);
-        this.addActionListener(this);
+    public CustomCheckBox(String text, boolean checked) {        
+        this.checkBox = new JCheckBox(text, checked);
+        this.checkBox.addActionListener(this);
+        this.add(this.checkBox);
+        
     }
 
     
@@ -31,7 +35,7 @@ public class CustomCheckBox extends JCheckBox implements Observable, ActionListe
     @Override
     public void notifyObserver() {
         for(Observer o : observers){
-            o.reactToChanges(new CheckBoxEvent(this, this.isSelected()));
+            o.reactToChanges(new CheckBoxEvent(this, this.checkBox.isSelected()));
         }
     }
 
