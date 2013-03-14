@@ -42,7 +42,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String maxStepCountLabel = "max number of generation steps";
     private CustomSpinner maxStepCount;
     private int maxStepCountId;
-    private static String timeoutLabel = "timeout (ms)";
+    private static String timeoutLabel = "timeout(ms)";    
     private CustomSpinner timeout;
     private int timeoutId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
