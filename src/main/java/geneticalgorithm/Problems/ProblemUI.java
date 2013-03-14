@@ -18,13 +18,13 @@ import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
-import javax.swing.JPanel;
+import javax.swing.JDialog;
 
 /**
  *
  * @author simonneau
  */
-public class ProblemUI extends JPanel implements View, Observer {
+public class ProblemUI extends JDialog implements View, Observer {
 
     private ProblemController controller;
     private static String mutationProbabilityLabel = "mutation Probability";
