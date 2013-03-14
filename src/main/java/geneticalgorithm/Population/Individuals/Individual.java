@@ -70,4 +70,6 @@ public abstract class Individual extends Model {
     public IndividualUI getUI(){
         return (IndividualUI)super.getUI();
     }
+    
+    public abstract String xmlSerialize();
 }

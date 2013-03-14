@@ -5,10 +5,11 @@
 package geneticalgorithm.Problems;
 
 import GraphicalComponents.CustomSpinner;
+import GraphicalComponents.IdentifiableComponent;
+import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.OptionLine;
-import GraphicalComponents.OptionLineEvent;
 import GraphicalComponents.SelectMenu;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
@@ -102,24 +103,21 @@ public class ProblemUI extends JPanel implements View, Observer {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-
-        if (ev instanceof OptionLineEvent) {
-
-            OptionLineEvent event = (OptionLineEvent) ev;
-            OptionLine option = (OptionLine) event.getSource();
-            String label = option.getLabel();
-
-            if (label.equals(mutationProbabilityLabel)) {
-                this.controller.applyChanges(new MutationProbabilityUserEvent(this, event.getValue()));
-
-            } else if (label.equals(crossProbabilityLabel)) {
-                this.controller.applyChanges(new CrossProbabilityUserEvent(this, event.getValue()));
-
+        Observable source = ev.getSource();
+        
+        if(source instanceof IdentifiableComponent){
+            
+            IdentifiableComponent component = (IdentifiableComponent)source;
+            int id = component.getId();
+            
+            if(id == this.validateButtonId){
+                
+                //TODO : send userEvent
             }
         }
     }

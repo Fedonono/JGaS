@@ -4,20 +4,16 @@
  */
 package geneticalgorithm.Problems;
 
-import MvcPattern.Controller;
 import MvcPattern.UserEvent;
 
 /**
  *
  * @author simonneau
  */
-public class ProblemController implements Controller{
-    
-    private Problem problem;
+public class ProblemUserEvent extends UserEvent{
 
-    @Override
-    public void applyChanges(UserEvent event) {
-        //TODO
+    public ProblemUserEvent(ProblemUI source) {
+        super(source);
     }
     
 }

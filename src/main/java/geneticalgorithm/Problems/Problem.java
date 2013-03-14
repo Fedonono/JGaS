@@ -117,4 +117,10 @@ public abstract class Problem extends Model {
     }
 
     public abstract Population createInitialPopulation();
+
+    public String xmlSerialize() {
+        String serialisedPopulation = "";
+        //TODO
+        return serialisedPopulation;
+    }
 }

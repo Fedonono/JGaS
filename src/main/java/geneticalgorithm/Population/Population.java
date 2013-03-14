@@ -188,4 +188,10 @@ public class Population extends Model {
         }
         return bestIndividual;
     }
+
+    public String xmlSerialise() {
+        String serialisedPopulation = "";
+        //TODO
+        return serialisedPopulation;
+    }
 }
