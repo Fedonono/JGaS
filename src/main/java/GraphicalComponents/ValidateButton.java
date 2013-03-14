@@ -13,17 +13,19 @@ import javax.swing.JButton;
  *
  * @author simonneau
  */
-public class ValidateButton extends JButton implements Observable, ActionListener{
+public class ValidateButton extends IdentifiableComponent implements Observable, ActionListener{
     
-    LinkedList<Observer> observers = new LinkedList<>();
+    private LinkedList<Observer> observers = new LinkedList<>();
+    private JButton button;
+    
     
     /**
      *
      * @param label
      */
     public ValidateButton(String label) {
-        super(label);
-        this.addActionListener(this);
+        this.button = new JButton(label);
+        this.button.addActionListener(this);
     }
 
     /**
@@ -35,7 +37,7 @@ public class ValidateButton extends JButton implements Observable, ActionListene
         observers.add(o);
     }
 
-    /**
+    /**this
      *
      */
     @Override
