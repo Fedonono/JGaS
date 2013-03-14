@@ -32,19 +32,19 @@ public class ProblemUI extends JDialog implements View, Observer {
     private boolean initialized = false;
     private ProblemController controller;
     private static String mutationProbabilityLabel = "mutation Probability";
-    private OptionLine mutationProbability;
+    private CustomSpinner mutationProbability;
     private int mutationProbabilityId;
     private static String crossProbabilityLabel = "cross Probability";
-    private OptionLine crossProbability;
+    private CustomSpinner crossProbability;
     private int crossProbabilityId;
     private static String populationSizeLabel = "population size";
-    private CustomSpinner populationSize;
+    private OptionLine populationSize;
     private int populationId;
-    private static String maxStepCountLabel = "max number of generation steps";
-    private CustomSpinner maxStepCount;
+    private static String maxStepCountLabel = "limit steps";
+    private OptionLine maxStepCount;
     private int maxStepCountId;
     private static String timeoutLabel = "timeout(ms)";
-    private CustomSpinner timeout;
+    private OptionLine timeout;
     private int timeoutId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
     private SelectMenu<CrossOverOperator> availableCrossOverOperators;
@@ -66,15 +66,15 @@ public class ProblemUI extends JDialog implements View, Observer {
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-        int heightPx = 400;
-        int widthPx = 420;
+        int heightPx = 410;
+        int widthPx = 450;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
-        this.mutationProbability = new OptionLine(mutationProbabilityLabel, 0, 1, 0);
+        this.mutationProbability = new CustomSpinner(mutationProbabilityLabel, 0, 1);
         this.mutationProbabilityId = this.mutationProbability.getId();
         this.add(this.mutationProbability);
 
-        this.crossProbability = new OptionLine(crossProbabilityLabel, 0, 1, 0);
+        this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1);
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
 
@@ -94,15 +94,15 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.availableSelectionOperatorsId = this.availableSelectionOperators.getId();
         this.add(this.availableSelectionOperators);
 
-        this.maxStepCount = new CustomSpinner(maxStepCountLabel, 0, Integer.MAX_VALUE);
+        this.maxStepCount = new OptionLine(maxStepCountLabel, 0, Integer.MAX_VALUE, 0);
         this.maxStepCountId = this.maxStepCount.getId();
         this.add(this.maxStepCount);
 
-        this.timeout = new CustomSpinner(timeoutLabel, 0, Integer.MAX_VALUE);
+        this.timeout = new OptionLine(timeoutLabel, 0, Integer.MAX_VALUE, 0);
         this.timeoutId = this.timeout.getId();
         this.add(this.timeout);
 
-        this.populationSize = new CustomSpinner(populationSizeLabel, 1, Integer.MAX_VALUE);
+        this.populationSize = new OptionLine(populationSizeLabel, 1, Integer.MAX_VALUE, 50);
         this.populationId = this.populationSize.getId();
         this.add(this.populationSize);
 

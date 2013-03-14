@@ -1,5 +1,5 @@
 /*
- * Minesweeper Project
+ * Genetic Algorithm Project
  * by Group3 : Arnaud BABOL, Guillaume SIMMONEAU
  */
 package GraphicalComponents;
@@ -20,7 +20,11 @@ public class CustomTextField extends IdentifiableComponent implements Observable
     private JTextField textField;
 
     public CustomTextField(String text) {
-        this.textField = new JTextField(text, 3);
+        this(text, 8);
+    }
+    
+    public CustomTextField(String text, int columns) {
+        this.textField = new JTextField(text, columns);
         this.add(textField);
         this.textField.addActionListener(this);
     }
