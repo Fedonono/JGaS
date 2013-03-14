@@ -19,6 +19,7 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
 
     public CustomSlider(int min, int max, int value) {
         slider = new JSlider(min, max, value);
+        this.add(slider);
     }
     
     public void setValue(int value) {
@@ -57,14 +58,14 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
     }
     
     public void setPaintTicks(boolean bool){
-        this.setPaintTicks(bool);
+        this.slider.setPaintTicks(bool);
     }
     
     public void setPaintLabels(boolean bool){
-        this.setPaintLabels(bool);
+        this.slider.setPaintLabels(bool);
     }
     
     public void setMaximum(int maximum){
-        this.setMaximum(maximum);
+        this.slider.setMaximum(maximum);
     }
 }

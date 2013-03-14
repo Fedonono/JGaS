@@ -21,6 +21,7 @@ public class CustomTextField extends IdentifiableComponent implements Observable
 
     public CustomTextField(String text) {
         this.textField = new JTextField(text, 3);
+        this.add(textField);
         this.textField.addActionListener(this);
     }
 

@@ -4,7 +4,11 @@
  */
 package GraphicalComponents;
 
+import java.awt.BorderLayout;
 import java.util.LinkedList;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
 /**
@@ -17,15 +21,17 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     private Spinner spinner;
 
     public CustomSpinner() {
-        this(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        this("", Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public CustomSpinner(int min, int max) {
-        this(min, max, 0);
+    public CustomSpinner(String label, int min, int max) {
+        this(label, min, max, 1);
     }
 
-    public CustomSpinner(int min, int max, int defaultValue) {
+    public CustomSpinner(String label, int min, int max, int defaultValue) {
+        this.add(new JLabel(label));
         this.spinner = new Spinner(min, max, defaultValue);
+        this.add(spinner);
         this.spinner.addObserver(this);
     }
 

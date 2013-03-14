@@ -25,6 +25,7 @@ public class ValidateButton extends IdentifiableComponent implements Observable,
      */
     public ValidateButton(String label) {
         this.button = new JButton(label);
+        this.add(button);
         this.button.addActionListener(this);
     }
 

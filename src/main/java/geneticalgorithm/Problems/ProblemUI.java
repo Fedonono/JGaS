@@ -18,6 +18,9 @@ import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
+import java.awt.Container;
+import java.awt.Dimension;
+import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 
 /**
@@ -33,7 +36,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String crossProbabilityLabel = "cross Probability";
     private OptionLine crossProbability;
     private int crossProbabilityId;
-    private static String poplationSizeLabel = "population size";
+    private static String populationSizeLabel = "population size";
     private CustomSpinner populationSize;
     private int populationId;
     private static String maxStepCountLabel = "max number of generation steps";
@@ -59,6 +62,12 @@ public class ProblemUI extends JDialog implements View, Observer {
     private int validateButtonId;
 
     public ProblemUI() {
+        Container cp = this.getContentPane();
+        cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
+
+        int heightPx = 300; // peut servir dans le futur
+        int widthPx = 400;
+        this.setMinimumSize(new Dimension(widthPx, heightPx));
 
         this.mutationProbability = new OptionLine(mutationProbabilityLabel, 0, 1, 0);
         this.mutationProbabilityId = this.mutationProbability.getId();
@@ -84,15 +93,15 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.availableSelectionOperatorsId = this.availableSelectionOperators.getId();
         this.add(this.availableSelectionOperators);
 
-        this.maxStepCount = new CustomSpinner(1, Integer.MAX_VALUE);
+        this.maxStepCount = new CustomSpinner(maxStepCountLabel, 1, Integer.MAX_VALUE);
         this.maxStepCountId = this.maxStepCount.getId();
         this.add(this.maxStepCount);
 
-        this.timeout = new CustomSpinner(1, Integer.MAX_VALUE);
+        this.timeout = new CustomSpinner(timeoutLabel, 1, Integer.MAX_VALUE);
         this.timeoutId = this.timeout.getId();
         this.add(this.timeout);
 
-        this.populationSize = new CustomSpinner(1, Integer.MAX_VALUE);
+        this.populationSize = new CustomSpinner(populationSizeLabel, 1, Integer.MAX_VALUE);
         this.populationId = this.populationSize.getId();
         this.add(this.populationSize);
 
@@ -160,5 +169,11 @@ public class ProblemUI extends JDialog implements View, Observer {
 
     public int getValidateButtonId() {
         return validateButtonId;
+    }
+
+    public static void main(String[] args) {
+        ProblemUI pbUI = new ProblemUI();
+        pbUI.setSize(500, 500);
+        pbUI.setVisible(true);
     }
 }
