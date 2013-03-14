@@ -29,6 +29,7 @@ import javax.swing.JDialog;
  */
 public class ProblemUI extends JDialog implements View, Observer {
 
+    private boolean initialized = false;
     private ProblemController controller;
     private static String mutationProbabilityLabel = "mutation Probability";
     private OptionLine mutationProbability;
@@ -42,7 +43,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String maxStepCountLabel = "max number of generation steps";
     private CustomSpinner maxStepCount;
     private int maxStepCountId;
-    private static String timeoutLabel = "timeout(ms)";    
+    private static String timeoutLabel = "timeout(ms)";
     private CustomSpinner timeout;
     private int timeoutId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
@@ -112,64 +113,118 @@ public class ProblemUI extends JDialog implements View, Observer {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        //TODO
+
+        if (ev instanceof ProblemRefreshEvent) {
+            Problem source = (Problem) ev.getSource();
+
+            if (!this.initialized) {
+                this.availableCrossOverOperators.addAll(source.getAvailableCrossOverOperators());
+                this.availableEvaluationOperators.addAll(source.getAvailableEvaluationOperator());
+                this.availableMutationOperators.addAll(source.getAvailableMutationOperators());
+                this.availableSelectionOperators.addAll(source.getAvailableSelectionOperators());
+                this.initialized = true;
+            }
+        }
     }
+    
+    
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
         Observable source = ev.getSource();
-        
-        if(source instanceof IdentifiableComponent){
-            
-            IdentifiableComponent component = (IdentifiableComponent)source;
+
+        if (source instanceof IdentifiableComponent) {
+
+            IdentifiableComponent component = (IdentifiableComponent) source;
             int id = component.getId();
-            
-            if(id == this.validateButtonId){
-                
-                //TODO : send userEvent
+
+            if (id == this.validateButtonId) {
+                this.notifyController();
             }
         }
     }
+    
+    private void notifyController(){
+        this.controller.applyChanges(new ProblemUserEvent(this));
+    }
 
-    public int getMutationProbabilityId() {
+    private int getMutationProbabilityId() {
         return mutationProbabilityId;
     }
 
-    public int getCrossProbabilityId() {
+    private int getCrossProbabilityId() {
         return crossProbabilityId;
     }
 
-    public int getPopulationId() {
+    private int getPopulationId() {
         return populationId;
     }
 
-    public int getMaxStepCountId() {
+    private int getMaxStepCountId() {
         return maxStepCountId;
     }
 
-    public int getTimeoutId() {
+    private int getTimeoutId() {
         return timeoutId;
     }
 
-    public int getAvailableCrossOverOperatorsId() {
+    private int getAvailableCrossOverOperatorsId() {
         return availableCrossOverOperatorsId;
     }
 
-    public int getAvailableMutationOperatorsId() {
+    private int getAvailableMutationOperatorsId() {
         return availableMutationOperatorsId;
     }
 
-    public int getAvailableSelectionOperatorsId() {
+    private int getAvailableSelectionOperatorsId() {
         return availableSelectionOperatorsId;
     }
 
-    public int getAvailableEvaluationOperatorId() {
+    private int getAvailableEvaluationOperatorId() {
         return availableEvaluationOperatorId;
     }
 
-    public int getValidateButtonId() {
+    private int getValidateButtonId() {
         return validateButtonId;
     }
+    
+    public CrossOverOperator getSelectedCrossOverOperator(){
+        return this.availableCrossOverOperators.getSelectedItem();
+    }
+    
+    public MutationOperator getSelectedMutationOperator(){
+        return this.availableMutationOperators.getSelectedItem();
+    }
+    
+    public SelectionOperator getSelectedSelectionOperator(){
+        return this.availableSelectionOperators.getSelectedItem();
+    }
+    
+    public EvaluationOperator getSelectedEvaluationOperator(){
+        return this.availableEvaluationOperators.getSelectedItem();
+    }
+
+    public int getMutationProbability() {
+        return mutationProbability.getValue();
+    }
+
+    public int getCrossProbability() {
+        return crossProbability.getValue();
+    }
+
+    public int getPopulationSize() {
+        return populationSize.getValue();
+    }
+
+    public int getMaxStepCount() {
+        return maxStepCount.getValue();
+    }
+
+    public int getTimeout() {
+        return timeout.getValue();
+    }
+    
+    
 
     public static void main(String[] args) {
         ProblemUI pbUI = new ProblemUI();

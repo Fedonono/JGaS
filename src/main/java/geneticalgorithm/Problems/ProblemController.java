@@ -11,13 +11,23 @@ import MvcPattern.UserEvent;
  *
  * @author simonneau
  */
-public class ProblemController implements Controller{
-    
+public class ProblemController implements Controller {
+
     private Problem problem;
 
     @Override
     public void applyChanges(UserEvent event) {
-        //TODO
+        if (event instanceof ProblemUserEvent) {
+            ProblemUI source = (ProblemUI) event.getSource();
+
+            problem.setCrossProbability(source.getCrossProbability());
+            problem.setMaxStepCount(source.getMaxStepCount());
+            problem.setMutationProbability(source.getMutationProbability());
+            problem.setPopulationSize(source.getPopulationSize());
+            problem.setSelectedCrossOverOperation(source.getSelectedCrossOverOperator());
+            problem.setSelectedEvaluationOperator(source.getSelectedEvaluationOperator());
+            problem.setSelectedMutationOperator(source.getSelectedMutationOperator());
+            problem.setSelectedSelectionOperator(source.getSelectedSelectionOperator());
+        }
     }
-    
 }

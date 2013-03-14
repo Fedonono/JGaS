@@ -5,6 +5,7 @@
 package GraphicalComponents;
 
 import java.awt.FlowLayout;
+import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import javax.swing.JLabel;
  * @author nono
  */
 public class SelectMenu<E> extends IdentifiableComponent implements Observable {
-    
+
     private LinkedList<Observer> observers = new LinkedList<>();
     private JComboBox<E> comboBox;
 
@@ -22,9 +23,9 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
 
         super(new FlowLayout());
         this.add(new JLabel(label));
-        
+
         comboBox = new JComboBox<>();
-        
+
         this.add(comboBox, FlowLayout.CENTER);
     }
 
@@ -32,20 +33,24 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
     public void addObserver(Observer o) {
         this.observers.add(o);
     }
-    
-    public void addItem(E item){
+
+    public void addItem(E item) {
         this.comboBox.addItem(item);
     }
-    
-    public E getSelectedItem(){
-        return (E)(this.comboBox.getModel().getSelectedItem());
+
+    public void addAll(Collection<E> collection) {
+        for (E item : collection) {
+            comboBox.addItem(item);
+        }
     }
-    
-    
+
+    public E getSelectedItem() {
+        return (E) (this.comboBox.getModel().getSelectedItem());
+    }
 
     @Override
     public void notifyObserver() {
-        for(Observer o : observers){
+        for (Observer o : observers) {
             o.reactToChanges(new SelectMenuEvent<>(this, this.getSelectedItem()));
         }
     }

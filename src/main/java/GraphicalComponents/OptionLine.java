@@ -109,7 +109,7 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
         return this.label;
     }
     
-    int getValue(){
+    public int getValue(){
         return this.value;
     }
 }

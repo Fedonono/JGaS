@@ -18,14 +18,17 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     private Spinner spinner;
 
     public CustomSpinner() {
+        
         this("", Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     public CustomSpinner(String label, int min, int max) {
+        
         this(label, min, max, 1);
     }
 
     public CustomSpinner(String label, int min, int max, int defaultValue) {
+        
         this.add(new JLabel(label));
         this.spinner = new Spinner(min, max, defaultValue);
         this.add(spinner);

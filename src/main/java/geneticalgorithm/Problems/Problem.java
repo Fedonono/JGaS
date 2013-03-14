@@ -119,6 +119,11 @@ public abstract class Problem extends Model {
     public int getPopulationSize() {
         return populationSize;
     }
+    
+    @Override
+    public void notifyViews(){
+       super.notifyViews(new ProblemRefreshEvent(this)); 
+    }
 
     public abstract Population createInitialPopulation();
 
