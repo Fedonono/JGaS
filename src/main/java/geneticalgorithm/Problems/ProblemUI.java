@@ -109,6 +109,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.validateButton = new ValidateButton(validateButtonLabel);
         this.validateButtonId = this.validateButton.getId();
         this.add(this.validateButton);
+        this.validateButton.addObserver(this);
         
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
@@ -139,8 +140,8 @@ public class ProblemUI extends JDialog implements View, Observer {
             int id = component.getId();
 
             if (id == this.validateButtonId) {
-                this.notifyController();
                 this.setVisible(false);
+                this.notifyController();
             }
         }
     }
@@ -229,4 +230,10 @@ public class ProblemUI extends JDialog implements View, Observer {
         ProblemUI pbUI = new ProblemUI();
         pbUI.setVisible(true);
     }
+
+    public void setController(ProblemController controller) {
+        this.controller = controller;
+    }
+    
+    
 }

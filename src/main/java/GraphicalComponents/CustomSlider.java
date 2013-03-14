@@ -22,6 +22,8 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
         slider = new JSlider(min, max, value);
         this.add(slider);
         this.slider.addChangeListener(this);
+
+
     }
 
     public void setValue(int value) {

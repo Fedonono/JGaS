@@ -18,6 +18,7 @@ public class ProblemController implements Controller {
     @Override
     public void applyChanges(UserEvent event) {
         if (event instanceof ProblemUserEvent) {
+            
             ProblemUI source = (ProblemUI) event.getSource();
 
             problem.setCrossProbability(source.getCrossProbability());
@@ -30,4 +31,10 @@ public class ProblemController implements Controller {
             problem.setSelectedSelectionOperator(source.getSelectedSelectionOperator());
         }
     }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+    
+    
 }
