@@ -109,6 +109,8 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.validateButton = new ValidateButton(validateButtonLabel);
         this.validateButtonId = this.validateButton.getId();
         this.add(this.validateButton);
+        
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
     @Override
@@ -126,8 +128,6 @@ public class ProblemUI extends JDialog implements View, Observer {
             }
         }
     }
-    
-    
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
@@ -140,11 +140,12 @@ public class ProblemUI extends JDialog implements View, Observer {
 
             if (id == this.validateButtonId) {
                 this.notifyController();
+                this.setVisible(false);
             }
         }
     }
-    
-    private void notifyController(){
+
+    private void notifyController() {
         this.controller.applyChanges(new ProblemUserEvent(this));
     }
 
@@ -187,28 +188,28 @@ public class ProblemUI extends JDialog implements View, Observer {
     private int getValidateButtonId() {
         return validateButtonId;
     }
-    
-    public CrossOverOperator getSelectedCrossOverOperator(){
+
+    public CrossOverOperator getSelectedCrossOverOperator() {
         return this.availableCrossOverOperators.getSelectedItem();
     }
-    
-    public MutationOperator getSelectedMutationOperator(){
+
+    public MutationOperator getSelectedMutationOperator() {
         return this.availableMutationOperators.getSelectedItem();
     }
-    
-    public SelectionOperator getSelectedSelectionOperator(){
+
+    public SelectionOperator getSelectedSelectionOperator() {
         return this.availableSelectionOperators.getSelectedItem();
     }
-    
-    public EvaluationOperator getSelectedEvaluationOperator(){
+
+    public EvaluationOperator getSelectedEvaluationOperator() {
         return this.availableEvaluationOperators.getSelectedItem();
     }
 
-    public int getMutationProbability() {
+    public double getMutationProbability() {
         return mutationProbability.getValue();
     }
 
-    public int getCrossProbability() {
+    public double getCrossProbability() {
         return crossProbability.getValue();
     }
 
@@ -223,8 +224,6 @@ public class ProblemUI extends JDialog implements View, Observer {
     public int getTimeout() {
         return timeout.getValue();
     }
-    
-    
 
     public static void main(String[] args) {
         ProblemUI pbUI = new ProblemUI();
