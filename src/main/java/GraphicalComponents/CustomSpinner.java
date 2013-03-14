@@ -12,35 +12,32 @@ import javax.swing.JSpinner;
  *
  * @author simonneau
  */
-public class CustomSpinner extends IdentifiableComponent implements Observable, Observer {
+public class CustomSpinner<E extends Number> extends IdentifiableComponent implements Observable, Observer {
 
     private LinkedList<Observer> observers = new LinkedList<>();
-    private Spinner spinner;
+    private Spinner<E> spinner;
 
-    public CustomSpinner() {
-        
-        this("", Integer.MIN_VALUE, Integer.MAX_VALUE);
+    public CustomSpinner(String label, Number min, Number max) {
+
+        this(label, min, max, min);
     }
 
-    public CustomSpinner(String label, int min, int max) {
-        
-        this(label, min, max, 1);
-    }
-
-    public CustomSpinner(String label, int min, int max, int defaultValue) {
+    public CustomSpinner(String label, Number min, Number max, Number defaultValue){
         
         this.add(new JLabel(label));
-        this.spinner = new Spinner(min, max, defaultValue);
+        this.spinner = new Spinner<>((E)min, (E)max, (E)defaultValue);
         this.add(spinner);
         this.spinner.addObserver(this);
     }
+    
+    
 
-    public void setValue(int v) {
-        this.spinner.setValue(v);
+    public void setValue(Number v) {
+        this.spinner.setValue((E)v);
     }
 
-    public int getValue() {
-        return (int) this.spinner.getValue();
+    public E getValue() {
+        return  (E)this.spinner.getValue();
     }
 
     @Override
@@ -60,17 +57,17 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
         this.notifyObserver();
     }
 
-    private class Spinner extends JSpinner implements Observable {
+    private class Spinner<E extends Number> extends JSpinner implements Observable {
 
         Observer observer;
-        private int max;
-        private int min;
+        private E max;
+        private E min;
 
-        public Spinner(int min, int max, int defaultValue) {
+        public Spinner(E min, E max, E defaultValue) {
             this.min = min;
             this.max = max;
 
-            if (defaultValue <= max && defaultValue >= min) {
+            if (defaultValue.doubleValue() <= max.doubleValue() && defaultValue.doubleValue() >= min.doubleValue()) {
                 super.setValue(defaultValue);
 
             } else {
@@ -81,9 +78,13 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
 
         @Override
         public void setValue(Object value) {
-            int v = (int) value;
-            if (v <= max && v >= min) {
-                super.setValue(value);
+            if (value instanceof Number) {
+                Number v = (Number) value;
+                if (v.doubleValue() <= max.doubleValue() && v.doubleValue() >= min.doubleValue()) {
+                    super.setValue(value);
+                }
+            } else {
+                throw new NumberFormatException();
             }
         }
 

@@ -10,14 +10,14 @@ package GraphicalComponents;
  */
 public class SpinnerEvent extends ObservationEvent {
 
-    int value;
+    Number value;
     
-    public SpinnerEvent(Observable source, int value) {
+    public SpinnerEvent(Observable source, Number value) {
         super(source);
         this.value = value;
     }
     
-    public int getValue(){
+    public Number getValue(){
         return this.value;
     }
     
