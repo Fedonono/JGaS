@@ -70,11 +70,11 @@ public class ProblemUI extends JDialog implements View, Observer {
         int widthPx = 450;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
-        this.mutationProbability = new CustomSpinner(mutationProbabilityLabel, 0, 1);
+        this.mutationProbability = new CustomSpinner(mutationProbabilityLabel, 0, 1,0,0.01);
         this.mutationProbabilityId = this.mutationProbability.getId();
         this.add(this.mutationProbability);
 
-        this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1);
+        this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1,0,0.01);
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
 
@@ -206,11 +206,11 @@ public class ProblemUI extends JDialog implements View, Observer {
     }
 
     public double getMutationProbability() {
-        return mutationProbability.getValue();
+        return mutationProbability.getValue().doubleValue();
     }
 
     public double getCrossProbability() {
-        return crossProbability.getValue();
+        return crossProbability.getValue().doubleValue();
     }
 
     public int getPopulationSize() {

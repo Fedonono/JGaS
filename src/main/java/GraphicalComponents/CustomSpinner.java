@@ -7,37 +7,37 @@ package GraphicalComponents;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
  * @author simonneau
  */
-public class CustomSpinner<E extends Number> extends IdentifiableComponent implements Observable, Observer {
+//TODO ==> use JSpinner NumberEditor to allow floating spinner
+public class CustomSpinner extends IdentifiableComponent implements Observable, Observer {
 
     private LinkedList<Observer> observers = new LinkedList<>();
-    private Spinner<E> spinner;
+    private Spinner spinner;
 
     public CustomSpinner(String label, Number min, Number max) {
 
-        this(label, min, max, min);
+        this(label, min, max, min, 1);
     }
 
-    public CustomSpinner(String label, Number min, Number max, Number defaultValue){
+    public CustomSpinner(String label, Number min, Number max, Number defaultValue, Number step) {
         
         this.add(new JLabel(label));
-        this.spinner = new Spinner<>((E)min, (E)max, (E)defaultValue);
+        this.spinner = new Spinner(min, max, defaultValue, step);
         this.add(spinner);
         this.spinner.addObserver(this);
     }
-    
-    
 
     public void setValue(Number v) {
-        this.spinner.setValue((E)v);
+        this.spinner.setValue(v);
     }
 
-    public E getValue() {
-        return  (E)this.spinner.getValue();
+    public Number getValue() {
+        return (Number)this.spinner.getValue();
     }
 
     @Override
@@ -57,22 +57,24 @@ public class CustomSpinner<E extends Number> extends IdentifiableComponent imple
         this.notifyObserver();
     }
 
-    private class Spinner<E extends Number> extends JSpinner implements Observable {
+    private class Spinner extends JSpinner implements Observable {
 
         Observer observer;
-        private E max;
-        private E min;
+        private Number  max;
+        private Number min;
 
-        public Spinner(E min, E max, E defaultValue) {
+        public Spinner(Number min, Number max, Number defaultValue, Number step) {
             this.min = min;
             this.max = max;
-
+            this.setModel(new SpinnerNumberModel(defaultValue.doubleValue(), min.doubleValue(), max.doubleValue(), step.doubleValue()));
             if (defaultValue.doubleValue() <= max.doubleValue() && defaultValue.doubleValue() >= min.doubleValue()) {
                 super.setValue(defaultValue);
 
             } else {
                 throw new MinMaxValueException(min, max);
             }
+
+
 
         }
 
