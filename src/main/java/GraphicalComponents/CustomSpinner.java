@@ -81,8 +81,6 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
             int v = (int) value;
             if (v <= max && v >= min) {
                 super.setValue(value);
-            } else {
-                throw new MinMaxValueException(min, max);
             }
         }
 

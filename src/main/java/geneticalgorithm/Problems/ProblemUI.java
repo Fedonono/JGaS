@@ -93,11 +93,11 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.availableSelectionOperatorsId = this.availableSelectionOperators.getId();
         this.add(this.availableSelectionOperators);
 
-        this.maxStepCount = new CustomSpinner(maxStepCountLabel, 1, Integer.MAX_VALUE);
+        this.maxStepCount = new CustomSpinner(maxStepCountLabel, 0, Integer.MAX_VALUE);
         this.maxStepCountId = this.maxStepCount.getId();
         this.add(this.maxStepCount);
 
-        this.timeout = new CustomSpinner(timeoutLabel, 1, Integer.MAX_VALUE);
+        this.timeout = new CustomSpinner(timeoutLabel, 0, Integer.MAX_VALUE);
         this.timeoutId = this.timeout.getId();
         this.add(this.timeout);
 
