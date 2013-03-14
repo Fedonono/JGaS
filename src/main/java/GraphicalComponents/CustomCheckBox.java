@@ -23,7 +23,6 @@ public class CustomCheckBox extends IdentifiableComponent implements Observable,
         this.checkBox = new JCheckBox(text, checked);
         this.checkBox.addActionListener(this);
         this.add(this.checkBox);
-        
     }
 
     

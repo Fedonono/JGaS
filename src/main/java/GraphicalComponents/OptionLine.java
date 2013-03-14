@@ -7,7 +7,6 @@ package GraphicalComponents;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *

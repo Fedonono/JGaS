@@ -112,6 +112,10 @@ public abstract class Problem extends Model {
         this.populationSize = populationSize;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public int getPopulationSize() {
         return populationSize;
     }

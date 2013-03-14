@@ -42,7 +42,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String maxStepCountLabel = "max number of generation steps";
     private CustomSpinner maxStepCount;
     private int maxStepCountId;
-    private static String timeoutLabel = "timeout";
+    private static String timeoutLabel = "timeout (ms)";
     private CustomSpinner timeout;
     private int timeoutId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
@@ -65,8 +65,8 @@ public class ProblemUI extends JDialog implements View, Observer {
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-        int heightPx = 300; // peut servir dans le futur
-        int widthPx = 400;
+        int heightPx = 400;
+        int widthPx = 420;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
         this.mutationProbability = new OptionLine(mutationProbabilityLabel, 0, 1, 0);
@@ -173,7 +173,6 @@ public class ProblemUI extends JDialog implements View, Observer {
 
     public static void main(String[] args) {
         ProblemUI pbUI = new ProblemUI();
-        pbUI.setSize(500, 500);
         pbUI.setVisible(true);
     }
 }
