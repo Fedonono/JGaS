@@ -4,6 +4,7 @@
  */
 package GraphicalComponents;
 
+import java.awt.Dimension;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -20,14 +21,13 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     private Spinner spinner;
 
     public CustomSpinner(String label, Number min, Number max) {
-
         this(label, min, max, min, 1);
     }
 
     public CustomSpinner(String label, Number min, Number max, Number defaultValue, Number step) {
-        
         this.add(new JLabel(label));
         this.spinner = new Spinner(min, max, defaultValue, step);
+        this.spinner.setPreferredSize(new Dimension(50, spinner.getPreferredSize().height));
         this.add(spinner);
         this.spinner.addObserver(this);
     }
