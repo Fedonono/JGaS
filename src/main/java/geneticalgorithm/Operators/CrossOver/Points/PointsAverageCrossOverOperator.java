@@ -14,6 +14,10 @@ import java.util.ArrayList;
  * @author nono
  */
 public class PointsAverageCrossOverOperator extends CrossOverOperator {
+    
+    public PointsAverageCrossOverOperator(double probability){
+        super(probability);
+    }
 
     @Override
     public Individual cross(Individual male, Individual female) {

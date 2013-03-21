@@ -5,7 +5,9 @@
 package geneticalgorithm.Population;
 
 import MvcPattern.Model;
-import geneticalgorithm.Operators.Selection.SelectionOperator;
+import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
+import geneticalgorithm.Operators.Mutation.MutationOperator;
+import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.Iterator;
@@ -18,19 +20,19 @@ import java.util.LinkedList;
 public class Population extends Model {
 
     private LinkedList<Individual> individuals;
-    private SelectionOperator selectionOperator;
     private int observableVolume = 0;
+    private Operators operators;
 
     public Population() {
         this(null);
     }
 
-    public Population(SelectionOperator sop) {
-        this(sop, 0);
+    public Population(Operators operators) {
+        this(operators, 0);
     }
 
-    public Population(SelectionOperator sop, int observableVolume) {
-        this.selectionOperator = sop;
+    public Population(Operators operators, int observableVolume) {
+        this.operators = operators;
         this.individuals = new LinkedList<>();
         this.observableVolume = observableVolume;
     }
@@ -45,8 +47,8 @@ public class Population extends Model {
 
     }
 
-    public void setSelectionOperator(SelectionOperator selectionOperator) {
-        this.selectionOperator = selectionOperator;
+    public void setOperators(Operators operators) {
+        this.operators = operators;
     }
 
     public void setObservableVolume(int observableVolume) {
@@ -69,7 +71,7 @@ public class Population extends Model {
 
         for (Individual individual : individuals) {
 
-            individual.evaluate();
+            this.operators.getEvaluationOperator().evaluate(individual);
         }
     }
 
@@ -80,7 +82,7 @@ public class Population extends Model {
     public void buildNextGeneration() {
 
         this.evaluationStep();
-        Population population = this.selectionOperator.buildNextGeneration(this);
+        Population population = this.operators.getSelectionOperator().buildNextGeneration(this);
         this.setSolutions(population);
     }
 
@@ -95,10 +97,10 @@ public class Population extends Model {
      */
     public void crossOverStep() {
         LinkedList<Individual> crossQueue = new LinkedList<>();
-
+        CrossOverOperator crossoverOperator = this.operators.getCrossoverOperator();
         for (Individual individual : individuals) {
 
-            if (Math.random() < individual.getCrossOverProbability()) {
+            if (Math.random() < crossoverOperator.getProbability()) {
 
                 crossQueue.add(individual);
             }
@@ -135,7 +137,7 @@ public class Population extends Model {
                     nbCandidates--;
                 }
             }
-            male.cross(female);
+            crossoverOperator.cross(male,female);
         }
     }
 
@@ -145,11 +147,13 @@ public class Population extends Model {
      */
     public void mutationStep() {
 
+        MutationOperator mutationOperator = this.operators.getMutationOperator();
+        
         for (Individual individual : individuals) {
 
-            if (Math.random() < individual.getMutationProbability()) {
+            if (Math.random() < mutationOperator.getProbability()) {
 
-                individual.mutate();
+                mutationOperator.mutate(individual);
             }
         }
     }
@@ -193,5 +197,11 @@ public class Population extends Model {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
+    }
+    
+    public void evolve(){
+        this.crossOverStep();
+        this.mutationStep();
+        this.buildNextGeneration();
     }
 }

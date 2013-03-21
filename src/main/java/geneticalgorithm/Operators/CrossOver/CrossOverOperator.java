@@ -4,15 +4,18 @@
  */
 package geneticalgorithm.Operators.CrossOver;
 
-import geneticalgorithm.Operators.Operator;
+import geneticalgorithm.Operators.ProbableOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public abstract  class CrossOverOperator extends Operator {
-    
+public abstract class CrossOverOperator extends ProbableOperator {
+
+    public CrossOverOperator(double prb) {
+        super(prb);
+    }
+
     public abstract Individual cross(Individual male, Individual female);
-    
 }

@@ -34,9 +34,7 @@ public class GeneticEngine {
         while (!this.stop && this.stepCount <= maxStepCount) {
             
             this.stepCount++;
-            this.population.crossOverStep();
-            this.population.mutationStep();
-            this.population.buildNextGeneration();
+            this.population.evolve();
 
 
         }

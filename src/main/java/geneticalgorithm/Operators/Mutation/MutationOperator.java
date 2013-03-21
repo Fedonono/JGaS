@@ -4,13 +4,18 @@
  */
 package geneticalgorithm.Operators.Mutation;
 
-import geneticalgorithm.Operators.Operator;
+import geneticalgorithm.Operators.ProbableOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public abstract class MutationOperator extends Operator {
+public abstract class MutationOperator extends ProbableOperator {
+    
+    public MutationOperator(double prb){
+        super(prb);
+    };
+    
     public abstract Individual mutate(Individual individual);
 }

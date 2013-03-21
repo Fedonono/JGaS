@@ -13,8 +13,10 @@ import geneticalgorithm.Population.Individuals.Individual;
 public class TestCrossOverOperator extends CrossOverOperator {
     
     private static final String LABEL = "testCrossOverOperator";
+    private static final double defaultProba = 0.2;
 
-    public TestCrossOverOperator(String label) {
+    public TestCrossOverOperator(double prb,String label) {
+        super(prb);
         this.label = label;
     }
 
@@ -28,7 +30,7 @@ public class TestCrossOverOperator extends CrossOverOperator {
     
     public static TestCrossOverOperator getInstance() {
         if(instance == null){
-            instance = new TestCrossOverOperator(LABEL);
+            instance = new TestCrossOverOperator(defaultProba, LABEL);
         }
         
         return (TestCrossOverOperator)instance;

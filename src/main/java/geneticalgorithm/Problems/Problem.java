@@ -8,6 +8,7 @@ import MvcPattern.Model;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
+import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Population.Population;
 import java.util.LinkedList;
@@ -27,10 +28,7 @@ public abstract class Problem extends Model {
     private String label;
     private double mutationProbability;
     private double crossProbability;
-    private MutationOperator selectedMutationOperator;
-    private CrossOverOperator selectedCrossOverOperation;
-    private SelectionOperator selectedSelectionOperator;
-    private EvaluationOperator selectedEvaluationOperator;
+    private Operators operators; 
 
     public LinkedList<MutationOperator> getAvailableMutationOperators() {
         return availableMutationOperators;
@@ -65,19 +63,19 @@ public abstract class Problem extends Model {
     }
 
     public MutationOperator getSelectedMutationOperator() {
-        return selectedMutationOperator;
+        return operators.getMutationOperator();
     }
 
     public CrossOverOperator getSelectedCrossOverOperation() {
-        return selectedCrossOverOperation;
+        return operators.getCrossoverOperator();
     }
 
     public SelectionOperator getSelectedSelectionOperator() {
-        return selectedSelectionOperator;
+        return operators.getSelectionOperator();
     }
 
     public EvaluationOperator getSelectedEvaluationOperator() {
-        return selectedEvaluationOperator;
+        return operators.getEvaluationOperator();
     }
 
     public void setMaxStepCount(int maxStepCount) {
@@ -93,19 +91,19 @@ public abstract class Problem extends Model {
     }
 
     public void setSelectedMutationOperator(MutationOperator selectedMutationOperator) {
-        this.selectedMutationOperator = selectedMutationOperator;
+        this.operators.setMutationOperator(selectedMutationOperator);
     }
 
     public void setSelectedCrossOverOperation(CrossOverOperator selectedCrossOverOperation) {
-        this.selectedCrossOverOperation = selectedCrossOverOperation;
+        this.operators.setCrossoverOperator(selectedCrossOverOperation);
     }
 
     public void setSelectedSelectionOperator(SelectionOperator selectedSelectionOperator) {
-        this.selectedSelectionOperator = selectedSelectionOperator;
+        this.operators.setSelectionOperator(selectedSelectionOperator);
     }
 
     public void setSelectedEvaluationOperator(EvaluationOperator selectedEvaluationOperator) {
-        this.selectedEvaluationOperator = selectedEvaluationOperator;
+        this.operators.setEvaluationOperator(selectedEvaluationOperator);
     }
 
     public void setPopulationSize(int populationSize) {
@@ -131,5 +129,13 @@ public abstract class Problem extends Model {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
+    }
+    
+    protected void setSelectedOperators(Operators operators){
+        this.operators = operators;
+    }
+    
+    public Operators getSelectedOperators(){
+        return this.operators;
     }
 }
