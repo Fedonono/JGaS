@@ -4,6 +4,7 @@
  */
 package geneticalgorithm;
 
+import MvcPattern.Model;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 
@@ -11,12 +12,16 @@ import geneticalgorithm.Population.Population;
  *
  * @author simonneau
  */
-public class GeneticEngine {
+public class GeneticEngine extends Model {
 
     private Population population;
     private boolean stop = true;
     private int stepCount = 0;
     private int maxStepCount;
+    
+    public GeneticEngine(Population population){
+        this.population = population;
+    }
 
     public void start() {
 
