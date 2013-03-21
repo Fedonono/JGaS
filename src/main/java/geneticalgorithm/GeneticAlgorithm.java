@@ -21,8 +21,6 @@ public class GeneticAlgorithm extends Model{
         this.problems = new LinkedList<>();
         
     }
-
-    
     
     public void addProblem(Problem problem) {
         this.problems.add(problem);
@@ -51,20 +49,15 @@ public class GeneticAlgorithm extends Model{
         this.mainFrame.setVisible(true);        
     }
     
-    private void start(){
+    public void start(){
         //TODO
     }
     
-    private void stop(){
-        
+    public void stop(){
+        //TODO
     }
     
-    private void configure(){
-        
-    }     
-    
-    
-    private void Perform(AGcontrolEvent ev){
+    public void configure(){
         //TODO
     }
 }

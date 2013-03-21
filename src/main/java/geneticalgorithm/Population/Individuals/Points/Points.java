@@ -33,8 +33,23 @@ public class Points extends Individual {
     }
 
     @Override
-    public String xmlSerialize() {
+    public String xmlSerialization() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
+    private int compareTo(Points individual) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        if(t instanceof Points){
+            Individual individual = (Individual)t;
+            return this.compareTo(individual);
+        }else{
+            throw new RuntimeException();//TODO exception specifique
+        }
     }
     
 }

@@ -11,7 +11,7 @@ import MvcPattern.Model;
  *
  * @author simonneau
  */
-public abstract class Individual extends Model {
+public abstract class Individual extends Model implements Comparable {
 
     
    
@@ -40,5 +40,7 @@ public abstract class Individual extends Model {
         return (IndividualUI)super.getUI();
     }
     
-    public abstract String xmlSerialize();
+    public abstract String xmlSerialization();
+    
+    
 }
