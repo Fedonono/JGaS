@@ -10,6 +10,7 @@ import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -19,7 +20,7 @@ import java.util.LinkedList;
  */
 public class Population extends Model {
 
-    private LinkedList<Individual> individuals;
+    private ArrayList<Individual> individuals;
     private int observableVolume = 0;
     private Operators operators;
 
@@ -33,7 +34,7 @@ public class Population extends Model {
 
     public Population(Operators operators, int observableVolume) {
         this.operators = operators;
-        this.individuals = new LinkedList<>();
+        this.individuals = new ArrayList<>();
         this.observableVolume = observableVolume;
     }
 
@@ -87,7 +88,7 @@ public class Population extends Model {
     }
 
     protected void setSolutions(Population population) {
-        this.individuals = new LinkedList<>();
+        this.individuals = new ArrayList<>();
         this.individuals.addAll(population.individuals);
     }
 
@@ -137,7 +138,7 @@ public class Population extends Model {
                     nbCandidates--;
                 }
             }
-            crossoverOperator.cross(male,female);
+            crossoverOperator.cross(male, female);
         }
     }
 
@@ -148,7 +149,7 @@ public class Population extends Model {
     public void mutationStep() {
 
         MutationOperator mutationOperator = this.operators.getMutationOperator();
-        
+
         for (Individual individual : individuals) {
 
             if (Math.random() < mutationOperator.getProbability()) {
@@ -166,8 +167,6 @@ public class Population extends Model {
         candidates.addAll(this.individuals);
 
         int index;
-
-
         for (int i = 0; i < this.observableVolume; i++) {
 
             index = (int) (Math.random() * candidates.size());
@@ -198,8 +197,8 @@ public class Population extends Model {
         //TODO
         return serialisedPopulation;
     }
-    
-    public void evolve(){
+
+    public void evolve() {
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();

@@ -4,20 +4,15 @@
  */
 package geneticalgorithm.Population.Individuals;
 
-
 import MvcPattern.Model;
 
 /**
  *
  * @author simonneau
  */
-public abstract class Individual extends Model implements Comparable {
+public abstract class Individual extends Model implements Comparable<Individual> {
 
-    
-   
     private double score;
-
-    
 
     /**
      * Overall properties of 'this' with 's' properties.
@@ -29,18 +24,30 @@ public abstract class Individual extends Model implements Comparable {
     public double getScore() {
         return this.score;
     }
-    
-    
-    public void setScore(double score){
+
+    public void setScore(double score) {
         this.score = score;
     }
-    
+
     @Override
-    public IndividualUI getUI(){
-        return (IndividualUI)super.getUI();
+    public IndividualUI getUI() {
+        return (IndividualUI) super.getUI();
     }
-    
+
     public abstract String xmlSerialization();
-    
-    
+
+    @Override
+    public int compareTo(Individual t) {
+        
+        double thisScore = this.getScore();
+        double tScore = this.getScore();
+        
+        if (thisScore > tScore) {
+            return 1;
+        } else if (thisScore < tScore) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 }
