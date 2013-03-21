@@ -52,6 +52,19 @@ public class GeneticAlgorithm extends Model{
     }
     
     private void start(){
+        //TODO
+    }
+    
+    private void stop(){
         
+    }
+    
+    private void configure(){
+        
+    }     
+    
+    
+    private void Perform(AGcontrolEvent ev){
+        //TODO
     }
 }

@@ -193,7 +193,7 @@ public class Population extends Model {
         return bestIndividual;
     }
 
-    public String xmlSerialise() {
+    public String xmlSerialisation() {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;

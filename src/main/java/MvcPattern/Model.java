@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class Model {
 
-    private LinkedList<View> views = new LinkedList<>();
+    private transient LinkedList<View> views = new LinkedList<>();
 
     protected void notifyViews(RefreshEvent ev) {
         for (View v : views) {
