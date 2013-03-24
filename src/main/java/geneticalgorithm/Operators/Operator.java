@@ -8,7 +8,7 @@ package geneticalgorithm.Operators;
  *
  * @author simonneau
  */
-public class Operator{
+public abstract class Operator{
 
     protected String label;
     protected static Operator instance;

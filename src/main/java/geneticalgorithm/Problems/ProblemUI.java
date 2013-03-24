@@ -226,6 +226,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         return timeout.getValue();
     }
 
+    // TODO : A delete par la suite. Utile pour les tests
     public static void main(String[] args) {
         ProblemUI pbUI = new ProblemUI();
         pbUI.setVisible(true);
