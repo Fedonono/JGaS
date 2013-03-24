@@ -20,12 +20,13 @@ import java.util.logging.Logger;
  * @author nono
  */
 public class Min1D_2D extends Problem {
+    
+    private static Function function; // singleton ?, On appel function.changeFunction pour le changer ?
 
     // En faire une random par la suite, ceci sera utile juste pour les tests !
     @Override
     public Population createInitialPopulation() {
         Population pop = new Population();
-        Function function = null;
         try {
             function = new Function("sin(x)");
         } catch (UnknownFunctionException ex) {

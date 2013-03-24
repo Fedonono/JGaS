@@ -43,4 +43,8 @@ public class Function {
         }
         return calc.calculate();
     }
+    
+    public void changeFunction(String function) throws UnknownFunctionException, UnknownFunctionException, UnparsableExpressionException {
+        calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
+    }
 }
