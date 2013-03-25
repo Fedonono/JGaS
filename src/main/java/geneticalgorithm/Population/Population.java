@@ -22,18 +22,12 @@ public class Population extends Model {
 
     private ArrayList<Individual> individuals;
     private int observableVolume = 0;
-    private Operators operators;
 
     public Population() {
-        this(null);
+        this(0);
     }
 
-    public Population(Operators operators) {
-        this(operators, 0);
-    }
-
-    public Population(Operators operators, int observableVolume) {
-        this.operators = operators;
+    public Population(int observableVolume) {
         this.individuals = new ArrayList<>();
         this.observableVolume = observableVolume;
     }
@@ -48,9 +42,11 @@ public class Population extends Model {
 
     }
 
-    public void setOperators(Operators operators) {
-        this.operators = operators;
+    public ArrayList<Individual> getIndividuals() {
+        return individuals;
     }
+    
+    
 
     public void setObservableVolume(int observableVolume) {
         int size = this.individuals.size();
@@ -65,103 +61,14 @@ public class Population extends Model {
         return observableVolume;
     }
 
-    /**
-     * Evaluate all the individuals using their evaluation method.
-     */
-    private void evaluationStep() {
-
-        for (Individual individual : individuals) {
-
-            this.operators.getEvaluationOperator().evaluate(individual);
-        }
-    }
-
-    /**
-     * Selects the survivals of the current generation using the selected
-     * selection operator.
-     */
-    public void buildNextGeneration() {
-
-        this.evaluationStep();
-        Population population = this.operators.getSelectionOperator().buildNextGeneration(this);
-        this.setSolutions(population);
-    }
-
-    protected void setSolutions(Population population) {
+    public void setSolutions(Population population) {
         this.individuals = new ArrayList<>();
         this.individuals.addAll(population.individuals);
     }
 
-    /**
-     * Randomly crosses Individuals between them using the selected cross over
-     * operator.
-     */
-    public void crossOverStep() {
-        LinkedList<Individual> crossQueue = new LinkedList<>();
-        CrossOverOperator crossoverOperator = this.operators.getCrossoverOperator();
-        for (Individual individual : individuals) {
-
-            if (Math.random() < crossoverOperator.getProbability()) {
-
-                crossQueue.add(individual);
-            }
-        }
-
-        int queueSize = crossQueue.size();
-        Individual male;
-        Individual female = null;
-        int nbCandidates;
-        double sexAppeal;
-
-        while (queueSize > 1) {
-
-            male = crossQueue.remove(0);
-            queueSize--;
-
-            nbCandidates = queueSize;
-            boolean done = false;
-
-            while (nbCandidates > 0 && !done) {
-
-                Iterator<Individual> solutionIterator = crossQueue.iterator();
-                female = solutionIterator.next();
-                sexAppeal = 1 / nbCandidates;
-
-                if (Math.random() < sexAppeal) {
-
-                    solutionIterator.remove();
-                    queueSize--;
-                    done = true;
-
-                } else {
-
-                    nbCandidates--;
-                }
-            }
-            crossoverOperator.cross(male, female);
-        }
-    }
-
-    /**
-     * Randomly makes some individual victim of mutations using the selected
-     * mutation operator.
-     */
-    public void mutationStep() {
-
-        MutationOperator mutationOperator = this.operators.getMutationOperator();
-
-        for (Individual individual : individuals) {
-
-            if (Math.random() < mutationOperator.getProbability()) {
-
-                mutationOperator.mutate(individual);
-            }
-        }
-    }
-
     @Override
     public void notifyViews() {
-
+        
         LinkedList<IndividualUI> visualSample = new LinkedList<>();
         LinkedList<Individual> candidates = new LinkedList<>();
         candidates.addAll(this.individuals);
@@ -177,7 +84,6 @@ public class Population extends Model {
     }
 
     public Individual bestIndividual() {
-
         Iterator<Individual> individualIterator = this.individuals.iterator();
         Individual bestIndividual = individualIterator.next();
         Individual currentIndividual;
@@ -196,11 +102,5 @@ public class Population extends Model {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
-    }
-
-    public void evolve() {
-        this.crossOverStep();
-        this.mutationStep();
-        this.buildNextGeneration();
     }
 }

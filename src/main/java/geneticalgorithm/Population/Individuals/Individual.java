@@ -38,7 +38,9 @@ public abstract class Individual extends Model implements Comparable<Individual>
 
     @Override
     public int compareTo(Individual t) {
-        
+        if(this.getClass() != t.getClass()){
+            throw new IllegalArgumentException("argument is not an instance of "+this.getClass().toString());
+        }
         double thisScore = this.getScore();
         double tScore = this.getScore();
         
