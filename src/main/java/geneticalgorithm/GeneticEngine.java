@@ -10,6 +10,7 @@ import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
+import geneticalgorithm.Population.PopulationUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -34,13 +35,11 @@ public class GeneticEngine extends Model {
         this(pop, null);
     }
 
-    public GeneticEngine(Operators op) {
-        this(null, op);
-    }
-
     public GeneticEngine(Population population, Operators operators) {
+        
         this.population = population;
         this.operators = operators;
+        this.addView(new GeneticEngineUI((PopulationUI)population.getUI()));
     }
 
     public Population getPopulation() {
@@ -116,7 +115,7 @@ public class GeneticEngine extends Model {
 
         this.evaluationStep();
         this.population.sort();
-        
+
         Population pop = this.operators.getSelectionOperator().buildNextGeneration(this.population);
         this.population.setSolutions(pop);
     }
@@ -172,8 +171,7 @@ public class GeneticEngine extends Model {
             this.population.add(crossoverOperator.cross(male, female));
         }
     }
-    
-    
+
     /**
      * Randomly makes some individual victim of mutations using the selected
      * mutation operator.
@@ -183,7 +181,7 @@ public class GeneticEngine extends Model {
         MutationOperator mutationOperator = this.operators.getMutationOperator();
 
         ArrayList<Individual> individuals = this.population.getIndividuals();
-        
+
         for (Individual individual : individuals) {
 
             if (Math.random() < mutationOperator.getProbability()) {
@@ -192,12 +190,12 @@ public class GeneticEngine extends Model {
             }
         }
     }
-    
-    
-    
+
     private void evolve() {
+        
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();
+        
     }
 }

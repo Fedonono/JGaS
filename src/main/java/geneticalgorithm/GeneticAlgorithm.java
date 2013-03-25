@@ -1,6 +1,7 @@
 package geneticalgorithm;
 
 import MvcPattern.Model;
+import geneticalgorithm.Problems.Min1D.Min1D_2D;
 import geneticalgorithm.Problems.Problem;
 import java.awt.Frame;
 import java.util.Collection;
@@ -59,5 +60,11 @@ public class GeneticAlgorithm extends Model{
     
     public void configure(){
         //TODO
+    }
+    
+    public static void main(String[] args){
+        GeneticAlgorithm ga = new GeneticAlgorithm();
+        ga.addProblem(new Min1D_2D());
+        ga.run();
     }
 }

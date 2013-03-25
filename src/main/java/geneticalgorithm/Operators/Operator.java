@@ -13,6 +13,10 @@ public abstract class Operator{
     protected String label;
     protected static Operator instance;
     
+    public static Operator getInstance(){
+        return instance;
+    }
+    
     public String getLabel() {
         return this.label;
     }
