@@ -42,7 +42,7 @@ public abstract class Individual extends Model implements Comparable<Individual>
             throw new IllegalArgumentException("argument is not an instance of "+this.getClass().toString());
         }
         double thisScore = this.getScore();
-        double tScore = this.getScore();
+        double tScore = t.getScore();
         
         if (thisScore > tScore) {
             return 1;

@@ -5,12 +5,10 @@
 package geneticalgorithm.Population;
 
 import MvcPattern.Model;
-import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
-import geneticalgorithm.Operators.Mutation.MutationOperator;
-import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -102,5 +100,9 @@ public class Population extends Model {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
+    }
+    
+    public void sort(){
+        Collections.sort(individuals);
     }
 }
