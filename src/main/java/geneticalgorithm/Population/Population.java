@@ -28,6 +28,7 @@ public class Population extends Model {
     public Population(int observableVolume) {
         this.individuals = new ArrayList<>();
         this.observableVolume = observableVolume;
+        this.sort();
     }
 
     /**
@@ -37,7 +38,6 @@ public class Population extends Model {
      */
     public void add(Individual s) {
         this.individuals.add(s);
-
     }
 
     public ArrayList<Individual> getIndividuals() {
