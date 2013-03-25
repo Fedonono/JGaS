@@ -115,6 +115,8 @@ public class GeneticEngine extends Model {
     private void buildNextGeneration() {
 
         this.evaluationStep();
+        this.population.sort();
+        
         Population pop = this.operators.getSelectionOperator().buildNextGeneration(this.population);
         this.population.setSolutions(pop);
     }
