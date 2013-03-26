@@ -38,5 +38,19 @@
       <artifactId>exp4j</artifactId>
       <version>0.3.10</version>
     </dependency>
+    <dependency>
+      <groupId>berlios</groupId>
+      <artifactId>jmathplot</artifactId>
+      <version>39</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/jmathplot.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>berlios</groupId>
+      <artifactId>jmatharray</artifactId>
+      <version>39</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/jmatharray.jar</systemPath>
+    </dependency>
   </dependencies>
 </project>

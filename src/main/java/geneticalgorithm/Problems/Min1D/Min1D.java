@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author nono
  */
-public class Min1D_2D extends Problem {
+public class Min1D extends Problem {
     
     private static Function function; // singleton ?, On appel function.changeFunction pour le changer ?
 
@@ -28,11 +28,11 @@ public class Min1D_2D extends Problem {
     public Population createInitialPopulation() {
         Population pop = new Population();
         try {
-            function = new Function("sin(x)");
+            function = Function.newFunction("sin(x)");
         } catch (UnknownFunctionException ex) {
-            Logger.getLogger(Min1D_2D.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
-            Logger.getLogger(Min1D_2D.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         // Creation individu de test 1

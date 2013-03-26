@@ -15,12 +15,29 @@ import de.congrace.exp4j.UnparsableExpressionException;
  */
 public class Function {
     
-    private Calculable calc;
+    private static Function instance = null;
+    private static Calculable calc = null;
 
-    public Function(String function) throws UnknownFunctionException, UnparsableExpressionException {
-        calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
+    private Function(String function) throws UnknownFunctionException, UnparsableExpressionException {
+        instance.calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
     }
     
+    public static Function getInstance() throws UnknownFunctionException, UnparsableExpressionException {
+        if (instance == null) {
+            instance = new Function("2*x");
+        }
+        return instance;
+    }
+    
+    public static Function newFunction(String function) throws UnknownFunctionException, UnparsableExpressionException {
+        if (instance == null) {
+            instance = new Function(function);
+        } else {
+            instance.changeFunction(function);
+        }
+        return instance;
+    }
+
     public double getResult(Points points) {
         if (points.size() > 2)
             return 0; //TODO add exception by ARNAUD
@@ -30,10 +47,10 @@ public class Function {
         for (Double value : points) {
             switch (dim) {
                 case 0:
-                    calc.setVariable("x", value);
+                    instance.calc.setVariable("x", value);
                     break;
                 case 1:
-                    calc.setVariable("y", value);
+                    instance.calc.setVariable("y", value);
                     break;
                 default:
                     // TODO add exception by ARNAUD
@@ -41,10 +58,10 @@ public class Function {
             }
             dim++;
         }
-        return calc.calculate();
+        return instance.calc.calculate();
     }
     
-    public void changeFunction(String function) throws UnknownFunctionException, UnknownFunctionException, UnparsableExpressionException {
-        calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
+    private static void changeFunction(String function) throws UnknownFunctionException, UnknownFunctionException, UnparsableExpressionException {
+        instance.calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
     }
 }
