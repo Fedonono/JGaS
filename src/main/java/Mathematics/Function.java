@@ -17,9 +17,15 @@ public class Function {
     
     private static Function instance = null;
     private static Calculable calc = null;
+    private static String label = null;
 
     private Function(String function) throws UnknownFunctionException, UnparsableExpressionException {
+        this.changeFunction(function);
+    }
+
+    private static void changeFunction(String function) throws UnknownFunctionException, UnparsableExpressionException {
         instance.calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
+        instance.label = function;
     }
     
     public static Function getInstance() throws UnknownFunctionException, UnparsableExpressionException {
@@ -36,6 +42,15 @@ public class Function {
             instance.changeFunction(function);
         }
         return instance;
+    }
+    
+    public String getLabel() {
+        return instance.label;
+    }
+    
+    public double getY(double x) {
+        instance.calc.setVariable("x", x);
+        return instance.calc.calculate();
     }
 
     public double getResult(Points points) {
@@ -59,9 +74,5 @@ public class Function {
             dim++;
         }
         return instance.calc.calculate();
-    }
-    
-    private static void changeFunction(String function) throws UnknownFunctionException, UnknownFunctionException, UnparsableExpressionException {
-        instance.calc = new ExpressionBuilder(function).withVariableNames("x","y").build();
     }
 }
