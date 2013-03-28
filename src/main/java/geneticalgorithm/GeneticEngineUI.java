@@ -19,11 +19,15 @@ public class GeneticEngineUI extends IdentifiableComponent implements View {
 
     private static String stepLabel = "current step: ";
     private JLabel footer;
+    private PopulationUI pUI;
 
     public GeneticEngineUI(PopulationUI pUI) {
 
         this.setLayout(new BorderLayout());
+        
         this.footer = new JLabel(stepLabel + 0);
+        this.pUI = pUI;
+        
         this.add(this.footer, BorderLayout.SOUTH);
         this.add(pUI, BorderLayout.CENTER);
 

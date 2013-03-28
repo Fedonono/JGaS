@@ -9,8 +9,6 @@ import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class GeneticAlgorithm extends Model{
 
     private LinkedList<Problem> problems;
-    private Problem Selectedproblem;
+    private Problem SelectedProblem;
     private GeneticEngine geneticEngine;
     private Frame mainFrame;
 
@@ -51,15 +51,15 @@ public class GeneticAlgorithm extends Model{
     }
     
     public void start(){
-        //TODO
+        //TODO: lancer le moteur.
     }
     
-    public void stop(){
-        //TODO
+    public void pause(){
+        //TODO: mettre en pause.
     }
     
     public void configure(){
-        //TODO
+        //TODO: afficher le jdialog du pb.
     }
     
     public static void main(String[] args){

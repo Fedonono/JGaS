@@ -16,7 +16,7 @@ import javax.swing.JButton;
 public class ValidateButton extends IdentifiableComponent implements Observable, ActionListener{
     
     private LinkedList<Observer> observers = new LinkedList<>();
-    private JButton button;
+    protected JButton button;
     
     
     /**

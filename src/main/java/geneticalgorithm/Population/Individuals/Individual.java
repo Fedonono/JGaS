@@ -10,7 +10,7 @@ import MvcPattern.Model;
  *
  * @author simonneau
  */
-public abstract class Individual extends Model implements Comparable<Individual> {
+public abstract class Individual<T extends Individual> extends Model implements Comparable<T> {
 
     private double score;
 
@@ -38,12 +38,10 @@ public abstract class Individual extends Model implements Comparable<Individual>
 
     @Override
     public int compareTo(Individual t) {
-        if(this.getClass() != t.getClass()){
-            throw new IllegalArgumentException("argument is not an instance of "+this.getClass().toString());
-        }
+        
         double thisScore = this.getScore();
         double tScore = t.getScore();
-        
+
         if (thisScore > tScore) {
             return 1;
         } else if (thisScore < tScore) {
