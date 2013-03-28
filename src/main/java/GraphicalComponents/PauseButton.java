@@ -5,8 +5,10 @@
 package GraphicalComponents;
 
 import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import javax.swing.Icon;
+import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,10 +17,20 @@ import javax.swing.ImageIcon;
  */
 public class PauseButton extends ValidateButton{
     
-    private static final String pauseLocation = "./ressources/pause.png";
-    private static final String resumeLocation = "./ressources/resume.png";
-    private Icon pauseIcon;
-    private Icon resumeIcon;
+    private static final String pauseLocation = "Resources/pause.png";
+    private static final String resumeLocation = "Resources/resume.png";
+    private static Image pauseImage;
+    private static Image resumeImage;
+    static{
+        URL url = PauseButton.class.getResource(pauseLocation);
+        pauseImage = Toolkit.getDefaultToolkit().getImage(url);
+        url = PauseButton.class.getResource(resumeLocation);
+        resumeImage = Toolkit.getDefaultToolkit().getImage(url);
+        
+    }    
+    private ImageIcon pauseIcon;
+    private ImageIcon resumeIcon;
+    
     private boolean pause;
     
     public PauseButton(String Label){
@@ -27,16 +39,15 @@ public class PauseButton extends ValidateButton{
     
     public PauseButton(String label, boolean pause){
         super(label);
-        
-        this.pauseIcon = new ImageIcon(pauseLocation);
-        this.resumeIcon = new ImageIcon(resumeLocation);
+        this.pauseIcon = new ImageIcon(pauseImage);
+        this.resumeIcon = new ImageIcon(resumeImage);
         
         this.pause = pause;
-        this.setPause(pause);
+        this.setImageIcon(pause);
         
     }
     
-    private void setPause(boolean pause){
+    private void setImageIcon(boolean pause){
         if(pause){
             this.button.setIcon(resumeIcon);
         }else{
@@ -46,7 +57,7 @@ public class PauseButton extends ValidateButton{
     
     private void setPause(){
         this.pause = !this.pause;
-        this.setPause(this.pause);
+        this.setImageIcon(this.pause);
     }
     
     @Override
