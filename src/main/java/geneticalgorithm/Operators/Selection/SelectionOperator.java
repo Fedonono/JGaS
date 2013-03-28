@@ -13,5 +13,5 @@ import geneticalgorithm.Population.Population;
  */
 public abstract class SelectionOperator extends Operator {
 
-    public abstract Population buildNextGeneration(Population population);
+    public abstract Population buildNextGeneration(Population population, int size);
 }

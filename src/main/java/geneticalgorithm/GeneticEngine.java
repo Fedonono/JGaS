@@ -22,22 +22,18 @@ import java.util.LinkedList;
 public class GeneticEngine extends Model {
 
     private Population population;
+    private int initialSize;
     private boolean stop = true;
     private int stepCount = 0;
     private int maxStepCount;
     private Operators operators;
-
-    public GeneticEngine() {
-        this(null, null);
-    }
 
     public GeneticEngine(Population pop) {
         this(pop, null);
     }
 
     public GeneticEngine(Population population, Operators operators) {
-        
-        this.population = population;
+        this.setPopulation(population);
         this.operators = operators;
         this.addView(new GeneticEngineUI((PopulationUI)population.getUI()));
     }
@@ -60,6 +56,7 @@ public class GeneticEngine extends Model {
 
     public void setPopulation(Population population) {
         this.population = population;
+        this.initialSize = population.size();
     }
 
     public void setMaxStepCount(int maxStepCount) {
@@ -92,7 +89,7 @@ public class GeneticEngine extends Model {
 
     public Individual getBestSolution() {
 
-        return this.population.bestIndividual();
+        return this.population.getAlphaIndividual();
     }
 
     /**
@@ -114,9 +111,7 @@ public class GeneticEngine extends Model {
     private void buildNextGeneration() {
 
         this.evaluationStep();
-        this.population.sort();
-
-        Population pop = this.operators.getSelectionOperator().buildNextGeneration(this.population);
+        Population pop = this.operators.getSelectionOperator().buildNextGeneration(this.population, this.initialSize);
         this.population.setSolutions(pop);
     }
 

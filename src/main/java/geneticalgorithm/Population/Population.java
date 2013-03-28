@@ -8,6 +8,7 @@ import MvcPattern.Model;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -40,11 +41,21 @@ public class Population extends Model {
         this.individuals.add(s);
     }
 
+    public void addAll(Collection<? extends Individual> coll) {
+        this.individuals.addAll(coll);
+    }
+
+    public void addAll(int index, Collection<? extends Individual> coll) {
+        this.individuals.addAll(index, coll);
+    }
+    
+    public Iterator<Individual> iterator(){
+        return this.individuals.iterator();
+    }
+
     public ArrayList<Individual> getIndividuals() {
         return individuals;
     }
-    
-    
 
     public void setObservableVolume(int observableVolume) {
         int size = this.individuals.size();
@@ -66,7 +77,7 @@ public class Population extends Model {
 
     @Override
     public void notifyViews() {
-        
+
         LinkedList<IndividualUI> visualSample = new LinkedList<>();
         LinkedList<Individual> candidates = new LinkedList<>();
         candidates.addAll(this.individuals);
@@ -81,7 +92,7 @@ public class Population extends Model {
         super.notifyViews(new PopulationRefreshEvent(this, visualSample));
     }
 
-    public Individual bestIndividual() {
+    public Individual getAlphaIndividual() {
         Iterator<Individual> individualIterator = this.individuals.iterator();
         Individual bestIndividual = individualIterator.next();
         Individual currentIndividual;
@@ -95,14 +106,18 @@ public class Population extends Model {
         }
         return bestIndividual;
     }
-
+    
     public String xmlSerialisation() {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
     }
-    
-    public void sort(){
+
+    public void sort() {
         Collections.sort(individuals);
+    }
+
+    public int size() {
+        return this.individuals.size();
     }
 }

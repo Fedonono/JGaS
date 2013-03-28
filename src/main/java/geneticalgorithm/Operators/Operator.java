@@ -11,7 +11,7 @@ package geneticalgorithm.Operators;
 public abstract class Operator{
 
     protected String label;
-    protected static Operator instance;
+    private static Operator instance;
     
     public static Operator getInstance(){
         return instance;
