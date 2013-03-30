@@ -4,10 +4,15 @@
  */
 package geneticalgorithm.Operators.Mutation.Function;
 
+import Mathematics.Function.Model.Function;
 import Mathematics.Points;
+import de.congrace.exp4j.UnknownFunctionException;
+import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +41,13 @@ public class FunctionStepMutationOperator extends MutationOperator {
             for (Double number : individualValues) {
                 number = stepMutation(number, this.getRandomNumber(randomMin, randomMax));
             }
+            /*try {
+                Function.getInstance().inDomaine(individualValues);
+            } catch (UnknownFunctionException ex) {
+                Logger.getLogger(FunctionStepMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnparsableExpressionException ex) {
+                Logger.getLogger(FunctionStepMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
             return individualP;
         }
         // IncorrectIndividualException TODO BY ARNAUD

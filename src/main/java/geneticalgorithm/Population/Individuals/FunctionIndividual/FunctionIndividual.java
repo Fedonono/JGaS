@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
-import Mathematics.Function;
+import Mathematics.Function.Model.Function;
 import Mathematics.Points;
 import geneticalgorithm.Population.Individuals.Individual;
 
@@ -15,7 +15,7 @@ import geneticalgorithm.Population.Individuals.Individual;
 public class FunctionIndividual extends Individual {
     
     private Points points;
-    private Function function;
+    public Function function;
 
     public FunctionIndividual(Function function, Double... values) {
         if (values.length > 2) {

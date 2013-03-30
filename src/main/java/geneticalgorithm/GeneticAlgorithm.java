@@ -43,8 +43,8 @@ public class GeneticAlgorithm extends Model{
         
         GAcontroller gaController = new GAcontroller(this);
         MainUI mainUI = new MainUI(gaController);
-        this.addView(mainUI)
-                ;
+        this.addView(mainUI);
+
         this.mainFrame = new Frame();
         this.mainFrame.add(mainUI);
         this.mainFrame.setVisible(true);        

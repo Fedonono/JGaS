@@ -73,14 +73,13 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        Class evClass = ev.getClass();
         int value = this.value;
-        if (evClass == CustomSliderEvent.class) {
+        if (ev instanceof CustomSliderEvent) {
             
             CustomSliderEvent event = (CustomSliderEvent) ev;
             value = event.getValue();
 
-        } else if (evClass == CustomTextFieldEvent.class) {
+        } else if (ev instanceof CustomTextFieldEvent) {
             
             CustomTextFieldEvent event = (CustomTextFieldEvent) ev;
             try {

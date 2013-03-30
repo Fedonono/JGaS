@@ -1,4 +1,4 @@
-import Mathematics.Function;
+import Mathematics.Function.Model.Function;
 import Mathematics.Points;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -41,8 +41,9 @@ public class GridPlotsExample {
  
 	// function definition: z=cos(PI*x)*sin(PI*y)
 	public static double f1(double x, double y) throws UnknownFunctionException, UnparsableExpressionException {
-		double z = Function.getInstance().getResult(new Points(x, y));
-		return z;
+	//	double z = Function.getInstance().getResult(new Points(x, y));
+	//	return z;
+            return 1.2;
 	}
  
 	// grid version of the function

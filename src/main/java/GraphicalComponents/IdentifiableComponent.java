@@ -14,7 +14,6 @@ import javax.swing.JPanel;
  */
 public class IdentifiableComponent extends JPanel {
     private static int nextId = 0;
-    
     private int id;
 
     public IdentifiableComponent() {
@@ -24,8 +23,7 @@ public class IdentifiableComponent extends JPanel {
         this.setLayout(lm);
         this.id = nextId++;
     }
-    
-    
+
     public int getId(){
         return this.id;
     }

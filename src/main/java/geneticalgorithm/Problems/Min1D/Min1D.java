@@ -4,16 +4,19 @@
  */
 package geneticalgorithm.Problems.Min1D;
 
-import Mathematics.Function;
+import Mathematics.Function.Model.Function2D;
 import Mathematics.Points;
+import MvcPattern.View;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
-import geneticalgorithm.Population.Individuals.Individual;
+import Mathematics.Function.Controller.FunctionController;
+import Mathematics.Function.View.Function2DUI;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Problem;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -21,31 +24,43 @@ import java.util.logging.Logger;
  */
 public class Min1D extends Problem {
     
-    private static Function function; // singleton ?, On appel function.changeFunction pour le changer ?
+    private static Function2D function;
+    private static Function2DUI viewToDel;
+    private static FunctionController controller;
 
     // En faire une random par la suite, ceci sera utile juste pour les tests !
-    @Override
-    public Population createInitialPopulation() {
+    //@Override
+    //public Population createInitialPopulation() {
+    public static void main(String[] args) throws UnknownFunctionException, UnparsableExpressionException {
         Population pop = new Population();
         try {
-            function = Function.newFunction("sin(x)");
+            function = new Function2D("sin(x)", new Points(-1.0,1.0));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
+        controller = new FunctionController(function);
+        viewToDel = new Function2DUI(controller);
+        function.addView(viewToDel);
         
         // Creation individu de test 1
-        Individual test1 = new FunctionIndividual(function, 1d);
+        FunctionIndividual test1 = new FunctionIndividual(function, 1d);
         
         // Creation individu de test 2
-        Individual test2 = new FunctionIndividual(function, 5d);
+        FunctionIndividual test2 = new FunctionIndividual(function, 5d);
         
         // Ajout à la population
         pop.add(test1);
         pop.add(test2);
-        return pop;
-        
+        JFrame frame = new JFrame();
+        frame.add(viewToDel);
+        frame.setSize(800, 800);
+        frame.setVisible(true);
     }
-    
+
+    @Override
+    public Population createInitialPopulation() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
