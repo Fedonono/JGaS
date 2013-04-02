@@ -4,9 +4,13 @@
  */
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
+import Mathematics.Function.View.Function2DUI;
 import MvcPattern.RefreshEvent;
-import geneticalgorithm.Population.Individuals.Individual;
+import de.congrace.exp4j.UnknownFunctionException;
+import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.IndividualUI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,9 +20,15 @@ public class FunctionIndividualUI extends IndividualUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        System.out.println("functionIndividualUi");
         FunctionIndividual ind = (FunctionIndividual) ev.getSource();
-        //ind.getFunction().
+        Function2DUI fUI = (Function2DUI) ind.getFunction().getUI();
+        try {
+            fUI.addIndividu(ind);
+        } catch (UnknownFunctionException ex) {
+            Logger.getLogger(FunctionIndividualUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnparsableExpressionException ex) {
+            Logger.getLogger(FunctionIndividualUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

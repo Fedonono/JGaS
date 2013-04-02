@@ -23,6 +23,7 @@ import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.Events.DomaineEvent;
 import Mathematics.Function.Events.FunctionEvent;
 import Mathematics.Function.Events.FunctionRefreshEvent;
+import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.logging.Level;
@@ -41,6 +42,10 @@ public class Function2DUI extends IdentifiableComponent implements Observer, Vie
     private CustomSpinner xMin;
     private CustomSpinner xMax;
     private FunctionController controller;
+
+    public FunctionController getController() {
+        return controller;
+    }
 
     public Function2DUI(FunctionController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(new BorderLayout());
@@ -71,6 +76,10 @@ public class Function2DUI extends IdentifiableComponent implements Observer, Vie
 
         this.add(plot2D, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
+    }
+    
+    public void addIndividu(FunctionIndividual ind) throws UnknownFunctionException, UnparsableExpressionException {
+        this.plot2D.addIndividu((Function2D)ind.getFunction(), ind.getPoints().get(0));
     }
 
     @Override
