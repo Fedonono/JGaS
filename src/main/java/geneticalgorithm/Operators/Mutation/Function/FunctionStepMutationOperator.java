@@ -41,13 +41,6 @@ public class FunctionStepMutationOperator extends MutationOperator {
             for (Double number : individualValues) {
                 number = stepMutation(number, this.getRandomNumber(randomMin, randomMax));
             }
-            /*try {
-                Function.getInstance().inDomaine(individualValues);
-            } catch (UnknownFunctionException ex) {
-                Logger.getLogger(FunctionStepMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnparsableExpressionException ex) {
-                Logger.getLogger(FunctionStepMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
             return individualP;
         }
         // IncorrectIndividualException TODO BY ARNAUD

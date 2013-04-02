@@ -23,7 +23,7 @@ import javax.swing.JFrame;
  * @author nono
  */
 public class Min1D extends Problem {
-    
+    // static pour les tests !
     private static Function2D function;
     private static Function2DUI viewToDel;
     private static FunctionController controller;
@@ -53,6 +53,7 @@ public class Min1D extends Problem {
         // Ajout à la population
         pop.add(test1);
         pop.add(test2);
+        pop.notifyViews();
         JFrame frame = new JFrame();
         frame.add(viewToDel);
         frame.setSize(800, 800);

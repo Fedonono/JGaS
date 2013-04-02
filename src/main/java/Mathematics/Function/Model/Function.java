@@ -4,16 +4,14 @@
  */
 package Mathematics.Function.Model;
 
-import GraphicalComponents.IdentifiableComponent;
+import Mathematics.Function.Events.FunctionRefreshEvent;
 import Mathematics.Points;
 import MvcPattern.Model;
 import MvcPattern.RefreshEvent;
-import MvcPattern.View;
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import javax.swing.JPanel;
 
 /**
  *
@@ -32,19 +30,19 @@ public abstract class Function extends Model {
     public void setFunction(String function) throws UnknownFunctionException, UnparsableExpressionException {
         this.calc = new ExpressionBuilder(function).withVariableNames("x", "y").build();
         this.label = function;
-        super.notifyViews(new RefreshEvent(this));
+        super.notifyViews(new FunctionRefreshEvent(this));
     }
 
     public void setFunction(Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.domaine = domaine;
-        super.notifyViews(new RefreshEvent(this));
+        super.notifyViews(new FunctionRefreshEvent(this));
     }
     
     public void setFunction(String function, Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.domaine = domaine;
         this.calc = new ExpressionBuilder(function).withVariableNames("x", "y").build();
         this.label = function;
-        super.notifyViews(new RefreshEvent(this));
+        super.notifyViews(new FunctionRefreshEvent(this));
     }
 
     public String getLabel() {

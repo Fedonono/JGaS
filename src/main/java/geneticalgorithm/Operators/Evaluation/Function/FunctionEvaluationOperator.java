@@ -4,6 +4,7 @@
  */
 package geneticalgorithm.Operators.Evaluation.Function;
 
+import Mathematics.Points;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
@@ -17,8 +18,10 @@ public class FunctionEvaluationOperator extends EvaluationOperator {
     public void evaluate(Individual individual) {
         if (individual instanceof FunctionIndividual) {
             FunctionIndividual individualP = (FunctionIndividual) individual;
-            double score = -individualP.getResult(individualP.getPoints());
-            individualP.setScore(score);
+            Points points = individualP.getPoints();
+            individualP.function.inDomaine(points);
+            double score = -individualP.getResult(points);
+            individual.setScore(score);
         }
         // IncorrectIndividualException TODO BY ARNAUD
     }

@@ -24,6 +24,7 @@ public class FunctionIndividual extends Individual {
         
         this.points = new Points(values);
         this.function = function;
+        this.addView(new FunctionIndividualUI());
     }
 
     public FunctionIndividual(Points points) {
@@ -40,6 +41,10 @@ public class FunctionIndividual extends Individual {
 
     public void setFunction(Function function) {
         this.function = function;
+    }
+
+    public Function getFunction() {
+        return function;
     }
     
     public double getResult(Points points) {

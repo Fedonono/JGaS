@@ -20,8 +20,9 @@ import de.congrace.exp4j.UnparsableExpressionException;
 import Mathematics.Function.Controller.FunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
-import mathematics.Function.Events.DomaineEvent;
-import mathematics.Function.Events.FunctionEvent;
+import Mathematics.Function.Events.DomaineEvent;
+import Mathematics.Function.Events.FunctionEvent;
+import Mathematics.Function.Events.FunctionRefreshEvent;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.logging.Level;
@@ -74,13 +75,16 @@ public class Function2DUI extends IdentifiableComponent implements Observer, Vie
 
     @Override
     public void refresh(RefreshEvent ev) {
-        Function func = (Function)ev.getSource();
-        try {
-            this.plot2D.setPlot((Function2D)func);
-        } catch (UnknownFunctionException ex) {
-            Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnparsableExpressionException ex) {
-            Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (ev instanceof FunctionRefreshEvent) {
+            System.out.println("functionRefreshEvent");
+            Function func = (Function)ev.getSource();
+            try {
+                this.plot2D.setPlot((Function2D)func);
+            } catch (UnknownFunctionException ex) {
+                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnparsableExpressionException ex) {
+                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

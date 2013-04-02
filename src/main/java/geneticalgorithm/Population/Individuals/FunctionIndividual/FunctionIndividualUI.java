@@ -16,7 +16,9 @@ public class FunctionIndividualUI extends IndividualUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        Individual ind = (Individual) ev.getSource();
+        System.out.println("functionIndividualUi");
+        FunctionIndividual ind = (FunctionIndividual) ev.getSource();
+        //ind.getFunction().
     }
     
 }

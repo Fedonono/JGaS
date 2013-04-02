@@ -90,6 +90,10 @@ public class Population extends Model {
         }
 
         super.notifyViews(new PopulationRefreshEvent(this, visualSample));
+        
+        for (Individual individual : individuals) {
+            individual.notifyViews();
+        }
     }
 
     public Individual getAlphaIndividual() {
