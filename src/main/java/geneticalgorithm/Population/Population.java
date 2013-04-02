@@ -90,10 +90,19 @@ public class Population extends Model {
         }
 
         super.notifyViews(new PopulationRefreshEvent(this, visualSample));
-        
+        //TODO BY ARNAUD -- CHECK IF LE BOUCLE EN DESSOUS FAIT PAS LE BOULOT de la ligne du dessus. EN PARLER A GUIOME
         for (Individual individual : individuals) {
             individual.notifyViews();
         }
+    }
+    
+    public Individual getFirstIndividual() {
+        if (this.individuals.size() > 0) {
+            return this.individuals.get(0);
+        }
+        return null;
+        // TODO EXCEPTION PAS INDIVIDU BY ARNAUD
+        
     }
 
     public Individual getAlphaIndividual() {

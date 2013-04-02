@@ -39,7 +39,6 @@ public class PopulationUI extends JPanel implements View, Observer {
     public void refresh(RefreshEvent ev) {
         
         if(ev instanceof PopulationRefreshEvent){
-            
             PopulationRefreshEvent event = (PopulationRefreshEvent)ev;            
             LinkedList<IndividualUI> samples = event.getSample();
             

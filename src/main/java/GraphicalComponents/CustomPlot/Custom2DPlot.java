@@ -5,7 +5,6 @@
 package GraphicalComponents.CustomPlot;
 
 import GraphicalComponents.IdentifiableComponent;
-import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import Mathematics.Points;
 import MvcPattern.RefreshEvent;
@@ -13,12 +12,15 @@ import MvcPattern.View;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
+import javax.swing.OverlayLayout;
 import org.math.plot.Plot2DPanel;
 import static org.math.array.DoubleArray.*;
-import org.math.plot.PlotPanel;
+import org.math.plot.plots.ScatterPlot;
 
 /**
  *
@@ -31,6 +33,9 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     public Custom2DPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
         this.setLayout(new BorderLayout());
         plot = new Plot2DPanel();
+        individuPlot = new Plot2DPanel();
+        plot.setOpaque(false);
+        individuPlot.setOpaque(false);
         this.setPlot(function);
     }
     
@@ -48,18 +53,15 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     }
     
     public void addIndividu(Function2D function, double x) throws UnknownFunctionException, UnparsableExpressionException {
-        double xy[] = {x, getY(function, x)};
-        individuPlot.addScatterPlot("individu", xy);
-    }
-
-    public double getY(Function2D function, double x) throws UnknownFunctionException, UnparsableExpressionException {
-        return function.getY(x);
+        double xp[] = {x};
+        double yp[] = {function.getY(x)};
+        plot.addScatterPlot("individu", xp, yp);
     }
 
     public double[] getY(Function2D function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {
         double[] y = new double[x.length];
         for (int i = 0; i < x.length; i++) {
-            y[i] = this.getY(function, x[i]);
+            y[i] = function.getY(x[i]);
         }
         return y;
     }

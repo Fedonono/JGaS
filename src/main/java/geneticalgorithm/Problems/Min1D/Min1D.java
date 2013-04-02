@@ -34,7 +34,7 @@ public class Min1D extends Problem {
     public static void main(String[] args) throws UnknownFunctionException, UnparsableExpressionException {
         Population pop = new Population();
         try {
-            function = new Function2D("sin(x)", new Points(-1.0,1.0));
+            function = new Function2D("sin(x)", new Points(0.0,1.0));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
@@ -45,12 +45,13 @@ public class Min1D extends Problem {
         function.addView(viewToDel);
         
         // Creation individu de test 1
-        FunctionIndividual test1 = new FunctionIndividual(function, 1d);
+        FunctionIndividual test1 = new FunctionIndividual(function, 0.1);
         
         // Creation individu de test 2
-        FunctionIndividual test2 = new FunctionIndividual(function, 5d);
+        FunctionIndividual test2 = new FunctionIndividual(function, 0.5);
         
         // Ajout à la population
+        pop.addView(viewToDel);
         pop.add(test1);
         pop.add(test2);
         pop.notifyViews();

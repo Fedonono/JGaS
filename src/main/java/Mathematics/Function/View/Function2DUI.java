@@ -24,6 +24,8 @@ import Mathematics.Function.Events.DomaineEvent;
 import Mathematics.Function.Events.FunctionEvent;
 import Mathematics.Function.Events.FunctionRefreshEvent;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
+import geneticalgorithm.Population.Population;
+import geneticalgorithm.Population.PopulationRefreshEvent;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.logging.Level;
@@ -85,8 +87,19 @@ public class Function2DUI extends IdentifiableComponent implements Observer, Vie
     @Override
     public void refresh(RefreshEvent ev) {
         if (ev instanceof FunctionRefreshEvent) {
-            System.out.println("functionRefreshEvent");
             Function func = (Function)ev.getSource();
+            try {
+                this.plot2D.setPlot((Function2D)func);
+            } catch (UnknownFunctionException ex) {
+                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnparsableExpressionException ex) {
+                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (ev instanceof PopulationRefreshEvent) {
+            Population pop = (Population)ev.getSource();
+            FunctionIndividual funcInd = (FunctionIndividual) pop.getFirstIndividual();
+            Function func = funcInd.getFunction();
             try {
                 this.plot2D.setPlot((Function2D)func);
             } catch (UnknownFunctionException ex) {
