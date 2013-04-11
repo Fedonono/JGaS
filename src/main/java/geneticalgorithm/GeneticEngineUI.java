@@ -16,6 +16,7 @@ import MvcPattern.Controller;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Population.PopulationUI;
+import geneticalgorithm.Problems.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
@@ -27,16 +28,18 @@ import javax.swing.JLabel;
  */
 public class GeneticEngineUI extends IdentifiableComponent implements View, Observer {
 
-    private PauseStepPanel header;
+    private Header header;
     private Footer footer;
     private Controller controller;
+    private ProblemUI pUI;
 
     public GeneticEngineUI(GeneticEngine ge, PopulationUI pUI) {
 
         this.controller = new GeneticEngineUserCtrl(ge);
-
+        this.pUI = (ProblemUI)ge.getProblem().getUI();
+        
         this.setLayout(new BorderLayout());
-        this.header = new PauseStepPanel(false);
+        this.header = new Header();
         this.footer = new Footer();
 
         this.add(this.header, BorderLayout.NORTH);
@@ -63,14 +66,13 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             if (id == this.header.getId()) {
 
                 if (ev instanceof PauseEvent) {
-                    this.controller.applyChanges(new PauseEngineEvent(this, ((PauseEvent)ev).isPaused()));
+                    this.controller.applyChanges(new PauseEngineEvent(this, ((PauseEvent) ev).isPaused()));
                 } else {
                     this.controller.applyChanges(new StepEngineEvent(this));
                 }
 
             } else if (id == this.footer.getId()) {
-                this.header.setVisible(false);
-                this.controller.applyChanges(new StopEngineEvent(this));
+                this.pUI.setVisible(true);
             }
         }
     }
@@ -78,19 +80,20 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     private class Footer extends IdentifiableComponent implements Observable, Observer {
 
         private String stepLabel = "current step:";
+        private String timeLabel = "time(ms):";
         private JLabel label;
-        private ValidateButton stop;
+        private ValidateButton configure;
         private LinkedList<Observer> observers = new LinkedList<>();
 
         public Footer() {
 
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
-            this.label.setText(this.stepLabel + 0);
-            this.stop = new ValidateButton("stop");
+            this.label.setText(this.stepLabel + 0 + " " + timeLabel + 0 + "ms");
+            this.configure = new ValidateButton("configure");
+            
             this.add(this.label);
-            this.add(this.stop);
-            this.stop.addObserver(this);
-
+            this.add(this.configure, FlowLayout.RIGHT);
+            this.configure.addObserver(this);
         }
 
         @Override
@@ -107,12 +110,44 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         @Override
         public void reactToChanges(ObservationEvent ev) {
-            this.stop.setVisible(false);
             this.notifyObserver();
         }
 
         public void setStepCount(int stepCount) {
             this.label.setText(stepLabel + stepCount);
         }
+    }
+    
+    
+    //TODO
+    private class Header extends IdentifiableComponent implements Observable, Observer{
+        
+        private PauseStepPanel pauseStep;
+        private ValidateButton stop;
+        
+        
+        public Header(){
+            this.setLayout(new FlowLayout(FlowLayout.LEFT));
+            //TODO            
+        }
+
+        
+        
+        
+        @Override
+        public void addObserver(Observer o) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public void notifyObserver() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public void reactToChanges(ObservationEvent ev) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+        
     }
 }

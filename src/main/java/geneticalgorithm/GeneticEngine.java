@@ -5,12 +5,14 @@
 package geneticalgorithm;
 
 import MvcPattern.Model;
+import Tools.Chronometer;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationUI;
+import geneticalgorithm.Problems.Problem;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,21 +28,33 @@ public class GeneticEngine extends Model {
     private boolean stop = true;
     private int stepCount = 0;
     private int maxStepCount;
+    private int timeout;
+    private Chronometer chronometer;
+    private Problem problem;
     private Operators operators;
 
-    public GeneticEngine(Population pop) {
-        this(pop, null);
-    }
-
-    public GeneticEngine(Population population, Operators operators) {
-        this.setPopulation(population);
-        this.operators = operators;
+    public GeneticEngine(Problem problem) {
+        
+        this.setPopulation(problem.createInitialPopulation());
+        this.problem = problem;
+        this.maxStepCount = problem.getMaxStepCount();
+        this.operators = problem.getSelectedOperators();
+        this.timeout = problem.getTimeout();
+        
+        this.chronometer = new Chronometer();
+        
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
     }
 
     public Population getPopulation() {
         return population;
     }
+
+    public Problem getProblem() {
+        return problem;
+    }
+    
+    
 
     public int getStepCount() {
         return stepCount;
@@ -49,11 +63,7 @@ public class GeneticEngine extends Model {
     public int getMaxStepCount() {
         return maxStepCount;
     }
-
-    public Operators getOperators() {
-        return operators;
-    }
-
+    
     public final void setPopulation(Population population) {
         this.population = population;
         this.initialSize = population.size();
@@ -63,23 +73,30 @@ public class GeneticEngine extends Model {
         this.maxStepCount = maxStepCount;
     }
 
-    public void setOperators(Operators operators) {
-        this.operators = operators;
-    }
+    
 
     public void start() {
-
         this.stop = false;
         this.engine();
+        this.chronometer.start();
     }
 
     public void stop() {
 
         this.stop = true;
+        this.chronometer.stop();
+    }
+    
+    private boolean timeIsOut(){
+        if(this.timeout == 0){
+            return false;
+        }else{
+            return (this.timeout - this.chronometer.getTime() <= 0);
+        }
     }
 
     private void engine() {
-        while (!this.stop && this.stepCount <= maxStepCount) {
+        while (!this.stop && this.stepCount <= maxStepCount && this.timeIsOut()) {
             this.evolve();
         }
     }

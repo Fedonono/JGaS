@@ -3,6 +3,8 @@ package geneticalgorithm;
 import MvcPattern.Model;
 import geneticalgorithm.Problems.Min1D.Min1D;
 import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problems.ProblemController;
+import geneticalgorithm.Problems.ProblemUI;
 import java.awt.Frame;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -14,6 +16,7 @@ import java.util.LinkedList;
 public class GeneticAlgorithm extends Model{
 
     private LinkedList<Problem> problems;
+    
     private Problem SelectedProblem;
     private GeneticEngine geneticEngine;
     private Frame mainFrame;
@@ -22,13 +25,25 @@ public class GeneticAlgorithm extends Model{
         this.problems = new LinkedList<>();
         
     }
+
+    public void setSelectedProblem(Problem SelectedProblem) {
+        this.SelectedProblem = SelectedProblem;
+        this.geneticEngine = new GeneticEngine(SelectedProblem);
+        this.geneticEngine.start();
+    }
+    
+    
     
     public void addProblem(Problem problem) {
+        problem.addView(new ProblemUI(new ProblemController(problem)));
         this.problems.add(problem);
+        
     }
 
     public void addAll(Collection<Problem> foreignProblems) {
-        this.problems.addAll(foreignProblems);
+        for(Problem pb : foreignProblems){
+            this.addProblem(pb);
+        }
     }
     
     public LinkedList<Problem> getProblems(){
@@ -41,8 +56,8 @@ public class GeneticAlgorithm extends Model{
     
     public void run(){
         
-        GAcontroller gaController = new GAcontroller(this);
-        MainUI mainUI = new MainUI(gaController);
+        GAUserCtrl gaController = new GAUserCtrl(this);
+        MainUI mainUI = new MainUI(this,gaController);
         this.addView(mainUI);
 
         this.mainFrame = new Frame();

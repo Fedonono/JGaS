@@ -5,36 +5,130 @@
 package geneticalgorithm;
 
 import GraphicalComponents.IdentifiableComponent;
+import GraphicalComponents.Observable;
+import GraphicalComponents.ObservationEvent;
+import GraphicalComponents.Observer;
+import GraphicalComponents.SelectMenu;
+import GraphicalComponents.ValidateButton;
 import MvcPattern.Controller;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problems.ProblemUI;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  *
  * @author simonneau
  */
-public class MainUI extends IdentifiableComponent implements View{
-    
+public class MainUI extends IdentifiableComponent implements View, Observer {
+
     private Controller controller;
-    
-    public MainUI(GAcontroller controller){
-        
+    private GeneticEngineUI geUI;
+    private Header header;
+
+    public MainUI(GeneticAlgorithm ga, GAUserCtrl controller) {
         this.controller = controller;
-        
-        //TODO_1 design
+        this.setLayout(new BorderLayout());
+
+        this.header = new Header();
+        this.header.addItems(ga.getProblems());
+
+        this.add(this.header, BorderLayout.NORTH);
+        this.header.addObserver(this);
     }
 
-    public void setController(GAcontroller controller){
+    public void setController(GAUserCtrl controller) {
         this.controller = controller;
     }
-    
+
     @Override
     public void refresh(RefreshEvent ev) {
-        //TODO_2 
+        //TODO
     }
-    
-    public void notifyController(){
-        //TODO_3
+
+    private void notifyController(NewContextEvent ev) {
+        this.controller.applyChanges(new GAContextEvent(this, ev.getSelectedProblem()));
     }
-    
+
+    @Override
+    public void reactToChanges(ObservationEvent ev) {
+        if (ev instanceof NewContextEvent) {
+            NewContextEvent event = (NewContextEvent) ev;
+            Problem p = event.getSelectedProblem();
+            ((ProblemUI) p.getUI()).setVisible(true);
+
+            this.notifyController(event);
+        }
+    }
+
+    private class Header extends IdentifiableComponent implements Observable, Observer {
+
+        private SelectMenu<Problem> selectMenu;
+        private ValidateButton newContext;
+        private LinkedList<Observer> observers = new LinkedList<>();
+
+        public Header() {
+            this.setLayout(new FlowLayout(FlowLayout.LEFT));
+            this.selectMenu = new SelectMenu<>("available problems:");
+            this.newContext = new ValidateButton("OK");
+
+            this.add(this.selectMenu);
+            this.add(this.newContext);
+            this.newContext.addObserver(this);
+        }
+
+        public void addItem(Problem item) {
+            this.selectMenu.addItem(item);
+        }
+
+        public void addItems(Collection<Problem> items) {
+            for (Problem item : items) {
+                this.addItem(item);
+            }
+        }
+
+        @Override
+        public void addObserver(Observer o) {
+            this.observers.add(o);
+        }
+
+        @Override
+        public void notifyObserver() {
+            //empty
+        }
+
+        private void notifyObserver(ObservationEvent ev) {
+            for (Observer o : this.observers) {
+                o.reactToChanges(ev);
+            }
+        }
+
+        @Override
+        public void reactToChanges(ObservationEvent ev) {
+            int id = ((IdentifiableComponent) ev.getSource()).getId();
+
+            if (id == this.newContext.getId()) {
+                this.notifyObserver(new NewContextEvent(this, this.selectMenu.getSelectedItem()));
+
+            }
+        }
+    }
+
+    private class NewContextEvent extends ObservationEvent {
+
+        Problem selectedProblem;
+
+        public NewContextEvent(Header source, Problem selectedProblem) {
+            super(source);
+            this.selectedProblem = selectedProblem;
+        }
+
+        public Problem getSelectedProblem() {
+            return this.selectedProblem;
+        }
+    }
 }
