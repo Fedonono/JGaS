@@ -70,13 +70,5 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
         for (Observer o : observers) {
             o.reactToChanges(ev);
         }
-    }
-
-    public static void main(String[] args) {
-        Frame f = new Frame();
-        f.add(new PauseStepPanel(false));
-        f.setVisible(true);
-    }
-    
-    
+    }    
 }
