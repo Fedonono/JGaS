@@ -35,7 +35,7 @@ public class GeneticEngine extends Model {
     public GeneticEngine(Population population, Operators operators) {
         this.setPopulation(population);
         this.operators = operators;
-        this.addView(new GeneticEngineUI((PopulationUI)population.getUI()));
+        this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
     }
 
     public Population getPopulation() {
@@ -54,7 +54,7 @@ public class GeneticEngine extends Model {
         return operators;
     }
 
-    public void setPopulation(Population population) {
+    public final void setPopulation(Population population) {
         this.population = population;
         this.initialSize = population.size();
     }
@@ -79,10 +79,7 @@ public class GeneticEngine extends Model {
     }
 
     private void engine() {
-
         while (!this.stop && this.stepCount <= maxStepCount) {
-
-            this.stepCount++;
             this.evolve();
         }
     }
@@ -186,11 +183,12 @@ public class GeneticEngine extends Model {
         }
     }
 
-    private void evolve() {
-        
+    public void evolve() {
+
+        this.stepCount++;
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();
-        
+
     }
 }
