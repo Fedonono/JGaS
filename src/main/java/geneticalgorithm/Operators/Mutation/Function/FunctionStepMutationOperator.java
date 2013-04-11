@@ -4,25 +4,16 @@
  */
 package geneticalgorithm.Operators.Mutation.Function;
 
-import Mathematics.Function.Model.Function;
 import Mathematics.Points;
-import de.congrace.exp4j.UnknownFunctionException;
-import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author nono
  */
 public class FunctionStepMutationOperator extends MutationOperator {
-    
-    private static final double randomMin = -1;
-    private static final double randomMax = 1;
-
     public FunctionStepMutationOperator(double prb) {
         super(prb);
     }
@@ -38,8 +29,14 @@ public class FunctionStepMutationOperator extends MutationOperator {
             FunctionIndividual individualP = (FunctionIndividual) individual;
             Points individualValues = individualP.getPoints();
 
+            int dim = 0;
+            double min,max;
+            Points domaine = individualP.getFunction().getDomaine();
             for (Double number : individualValues) {
-                number = stepMutation(number, this.getRandomNumber(randomMin, randomMax));
+                min = domaine.get(dim);
+                max = domaine.get(dim+1);
+                number = stepMutation(number, Math.random()*(max-min)+min);
+                dim++;
             }
             return individualP;
         }
@@ -49,9 +46,5 @@ public class FunctionStepMutationOperator extends MutationOperator {
 
     private Double stepMutation(Double number, double randomStep) {
         return number.doubleValue()+randomStep;
-    }
-    
-    private double getRandomNumber(double min, double max) {
-        return (Math.random() * (max-min)) + min;
     }
 }
