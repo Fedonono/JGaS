@@ -4,12 +4,7 @@
  */
 package GraphicalComponents;
 
-import java.awt.Frame;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.net.URL;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,60 +12,56 @@ import javax.swing.ImageIcon;
  */
 public class PauseButton extends ValidateButton{
     
-    private static final String pauseLocation = "Resources/pause.png";
-    private static final String resumeLocation = "Resources/resume.png";
-    private static Image pauseImage;
-    private static Image resumeImage;
-    static{
-        URL url = PauseButton.class.getResource(pauseLocation);
-        pauseImage = Toolkit.getDefaultToolkit().getImage(url);
-        url = PauseButton.class.getResource(resumeLocation);
-        resumeImage = Toolkit.getDefaultToolkit().getImage(url);
-        
-    }    
-    private ImageIcon pauseIcon;
-    private ImageIcon resumeIcon;
     
-    private boolean pause;
+    private static String pause = "pause";
+    private static String resume = "resume";
     
-    public PauseButton(String Label){
-        this(Label, false);
+    private boolean isPaused;
+    
+    public PauseButton(){
+        this( false);
     }
     
-    public PauseButton(String label, boolean pause){
-        super(label);
-        this.pauseIcon = new ImageIcon(pauseImage);
-        this.resumeIcon = new ImageIcon(resumeImage);
-        
-        this.pause = pause;
-        this.setImageIcon(pause);
-        
-    }
-    
-    private void setImageIcon(boolean pause){
-        if(pause){
-            this.button.setIcon(resumeIcon);
+    public PauseButton(boolean isPaused){
+        super("");
+        this.isPaused = isPaused;
+        String label;
+        if(isPaused){
+            label = resume;
         }else{
-            this.button.setIcon(pauseIcon);
+            label = pause;
+        }
+        this.setText(label);        
+    }
+    
+    private void setState(boolean isPaused){
+        if(isPaused){
+            this.button.setText(resume);
+        }else{
+            this.button.setText(pause);
         }
     }
     
     private void setPause(){
-        this.pause = !this.pause;
-        this.setImageIcon(this.pause);
+        this.isPaused = !this.isPaused;
+        this.setState(this.isPaused);
+    }
+    
+    @Override
+    public void notifyObserver(){
+       for(Observer o: observers){
+           o.reactToChanges(new PauseEvent(this, this.isPaused));
+       }
     }
     
     @Override
     public void actionPerformed(ActionEvent ae){
         super.actionPerformed(ae);
         this.setPause();
+        this.notifyObserver();
     }
     
-    
-    public static void main(String[] args){
-        PauseButton pb = new PauseButton("",true);
-        Frame frame = new Frame();
-        frame.setVisible(true);
-        frame.add(pb);
+    public boolean isPaused(){
+        return this.isPaused;
     }
 }
