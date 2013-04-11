@@ -61,6 +61,7 @@ public class GeneticAlgorithm extends Model{
         this.addView(mainUI);
 
         this.mainFrame = new Frame();
+        this.mainFrame.setBounds(0, 0, 1280, 800);
         this.mainFrame.add(mainUI);
         this.mainFrame.setVisible(true);        
     }

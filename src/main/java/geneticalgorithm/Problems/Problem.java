@@ -5,6 +5,7 @@
 package geneticalgorithm.Problems;
 
 import MvcPattern.Model;
+import MvcPattern.View;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
@@ -23,13 +24,13 @@ public abstract class Problem extends Model {
     private LinkedList<CrossOverOperator> availableCrossOverOperators = new LinkedList<>();
     private LinkedList<SelectionOperator> availableSelectionOperators = new LinkedList<>();
     private LinkedList<EvaluationOperator> availableEvaluationOperator = new LinkedList<>();
-    private int maxStepCount;
-    private int populationSize;
+    private int maxStepCount = 0;
+    private int populationSize = 100;
     private String label;
-    private double mutationProbability;
-    private double crossProbability;
+    private double mutationProbability = 0.1;
+    private double crossProbability = 0.2;
     private Operators operators = new Operators();
-    private int timeout;
+    private int timeout = 0;
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
@@ -162,5 +163,11 @@ public abstract class Problem extends Model {
 
     public void addEvaluationOperator(EvaluationOperator operator) {
         this.availableEvaluationOperator.add(operator);
+    }
+
+    @Override
+    public void addView(View v) {
+        super.addView(v);
+        v.refresh(new ProblemRefreshEvent(this));
     }
 }

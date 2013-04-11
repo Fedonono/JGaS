@@ -52,7 +52,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
     @Override
     public void refresh(RefreshEvent ev) {
-        // recuperer le step courant et le mettre à jour.
+        //TODO// recuperer le step courant et le mettre à jour.
     }
 
     @Override
@@ -124,11 +124,19 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         
         private PauseStepPanel pauseStep;
         private ValidateButton stop;
+        private LinkedList<Observer> observers = new LinkedList<>();
         
         
         public Header(){
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
-            //TODO            
+            this.pauseStep = new PauseStepPanel(false);
+            this.stop = new ValidateButton("stop");
+            
+            this.add(this.pauseStep);
+            this.add(this.stop, FlowLayout.LEFT);
+            
+            this.pauseStep.addObserver(this);
+            this.stop.addObserver(this);
         }
 
         
@@ -136,7 +144,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         
         @Override
         public void addObserver(Observer o) {
-            throw new UnsupportedOperationException("Not supported yet.");
+            this.observers.add(o);
         }
 
         @Override

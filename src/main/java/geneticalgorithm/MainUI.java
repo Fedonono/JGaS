@@ -61,7 +61,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
             Problem p = event.getSelectedProblem();
             ((ProblemUI) p.getUI()).setVisible(true);
 
-            this.notifyController(event);
+            this.notifyController(event);//TODO activate on Problem validate click
         }
     }
 

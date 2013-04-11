@@ -27,9 +27,6 @@ import javax.swing.JDialog;
  *
  * @author simonneau
  */
-
-
-
 public class ProblemUI extends JDialog implements View, Observer {
 
     private boolean initialized = false;
@@ -64,27 +61,27 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String validateButtonLabel = "validate";
     private ValidateButton validateButton;
     private int validateButtonId;
-    
-    public ProblemUI(){
+
+    public ProblemUI() {
         this(null);
     }
 
     public ProblemUI(ProblemController controller) {
-        
+
         this.controller = controller;
-        
+
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-        int heightPx = 410;
-        int widthPx = 450;
+        int heightPx = 620;
+        int widthPx = 600;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
-        this.mutationProbability = new CustomSpinner(mutationProbabilityLabel, 0, 1,0,0.01);
+        this.mutationProbability = new CustomSpinner(mutationProbabilityLabel, 0, 1, 0, 0.01);
         this.mutationProbabilityId = this.mutationProbability.getId();
         this.add(this.mutationProbability);
 
-        this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1,0,0.01);
+        this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1, 0, 0.01);
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
 
@@ -120,7 +117,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.validateButtonId = this.validateButton.getId();
         this.add(this.validateButton);
         this.validateButton.addObserver(this);
-        
+
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
@@ -135,6 +132,9 @@ public class ProblemUI extends JDialog implements View, Observer {
                 this.availableEvaluationOperators.addAll(source.getAvailableEvaluationOperator());
                 this.availableMutationOperators.addAll(source.getAvailableMutationOperators());
                 this.availableSelectionOperators.addAll(source.getAvailableSelectionOperators());
+                this.mutationProbability.setValue(source.getMutationProbability());
+                this.crossProbability.setValue(source.getCrossProbability());
+                this.populationSize.setValue(source.getPopulationSize());
                 this.initialized = true;
             }
         }
@@ -245,6 +245,4 @@ public class ProblemUI extends JDialog implements View, Observer {
     public void setController(ProblemController controller) {
         this.controller = controller;
     }
-    
-    
 }
