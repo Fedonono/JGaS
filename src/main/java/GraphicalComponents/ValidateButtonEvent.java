@@ -14,7 +14,7 @@ public class ValidateButtonEvent extends ObservationEvent{
      *
      * @param source
      */
-    public ValidateButtonEvent(ValidateButton source) {
+    public ValidateButtonEvent(Observable source) {
         super(source);
     }
     
