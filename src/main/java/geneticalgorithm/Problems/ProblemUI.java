@@ -27,6 +27,9 @@ import javax.swing.JDialog;
  *
  * @author simonneau
  */
+
+
+
 public class ProblemUI extends JDialog implements View, Observer {
 
     private boolean initialized = false;
@@ -61,8 +64,15 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String validateButtonLabel = "validate";
     private ValidateButton validateButton;
     private int validateButtonId;
+    
+    public ProblemUI(){
+        this(null);
+    }
 
-    public ProblemUI() {
+    public ProblemUI(ProblemController controller) {
+        
+        this.controller = controller;
+        
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
@@ -111,7 +121,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.add(this.validateButton);
         this.validateButton.addObserver(this);
         
-        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     @Override

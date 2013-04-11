@@ -19,16 +19,25 @@ import java.util.LinkedList;
  */
 public abstract class Problem extends Model {
 
-    private LinkedList<MutationOperator> availableMutationOperators;
-    private LinkedList<CrossOverOperator> availableCrossOverOperators;
-    private LinkedList<SelectionOperator> availableSelectionOperators;
-    private LinkedList<EvaluationOperator> availableEvaluationOperator;
+    private LinkedList<MutationOperator> availableMutationOperators = new LinkedList<>();
+    private LinkedList<CrossOverOperator> availableCrossOverOperators = new LinkedList<>();
+    private LinkedList<SelectionOperator> availableSelectionOperators = new LinkedList<>();
+    private LinkedList<EvaluationOperator> availableEvaluationOperator = new LinkedList<>();
     private int maxStepCount;
     private int populationSize;
     private String label;
     private double mutationProbability;
     private double crossProbability;
-    private Operators operators; 
+    private Operators operators = new Operators();
+    private int timeout;
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
 
     public LinkedList<MutationOperator> getAvailableMutationOperators() {
         return availableMutationOperators;
@@ -117,10 +126,10 @@ public abstract class Problem extends Model {
     public int getPopulationSize() {
         return populationSize;
     }
-    
+
     @Override
-    public void notifyViews(){
-       super.notifyViews(new ProblemRefreshEvent(this)); 
+    public void notifyViews() {
+        super.notifyViews(new ProblemRefreshEvent(this));
     }
 
     public abstract Population createInitialPopulation();
@@ -130,12 +139,12 @@ public abstract class Problem extends Model {
         //TODO
         return serialisedPopulation;
     }
-    
-    protected void setSelectedOperators(Operators operators){
+
+    protected void setSelectedOperators(Operators operators) {
         this.operators = operators;
     }
-    
-    public Operators getSelectedOperators(){
+
+    public Operators getSelectedOperators() {
         return this.operators;
     }
 

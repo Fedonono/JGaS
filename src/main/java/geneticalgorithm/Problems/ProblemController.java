@@ -15,6 +15,10 @@ public class ProblemController implements Controller {
 
     private Problem problem;
 
+    public ProblemController(Problem problem){
+        this.problem = problem;
+    }
+    
     @Override
     public void applyChanges(UserEvent event) {
         if (event instanceof ProblemUserEvent) {
@@ -23,6 +27,7 @@ public class ProblemController implements Controller {
 
             problem.setCrossProbability(source.getCrossProbability());
             problem.setMaxStepCount(source.getMaxStepCount());
+            problem.setTimeout(source.getTimeout());
             problem.setMutationProbability(source.getMutationProbability());
             problem.setPopulationSize(source.getPopulationSize());
             problem.setSelectedCrossOverOperation(source.getSelectedCrossOverOperator());
