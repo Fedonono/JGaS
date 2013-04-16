@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.Collection;
 import java.util.LinkedList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -47,7 +48,15 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        //TODO
+        if (ev instanceof ReadyToStartEvent) {
+
+            this.add(((ReadyToStartEvent) ev).getEngineUI(), BorderLayout.CENTER);
+            JFrame f = new JFrame();
+            f.setBounds(0, 0, 1200, 800);
+            f.add(((ReadyToStartEvent) ev).getEngineUI());
+            f.setVisible(true);
+
+        }
     }
 
     private void notifyController(NewContextEvent ev) {

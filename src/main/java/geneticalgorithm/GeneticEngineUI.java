@@ -20,6 +20,7 @@ import geneticalgorithm.Problems.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -31,19 +32,24 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     private Header header;
     private Footer footer;
     private Controller controller;
-    private ProblemUI pUI;
+    private ProblemUI problem;
 
-    public GeneticEngineUI(GeneticEngine ge, PopulationUI pUI) {
+    public GeneticEngineUI(GeneticEngine ge, PopulationUI populationUI) {
 
         this.controller = new GeneticEngineUserCtrl(ge);
-        this.pUI = (ProblemUI) ge.getProblem().getUI();
+        this.problem = (ProblemUI) ge.getProblem().getUI();
 
         this.setLayout(new BorderLayout());
         this.header = new Header();
         this.footer = new Footer();
 
         this.add(this.header, BorderLayout.NORTH);
-        this.add(pUI, BorderLayout.CENTER);
+        
+        /*JFrame frame = new JFrame();
+        frame.setBounds(0, 0, 1280, 800);
+        frame.add(this);
+        frame.setVisible(true);*/
+        this.add(populationUI, BorderLayout.CENTER);
         this.add(this.footer, BorderLayout.SOUTH);
 
         this.header.addObserver(this);
@@ -88,7 +94,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 }
 
             } else if (id == this.footer.getId()) {
-                this.pUI.setVisible(true);
+                this.problem.setVisible(true);
             }
         }
     }
