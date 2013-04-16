@@ -43,25 +43,23 @@ public class Min1D extends Problem {
     
     @Override
     public Population createInitialPopulation() {
-        Population pop = new Population();
-        Function function = null;
+        Population function = null;
         FunctionUI fDUI = null;
         int popSize = this.getPopulationSize();
 
         try {
             function = new Function2D(strFunc, new Points(xMin, xMax));
-            fDUI = new Function2DUI(this.getPopulationSize(), new FunctionController(function));
+            fDUI = new Function2DUI(this.getPopulationSize(), new FunctionController((Function)function));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
         function.addView(fDUI);
-        pop.addView(fDUI);
 
         for (int i = 0; i < popSize; i++) {
-            pop.add(new FunctionIndividual(function, (Math.random() * (xMax - xMin)) + xMin));
+            function.add(new FunctionIndividual((Function)function, (Math.random() * (xMax - xMin)) + xMin));
         }
-        return pop;
+        return function;
     }
 }
