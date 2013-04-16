@@ -5,7 +5,7 @@
 package Mathematics.Function.View;
 
 import GraphicalComponents.CustomTextField;
-import Mathematics.Function.Controller.FunctionController;
+import Mathematics.Function.Controller.PopulationFunctionController;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;

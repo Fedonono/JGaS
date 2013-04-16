@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Problems.Min1D;
 
-import Mathematics.Function.Controller.FunctionController;
+import Mathematics.Function.Controller.PopulationFunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.View.Function2DUI;
@@ -16,6 +16,7 @@ import geneticalgorithm.Operators.CrossOver.Function.FunctionAverageCrossOverOpe
 import geneticalgorithm.Operators.Evaluation.Function.FunctionEvaluationOperator;
 import geneticalgorithm.Operators.Mutation.Function.FunctionStepMutationOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
+import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Problem;
@@ -43,23 +44,26 @@ public class Min1D extends Problem {
     
     @Override
     public Population createInitialPopulation() {
-        Population function = null;
+        PopulationFunction pop = null;
+        Function function = null;
         FunctionUI fDUI = null;
         int popSize = this.getPopulationSize();
 
         try {
             function = new Function2D(strFunc, new Points(xMin, xMax));
-            fDUI = new Function2DUI(this.getPopulationSize(), new FunctionController((Function)function));
+            pop = new PopulationFunction(function);
+            fDUI = new Function2DUI(this.getPopulationSize(), new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
-        function.addView(fDUI);
+        function.addView(fDUI); // A DELETE ? TODO BY ARNAUD
+        pop.addView(fDUI);
 
         for (int i = 0; i < popSize; i++) {
-            function.add(new FunctionIndividual((Function)function, (Math.random() * (xMax - xMin)) + xMin));
+            pop.add(new FunctionIndividual(function, (Math.random() * (xMax - xMin)) + xMin));
         }
-        return function;
+        return pop;
     }
 }

@@ -19,6 +19,7 @@ import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.Events.DomaineEvent;
 import Mathematics.Function.Events.FunctionEvent;
 import Mathematics.Function.Events.FunctionRefreshEvent;
+import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
@@ -45,7 +46,8 @@ public class Function2DUI extends FunctionUI {
         this.setLayout(new BorderLayout());
 
         this.functionChange = new CustomTextField("sin(x)");
-        this.plot2D = new Custom2DPlot((Function2D)controller.getModel());
+        PopulationFunction popC = (PopulationFunction) controller.getModel();
+        this.plot2D = new Custom2DPlot((Function2D)popC.getFunction());
         this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
         this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
 

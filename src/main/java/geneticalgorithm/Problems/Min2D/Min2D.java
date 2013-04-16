@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Problems.Min2D;
 
-import Mathematics.Function.Controller.FunctionController;
+import Mathematics.Function.Controller.PopulationFunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.Model.Function3D;
@@ -18,6 +18,7 @@ import geneticalgorithm.Operators.CrossOver.Function.FunctionAverageCrossOverOpe
 import geneticalgorithm.Operators.Evaluation.Function.FunctionEvaluationOperator;
 import geneticalgorithm.Operators.Mutation.Function.FunctionStepMutationOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
+import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Min1D.Min1D;
@@ -44,14 +45,15 @@ public class Min2D extends Min1D {
     
     @Override
     public Population createInitialPopulation() {
-        Population pop = new Population();
+        PopulationFunction pop = null;
         Function function = null;
         FunctionUI fDUI = null;
         int popSize = this.getPopulationSize();
 
         try {
             function = new Function3D(strFunc, new Points(xMin, xMax, yMin, yMax));
-            fDUI = new Function3DUI(this.getPopulationSize(), new FunctionController(function));
+            pop = new PopulationFunction(function);
+            fDUI = new Function3DUI(this.getPopulationSize(), new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {

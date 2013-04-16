@@ -6,18 +6,18 @@ package Mathematics.Function.Model;
 
 import Mathematics.Function.Events.FunctionRefreshEvent;
 import Mathematics.Points;
+import MvcPattern.Model;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import geneticalgorithm.Population.Population;
 
 /**
  *
  * @author nono
  */
-public abstract class Function extends Population {
+public abstract class Function extends Model {
 
     private String label = null;
     protected Calculable calc = null;
