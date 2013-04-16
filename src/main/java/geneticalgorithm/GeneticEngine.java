@@ -33,13 +33,15 @@ public class GeneticEngine extends Model {
 
     public GeneticEngine(Problem problem) {
 
-        this.setPopulation(problem.createInitialPopulation());
         this.problem = problem;
-        this.operators = problem.getSelectedOperators();
-
-        this.chronometer = new Chronometer();
-
+        this.init();
+        
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
+    }
+    private void init(){
+        this.setPopulation(this.problem.createInitialPopulation());
+        this.operators = this.problem.getSelectedOperators();
+        this.chronometer = new Chronometer();
     }
 
     public Population getPopulation() {
@@ -49,14 +51,22 @@ public class GeneticEngine extends Model {
     public Problem getProblem() {
         return problem;
     }
+    
+    public void setProblem(Problem problem){
+        this.problem = problem;
+        this.init();
+        // send event to configure button to specify the new problem.
+    }
 
     public int getStepCount() {
         return stepCount;
     }
 
-    public final void setPopulation(Population population) {
+    private void setPopulation(Population population) {
         this.population = population;
         this.initialSize = population.size();
+        // send event to specify the new populationView : :paintimmediatly(source.getGraphics());
+
     }
 
     public void start() {

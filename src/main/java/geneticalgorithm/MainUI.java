@@ -31,15 +31,24 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
     private GeneticEngineUI geUI;
     private Header header;
 
-    public MainUI(GeneticAlgorithm ga, GAUserCtrl controller) {
+    public MainUI(GeneticAlgorithm ga, GAUserCtrl controller, GeneticEngineUI geUI) {
         this.controller = controller;
         this.setLayout(new BorderLayout());
 
         this.header = new Header();
         this.header.addItems(ga.getProblems());
+        
+        this.geUI = geUI;
 
         this.add(this.header, BorderLayout.NORTH);
+        this.add(geUI, BorderLayout.CENTER);
         this.header.addObserver(this);
+    }
+    
+    private void reset(){
+        this.removeAll();
+        this.add(this.header, BorderLayout.NORTH);
+        this.add(geUI, BorderLayout.CENTER);
     }
 
     public void setController(GAUserCtrl controller) {
@@ -49,12 +58,12 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
     @Override
     public void refresh(RefreshEvent ev) {
         if (ev instanceof ReadyToStartEvent) {
-
-            this.add(((ReadyToStartEvent) ev).getEngineUI(), BorderLayout.CENTER);
-            JFrame f = new JFrame();
+            this.geUI = ((ReadyToStartEvent) ev).getEngineUI();
+            this.reset();
+            /*JFrame f = new JFrame();
             f.setBounds(0, 0, 1200, 800);
             f.add(((ReadyToStartEvent) ev).getEngineUI());
-            f.setVisible(true);
+            f.setVisible(true);*/
 
         }
     }

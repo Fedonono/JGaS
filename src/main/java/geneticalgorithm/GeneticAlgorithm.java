@@ -33,6 +33,9 @@ public class GeneticAlgorithm extends Model {
     public void addProblem(Problem problem) {
         problem.addView(new ProblemUI(new ProblemController(problem)));
         this.problems.add(problem);
+        if(this.SelectedProblem == null){
+            this.SelectedProblem = problem;
+        }
 
     }
 
@@ -53,7 +56,9 @@ public class GeneticAlgorithm extends Model {
     public void run() {
 
         GAUserCtrl gaController = new GAUserCtrl(this);
-        MainUI mainUI = new MainUI(this, gaController);
+        this.geneticEngine = new GeneticEngine(this.SelectedProblem);
+        
+        MainUI mainUI = new MainUI(this, gaController, (GeneticEngineUI)this.geneticEngine.getUI());
         this.addView(mainUI);
 
         this.mainFrame = new JFrame();

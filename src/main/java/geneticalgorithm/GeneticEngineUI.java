@@ -44,11 +44,6 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         this.footer = new Footer();
 
         this.add(this.header, BorderLayout.NORTH);
-        
-        /*JFrame frame = new JFrame();
-        frame.setBounds(0, 0, 1280, 800);
-        frame.add(this);
-        frame.setVisible(true);*/
         this.add(populationUI, BorderLayout.CENTER);
         this.add(this.footer, BorderLayout.SOUTH);
 
