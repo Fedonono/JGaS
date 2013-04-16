@@ -11,7 +11,8 @@ package geneticalgorithm.Operators;
 public class ProbableOperator extends Operator {
     double probability;
     
-    public ProbableOperator(double prb){
+    public ProbableOperator(double prb, String label){
+        super(label);
         this.setProbability(prb);
     }
     

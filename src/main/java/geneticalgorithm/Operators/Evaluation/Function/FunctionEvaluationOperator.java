@@ -14,6 +14,10 @@ import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndivi
  * @author nono
  */
 public class FunctionEvaluationOperator extends EvaluationOperator {
+    private static String LABEL = "Evaluation";
+    public FunctionEvaluationOperator(){
+        super(LABEL);
+    }
     @Override
     public void evaluate(Individual individual) {
         if (individual instanceof FunctionIndividual) {

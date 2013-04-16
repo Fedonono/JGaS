@@ -12,9 +12,9 @@ import geneticalgorithm.Population.Individuals.Individual;
  * @author nono
  */
 public class FunctionBarycentreCrossOverOperator extends CrossOverOperator {
-
+private static String LABEL = "Barycentre";
     public FunctionBarycentreCrossOverOperator(double prb) {
-        super(prb);
+        super(prb, LABEL);
     }
 
     @Override

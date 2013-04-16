@@ -11,10 +11,9 @@ package geneticalgorithm.Operators;
 public abstract class Operator{
 
     protected String label;
-    private static Operator instance;
     
-    public static Operator getInstance(){
-        return instance;
+    public Operator(String label){
+        this.label = label;
     }
     
     public String getLabel() {

@@ -99,7 +99,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         private String timeLabel = "time(ms):";
         private long timeout = 0;
         private int stepCount = 0;
-        private JLabel label;
+        private JLabel label = new JLabel();
         private ValidateButton configure;
         private LinkedList<Observer> observers = new LinkedList<>();
 
@@ -110,7 +110,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             this.configure = new ValidateButton("configure");
 
             this.add(this.label);
-            this.add(this.configure, FlowLayout.RIGHT);
+            this.add(this.configure);
             this.configure.addObserver(this);
         }
 

@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * @author nono
  */
 public class FunctionAverageCrossOverOperator extends CrossOverOperator {
-    
+    private static String LABEL = "average";
     public FunctionAverageCrossOverOperator(double probability){
-        super(probability);
+        super(probability, LABEL);
     }
 
     @Override

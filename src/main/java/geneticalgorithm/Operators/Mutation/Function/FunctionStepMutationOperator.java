@@ -14,8 +14,11 @@ import geneticalgorithm.Population.Individuals.Individual;
  * @author nono
  */
 public class FunctionStepMutationOperator extends MutationOperator {
+    
+    private static String LABEL = "Random abscissa";
+    
     public FunctionStepMutationOperator(double prb) {
-        super(prb);
+        super(prb, LABEL);
     }
     
     /**

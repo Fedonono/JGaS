@@ -13,8 +13,8 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public abstract class MutationOperator extends ProbableOperator {
     
-    public MutationOperator(double prb){
-        super(prb);
+    public MutationOperator(double prb, String label){
+        super(prb, label);
     };
     
     public abstract Individual mutate(Individual individual);

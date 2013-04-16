@@ -10,7 +10,9 @@ import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
+import geneticalgorithm.Operators.Selection.ProportionalPerfomanceSelectionOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
+import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Population;
 import java.util.LinkedList;
 
@@ -32,6 +34,11 @@ public abstract class Problem extends Model {
     private Operators operators = new Operators();
     private int timeout = 0;
 
+    public Problem(){
+        this.addSelectionOperator(TruncationSelectionOperator.getInstance());
+        this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
+    }
+    
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }

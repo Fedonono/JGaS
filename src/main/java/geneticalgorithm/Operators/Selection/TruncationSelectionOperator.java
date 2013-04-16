@@ -14,9 +14,10 @@ import java.util.Iterator;
  */
 public class TruncationSelectionOperator extends SelectionOperator {
     private static TruncationSelectionOperator instance;
+    private static String LABEL = "truncation selection operator";
     
     private TruncationSelectionOperator(){
-        this.label = "truncation selection operator";
+        super(LABEL);
     }
     
     public static TruncationSelectionOperator getInstance() {

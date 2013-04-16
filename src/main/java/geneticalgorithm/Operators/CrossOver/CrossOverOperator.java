@@ -13,8 +13,8 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public abstract class CrossOverOperator extends ProbableOperator {
 
-    public CrossOverOperator(double prb) {
-        super(prb);
+    public CrossOverOperator(double prb, String label) {
+        super(prb, label);
     }
 
     public abstract Individual cross(Individual male, Individual female);

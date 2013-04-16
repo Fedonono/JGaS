@@ -12,6 +12,10 @@ import geneticalgorithm.Population.Population;
  * @author simonneau
  */
 public abstract class SelectionOperator extends Operator {
+    
+    public SelectionOperator(String label){
+        super(label);
+    }
 
     public abstract Population buildNextGeneration(Population population, int size);
 }
