@@ -1,5 +1,7 @@
 package geneticalgorithm;
 
+import geneticalgorithm.engine.GeneticEngineUI;
+import geneticalgorithm.engine.GeneticEngine;
 import MvcPattern.Model;
 import geneticalgorithm.Problems.Min1D.Min1D;
 import geneticalgorithm.Problems.Problem;

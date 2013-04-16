@@ -5,6 +5,7 @@
 package geneticalgorithm;
 
 import MvcPattern.RefreshEvent;
+import geneticalgorithm.engine.GeneticEngineUI;
 
 /**
  *

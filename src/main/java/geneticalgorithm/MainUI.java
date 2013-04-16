@@ -4,6 +4,7 @@
  */
 package geneticalgorithm;
 
+import geneticalgorithm.engine.GeneticEngineUI;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;

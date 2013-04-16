@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package geneticalgorithm;
+package geneticalgorithm.engine;
 
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
@@ -20,7 +20,6 @@ import geneticalgorithm.Problems.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
