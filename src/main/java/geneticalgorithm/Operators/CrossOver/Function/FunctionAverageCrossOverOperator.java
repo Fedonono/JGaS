@@ -33,7 +33,7 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
                 for (Double number : newPoints) {
                     number /= 2;
                 }
-                child = new FunctionIndividual(newPoints);
+                child = new FunctionIndividual(maleP.getFunction(), newPoints);
             } else {
                 // IncorrectIndividualDataException TODO BY ARNAUD
             }

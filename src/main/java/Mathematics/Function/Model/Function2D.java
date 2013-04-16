@@ -22,10 +22,12 @@ public class Function2D extends Function {
         return this.calc.calculate();
     }
 
+    @Override
     public double getResult(Points points) {
         return getY(points.get(0));
     }
 
+    @Override
     public void inDomaine(Points points) {
         super.minMax(points.get(0), domaine.get(0), domaine.get(1));
     }

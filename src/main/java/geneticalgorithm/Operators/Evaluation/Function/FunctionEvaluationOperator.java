@@ -23,7 +23,7 @@ public class FunctionEvaluationOperator extends EvaluationOperator {
         if (individual instanceof FunctionIndividual) {
             FunctionIndividual individualP = (FunctionIndividual) individual;
             Points points = individualP.getPoints();
-            individualP.function.inDomaine(points);
+            individualP.getFunction().inDomaine(points);
             double score = -individualP.getResult(points);
             individual.setScore(score);
         }

@@ -27,10 +27,12 @@ public class Function3D extends Function {
         return this.calc.calculate();
     }
 
+    @Override
     public double getResult(Points points) {
         return getZ(points.get(0), points.get(1));
     }
 
+    @Override
     public void inDomaine(Points points) {
         super.minMax(points.get(0), domaine.get(0), domaine.get(1));
         super.minMax(points.get(1), domaine.get(2), domaine.get(3));

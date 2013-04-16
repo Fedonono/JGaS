@@ -15,7 +15,7 @@ import geneticalgorithm.Population.Individuals.Individual;
 public class FunctionIndividual extends Individual {
     
     private Points points;
-    public Function function;
+    private Function function;
 
     public FunctionIndividual(Function function, Double... values) {
         if (values.length > 2) {
@@ -27,7 +27,8 @@ public class FunctionIndividual extends Individual {
         this.addView(new FunctionIndividualUI());
     }
 
-    public FunctionIndividual(Points points) {
+    public FunctionIndividual(Function function, Points points) {
+        this.function = function;
         this.points = points;
     }
 
