@@ -30,7 +30,7 @@ public class GeneticEngineUserCtrl implements Controller{
             }
             
         }else if(event instanceof StepEngineEvent){
-            this.target.evolve();
+            this.target.step();
         }else if(event instanceof StopEngineEvent){
             this.target.stop();
         }

@@ -27,22 +27,18 @@ public class GeneticEngine extends Model {
     private int initialSize;
     private boolean stop = true;
     private int stepCount = 0;
-    private int maxStepCount;
-    private int timeout;
     private Chronometer chronometer;
     private Problem problem;
     private Operators operators;
 
     public GeneticEngine(Problem problem) {
-        
+
         this.setPopulation(problem.createInitialPopulation());
         this.problem = problem;
-        this.maxStepCount = problem.getMaxStepCount();
         this.operators = problem.getSelectedOperators();
-        this.timeout = problem.getTimeout();
-        
+
         this.chronometer = new Chronometer();
-        
+
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
     }
 
@@ -53,52 +49,42 @@ public class GeneticEngine extends Model {
     public Problem getProblem() {
         return problem;
     }
-    
-    
 
     public int getStepCount() {
         return stepCount;
     }
 
-    public int getMaxStepCount() {
-        return maxStepCount;
-    }
-    
     public final void setPopulation(Population population) {
         this.population = population;
         this.initialSize = population.size();
     }
 
-    public void setMaxStepCount(int maxStepCount) {
-        this.maxStepCount = maxStepCount;
-    }
-
-    
-
     public void start() {
         this.stop = false;
-        this.engine();
         this.chronometer.start();
+        this.engine();
     }
 
     public void stop() {
 
         this.stop = true;
         this.chronometer.stop();
+        this.notifyViews(new EngineStopedRefreshEvent(this));
     }
-    
-    private boolean timeIsOut(){
-        if(this.timeout == 0){
+
+    private boolean timeIsOut() {
+        if (this.problem.getTimeout() == 0) {
             return false;
-        }else{
-            return (this.timeout - this.chronometer.getTime() <= 0);
+        } else {
+            return (this.problem.getTimeout() - this.chronometer.getTime() <= 0);
         }
     }
 
     private void engine() {
-        while (!this.stop && this.stepCount <= maxStepCount && this.timeIsOut()) {
+        while (!this.stop && this.stepCount <= this.problem.getMaxStepCount() && !this.timeIsOut()) {
             this.evolve();
         }
+        this.stop();
     }
 
     public Individual getBestSolution() {
@@ -206,6 +192,18 @@ public class GeneticEngine extends Model {
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();
+        this.notifyViews();
 
+    }
+
+    public void step() {
+        this.chronometer.start();
+        this.evolve();
+        this.chronometer.stop();
+    }
+
+    @Override
+    public void notifyViews() {
+        super.notifyViews(new EngineRefreshEvent(this, this.problem.getTimeout(), this.stepCount));
     }
 }

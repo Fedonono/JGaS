@@ -36,8 +36,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     public GeneticEngineUI(GeneticEngine ge, PopulationUI pUI) {
 
         this.controller = new GeneticEngineUserCtrl(ge);
-        this.pUI = (ProblemUI)ge.getProblem().getUI();
-        
+        this.pUI = (ProblemUI) ge.getProblem().getUI();
+
         this.setLayout(new BorderLayout());
         this.header = new Header();
         this.footer = new Footer();
@@ -52,7 +52,16 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
     @Override
     public void refresh(RefreshEvent ev) {
-        //TODO// recuperer le step courant et le mettre à jour.
+        
+        if(ev instanceof EngineRefreshEvent){
+            
+            EngineRefreshEvent event = (EngineRefreshEvent)ev;
+            this.footer.setStepCount(event.getStepCount());
+            this.footer.setTimeout(event.getTimeout());
+        }
+        else if(ev instanceof EngineStopedRefreshEvent){
+            this.header.pause();
+        }
     }
 
     @Override
@@ -67,7 +76,14 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
                 if (ev instanceof PauseEvent) {
                     this.controller.applyChanges(new PauseEngineEvent(this, ((PauseEvent) ev).isPaused()));
-                } else {
+                    
+                } else if(ev instanceof StopEvent){
+                    this.controller.applyChanges(new StopEngineEvent(this));
+                    this.header.setVisible(false);
+                    this.footer.setButtonVisible(false);
+                    
+                    
+                }else{
                     this.controller.applyChanges(new StepEngineEvent(this));
                 }
 
@@ -81,6 +97,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         private String stepLabel = "current step:";
         private String timeLabel = "time(ms):";
+        private long timeout = 0;
+        private int stepCount = 0;
         private JLabel label;
         private ValidateButton configure;
         private LinkedList<Observer> observers = new LinkedList<>();
@@ -88,9 +106,9 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         public Footer() {
 
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
-            this.label.setText(this.stepLabel + 0 + " " + timeLabel + 0 + "ms");
+            this.refreshLabel();
             this.configure = new ValidateButton("configure");
-            
+
             this.add(this.label);
             this.add(this.configure, FlowLayout.RIGHT);
             this.configure.addObserver(this);
@@ -114,34 +132,49 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         }
 
         public void setStepCount(int stepCount) {
-            this.label.setText(stepLabel + stepCount);
+            this.stepCount = stepCount;
+            this.refreshLabel();
         }
-    }
-    
-    
-    //TODO
-    private class Header extends IdentifiableComponent implements Observable, Observer{
         
+        public void setButtonVisible(boolean visible){
+            this.configure.setVisible(visible);
+        }
+
+        public void setTimeout(long timeout) {
+            this.timeout = timeout;
+            this.refreshLabel();
+        }
+        
+        private void refreshLabel(){
+            this.label.setText(this.stepLabel + this.stepCount + " " + timeLabel + this.timeout + "ms");
+        }
+        
+        
+    }
+
+    //TODO
+    private class Header extends IdentifiableComponent implements Observable, Observer {
+
         private PauseStepPanel pauseStep;
         private ValidateButton stop;
         private LinkedList<Observer> observers = new LinkedList<>();
-        
-        
-        public Header(){
+
+        public Header() {
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
-            this.pauseStep = new PauseStepPanel(false);
+            this.pauseStep = new PauseStepPanel(true);
             this.stop = new ValidateButton("stop");
-            
+
             this.add(this.pauseStep);
             this.add(this.stop, FlowLayout.LEFT);
-            
+
             this.pauseStep.addObserver(this);
             this.stop.addObserver(this);
         }
+        
+        public void pause(){
+            this.pauseStep.setPause(true);
+        }
 
-        
-        
-        
         @Override
         public void addObserver(Observer o) {
             this.observers.add(o);
@@ -149,13 +182,35 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         @Override
         public void notifyObserver() {
-            throw new UnsupportedOperationException("Not supported yet.");
+            //empty
+        }
+
+        public void notifyObserver(ObservationEvent ev) {
+            //TODO
         }
 
         @Override
         public void reactToChanges(ObservationEvent ev) {
-            throw new UnsupportedOperationException("Not supported yet.");
+            int id = ((IdentifiableComponent) ev.getSource()).getId();
+
+            if (id == this.stop.getId()) {
+                this.notifyObserver(new StopEvent(this));
+                
+            } else if (id == this.pauseStep.getId()) {
+                if (ev instanceof PauseEvent) {
+                    this.notifyObserver(new PauseEvent(this, ((PauseEvent) ev).isPaused()));
+                    
+                } else {
+                    this.notifyObserver(new ValidateButtonEvent(this));
+                }
+            }
         }
-        
+    }
+
+    private class StopEvent extends ObservationEvent {
+
+        public StopEvent(Observable source) {
+            super(source);
+        }
     }
 }
