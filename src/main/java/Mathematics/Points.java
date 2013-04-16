@@ -5,6 +5,7 @@
 package Mathematics;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -16,6 +17,10 @@ public class Points extends ArrayList<Double> {
         for(Double value : doubles){
             this.add(value);
         }
+    }
+
+    public Points(Collection<? extends Double> c) {
+        super(c);
     }
 
     
