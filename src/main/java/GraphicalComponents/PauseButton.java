@@ -34,7 +34,7 @@ public class PauseButton extends ValidateButton{
         this.setText(label);        
     }
     
-    private void setState(boolean isPaused){
+    public void setState(boolean isPaused){
         if(isPaused){
             this.button.setText(resume);
         }else{

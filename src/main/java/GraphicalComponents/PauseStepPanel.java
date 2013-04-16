@@ -70,5 +70,10 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
         for (Observer o : observers) {
             o.reactToChanges(ev);
         }
-    }    
+    }
+    
+    public void setPause(boolean pause){
+        this.pauseButton.setState(pause);
+        this.stepButton.setVisible(pause);     
+    }
 }

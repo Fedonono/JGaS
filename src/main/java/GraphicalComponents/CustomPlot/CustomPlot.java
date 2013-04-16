@@ -7,7 +7,6 @@ package GraphicalComponents.CustomPlot;
 import GraphicalComponents.IdentifiableComponent;
 import Mathematics.Function.Model.Function;
 import MvcPattern.View;
-import org.math.plot.PlotPanel;
 
 /**
  *
