@@ -26,5 +26,9 @@ public class PopulationController implements Controller{
             model.setObservableVolume(ev.getValue());
         }
     }
+
+    public Population getModel() {
+        return model;
+    }
     
 }

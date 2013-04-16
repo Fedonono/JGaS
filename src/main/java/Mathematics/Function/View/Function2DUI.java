@@ -8,16 +8,12 @@ import GraphicalComponents.CustomPlot.Custom2DPlot;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
-import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.ObservationEvent;
-import GraphicalComponents.Observer;
 import GraphicalComponents.SpinnerEvent;
 import Mathematics.Points;
 import MvcPattern.RefreshEvent;
-import MvcPattern.View;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import Mathematics.Function.Controller.FunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.Events.DomaineEvent;
@@ -25,6 +21,7 @@ import Mathematics.Function.Events.FunctionEvent;
 import Mathematics.Function.Events.FunctionRefreshEvent;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
+import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -37,22 +34,16 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class Function2DUI extends IdentifiableComponent implements Observer, View {
+public class Function2DUI extends FunctionUI {
 
     private Custom2DPlot plot2D;
-    private CustomTextField functionChange;
     private CustomSpinner xMin;
     private CustomSpinner xMax;
-    private FunctionController controller;
 
-    public FunctionController getController() {
-        return controller;
-    }
+    public Function2DUI(int size, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+        super(size, controller);
+        this.setLayout(new BorderLayout());
 
-    public Function2DUI(FunctionController controller) throws UnknownFunctionException, UnparsableExpressionException {
-        super(new BorderLayout());
-
-        this.controller = controller;
         this.functionChange = new CustomTextField("sin(x)");
         this.plot2D = new Custom2DPlot((Function2D)controller.getModel());
         this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
@@ -80,6 +71,7 @@ public class Function2DUI extends IdentifiableComponent implements Observer, Vie
         this.add(footer, BorderLayout.SOUTH);
     }
     
+    @Override
     public void addIndividu(FunctionIndividual ind) throws UnknownFunctionException, UnparsableExpressionException {
         this.plot2D.addIndividu((Function2D)ind.getFunction(), ind.getPoints().get(0));
     }

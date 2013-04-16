@@ -23,7 +23,7 @@ public class PopulationUI extends JPanel implements View, Observer {
 
     private OptionLine volumeOption;
     private JPanel populationSample;
-    private PopulationController controller;
+    protected PopulationController controller;
 
     public PopulationUI(int size) {
         
@@ -52,6 +52,10 @@ public class PopulationUI extends JPanel implements View, Observer {
             this.volumeOption.setValue(event.getValue());
         }
         
+    }
+
+    public PopulationController getController() {
+        return controller;
     }
     
     public void setController(PopulationController controller) {

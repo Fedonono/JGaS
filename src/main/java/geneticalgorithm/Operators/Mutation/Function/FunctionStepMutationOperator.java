@@ -6,8 +6,8 @@ package geneticalgorithm.Operators.Mutation.Function;
 
 import Mathematics.Points;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
-import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
+import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
