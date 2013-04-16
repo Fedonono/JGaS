@@ -158,18 +158,33 @@ public abstract class Problem extends Model {
 
     public void addMutationOperator(MutationOperator operator) {
         this.availableMutationOperators.add(operator);
+        if(this.getSelectedMutationOperator() == null){
+            this.setSelectedMutationOperator(operator);
+        }
     }
 
     public void addCrossOverOperator(CrossOverOperator operator) {
         this.availableCrossOverOperators.add(operator);
+        
+        if(this.getSelectedCrossOverOperation() == null){
+            this.setSelectedCrossOverOperation(operator);
+        }
     }
 
     public void addSelectionOperator(SelectionOperator operator) {
         this.availableSelectionOperators.add(operator);
+        
+        if(this.getSelectedSelectionOperator() == null){
+            this.setSelectedSelectionOperator(operator);
+        }
     }
 
     public void addEvaluationOperator(EvaluationOperator operator) {
         this.availableEvaluationOperator.add(operator);
+        
+        if(this.getSelectedEvaluationOperator() == null){
+            this.setSelectedEvaluationOperator(operator);
+        }
     }
 
     @Override
