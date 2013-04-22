@@ -67,7 +67,7 @@ public class GeneticAlgorithm extends Model {
         this.mainFrame = new CustomFrame();
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.mainFrame.setBounds(0, 0, 1280, 800);
+        this.mainFrame.setSize(1280, 800);
         this.mainFrame.add(mainUI, BorderLayout.CENTER);
         this.mainFrame.setVisible(true);
         mainUI.addObserver(this.mainFrame);

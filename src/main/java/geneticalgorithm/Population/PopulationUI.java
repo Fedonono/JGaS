@@ -10,10 +10,7 @@ import GraphicalComponents.OptionLine;
 import GraphicalComponents.OptionLineEvent;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
-import geneticalgorithm.Population.Individuals.Individual;
-import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.awt.FlowLayout;
-import java.util.LinkedList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 

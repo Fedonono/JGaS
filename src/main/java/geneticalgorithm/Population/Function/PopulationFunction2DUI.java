@@ -91,6 +91,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
             }
         }
         if (ev instanceof PopulationRefreshEvent) {
+            
             PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
             Population pop = (Population) event.getSource();
             FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();

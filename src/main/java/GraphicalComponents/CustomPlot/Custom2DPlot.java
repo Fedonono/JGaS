@@ -40,7 +40,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
         this.setPlot(function);
     }
     
-    public void setPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
+    public final void setPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
         this.id = 0;
         plot.removeAllPlots();
         Points domaine = function.getDomaine();
@@ -77,9 +77,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
         Function2D func2D = (Function2D)ev.getSource();
         try {
             setPlot(func2D);
-        } catch (UnknownFunctionException ex) {
-            Logger.getLogger(Custom2DPlot.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnparsableExpressionException ex) {
+        } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(Custom2DPlot.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -4,7 +4,7 @@
  */
 package GraphicalComponents;
 
-import java.awt.Rectangle;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -16,9 +16,9 @@ public class CustomFrame extends JFrame implements Observer {
     @Override
     public void reactToChanges(ObservationEvent ev) {
         if(ev instanceof RepaintEvent){
-            Rectangle bounds = this.getBounds();
-            this.setBounds(0, 0, 0, 0);
-            this.setBounds(bounds);
+             Dimension size = this.getSize();
+            this.setSize(0, 0);
+            this.setSize(size);
         }
     }
     

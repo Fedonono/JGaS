@@ -9,13 +9,15 @@ import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author simonneau
  */
 //TODO ==> use JSpinner NumberEditor to allow floating spinner
-public class CustomSpinner extends IdentifiableComponent implements Observable, Observer {
+public class CustomSpinner extends IdentifiableComponent implements Observable, ChangeListener {
 
     private LinkedList<Observer> observers = new LinkedList<>();
     private Spinner spinner;
@@ -29,7 +31,7 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
         this.spinner = new Spinner(min, max, defaultValue, step);
         this.spinner.setPreferredSize(new Dimension(50, spinner.getPreferredSize().height));
         this.add(spinner);
-        this.spinner.addObserver(this);
+        this.spinner.addChangeListener(this);
     }
 
     public void setValue(Number v) {
@@ -48,18 +50,19 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     @Override
     public void notifyObserver() {
         for (Observer o : observers) {
-            o.reactToChanges(new SpinnerEvent(spinner, this.getValue()));
+            o.reactToChanges(new SpinnerEvent(this, this.getValue()));
         }
     }
 
     @Override
-    public void reactToChanges(ObservationEvent ev) {
+    public void stateChanged(ChangeEvent ce) {
         this.notifyObserver();
     }
 
-    private class Spinner extends JSpinner implements Observable {
-
-        Observer observer;
+    
+    //inner class Spinner
+    private class Spinner extends JSpinner {
+        
         private Number  max;
         private Number min;
 
@@ -88,16 +91,6 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
             } else {
                 throw new NumberFormatException();
             }
-        }
-
-        @Override
-        public void addObserver(Observer o) {
-            this.observer = o;
-        }
-
-        @Override
-        public void notifyObserver() {
-            this.observer.reactToChanges(new ObservationEvent(this));
         }
     }
 }

@@ -80,6 +80,8 @@ public class Population extends Model {
     public void notifyViews() {
         int size = 0;
         LinkedList<Individual> sample = new LinkedList<>(); // liste d'individu à refresh
+        
+        this.sort();
         Iterator it = individuals.iterator();
         
         while (it.hasNext() && size < this.observableVolume){
