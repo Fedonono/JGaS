@@ -26,9 +26,9 @@ public class PopulationUI extends JPanel implements View, Observer {
     protected JPanel populationSample;
     protected PopulationController controller;
 
-    public PopulationUI(int size) {
+    public PopulationUI(int sizeView, int popSize) {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.volumeOption = new OptionLine("Sample size", 0, size, 0);
+        this.volumeOption = new OptionLine("Sample size", 0, popSize, sizeView);
         this.populationSample = new JPanel(new FlowLayout());
         this.volumeOption.addObserver(this);
 

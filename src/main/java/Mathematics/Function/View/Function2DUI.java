@@ -46,8 +46,8 @@ public class Function2DUI extends FunctionUI {
     private CustomSpinner xMin;
     private CustomSpinner xMax;
 
-    public Function2DUI(int size, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
-        super(size, controller);
+    public Function2DUI(int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+        super(sizeView, popSize, controller);
         JPanel panel = new JPanel(new BorderLayout());
         this.functionChange = new CustomTextField("sin(x)");
         PopulationFunction popC = (PopulationFunction) controller.getModel();

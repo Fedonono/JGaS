@@ -52,7 +52,7 @@ public class Min1D extends Problem {
         try {
             function = new Function2D(strFunc, new Points(xMin, xMax));
             pop = new PopulationFunction(function);
-            fDUI = new Function2DUI(this.getPopulationSize(), new PopulationFunctionController(pop));
+            fDUI = new Function2DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {
