@@ -20,10 +20,10 @@ import java.util.LinkedList;
 public class Population extends Model {
 
     private ArrayList<Individual> individuals;
-    private int observableVolume = 0;
+    private int observableVolume = 1;
 
     public Population() {
-        this(0);
+        this(1);
     }
 
     public Population(int observableVolume) {
@@ -60,8 +60,8 @@ public class Population extends Model {
         int size = this.individuals.size();
         if (observableVolume > size) {
             observableVolume = size;
-        }else if(observableVolume < 0){
-            observableVolume = 0;
+        }else if(observableVolume < 1){
+            observableVolume = 1;
         }
         this.observableVolume = observableVolume;
         super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume));
@@ -78,6 +78,7 @@ public class Population extends Model {
 
     @Override
     public void notifyViews() {
+        
         LinkedList<IndividualUI> visualSample = new LinkedList<>();
         LinkedList<Individual> candidates = new LinkedList<>();
         candidates.addAll(this.individuals);
@@ -94,15 +95,6 @@ public class Population extends Model {
         for (Individual individual : individuals) {
             individual.notifyViews();
         }
-    }
-    
-    public Individual getFirstIndividual() {
-        if (this.individuals.size() > 0) {
-            return this.individuals.get(0);
-        }
-        return null;
-        // TODO EXCEPTION PAS INDIVIDU BY ARNAUD
-        
     }
 
     public Individual getAlphaIndividual() {

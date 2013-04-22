@@ -7,7 +7,6 @@ package geneticalgorithm.Population.Function;
 import MvcPattern.UserEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import geneticalgorithm.Population.ObservableVolumeUserEvent;
 import geneticalgorithm.Population.PopulationController;
 import java.util.logging.Level;
 import java.util.logging.Logger;

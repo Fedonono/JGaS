@@ -20,14 +20,11 @@ public class FunctionIndividualUI extends IndividualUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        System.out.println("refresh individu");
         FunctionIndividual ind = (FunctionIndividual) ev.getSource();
         PopulationFunction2DUI fUI = (PopulationFunction2DUI) ind.getFunction().getUI();
         try {
             fUI.addIndividu(ind);
-        } catch (UnknownFunctionException ex) {
-            Logger.getLogger(FunctionIndividualUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnparsableExpressionException ex) {
+        } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(FunctionIndividualUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
