@@ -112,7 +112,8 @@ public class ProblemUI extends JDialog implements View, Observer {
 
 
 
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        
     }
 
     @Override

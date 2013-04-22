@@ -73,12 +73,9 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        if (ev instanceof NewContextEvent) {
-            NewContextEvent event = (NewContextEvent) ev;
-            Problem p = event.getSelectedProblem();
-            ((ProblemUI) p.getUI()).setVisible(true);
+        if (ev instanceof NewContextEvent) {        
 
-            this.notifyController(event);
+            this.notifyController((NewContextEvent) ev);
         }
         else if(ev instanceof RepaintEvent){
             this.repaint();
