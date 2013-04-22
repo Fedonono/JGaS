@@ -36,10 +36,8 @@ public class FunctionStepMutationOperator extends MutationOperator {
             double min,max;
             Points domaine = individualP.getFunction().getDomaine();
             for (Double number : individualValues) {
-                /*min = domaine.get(dim);
-                max = domaine.get(dim+1); FIX TEMPORAIRE TODO BY ARNAUD */
-                min = domaine.get(0);
-                max = domaine.get(1);
+                min = domaine.get(dim);
+                max = domaine.get(dim+1);
                 number = stepMutation(number, Math.random()*(max-min)+min);
                 dim++;
             }

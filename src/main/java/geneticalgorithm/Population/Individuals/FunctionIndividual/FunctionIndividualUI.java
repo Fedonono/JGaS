@@ -20,6 +20,7 @@ public class FunctionIndividualUI extends IndividualUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
+        System.out.println("refresh individu");
         FunctionIndividual ind = (FunctionIndividual) ev.getSource();
         Function2DUI fUI = (Function2DUI) ind.getFunction().getUI();
         try {

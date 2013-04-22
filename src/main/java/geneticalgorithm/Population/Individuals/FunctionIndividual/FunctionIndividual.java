@@ -28,6 +28,9 @@ public class FunctionIndividual extends Individual {
     }
 
     public FunctionIndividual(Function function, Points points) {
+        if (points.size() > 2) {
+            // IncorrectDim exception TODO BY ARNAUD
+        }
         this.function = function;
         this.points = points;
     }

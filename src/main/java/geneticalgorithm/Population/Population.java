@@ -76,7 +76,7 @@ public class Population extends Model {
 
     @Override
     public void notifyViews() {
-
+        System.out.println("lance notify views pop");
         LinkedList<IndividualUI> visualSample = new LinkedList<>();
         LinkedList<Individual> candidates = new LinkedList<>();
         candidates.addAll(this.individuals);
@@ -91,6 +91,7 @@ public class Population extends Model {
         super.notifyViews(new PopulationRefreshEvent(this, visualSample));
         //TODO BY ARNAUD -- CHECK IF LE BOUCLE EN DESSOUS FAIT PAS LE BOULOT de la ligne du dessus. EN PARLER A GUIOME
         for (Individual individual : individuals) {
+            System.out.println("hack lance refresh individiu");
             individual.notifyViews();
         }
     }

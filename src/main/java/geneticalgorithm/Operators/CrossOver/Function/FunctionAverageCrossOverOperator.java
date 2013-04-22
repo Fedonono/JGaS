@@ -9,6 +9,7 @@ import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.Individual;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -29,15 +30,18 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
 
             if (maleP.getDimension() == femaleP.getDimension()) {
                 Points newPoints = new Points(maleP.getPoints());
-                newPoints.addAll(femaleP.getPoints());
-                for (Double number : newPoints) {
-                    number /= 2;
+                Iterator it = newPoints.iterator();
+                Iterator itF = femaleP.getPoints().iterator();
+                while (it.hasNext()){
+                    Double number = (Double) it.next();
+                    double fNumber = (double) itF.next();
+                    number = (number.doubleValue()+fNumber)/2;
                 }
                 child = new FunctionIndividual(maleP.getFunction(), newPoints);
             } else {
                 // IncorrectIndividualDataException TODO BY ARNAUD
+                return null;
             }
-
             return child;
         }
         // IncorrectIndividualException TODO BY ARNAUD
