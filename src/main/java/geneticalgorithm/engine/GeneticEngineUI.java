@@ -10,6 +10,7 @@ import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.PauseEvent;
 import GraphicalComponents.PauseStepPanel;
+import GraphicalComponents.RepaintEvent;
 import GraphicalComponents.ValidateButton;
 import GraphicalComponents.ValidateButtonEvent;
 import MvcPattern.Controller;
@@ -26,12 +27,13 @@ import javax.swing.JLabel;
  *
  * @author simonneau
  */
-public class GeneticEngineUI extends IdentifiableComponent implements View, Observer {
+public class GeneticEngineUI extends IdentifiableComponent implements View, Observer, Observable {
 
     private Header header;
     private Footer footer;
     private Controller controller;
     private ProblemUI problemUI;
+    private LinkedList<Observer> observers = new LinkedList<>();
 
     public GeneticEngineUI(GeneticEngine ge, PopulationUI populationUI) {
 
@@ -69,6 +71,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
             PopulationUI populationUI = ((EnginePopulationRefreshEvent) ev).getPopulationUI();
             this.init(populationUI);
+            this.repaint();
+            this.notifyObserver();
 
         } else if (ev instanceof EngineProblemRefreshEvent) {
 
@@ -102,6 +106,18 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             else if (id == this.footer.getId()) {
                 this.problemUI.setVisible(true);
             }
+        }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(Observer o : this.observers){
+            o.reactToChanges(new RepaintEvent(this));
         }
     }
 

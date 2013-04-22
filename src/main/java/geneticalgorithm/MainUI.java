@@ -4,11 +4,11 @@
  */
 package geneticalgorithm;
 
-import geneticalgorithm.engine.GeneticEngineUI;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
+import GraphicalComponents.RepaintEvent;
 import GraphicalComponents.SelectMenu;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.Controller;
@@ -16,21 +16,22 @@ import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Problems.Problem;
 import geneticalgorithm.Problems.ProblemUI;
+import geneticalgorithm.engine.GeneticEngineUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.Collection;
 import java.util.LinkedList;
-import javax.swing.JFrame;
 
 /**
  *
  * @author simonneau
  */
-public class MainUI extends IdentifiableComponent implements View, Observer {
+public class MainUI extends IdentifiableComponent implements View, Observer, Observable {
 
     private Controller controller;
     private GeneticEngineUI geUI;
     private Header header;
+    private LinkedList<Observer> observers = new LinkedList<>();
 
     public MainUI(GeneticAlgorithm ga, GAUserCtrl controller, GeneticEngineUI geUI) {
         this.controller = controller;
@@ -40,9 +41,10 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
         this.header.addItems(ga.getProblems());
         
         this.geUI = geUI;
+        this.geUI.addObserver(this);
 
         this.add(this.header, BorderLayout.NORTH);
-        this.add(geUI, BorderLayout.CENTER);
+        this.add(this.geUI, BorderLayout.CENTER);
         this.header.addObserver(this);
     }
     
@@ -61,11 +63,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
         if (ev instanceof ReadyToStartEvent) {
             this.geUI = ((ReadyToStartEvent) ev).getEngineUI();
             this.reset();
-            /*JFrame f = new JFrame();
-            f.setBounds(0, 0, 1200, 800);
-            f.add(((ReadyToStartEvent) ev).getEngineUI());
-            f.setVisible(true);*/
-
+            this.notifyObserver();
         }
     }
 
@@ -82,8 +80,25 @@ public class MainUI extends IdentifiableComponent implements View, Observer {
 
             this.notifyController(event);
         }
+        else if(ev instanceof RepaintEvent){
+            this.repaint();
+            this.notifyObserver();
+        }
     }
 
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(Observer o : this.observers){
+            o.reactToChanges(new RepaintEvent(this));
+        }
+    }
+
+    
     private class Header extends IdentifiableComponent implements Observable, Observer {
 
         private SelectMenu<Problem> selectMenu;

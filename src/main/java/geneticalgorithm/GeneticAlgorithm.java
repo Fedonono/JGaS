@@ -1,9 +1,9 @@
 package geneticalgorithm;
 
+import GraphicalComponents.CustomFrame;
 import MvcPattern.Model;
 import geneticalgorithm.Problems.Min1D.Min1D;
 import geneticalgorithm.Problems.Problem;
-import geneticalgorithm.Problems.ProblemController;
 import geneticalgorithm.Problems.ProblemUI;
 import geneticalgorithm.engine.GeneticEngine;
 import geneticalgorithm.engine.GeneticEngineUI;
@@ -21,7 +21,7 @@ public class GeneticAlgorithm extends Model {
     private LinkedList<Problem> problems;
     private Problem SelectedProblem;
     private GeneticEngine geneticEngine;
-    private JFrame mainFrame;
+    private CustomFrame mainFrame;
 
     public GeneticAlgorithm() {
         this.problems = new LinkedList<>();
@@ -36,7 +36,7 @@ public class GeneticAlgorithm extends Model {
     public void addProblem(Problem problem) {
         this.problems.add(problem);
         problem.addView(new ProblemUI(problem));
-        if(this.SelectedProblem == null){
+        if (this.SelectedProblem == null) {
             this.SelectedProblem = problem;
         }
 
@@ -60,25 +60,29 @@ public class GeneticAlgorithm extends Model {
 
         GAUserCtrl gaController = new GAUserCtrl(this);
         this.geneticEngine = new GeneticEngine(this.SelectedProblem);
-        
-        MainUI mainUI = new MainUI(this, gaController, (GeneticEngineUI)this.geneticEngine.getUI());
+
+        MainUI mainUI = new MainUI(this, gaController, (GeneticEngineUI) this.geneticEngine.getUI());
         this.addView(mainUI);
 
-        this.mainFrame = new JFrame();
+        this.mainFrame = new CustomFrame();
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.mainFrame.setBounds(0, 0, 1280, 800);
         this.mainFrame.add(mainUI, BorderLayout.CENTER);
         this.mainFrame.setVisible(true);
-    }    
+        mainUI.addObserver(this.mainFrame);
+    }
 
     protected void start() {
-        this.geneticEngine = new GeneticEngine(SelectedProblem);
-        
-        this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI)this.geneticEngine.getUI()));
+        if (this.geneticEngine == null) {
+            this.geneticEngine = new GeneticEngine(this.SelectedProblem);
+            this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
+        }else{
+            this.geneticEngine.setProblem(this.SelectedProblem);
+        }        
     }
-    
-    public void quit(){
+
+    public void quit() {
         this.mainFrame.setVisible(false);
         this.mainFrame = null;
         this.geneticEngine.pause();

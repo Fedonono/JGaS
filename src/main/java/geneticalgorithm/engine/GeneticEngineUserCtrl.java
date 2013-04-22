@@ -31,9 +31,7 @@ public class GeneticEngineUserCtrl implements Controller{
             }
             
         }else if(event instanceof StepEngineEvent){
-            System.out.println("step");
             this.target.step();
-            
         }
     }
     
