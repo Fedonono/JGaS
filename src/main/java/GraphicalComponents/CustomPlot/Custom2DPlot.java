@@ -27,8 +27,9 @@ import org.math.plot.plots.ScatterPlot;
  * @author nono
  */
 public class Custom2DPlot extends IdentifiableComponent implements View {
-    Plot2DPanel plot;
-    Plot2DPanel individuPlot;
+    private int id = 0;
+    private Plot2DPanel plot;
+    private Plot2DPanel individuPlot;
 
     public Custom2DPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
         this.setLayout(new BorderLayout());
@@ -40,6 +41,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     }
     
     public void setPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
+        this.id = 0;
         plot.removeAllPlots();
         Points domaine = function.getDomaine();
         double[] x = increment(domaine.get(0), 0.1, domaine.get(1)+0.1); // x = 0.0:0.1:1.0
@@ -53,9 +55,13 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     }
     
     public void addIndividu(Function2D function, double x) throws UnknownFunctionException, UnparsableExpressionException {
+        this.id++;
         double xp[] = {x};
         double yp[] = {function.getY(x)};
-        plot.addScatterPlot("individu", xp, yp);
+        if (this.id == 1)
+            plot.addScatterPlot("individu "+this.id, Color.RED, xp, yp);
+        else
+            plot.addScatterPlot("individu "+this.id, Color.BLUE, xp, yp);
     }
 
     public double[] getY(Function2D function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {

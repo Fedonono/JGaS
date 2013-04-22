@@ -12,6 +12,7 @@ import MvcPattern.View;
  *
  * @author nono
  */
-public abstract class CustomPlot extends IdentifiableComponent implements View {    
+public abstract class CustomPlot extends IdentifiableComponent implements View {
+    //TODO BY ARNAUD UTILITE?
     public abstract void setPlot(Function function);
 }
