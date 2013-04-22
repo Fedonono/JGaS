@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 public class OptionLine extends IdentifiableComponent implements Observer, Observable {
 
     private LinkedList<Observer> observers = new LinkedList<>();
-    
     private int maxValue;
     private int minValue;
     private int value;
@@ -24,7 +23,7 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
     private String label;
 
     public OptionLine(String text, int min, int max, int value) {
-        
+
         if (min > max) {
             throw new MinMaxValueException(max, min);
         }
@@ -38,18 +37,22 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
         this.add(new JLabel(text), FlowLayout.LEFT);
 
         this.slider = new CustomSlider(min, max, value);
-        
+
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         this.add(slider, FlowLayout.CENTER);
         slider.addObserver(this);
-        
+
         this.textField = new CustomTextField(Integer.toString(value));
         this.add(textField, FlowLayout.RIGHT);
         textField.addObserver(this);
     }
 
     public void setValue(int value) {
+        this.setValue(value, true);
+    }
+
+    private void setValue(int value, boolean notify) {
         if (value < this.minValue) {
             this.value = minValue;
         } else if (value > maxValue) {
@@ -57,8 +60,10 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
         } else {
             this.value = value;
         }
-        this.slider.reactToChanges(new CustomSliderEvent(slider, this.value));
-        this.textField.reactToChanges(new CustomTextFieldEvent(textField, Integer.toString(this.value)));
+        if (notify) {
+            this.textField.reactToChanges(new CustomTextFieldEvent(textField, Integer.toString(value)));
+            this.slider.reactToChanges(new CustomSliderEvent(slider, value));
+        }
     }
 
     public void setMaxValue(int maxV) {
@@ -73,20 +78,30 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
+
         int value = this.value;
-        if (ev instanceof CustomSliderEvent) {
-            
+        int id = ((IdentifiableComponent) ev.getSource()).getId();
+
+        if (id == this.slider.getId()) {
+
             CustomSliderEvent event = (CustomSliderEvent) ev;
             value = event.getValue();
 
-        } else if (ev instanceof CustomTextFieldEvent) {
-            
+            this.setValue(value,false);
+            this.textField.reactToChanges(new CustomTextFieldEvent(textField, Integer.toString(value)));
+
+        } else if (id == this.textField.getId()) {
+
             CustomTextFieldEvent event = (CustomTextFieldEvent) ev;
             try {
                 value = Integer.valueOf(event.getValue());
-            } catch (RuntimeException e) {}
+            } catch (RuntimeException e) {
+            }
+            
+            this.setValue(value,false);
+            this.slider.reactToChanges(new CustomSliderEvent(slider, value));
+
         }
-        this.setValue(value);
         this.notifyObserver();
     }
 
@@ -97,18 +112,18 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
 
     @Override
     public void notifyObserver() {
-        
-        for(Observer o : observers){
+
+        for (Observer o : observers) {
             o.reactToChanges(new OptionLineEvent(this, this.value));
         }
-        
+
     }
-    
-    public String getLabel(){
+
+    public String getLabel() {
         return this.label;
     }
-    
-    public int getValue(){
+
+    public int getValue() {
         return this.value;
     }
 }

@@ -17,6 +17,7 @@ public class ObservableVolumeUserEvent extends UserEvent{
     
     public ObservableVolumeUserEvent(View source, int value){
         super(source);
+        this.value = value;
     }
 
     public int getValue() {

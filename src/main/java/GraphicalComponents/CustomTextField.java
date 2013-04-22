@@ -16,13 +16,13 @@ import javax.swing.JTextField;
 public class CustomTextField extends IdentifiableComponent implements Observable, Observer, ActionListener {
 
     private LinkedList<Observer> observers = new LinkedList<>();
-    
     private JTextField textField;
+    private boolean notifyingDisabled = false;
 
     public CustomTextField(String text) {
         this(text, 8);
     }
-    
+
     public CustomTextField(String text, int columns) {
         this.textField = new JTextField(text, columns);
         this.add(textField);
@@ -36,22 +36,23 @@ public class CustomTextField extends IdentifiableComponent implements Observable
 
     @Override
     public void notifyObserver() {
-
-        for (Observer o : this.observers) {
-            o.reactToChanges(new CustomTextFieldEvent(this, this.textField.getText()));
+        if (!this.notifyingDisabled) {
+            for (Observer o : this.observers) {
+                o.reactToChanges(new CustomTextFieldEvent(this, this.textField.getText()));
+            }
         }
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
         CustomTextFieldEvent event = (CustomTextFieldEvent) ev;
+        this.notifyingDisabled = true;
         this.textField.setText(event.getValue());
+        this.notifyingDisabled = false;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         this.notifyObserver();
     }
-
-   
 }

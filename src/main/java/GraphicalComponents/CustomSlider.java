@@ -17,6 +17,7 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
 
     private LinkedList<Observer> observers = new LinkedList<>();
     private JSlider slider;
+    private boolean notifyingDisabled = false;
 
     public CustomSlider(int min, int max, int value) {
         slider = new JSlider(min, max, value);
@@ -27,17 +28,7 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
     }
 
     public void setValue(int value) {
-        this.setValue(value, true);
-    }
-
-    private void setValue(int value, boolean haveToNotify) {
-
-        if (haveToNotify) {
-            this.notifyObserver();
-        } else {
-            this.slider.setValue(value);
-        }
-
+        this.slider.setValue(value);
     }
 
     @Override
@@ -47,15 +38,19 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
 
     @Override
     public void notifyObserver() {
-        for (Observer o : this.observers) {
-            o.reactToChanges(new CustomSliderEvent(this, this.slider.getValue()));
+        if (!this.notifyingDisabled) {
+            for (Observer o : this.observers) {
+                o.reactToChanges(new CustomSliderEvent(this, this.slider.getValue()));
+            }
         }
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
         CustomSliderEvent event = (CustomSliderEvent) ev;
-        this.setValue(event.getValue(), false);
+        this.notifyingDisabled = true;
+        this.setValue(event.getValue());
+        this.notifyingDisabled = false;
     }
 
     public void setMinimum(int minimum) {
@@ -76,6 +71,6 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
 
     @Override
     public void stateChanged(ChangeEvent ce) {
-        this.setValue(this.slider.getValue());
+        this.notifyObserver();
     }
 }
