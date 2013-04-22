@@ -27,7 +27,6 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
             FunctionIndividual child = null;
             FunctionIndividual maleP = (FunctionIndividual) male;
             FunctionIndividual femaleP = (FunctionIndividual) female;
-
             if (maleP.getDimension() == femaleP.getDimension()) {
                 Points newPoints = new Points(maleP.getPoints());
                 Iterator it = newPoints.iterator();

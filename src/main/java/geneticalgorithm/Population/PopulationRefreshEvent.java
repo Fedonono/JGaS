@@ -5,7 +5,7 @@
 package geneticalgorithm.Population;
 
 import MvcPattern.RefreshEvent;
-import geneticalgorithm.Population.Individuals.IndividualUI;
+import geneticalgorithm.Population.Individuals.Individual;
 import java.util.LinkedList;
 
 /**
@@ -14,14 +14,14 @@ import java.util.LinkedList;
  */
 public class PopulationRefreshEvent extends RefreshEvent {
 
-    LinkedList<IndividualUI> sample;
+    LinkedList<Individual> sample;
     
-    public PopulationRefreshEvent(Population source, LinkedList<IndividualUI> sample) {
+    public PopulationRefreshEvent(Population source, LinkedList<Individual> sample) {
         super(source);
         this.sample = sample;
     }
 
-    public LinkedList<IndividualUI> getSample() {
+    public LinkedList<Individual> getSample() {
         return sample;
     }
     

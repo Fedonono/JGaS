@@ -17,9 +17,14 @@ import de.congrace.exp4j.UnparsableExpressionException;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
+import geneticalgorithm.Population.Individuals.Individual;
+import geneticalgorithm.Population.Individuals.IndividualUI;
+import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
+import geneticalgorithm.Population.PopulationRefreshEvent;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -86,19 +91,24 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        /*if (ev instanceof PopulationRefreshEvent) {
-            Population pop = (Population)ev.getSource();
-            FunctionIndividual funcInd = (FunctionIndividual) pop.getFirstIndividual();
+        if (ev instanceof PopulationRefreshEvent) {
+            PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
+            Population pop = (Population) event.getSource();
+            FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();
             Function func = funcInd.getFunction();
             try {
                 this.plot2D.setPlot((Function2D)func);
             } catch (UnknownFunctionException ex) {
-                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnparsableExpressionException ex) {
-                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            LinkedList<Individual> samples = event.getSample();
+
+            for (Individual sample : samples) {
+                sample.notifyViews();
             }
         }
-        */
     }
 
     @Override

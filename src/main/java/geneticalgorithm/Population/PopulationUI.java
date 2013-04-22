@@ -10,6 +10,7 @@ import GraphicalComponents.OptionLine;
 import GraphicalComponents.OptionLineEvent;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
@@ -39,15 +40,16 @@ public class PopulationUI extends JPanel implements View, Observer {
     @Override
     public void refresh(RefreshEvent ev) {
 
-        if (ev instanceof PopulationRefreshEvent) {
+        /*if (ev instanceof PopulationRefreshEvent) {
             PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
-            LinkedList<IndividualUI> samples = event.getSample();
+            LinkedList<Individual> samples = event.getSample();
 
-            for (IndividualUI sample : samples) {
-
-                this.populationSample.add(sample);
+            for (Individual sample : samples) {
+                sample.notifyViews();
+                //this.populationSample.add(sample.getUI()); POUR TSP TODO BY ARNAUD DELETE ?
             }
-        } else if (ev instanceof ObservableVolumeRefreshEvent) {
+        } else */
+        if (ev instanceof ObservableVolumeRefreshEvent) {
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
             this.volumeOption.setValue(event.getValue());
         }

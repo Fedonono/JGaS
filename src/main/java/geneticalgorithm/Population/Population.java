@@ -78,23 +78,17 @@ public class Population extends Model {
 
     @Override
     public void notifyViews() {
+        int size = 0;
+        LinkedList<Individual> sample = new LinkedList<>(); // liste d'individu à refresh
+        Iterator it = individuals.iterator();
         
-        LinkedList<IndividualUI> visualSample = new LinkedList<>();
-        LinkedList<Individual> candidates = new LinkedList<>();
-        candidates.addAll(this.individuals);
-
-        int index;
-        for (int i = 0; i < this.observableVolume; i++) {
-
-            index = (int) (Math.random() * candidates.size());
-            visualSample.add(candidates.remove(index).getUI());
+        while (it.hasNext() && size < this.observableVolume){
+            Individual individual = (Individual) it.next();
+            sample.add(individual);
+            size++;
         }
 
-        super.notifyViews(new PopulationRefreshEvent(this, visualSample));
-        //TODO BY ARNAUD -- CHECK IF LE BOUCLE EN DESSOUS FAIT PAS LE BOULOT de la ligne du dessus. EN PARLER A GUIOME
-        for (Individual individual : individuals) {
-            individual.notifyViews();
-        }
+        super.notifyViews(new PopulationRefreshEvent(this, sample));
     }
 
     public Individual getAlphaIndividual() {
