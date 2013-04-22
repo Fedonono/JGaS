@@ -9,6 +9,7 @@ import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
+import GraphicalComponents.OptionLineEvent;
 import GraphicalComponents.SpinnerEvent;
 import Mathematics.Points;
 import MvcPattern.RefreshEvent;
@@ -21,11 +22,15 @@ import Mathematics.Function.Events.FunctionEvent;
 import Mathematics.Function.Events.FunctionRefreshEvent;
 import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
+import geneticalgorithm.Population.Individuals.IndividualUI;
+import geneticalgorithm.Population.ObservableVolumeRefreshEvent;
+import geneticalgorithm.Population.ObservableVolumeUserEvent;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -43,8 +48,7 @@ public class Function2DUI extends FunctionUI {
 
     public Function2DUI(int size, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(size, controller);
-        this.setLayout(new BorderLayout());
-
+        JPanel panel = new JPanel(new BorderLayout());
         this.functionChange = new CustomTextField("sin(x)");
         PopulationFunction popC = (PopulationFunction) controller.getModel();
         this.plot2D = new Custom2DPlot((Function2D)popC.getFunction());
@@ -69,8 +73,10 @@ public class Function2DUI extends FunctionUI {
         this.xMin.addObserver(this);
         this.xMax.addObserver(this);
 
-        this.add(plot2D, BorderLayout.CENTER);
-        this.add(footer, BorderLayout.SOUTH);
+        panel.add(plot2D, BorderLayout.CENTER);
+        panel.add(footer, BorderLayout.SOUTH);
+        
+        this.add(panel);
     }
     
     @Override
@@ -80,7 +86,7 @@ public class Function2DUI extends FunctionUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
-        if (ev instanceof FunctionRefreshEvent) {
+        if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
             Function func = (Function)ev.getSource();
             try {
                 this.plot2D.setPlot((Function2D)func);
@@ -91,7 +97,7 @@ public class Function2DUI extends FunctionUI {
             }
         }
         if (ev instanceof PopulationRefreshEvent) {
-            Population pop = (Population)ev.getSource();
+            /*Population pop = (Population)ev.getSource();
             FunctionIndividual funcInd = (FunctionIndividual) pop.getFirstIndividual();
             Function func = funcInd.getFunction();
             try {
@@ -100,8 +106,21 @@ public class Function2DUI extends FunctionUI {
                 Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnparsableExpressionException ex) {
                 Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            PopulationRefreshEvent event = (PopulationRefreshEvent)ev;            
+            LinkedList<IndividualUI> samples = event.getSample();
+            
+            for(IndividualUI sample : samples){
+                
+                this.populationSample.add(sample);
             }
         }
+        if(ev instanceof ObservableVolumeRefreshEvent){
+            
+            ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent)ev;
+            this.volumeOption.setValue(event.getValue());
+        }
+        
     }
 
     @Override
@@ -113,6 +132,11 @@ public class Function2DUI extends FunctionUI {
             CustomTextFieldEvent ctfe = (CustomTextFieldEvent) ev;
             String newFunc = ctfe.getValue();
             controller.applyChanges(new FunctionEvent(this, newFunc));
+        }
+        if (ev instanceof OptionLineEvent) {
+            
+            OptionLineEvent event = (OptionLineEvent) ev;
+            this.controller.applyChanges(new ObservableVolumeUserEvent(this, event.getValue()));
         }
     }
 }

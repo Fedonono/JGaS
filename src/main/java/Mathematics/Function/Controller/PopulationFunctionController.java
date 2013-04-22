@@ -10,6 +10,7 @@ import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import Mathematics.Function.Events.FunctionEvent;
 import geneticalgorithm.Population.Function.PopulationFunction;
+import geneticalgorithm.Population.ObservableVolumeUserEvent;
 import geneticalgorithm.Population.PopulationController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +33,7 @@ public class PopulationFunctionController extends PopulationController {
 
     @Override
     public void applyChanges(UserEvent event) {
+        System.out.println("controller appycahnges");
         if(event instanceof FunctionEvent){
             FunctionEvent ev = (FunctionEvent)event;
             try {
@@ -41,6 +43,10 @@ public class PopulationFunctionController extends PopulationController {
             } catch (UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if(event instanceof ObservableVolumeUserEvent){
+            ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
+            model.setObservableVolume(ev.getValue());
         }
     }
     

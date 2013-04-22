@@ -13,6 +13,7 @@ import MvcPattern.View;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
@@ -21,12 +22,12 @@ import javax.swing.JPanel;
  */
 public class PopulationUI extends JPanel implements View, Observer {
 
-    private OptionLine volumeOption;
-    private JPanel populationSample;
+    protected OptionLine volumeOption;
+    protected JPanel populationSample;
     protected PopulationController controller;
 
     public PopulationUI(int size) {
-        
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.volumeOption = new OptionLine("Sample size", 0, size, 0);
         this.populationSample = new JPanel(new FlowLayout());
         this.volumeOption.addObserver(this);
