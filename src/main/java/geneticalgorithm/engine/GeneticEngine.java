@@ -105,6 +105,7 @@ public class GeneticEngine extends Model {
 
     private void engine() {
         while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
+            System.out.println(this.stepCount +"/"+this.problem.getMaxStepCount());
             this.evolve();
         }
         this.pause();

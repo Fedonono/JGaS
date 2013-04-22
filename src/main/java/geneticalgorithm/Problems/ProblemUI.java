@@ -39,7 +39,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     private CustomSpinner crossProbability;
     private int crossProbabilityId;
     private static String populationSizeLabel = "population size";
-    private OptionLine populationSize;
+    private CustomSpinner populationSize;
     private int populationId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
     private SelectMenu<CrossOverOperator> availableCrossOverOperators;
@@ -83,7 +83,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
         
-        this.populationSize = new OptionLine(populationSizeLabel, 1, Integer.MAX_VALUE, 50);
+        this.populationSize = new CustomSpinner(populationSizeLabel, 1, Integer.MAX_VALUE, 50, 1);
         this.populationId = this.populationSize.getId();
         this.add(this.populationSize);
 
@@ -211,7 +211,7 @@ public class ProblemUI extends JDialog implements View, Observer {
     }
 
     public int getPopulationSize() {
-        return populationSize.getValue();
+        return populationSize.getValue().intValue();
     }
 
     public void setController(ProblemController controller) {
