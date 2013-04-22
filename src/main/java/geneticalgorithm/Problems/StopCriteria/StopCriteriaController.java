@@ -24,7 +24,6 @@ public class StopCriteriaController implements Controller{
         
         if(event instanceof StopCriteriaUserCtrlEvent){
             StopCriteriaUserCtrlEvent ev = (StopCriteriaUserCtrlEvent)event;
-            
             this.target.setMaxStepCount(ev.getStepCount());
             this.target.setTimeout(ev.getTimeout());
             this.target.setMinEvolutionCriterion(ev.getEvolutionCriterion());

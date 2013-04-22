@@ -83,9 +83,10 @@ public class GeneticEngine extends Model {
         this.population = population;
         this.initialSize = population.size();
         this.firstStepDone = false;
-
+        
         this.evaluationStep();
 
+        this.population.notifyViews();
         this.notifyViews(new EnginePopulationRefreshEvent(this, (PopulationUI) this.population.getUI()));
 
     }
@@ -105,7 +106,7 @@ public class GeneticEngine extends Model {
 
     private void engine() {
         while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
-            System.out.println(this.stepCount +"/"+this.problem.getMaxStepCount());
+            
             this.evolve();
         }
         this.pause();
@@ -226,6 +227,7 @@ public class GeneticEngine extends Model {
         this.mutationStep();
         this.buildNextGeneration();
         this.notifyViews();
+        this.population.notifyViews();
 
     }
 

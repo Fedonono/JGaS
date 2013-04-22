@@ -24,7 +24,6 @@ public class ProblemController implements Controller {
         if (event instanceof ProblemUserEvent) {
             
             ProblemUI source = (ProblemUI) event.getSource();
-
             problem.setCrossProbability(source.getCrossProbability());
             problem.setMutationProbability(source.getMutationProbability());
             problem.setPopulationSize(source.getPopulationSize());
