@@ -83,7 +83,7 @@ public class GeneticEngine extends Model {
         this.population = population;
         this.initialSize = population.size();
         this.firstStepDone = false;
-        
+
         this.evaluationStep();
 
         this.population.notifyViews();
@@ -106,7 +106,7 @@ public class GeneticEngine extends Model {
 
     private void engine() {
         while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
-            
+
             this.evolve();
         }
         this.pause();
@@ -132,7 +132,7 @@ public class GeneticEngine extends Model {
 
         if (this.firstStepDone) {
             this.evolutionCriterion = Math.abs(this.previousTotalScore - currentTotalScore) / (Math.abs(this.previousTotalScore) + Math.abs(currentTotalScore));
-        }else{
+        } else {
             this.firstStepDone = true;
         }
         this.previousTotalScore = currentTotalScore;
@@ -232,9 +232,11 @@ public class GeneticEngine extends Model {
     }
 
     public void step() {
-        this.chronometer.start();
-        this.evolve();
-        this.chronometer.stop();
+        if (!this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
+            this.chronometer.start();
+            this.evolve();
+            this.chronometer.stop();
+        }
     }
 
     @Override
