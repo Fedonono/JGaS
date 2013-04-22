@@ -69,6 +69,7 @@ public class GeneticEngine extends Model {
     public final void setProblem(Problem problem) {
 
         this.problem = problem;
+        this.pause = true;
         this.notifyViews(new EngineProblemRefreshEvent(this, (ProblemUI) this.problem.getUI()));
         this.init();
     }

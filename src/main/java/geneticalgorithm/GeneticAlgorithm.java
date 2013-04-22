@@ -74,12 +74,8 @@ public class GeneticAlgorithm extends Model {
     }
 
     protected void start() {
-        if (this.geneticEngine == null) {
             this.geneticEngine = new GeneticEngine(this.SelectedProblem);
             this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
-        }else{
-            this.geneticEngine.setProblem(this.SelectedProblem);
-        }        
     }
 
     public void quit() {
