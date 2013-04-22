@@ -25,7 +25,6 @@ public class PopulationController implements Controller{
         
         if(event instanceof ObservableVolumeUserEvent){
             ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
-            System.out.println(ev.getValue());
             model.setObservableVolume(ev.getValue());
         }
     }
