@@ -4,10 +4,10 @@
  */
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
-import geneticalgorithm.Population.Function.PopulationFunction2DUI;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
+import geneticalgorithm.Population.Function.PopulationFunction2DUI;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;

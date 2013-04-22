@@ -34,7 +34,7 @@ public class StopCriteria extends Model{
     }
 
     @Override
-    public void notifyViews(){
+    public final void notifyViews(){
         super.notifyViews(new StopCriteriaRefreshEvent(this));
     }
     
