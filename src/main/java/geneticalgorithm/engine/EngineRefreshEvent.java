@@ -16,10 +16,11 @@ public class EngineRefreshEvent extends RefreshEvent {
     int currentStepCount;
     double evolutionCriterion;
 
-    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount) {
+    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount, double evolutionCriterion) {
         super(source);
         this.timeout = timeout;
         this.currentStepCount = stepCount;
+        this.evolutionCriterion = evolutionCriterion;
     }
 
     public long getTimeout() {

@@ -45,7 +45,7 @@ public class GeneticEngine extends Model {
     public final void addView(View geUI) {
 
         super.addView(geUI);
-        geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount));
+        geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount, this.evolutionCriterion));
     }
 
     public boolean isPaused() {
@@ -241,6 +241,6 @@ public class GeneticEngine extends Model {
 
     @Override
     public void notifyViews() {
-        super.notifyViews(new EngineRefreshEvent(this, this.problem.getTimeout(), this.stepCount));
+        super.notifyViews(new EngineRefreshEvent(this, this.problem.getTimeout(), this.stepCount, this.evolutionCriterion));
     }
 }

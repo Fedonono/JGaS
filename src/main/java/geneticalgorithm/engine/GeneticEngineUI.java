@@ -176,7 +176,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         }
         
         public void setEvolutionCriterion(double evolutionCriterion){
-            this.evolutionCriterion = evolutionCriterion;
+            this.evolutionCriterion = Math.round(10d*evolutionCriterion)/10d;
         }
 
         private void refreshLabel() {
