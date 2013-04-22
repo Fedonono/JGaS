@@ -28,14 +28,10 @@ public class PopulationFunctionController extends PopulationController {
     }
 
     @Override
-    public void applyChanges(UserEvent event) {
-        
+    public void applyChanges(UserEvent event) {        
         super.applyChanges(event);
-        
-        
-        
+
         if(event instanceof FunctionEvent){
-            
             FunctionEvent ev = (FunctionEvent)event;
             try {
                 model.getFunction().setFunction(ev.getFunction());

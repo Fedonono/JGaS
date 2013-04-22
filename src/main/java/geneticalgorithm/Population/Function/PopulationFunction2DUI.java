@@ -83,6 +83,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
 
     @Override
     public void refresh(RefreshEvent ev) {
+        super.refresh(ev);
         if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
             Function func = (Function)ev.getSource();
             try {
@@ -93,8 +94,8 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (ev instanceof PopulationRefreshEvent) {
-            /*Population pop = (Population)ev.getSource();
+        /*if (ev instanceof PopulationRefreshEvent) {
+            Population pop = (Population)ev.getSource();
             FunctionIndividual funcInd = (FunctionIndividual) pop.getFirstIndividual();
             Function func = funcInd.getFunction();
             try {
@@ -103,20 +104,9 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
                 Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnparsableExpressionException ex) {
                 Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            PopulationRefreshEvent event = (PopulationRefreshEvent)ev;            
-            LinkedList<IndividualUI> samples = event.getSample();
-            
-            for(IndividualUI sample : samples){
-                
-                this.populationSample.add(sample);
             }
         }
-        if(ev instanceof ObservableVolumeRefreshEvent){
-            ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent)ev;
-            this.volumeOption.setValue(event.getValue());
-        }
-        
+        */
     }
 
     @Override

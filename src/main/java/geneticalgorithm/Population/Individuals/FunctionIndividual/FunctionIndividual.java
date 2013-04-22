@@ -18,19 +18,12 @@ public class FunctionIndividual extends Individual {
     private Function function;
 
     public FunctionIndividual(Function function, Double... values) {
-        if (values.length > 2) {
-            // IncorrectDim exception TODO BY ARNAUD
-        }
-        
         this.points = new Points(values);
         this.function = function;
         this.addView(new FunctionIndividualUI());
     }
 
     public FunctionIndividual(Function function, Points points) {
-        if (points.size() > 2) {
-            // IncorrectDim exception TODO BY ARNAUD
-        }
         this.function = function;
         this.points = points;
     }
