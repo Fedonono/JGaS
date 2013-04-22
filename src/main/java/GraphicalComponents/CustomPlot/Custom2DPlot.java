@@ -42,7 +42,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     public void setPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
         plot.removeAllPlots();
         Points domaine = function.getDomaine();
-        double[] x = increment(domaine.get(0), 0.1, domaine.get(1)); // x = 0.0:0.1:1.0
+        double[] x = increment(domaine.get(0), 0.1, domaine.get(1)+0.1); // x = 0.0:0.1:1.0
 
         // define the legend position
         plot.addLegend("SOUTH");
