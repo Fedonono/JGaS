@@ -21,18 +21,19 @@ public class GeneticEngineUserCtrl implements Controller{
     
     @Override
     public void applyChanges(UserEvent event) {
+        
         if(event instanceof PauseEngineEvent){
             
             if(((PauseEngineEvent)event).isPaused()){
-                this.target.stop();
+                this.target.pause();
             }else{
-                this.target.start();
+                this.target.resume();
             }
             
         }else if(event instanceof StepEngineEvent){
+            System.out.println("step");
             this.target.step();
-        }else if(event instanceof StopEngineEvent){
-            this.target.stop();
+            
         }
     }
     

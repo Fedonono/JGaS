@@ -18,7 +18,7 @@ public class ReadyToStartEvent extends RefreshEvent {
     public ReadyToStartEvent(GeneticAlgorithm source, GeneticEngineUI engineUI){
         super(source);
         this.engineUI = engineUI;
-    }
+    }   
     
     public GeneticEngineUI getEngineUI(){
         return this.engineUI;

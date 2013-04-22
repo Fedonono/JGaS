@@ -14,6 +14,7 @@ import geneticalgorithm.Operators.Selection.ProportionalPerfomanceSelectionOpera
 import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Population;
+import geneticalgorithm.Problems.StopCriteria.StopCriteria;
 import java.util.LinkedList;
 
 /**
@@ -26,25 +27,26 @@ public abstract class Problem extends Model {
     private LinkedList<CrossOverOperator> availableCrossOverOperators = new LinkedList<>();
     private LinkedList<SelectionOperator> availableSelectionOperators = new LinkedList<>();
     private LinkedList<EvaluationOperator> availableEvaluationOperator = new LinkedList<>();
-    private int maxStepCount = 0;
     private int populationSize = 100;
     private String label;
     private double mutationProbability = 0.1;
     private double crossProbability = 0.2;
     private Operators operators = new Operators();
-    private int timeout = 0;
+    private StopCriteria stopCriteria;
 
-    public Problem(){
+    public Problem(){        
+        this.stopCriteria = new StopCriteria();
         this.addSelectionOperator(TruncationSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
     }
     
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
+    
+    public StopCriteria getStopCriteria(){
+        return this.stopCriteria;
     }
 
     public int getTimeout() {
-        return timeout;
+        return stopCriteria.getTimeout();
     }
 
     public LinkedList<MutationOperator> getAvailableMutationOperators() {
@@ -64,7 +66,7 @@ public abstract class Problem extends Model {
     }
 
     public int getMaxStepCount() {
-        return maxStepCount;
+        return stopCriteria.getMaxStepCount();
     }
 
     public String getLabel() {
@@ -93,10 +95,6 @@ public abstract class Problem extends Model {
 
     public EvaluationOperator getSelectedEvaluationOperator() {
         return operators.getEvaluationOperator();
-    }
-
-    public void setMaxStepCount(int maxStepCount) {
-        this.maxStepCount = maxStepCount;
     }
 
     public void setMutationProbability(double mutationProbability) {
@@ -171,7 +169,7 @@ public abstract class Problem extends Model {
         }
     }
 
-    public void addSelectionOperator(SelectionOperator operator) {
+    public final void addSelectionOperator(SelectionOperator operator) {
         this.availableSelectionOperators.add(operator);
         
         if(this.getSelectedSelectionOperator() == null){
@@ -188,8 +186,16 @@ public abstract class Problem extends Model {
     }
 
     @Override
-    public void addView(View v) {
+    public final void addView(View v) {
         super.addView(v);
         v.refresh(new ProblemRefreshEvent(this));
+    }
+    
+    public double getEvolutionCriterion(){
+        return this.stopCriteria.getEvolutionCriterion();
+    }
+    
+    public boolean stopCriteriaAreReached(int stepCount, int time, double evolutionCoeff){
+        return this.stopCriteria.areReached(stepCount, time, evolutionCoeff);
     }
 }

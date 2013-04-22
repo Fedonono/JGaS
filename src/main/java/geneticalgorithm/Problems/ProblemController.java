@@ -26,8 +26,6 @@ public class ProblemController implements Controller {
             ProblemUI source = (ProblemUI) event.getSource();
 
             problem.setCrossProbability(source.getCrossProbability());
-            problem.setMaxStepCount(source.getMaxStepCount());
-            problem.setTimeout(source.getTimeout());
             problem.setMutationProbability(source.getMutationProbability());
             problem.setPopulationSize(source.getPopulationSize());
             problem.setSelectedCrossOverOperation(source.getSelectedCrossOverOperator());

@@ -5,14 +5,15 @@
 package geneticalgorithm.engine;
 
 import MvcPattern.Model;
+import MvcPattern.View;
 import Tools.Chronometer;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
-import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationUI;
 import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problems.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -25,22 +26,35 @@ public class GeneticEngine extends Model {
 
     private Population population;
     private int initialSize;
-    private boolean stop = true;
+    private boolean pause = true;
     private int stepCount = 0;
+    private double evolutionCriterion = 1;
+    private double previousTotalScore = 0;
+    private boolean firstStepDone = false;
     private Chronometer chronometer;
     private Problem problem;
-    private Operators operators;
 
     public GeneticEngine(Problem problem) {
 
-        this.problem = problem;
-        this.init();
-        
+        this.setProblem(problem);
+
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
     }
-    private void init(){
+
+    @Override
+    public final void addView(View geUI) {
+
+        super.addView(geUI);
+        geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount));
+    }
+
+    public boolean isPaused() {
+        return this.pause;
+    }
+
+    private void init() {
+
         this.setPopulation(this.problem.createInitialPopulation());
-        this.operators = this.problem.getSelectedOperators();
         this.chronometer = new Chronometer();
     }
 
@@ -51,11 +65,12 @@ public class GeneticEngine extends Model {
     public Problem getProblem() {
         return problem;
     }
-    
-    public void setProblem(Problem problem){
+
+    public final void setProblem(Problem problem) {
+
         this.problem = problem;
+        this.notifyViews(new EngineProblemRefreshEvent(this, (ProblemUI) this.problem.getUI()));
         this.init();
-        // send event to configure button to specify the new problem.
     }
 
     public int getStepCount() {
@@ -63,38 +78,35 @@ public class GeneticEngine extends Model {
     }
 
     private void setPopulation(Population population) {
+
         this.population = population;
         this.initialSize = population.size();
-        // send event to specify the new populationView : :paintimmediatly(source.getGraphics());
+        this.firstStepDone = false;
+
+        this.evaluationStep();
+
+        this.notifyViews(new EnginePopulationRefreshEvent(this, (PopulationUI) this.population.getUI()));
 
     }
 
-    public void start() {
-        this.stop = false;
-        this.chronometer.start();
-        this.engine();
-    }
-
-    public void stop() {
-
-        this.stop = true;
-        this.chronometer.stop();
-        this.notifyViews(new EngineStopedRefreshEvent(this));
-    }
-
-    private boolean timeIsOut() {
-        if (this.problem.getTimeout() == 0) {
-            return false;
-        } else {
-            return (this.problem.getTimeout() - this.chronometer.getTime() <= 0);
+    public void resume() {
+        if (this.pause) {
+            this.pause = false;
+            this.chronometer.start();
+            this.engine();
         }
+    }
+
+    public void pause() {
+        this.pause = true;
+        this.chronometer.stop();
     }
 
     private void engine() {
-        while (!this.stop && this.stepCount <= this.problem.getMaxStepCount() && !this.timeIsOut()) {
+        while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
             this.evolve();
         }
-        this.stop();
+        this.pause();
     }
 
     public Individual getBestSolution() {
@@ -108,10 +120,19 @@ public class GeneticEngine extends Model {
     private void evaluationStep() {
 
         ArrayList<Individual> individuals = this.population.getIndividuals();
+        double currentTotalScore = 0;
 
         for (Individual individual : individuals) {
-            this.operators.getEvaluationOperator().evaluate(individual);
+            this.problem.getSelectedEvaluationOperator().evaluate(individual);
+            currentTotalScore += individual.getScore();
         }
+
+        if (this.firstStepDone) {
+            this.evolutionCriterion = Math.abs(this.previousTotalScore - currentTotalScore) / (Math.abs(this.previousTotalScore) + Math.abs(currentTotalScore));
+        }else{
+            this.firstStepDone = true;
+        }
+        this.previousTotalScore = currentTotalScore;
     }
 
     /**
@@ -121,7 +142,7 @@ public class GeneticEngine extends Model {
     private void buildNextGeneration() {
 
         this.evaluationStep();
-        Population pop = this.operators.getSelectionOperator().buildNextGeneration(this.population, this.initialSize);
+        Population pop = this.problem.getSelectedSelectionOperator().buildNextGeneration(this.population, this.initialSize);
         this.population.setSolutions(pop);
     }
 
@@ -133,7 +154,7 @@ public class GeneticEngine extends Model {
         LinkedList<Individual> crossQueue = new LinkedList<>();
         ArrayList<Individual> individuals = this.population.getIndividuals();
 
-        CrossOverOperator crossoverOperator = this.operators.getCrossoverOperator();
+        CrossOverOperator crossoverOperator = this.problem.getSelectedCrossOverOperation();
         for (Individual individual : individuals) {
 
             if (Math.random() < crossoverOperator.getProbability()) {
@@ -183,7 +204,7 @@ public class GeneticEngine extends Model {
      */
     private void mutationStep() {
 
-        MutationOperator mutationOperator = this.operators.getMutationOperator();
+        MutationOperator mutationOperator = this.problem.getSelectedMutationOperator();
 
         ArrayList<Individual> individuals = this.population.getIndividuals();
 

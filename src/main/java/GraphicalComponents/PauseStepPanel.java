@@ -4,7 +4,6 @@
  */
 package GraphicalComponents;
 
-import java.awt.Frame;
 import java.util.LinkedList;
 
 /**

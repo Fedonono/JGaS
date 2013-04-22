@@ -56,7 +56,6 @@ public class PauseButton extends ValidateButton{
     
     @Override
     public void actionPerformed(ActionEvent ae){
-        super.actionPerformed(ae);
         this.setPause();
         this.notifyObserver();
     }

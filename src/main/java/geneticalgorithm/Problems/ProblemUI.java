@@ -18,6 +18,7 @@ import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
+import geneticalgorithm.Problems.StopCriteria.StopCriteriaUI;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
@@ -40,12 +41,6 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String populationSizeLabel = "population size";
     private OptionLine populationSize;
     private int populationId;
-    private static String maxStepCountLabel = "limit steps";
-    private OptionLine maxStepCount;
-    private int maxStepCountId;
-    private static String timeoutLabel = "timeout(ms)";
-    private OptionLine timeout;
-    private int timeoutId;
     private static String availableCrossOverOperatorsLabel = "available cross over operators";
     private SelectMenu<CrossOverOperator> availableCrossOverOperators;
     private int availableCrossOverOperatorsId;
@@ -61,19 +56,22 @@ public class ProblemUI extends JDialog implements View, Observer {
     private static String validateButtonLabel = "validate";
     private ValidateButton validateButton;
     private int validateButtonId;
+    private StopCriteriaUI stopCriteriaUI;
 
     public ProblemUI() {
         this(null);
     }
 
-    public ProblemUI(ProblemController controller) {
+    public ProblemUI(Problem problem) {
 
-        this.controller = controller;
+        this.stopCriteriaUI = (StopCriteriaUI) problem.getStopCriteria().getUI();
+
+        this.controller = new ProblemController(problem);
 
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-        int heightPx = 620;
+        int heightPx = 1100;
         int widthPx = 600;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
@@ -84,6 +82,10 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1, 0, 0.01);
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
+        
+        this.populationSize = new OptionLine(populationSizeLabel, 1, Integer.MAX_VALUE, 50);
+        this.populationId = this.populationSize.getId();
+        this.add(this.populationSize);
 
         this.availableCrossOverOperators = new SelectMenu(availableCrossOverOperatorsLabel);
         this.availableCrossOverOperatorsId = this.availableCrossOverOperators.getId();
@@ -101,22 +103,14 @@ public class ProblemUI extends JDialog implements View, Observer {
         this.availableSelectionOperatorsId = this.availableSelectionOperators.getId();
         this.add(this.availableSelectionOperators);
 
-        this.maxStepCount = new OptionLine(maxStepCountLabel, 0, Integer.MAX_VALUE, 0);
-        this.maxStepCountId = this.maxStepCount.getId();
-        this.add(this.maxStepCount);
-
-        this.timeout = new OptionLine(timeoutLabel, 0, Integer.MAX_VALUE, 0);
-        this.timeoutId = this.timeout.getId();
-        this.add(this.timeout);
-
-        this.populationSize = new OptionLine(populationSizeLabel, 1, Integer.MAX_VALUE, 50);
-        this.populationId = this.populationSize.getId();
-        this.add(this.populationSize);
-
+        this.add(this.stopCriteriaUI);
+        
         this.validateButton = new ValidateButton(validateButtonLabel);
         this.validateButtonId = this.validateButton.getId();
         this.add(this.validateButton);
         this.validateButton.addObserver(this);
+
+
 
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
@@ -172,14 +166,6 @@ public class ProblemUI extends JDialog implements View, Observer {
         return populationId;
     }
 
-    private int getMaxStepCountId() {
-        return maxStepCountId;
-    }
-
-    private int getTimeoutId() {
-        return timeoutId;
-    }
-
     private int getAvailableCrossOverOperatorsId() {
         return availableCrossOverOperatorsId;
     }
@@ -226,20 +212,6 @@ public class ProblemUI extends JDialog implements View, Observer {
 
     public int getPopulationSize() {
         return populationSize.getValue();
-    }
-
-    public int getMaxStepCount() {
-        return maxStepCount.getValue();
-    }
-
-    public int getTimeout() {
-        return timeout.getValue();
-    }
-
-    // TODO : A delete par la suite. Utile pour les tests
-    public static void main(String[] args) {
-        ProblemUI pbUI = new ProblemUI();
-        pbUI.setVisible(true);
     }
 
     public void setController(ProblemController controller) {

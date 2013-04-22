@@ -10,22 +10,27 @@ import MvcPattern.RefreshEvent;
  *
  * @author simonneau
  */
-public class EngineRefreshEvent extends RefreshEvent{
-    
+public class EngineRefreshEvent extends RefreshEvent {
+
     long timeout;
     int currentStepCount;
-    
-    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount){
+    double evolutionCriterion;
+
+    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount) {
         super(source);
         this.timeout = timeout;
         this.currentStepCount = stepCount;
     }
-    
-    public long getTimeout(){
+
+    public long getTimeout() {
         return this.timeout;
     }
-    
-    public int getStepCount(){
+
+    public int getStepCount() {
         return this.currentStepCount;
+    }
+
+    public double getEvolutionCriterion() {
+        return this.evolutionCriterion;
     }
 }

@@ -1,12 +1,13 @@
 package geneticalgorithm;
 
-import geneticalgorithm.engine.GeneticEngineUI;
-import geneticalgorithm.engine.GeneticEngine;
 import MvcPattern.Model;
 import geneticalgorithm.Problems.Min1D.Min1D;
 import geneticalgorithm.Problems.Problem;
 import geneticalgorithm.Problems.ProblemController;
 import geneticalgorithm.Problems.ProblemUI;
+import geneticalgorithm.engine.GeneticEngine;
+import geneticalgorithm.engine.GeneticEngineUI;
+import java.awt.BorderLayout;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JFrame;
@@ -33,8 +34,8 @@ public class GeneticAlgorithm extends Model {
     }
 
     public void addProblem(Problem problem) {
-        problem.addView(new ProblemUI(new ProblemController(problem)));
         this.problems.add(problem);
+        problem.addView(new ProblemUI(problem));
         if(this.SelectedProblem == null){
             this.SelectedProblem = problem;
         }
@@ -64,9 +65,10 @@ public class GeneticAlgorithm extends Model {
         this.addView(mainUI);
 
         this.mainFrame = new JFrame();
+        this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.mainFrame.setBounds(0, 0, 1280, 800);
-        this.mainFrame.add(mainUI);
+        this.mainFrame.add(mainUI, BorderLayout.CENTER);
         this.mainFrame.setVisible(true);
     }    
 
@@ -79,7 +81,7 @@ public class GeneticAlgorithm extends Model {
     public void quit(){
         this.mainFrame.setVisible(false);
         this.mainFrame = null;
-        this.geneticEngine.stop();
+        this.geneticEngine.pause();
     }
 
     public static void main(String[] args) {

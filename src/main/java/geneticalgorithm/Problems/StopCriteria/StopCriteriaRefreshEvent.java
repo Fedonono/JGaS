@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package geneticalgorithm.engine;
+package geneticalgorithm.Problems.StopCriteria;
 
 import MvcPattern.RefreshEvent;
 
@@ -10,9 +10,9 @@ import MvcPattern.RefreshEvent;
  *
  * @author simonneau
  */
-public class EngineStopedRefreshEvent extends RefreshEvent {
+public class StopCriteriaRefreshEvent extends RefreshEvent {
 
-    public EngineStopedRefreshEvent(GeneticEngine source) {
+    public StopCriteriaRefreshEvent(StopCriteria source) {
         super(source);
     }
 }
