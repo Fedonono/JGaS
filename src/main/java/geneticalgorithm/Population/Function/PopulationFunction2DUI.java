@@ -10,15 +10,14 @@ import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.SpinnerEvent;
+import Mathematics.Function.Model.Function;
+import Mathematics.Function.Model.Function2D;
 import Mathematics.Points;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import Mathematics.Function.Model.Function;
-import Mathematics.Function.Model.Function2D;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.Individual;
-import geneticalgorithm.Population.Individuals.IndividualUI;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
@@ -45,7 +44,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
         JPanel panel = new JPanel(new BorderLayout());
         this.functionChange = new CustomTextField("sin(x)");
         PopulationFunction popC = (PopulationFunction) controller.getModel();
-        this.plot2D = new Custom2DPlot((Function2D)popC.getFunction());
+        this.plot2D = new Custom2DPlot((Function2D) popC.getFunction());
         this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
         this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
 
@@ -69,25 +68,25 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
 
         panel.add(plot2D, BorderLayout.CENTER);
         panel.add(footer, BorderLayout.SOUTH);
-        
+
         this.add(panel);
     }
-    
+
     @Override
     public void addIndividu(FunctionIndividual ind) throws UnknownFunctionException, UnparsableExpressionException {
-        this.plot2D.addIndividu((Function2D)ind.getFunction(), ind.getPoints().get(0));
+        this.plot2D.addIndividu((Function2D) ind.getFunction(), ind.getPoints().get(0));
     }
 
     @Override
     public void refresh(RefreshEvent ev) {
         super.refresh(ev);
         if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
-            Function func = (Function)ev.getSource();
+            Function func = (Function) ev.getSource();
+            
             try {
-                this.plot2D.setPlot((Function2D)func);
-            } catch (UnknownFunctionException ex) {
-                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnparsableExpressionException ex) {
+                this.plot2D.setPlot((Function2D) func);
+                
+            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -96,11 +95,11 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
             Population pop = (Population) event.getSource();
             FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();
             Function func = funcInd.getFunction();
+            
             try {
-                this.plot2D.setPlot((Function2D)func);
-            } catch (UnknownFunctionException ex) {
-                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnparsableExpressionException ex) {
+                this.plot2D.setPlot((Function2D) func);
+                
+            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             LinkedList<Individual> samples = event.getSample();
@@ -114,7 +113,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     @Override
     public void reactToChanges(ObservationEvent ev) {
         super.reactToChanges(ev);
-        
+
         if (ev instanceof SpinnerEvent) {
             controller.applyChanges(new DomaineEvent(this, new Points(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
         }
