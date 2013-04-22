@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mathematics.Function.View;
+package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.CustomPlot.Custom2DPlot;
 import GraphicalComponents.CustomSpinner;
@@ -17,9 +17,6 @@ import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
-import Mathematics.Function.Events.DomaineEvent;
-import Mathematics.Function.Events.FunctionEvent;
-import Mathematics.Function.Events.FunctionRefreshEvent;
 import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.IndividualUI;
@@ -40,13 +37,13 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class Function2DUI extends FunctionUI {
+public class PopulationFunction2DUI extends PopulationFunctionUI {
 
     private Custom2DPlot plot2D;
     private CustomSpinner xMin;
     private CustomSpinner xMax;
 
-    public Function2DUI(int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+    public PopulationFunction2DUI(int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(sizeView, popSize, controller);
         JPanel panel = new JPanel(new BorderLayout());
         this.functionChange = new CustomTextField("sin(x)");
@@ -91,9 +88,9 @@ public class Function2DUI extends FunctionUI {
             try {
                 this.plot2D.setPlot((Function2D)func);
             } catch (UnknownFunctionException ex) {
-                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnparsableExpressionException ex) {
-                Logger.getLogger(Function2DUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (ev instanceof PopulationRefreshEvent) {
@@ -116,7 +113,6 @@ public class Function2DUI extends FunctionUI {
             }
         }
         if(ev instanceof ObservableVolumeRefreshEvent){
-            
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent)ev;
             this.volumeOption.setValue(event.getValue());
         }

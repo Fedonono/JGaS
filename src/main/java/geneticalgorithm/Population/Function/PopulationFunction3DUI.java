@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mathematics.Function.View;
+package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.ObservationEvent;
 import MvcPattern.RefreshEvent;
@@ -15,9 +15,9 @@ import geneticalgorithm.Population.PopulationController;
  *
  * @author nono
  */
-public class Function3DUI extends FunctionUI {
+public class PopulationFunction3DUI extends PopulationFunctionUI {
 
-    public Function3DUI(int sizeView, int popSize, PopulationController controller) {
+    public PopulationFunction3DUI(int sizeView, int popSize, PopulationController controller) {
         super(sizeView, popSize, controller);
     }
 

@@ -24,7 +24,7 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
     private String label;
 
     public OptionLine(String text, int min, int max, int value) {
-
+        
         if (min > max) {
             throw new MinMaxValueException(max, min);
         }

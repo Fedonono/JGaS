@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mathematics.Function.Events;
+package geneticalgorithm.Population.Function;
 
 import Mathematics.Function.Model.Function;
 import MvcPattern.RefreshEvent;

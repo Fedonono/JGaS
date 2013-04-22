@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mathematics.Function.View;
+package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.CustomTextField;
-import Mathematics.Function.Controller.PopulationFunctionController;
+import geneticalgorithm.Population.Function.PopulationFunctionController;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
@@ -16,10 +16,10 @@ import geneticalgorithm.Population.PopulationUI;
  *
  * @author nono
  */
-public abstract class FunctionUI extends PopulationUI {
+public abstract class PopulationFunctionUI extends PopulationUI {
     protected CustomTextField functionChange;
     
-    public FunctionUI(int sizeView, int popSize, PopulationController controller) {
+    public PopulationFunctionUI(int sizeView, int popSize, PopulationController controller) {
         super(sizeView, popSize);
         this.setController(controller);
     }

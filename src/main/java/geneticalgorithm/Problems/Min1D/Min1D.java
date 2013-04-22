@@ -4,11 +4,11 @@
  */
 package geneticalgorithm.Problems.Min1D;
 
-import Mathematics.Function.Controller.PopulationFunctionController;
+import geneticalgorithm.Population.Function.PopulationFunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
-import Mathematics.Function.View.Function2DUI;
-import Mathematics.Function.View.FunctionUI;
+import geneticalgorithm.Population.Function.PopulationFunction2DUI;
+import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import Mathematics.Points;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -46,13 +46,13 @@ public class Min1D extends Problem {
     public Population createInitialPopulation() {
         PopulationFunction pop = null;
         Function function = null;
-        FunctionUI fDUI = null;
+        PopulationFunctionUI fDUI = null;
         int popSize = this.getPopulationSize();
 
         try {
             function = new Function2D(strFunc, new Points(xMin, xMax));
             pop = new PopulationFunction(function);
-            fDUI = new Function2DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
+            fDUI = new PopulationFunction2DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {

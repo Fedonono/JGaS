@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Mathematics.Function.Controller;
+package geneticalgorithm.Population.Function;
 
 import Mathematics.Function.Model.Function;
 import MvcPattern.UserEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import Mathematics.Function.Events.FunctionEvent;
 import geneticalgorithm.Population.Function.PopulationFunction;
 import geneticalgorithm.Population.ObservableVolumeUserEvent;
 import geneticalgorithm.Population.PopulationController;
@@ -45,6 +44,7 @@ public class PopulationFunctionController extends PopulationController {
             }
         }
         if(event instanceof ObservableVolumeUserEvent){
+            System.out.println("oui");
             ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
             model.setObservableVolume(ev.getValue());
         }

@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
-import Mathematics.Function.View.Function2DUI;
+import geneticalgorithm.Population.Function.PopulationFunction2DUI;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -22,7 +22,7 @@ public class FunctionIndividualUI extends IndividualUI {
     public void refresh(RefreshEvent ev) {
         System.out.println("refresh individu");
         FunctionIndividual ind = (FunctionIndividual) ev.getSource();
-        Function2DUI fUI = (Function2DUI) ind.getFunction().getUI();
+        PopulationFunction2DUI fUI = (PopulationFunction2DUI) ind.getFunction().getUI();
         try {
             fUI.addIndividu(ind);
         } catch (UnknownFunctionException ex) {

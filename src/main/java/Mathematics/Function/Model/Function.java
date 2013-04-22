@@ -4,7 +4,7 @@
  */
 package Mathematics.Function.Model;
 
-import Mathematics.Function.Events.FunctionRefreshEvent;
+import geneticalgorithm.Population.Function.FunctionRefreshEvent;
 import Mathematics.Points;
 import MvcPattern.Model;
 import MvcPattern.RefreshEvent;
