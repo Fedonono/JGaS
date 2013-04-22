@@ -59,9 +59,9 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
         double xp[] = {x};
         double yp[] = {function.getY(x)};
         if (this.id == 1)
-            plot.addScatterPlot("individu "+this.id, Color.RED, xp, yp);
+            plot.addScatterPlot("Best - Individu "+this.id, Color.RED, xp, yp);
         else
-            plot.addScatterPlot("individu "+this.id, Color.BLUE, xp, yp);
+            plot.addScatterPlot("Individu "+this.id, Color.BLUE, xp, yp);
     }
 
     public double[] getY(Function2D function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {
