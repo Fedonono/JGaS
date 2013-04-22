@@ -4,9 +4,8 @@
  */
 package geneticalgorithm.Population;
 
-import Mathematics.Function.Model.Function;
-import MvcPattern.UserEvent;
 import MvcPattern.Controller;
+import MvcPattern.UserEvent;
 import geneticalgorithm.Population.Function.PopulationFunction;
 
 /**
@@ -15,7 +14,7 @@ import geneticalgorithm.Population.Function.PopulationFunction;
  */
 public class PopulationController implements Controller{
     
-    PopulationFunction model;
+    protected PopulationFunction model;
 
     public void setModel(PopulationFunction model) {
         this.model = model;
@@ -23,6 +22,7 @@ public class PopulationController implements Controller{
     
     @Override
     public void applyChanges(UserEvent event) {
+        
         if(event instanceof ObservableVolumeUserEvent){
             ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
             model.setObservableVolume(ev.getValue());

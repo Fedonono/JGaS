@@ -121,6 +121,8 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
+        super.reactToChanges(ev);
+        
         if (ev instanceof SpinnerEvent) {
             controller.applyChanges(new DomaineEvent(this, new Points(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
         }
@@ -128,11 +130,6 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
             CustomTextFieldEvent ctfe = (CustomTextFieldEvent) ev;
             String newFunc = ctfe.getValue();
             controller.applyChanges(new FunctionEvent(this, newFunc));
-        }
-        if (ev instanceof OptionLineEvent) {
-            
-            OptionLineEvent event = (OptionLineEvent) ev;
-            this.controller.applyChanges(new ObservableVolumeUserEvent(this, event.getValue()));
         }
     }
 }

@@ -5,7 +5,6 @@
 package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.CustomTextField;
-import geneticalgorithm.Population.Function.PopulationFunctionController;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
