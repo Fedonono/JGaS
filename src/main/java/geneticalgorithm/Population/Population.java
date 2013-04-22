@@ -65,6 +65,7 @@ public class Population extends Model {
         }
         this.observableVolume = observableVolume;
         super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume));
+        this.notifyViews();
     }
 
     public int getObservableVolume() {
