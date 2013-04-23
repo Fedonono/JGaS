@@ -6,7 +6,7 @@ package GraphicalComponents.CustomPlot;
 
 import GraphicalComponents.IdentifiableComponent;
 import Mathematics.Function.Model.Function2D;
-import Mathematics.Points;
+import Mathematics.Point;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import de.congrace.exp4j.UnknownFunctionException;
@@ -40,7 +40,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
     public final void setPlot(Function2D function) throws UnknownFunctionException, UnparsableExpressionException {
         this.id = 0;
         plot.removeAllPlots();
-        Points domaine = function.getDomaine();
+        Point domaine = function.getDomaine();
         double[] x = increment(domaine.get(0), 0.1, domaine.get(1)+0.1); // x = 0.0:0.1:1.0
 
         // define the legend position

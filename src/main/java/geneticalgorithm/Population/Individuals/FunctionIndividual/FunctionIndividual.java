@@ -5,7 +5,7 @@
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
 import Mathematics.Function.Model.Function;
-import Mathematics.Points;
+import Mathematics.Point;
 import geneticalgorithm.Population.Individuals.Individual;
 
 /**
@@ -14,26 +14,27 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public class FunctionIndividual extends Individual {
     
-    private Points points;
+    private Point point;
     private Function function;
 
     public FunctionIndividual(Function function, Double... values) {
-        this.points = new Points(values);
+        this.point = new Point(values);
         this.function = function;
         this.addView(new FunctionIndividualUI());
     }
 
-    public FunctionIndividual(Function function, Points points) {
+    public FunctionIndividual(Function function, Point points) {
         this.function = function;
-        this.points = points;
+        this.point = points;
+        this.addView(new FunctionIndividualUI());
     }
 
-    public Points getPoints() {
-        return points;
+    public Point getPoint() {
+        return point;
     }
     
     public int getDimension() {
-        return points.size();
+        return point.size();
     }
 
     public void setFunction(Function function) {
@@ -44,7 +45,7 @@ public class FunctionIndividual extends Individual {
         return function;
     }
     
-    public double getResult(Points points) {
+    public double getResult(Point points) {
         return this.function.getResult(points);
     }
     

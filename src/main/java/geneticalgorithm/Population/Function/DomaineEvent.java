@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Population.Function;
 
-import Mathematics.Points;
+import Mathematics.Point;
 import MvcPattern.UserEvent;
 import MvcPattern.View;
 
@@ -14,14 +14,14 @@ import MvcPattern.View;
  */
 public class DomaineEvent extends UserEvent {
 
-    Points domaine;
+    Point domaine;
     
-    public DomaineEvent(View source, Points domaine){
+    public DomaineEvent(View source, Point domaine){
         super(source);
         this.domaine = domaine;
     }
 
-    public Points getValue() {
+    public Point getValue() {
         return domaine;
     }
 }

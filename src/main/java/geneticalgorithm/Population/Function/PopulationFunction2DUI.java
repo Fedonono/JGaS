@@ -12,7 +12,7 @@ import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.SpinnerEvent;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
-import Mathematics.Points;
+import Mathematics.Point;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -74,7 +74,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
 
     @Override
     public void addIndividu(FunctionIndividual ind){
-        this.plot2D.addIndividu((Function2D) ind.getFunction(), ind.getPoints().get(0));
+        this.plot2D.addIndividu((Function2D) ind.getFunction(), ind.getPoint().get(0));
     }
 
     @Override
@@ -117,7 +117,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
         super.reactToChanges(ev);
 
         if (ev instanceof SpinnerEvent) {
-            controller.applyChanges(new DomaineEvent(this, new Points(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
+            controller.applyChanges(new DomaineEvent(this, new Point(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
         }
         if (ev instanceof CustomTextFieldEvent) {
             CustomTextFieldEvent ctfe = (CustomTextFieldEvent) ev;

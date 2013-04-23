@@ -4,7 +4,7 @@
  */
 package Mathematics.Function.Model;
 
-import Mathematics.Points;
+import Mathematics.Point;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import de.congrace.exp4j.ExpressionBuilder;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * @author nono
  */
 public class Function3D extends Function {
-    public Function3D(String function, Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    public Function3D(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         super(function, domaine);
     }
 
@@ -28,12 +28,12 @@ public class Function3D extends Function {
     }
 
     @Override
-    public double getResult(Points points) {
+    public double getResult(Point points) {
         return getZ(points.get(0), points.get(1));
     }
 
     @Override
-    public void inDomaine(Points points) {
+    public void inDomaine(Point points) {
         super.minMax(points.get(0), domaine.get(0), domaine.get(1));
         super.minMax(points.get(1), domaine.get(2), domaine.get(3));
     }

@@ -4,7 +4,7 @@
  */
 package Mathematics.Function.Model;
 
-import Mathematics.Points;
+import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 
@@ -13,7 +13,7 @@ import de.congrace.exp4j.UnparsableExpressionException;
  * @author nono
  */
 public class Function2D extends Function {
-    public Function2D(String function, Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    public Function2D(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         super(function, domaine);
     }
 
@@ -23,12 +23,12 @@ public class Function2D extends Function {
     }
 
     @Override
-    public double getResult(Points points) {
+    public double getResult(Point points) {
         return getY(points.get(0));
     }
 
     @Override
-    public void inDomaine(Points points) {
+    public void inDomaine(Point points) {
         super.minMax(points.get(0), domaine.get(0), domaine.get(1));
     }
 }

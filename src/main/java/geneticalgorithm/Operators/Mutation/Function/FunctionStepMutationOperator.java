@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Operators.Mutation.Function;
 
-import Mathematics.Points;
+import Mathematics.Point;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.Individual;
@@ -32,11 +32,11 @@ public class FunctionStepMutationOperator extends MutationOperator {
         if (individual instanceof FunctionIndividual) {
             
             FunctionIndividual individualP = (FunctionIndividual) individual;
-            Points point = individualP.getPoints();
+            Point point = individualP.getPoint();
 
             int dim = 0;
             double min,max;
-            Points domaine = individualP.getFunction().getDomaine();
+            Point domaine = individualP.getFunction().getDomaine();
             
             for (Double coordinate : point) {
                 min = domaine.get(dim);

@@ -5,7 +5,7 @@
 package Mathematics.Function.Model;
 
 import geneticalgorithm.Population.Function.FunctionRefreshEvent;
-import Mathematics.Points;
+import Mathematics.Point;
 import MvcPattern.Model;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.Calculable;
@@ -21,9 +21,9 @@ public abstract class Function extends Model {
 
     private String label = null;
     protected Calculable calc = null;
-    protected Points domaine;
+    protected Point domaine;
     
-    protected Function(String function, Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    protected Function(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.setFunction(function, domaine);
     }
 
@@ -33,12 +33,12 @@ public abstract class Function extends Model {
         super.notifyViews(new FunctionRefreshEvent(this));
     }
 
-    public void setFunction(Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    public void setFunction(Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.domaine = domaine;
         super.notifyViews(new FunctionRefreshEvent(this));
     }
     
-    public void setFunction(String function, Points domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    public void setFunction(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.domaine = domaine;
         this.calc = new ExpressionBuilder(function).withVariableNames("x", "y").build();
         this.label = function;
@@ -49,7 +49,7 @@ public abstract class Function extends Model {
         return label;
     }
 
-    public Points getDomaine() {
+    public Point getDomaine() {
         return domaine;
     }
     
@@ -62,6 +62,6 @@ public abstract class Function extends Model {
         }
     }
 
-    public abstract double getResult(Points points);
-    public abstract void inDomaine(Points points);
+    public abstract double getResult(Point points);
+    public abstract void inDomaine(Point points);
 }

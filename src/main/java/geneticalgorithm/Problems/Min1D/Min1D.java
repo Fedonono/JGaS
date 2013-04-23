@@ -9,7 +9,7 @@ import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import geneticalgorithm.Population.Function.PopulationFunction2DUI;
 import geneticalgorithm.Population.Function.PopulationFunctionUI;
-import Mathematics.Points;
+import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Operators.CrossOver.Function.FunctionAverageCrossOverOperator;
@@ -50,7 +50,7 @@ public class Min1D extends Problem {
         int popSize = this.getPopulationSize();
 
         try {
-            function = new Function2D(strFunc, new Points(xMin, xMax));
+            function = new Function2D(strFunc, new Point(xMin, xMax));
             pop = new PopulationFunction(function);
             fDUI = new PopulationFunction2DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {

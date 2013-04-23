@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Operators.Evaluation.Function;
 
-import Mathematics.Points;
+import Mathematics.Point;
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
@@ -22,7 +22,7 @@ public class FunctionEvaluationOperator extends EvaluationOperator {
     public void evaluate(Individual individual) {
         if (individual instanceof FunctionIndividual) {
             FunctionIndividual individualP = (FunctionIndividual) individual;
-            Points points = individualP.getPoints();
+            Point points = individualP.getPoint();
             individualP.getFunction().inDomaine(points);
             double score = -individualP.getResult(points);
             individual.setScore(score);
