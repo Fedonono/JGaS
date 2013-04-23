@@ -4,8 +4,7 @@
  */
 package Tools;
 
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
+import java.util.Date;
 
 /**
  *
@@ -13,66 +12,50 @@ import javax.swing.Timer;
  */
 public class Chronometer {
 
-    private Timer chronometer;
+    private Date date;
     private int timeCount = 0;
-    private static final int DEFAULT_TIMER_PERIOD = 1;
-
-    
-    
-    public Chronometer(){
-        this(null);
-    }
-    
-    /**
-     *
-     * @param listener
-     */
-    public Chronometer(ActionListener listener) {
-        this.chronometer = new Timer(DEFAULT_TIMER_PERIOD, listener);
-    }
+    private boolean stoped = true;
 
     /**
      *
      */
     public void restart() {
         this.setTime(0);
-        this.chronometer.start();
-    }    
+        this.start();
+    }
 
     /**
      *
      */
     public void start() {
-        this.chronometer.start();
+        this.date = new Date();
+        this.stoped = false;
     }
 
     /**
      *
      */
     public void stop() {
-        this.chronometer.stop();
+        this.timeCount += new Date().getTime() - this.date.getTime();
+        this.stoped = true;
     }
-    
+
     /**
      *
      * @param time
      */
-    public void setTime(int time) {
+    private void setTime(int time) {
         this.timeCount = time;
     }
-    
+
     /**
      *
      * @return
      */
     public int getTime() {
+        if (!this.stoped) {
+            this.timeCount += new Date().getTime() - this.date.getTime();
+        }
         return this.timeCount;
-    }
-    
-    /**
-     *
-     */
-    public void incrTime() {
-        this.timeCount++;
     }
 }

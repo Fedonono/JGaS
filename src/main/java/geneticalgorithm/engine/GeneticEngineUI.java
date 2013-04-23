@@ -20,6 +20,7 @@ import geneticalgorithm.Population.PopulationUI;
 import geneticalgorithm.Problems.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 
@@ -132,6 +133,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         private JLabel label = new JLabel();
         private ValidateButton configure;
         private LinkedList<Observer> observers = new LinkedList<>();
+        private DecimalFormat df = new DecimalFormat("0.00");
 
         public Footer() {
 
@@ -176,11 +178,11 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         }
         
         public void setEvolutionCriterion(double evolutionCriterion){
-            this.evolutionCriterion = Math.round(10d*evolutionCriterion)/10d;
+            this.evolutionCriterion = evolutionCriterion;
         }
 
         private void refreshLabel() {
-            this.label.setText(this.stepLabel + this.stepCount + " / " + timeLabel + this.timeout + "ms"+" / "+this.evolutionLabel+this.evolutionCriterion*100+"%");
+            this.label.setText(this.stepLabel + this.stepCount + " / " + timeLabel + this.timeout + "ms"+" / "+this.evolutionLabel+df.format(this.evolutionCriterion*100)+"%");
         }
     }
 
