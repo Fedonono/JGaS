@@ -49,6 +49,10 @@ public class FunctionIndividual extends Individual {
         return this.function.getResult(points);
     }
     
+    public void setPoint(Point p){
+        this.point.set(p);
+    }
+    
     @Override
     protected void set(Individual s) {
         throw new UnsupportedOperationException("Not supported yet.");

@@ -28,4 +28,9 @@ public class Point extends ArrayList<Double> {
             this.set(i, (this.get(i) + point.get(i)) / 2);
         }
     }
+    
+    public void set(Point p){
+        this.clear();
+        this.addAll(p);
+    }
 }

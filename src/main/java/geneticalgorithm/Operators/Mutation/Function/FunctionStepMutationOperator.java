@@ -27,27 +27,31 @@ public class FunctionStepMutationOperator extends MutationOperator {
      * @return
      */
     @Override
-    public Individual mutate(Individual individual) {
+    public void mutate(Individual individual) {
         
         if (individual instanceof FunctionIndividual) {
             
-            FunctionIndividual individualP = (FunctionIndividual) individual;
-            Point point = individualP.getPoint();
+            FunctionIndividual functionIndividual = (FunctionIndividual) individual;
+            Point individualPoint = functionIndividual.getPoint();
 
             int dim = 0;
             double min,max;
-            Point domaine = individualP.getFunction().getDomaine();
+            Point domaine = functionIndividual.getFunction().getDomaine();
+            Point mutantPoint = new Point();
             
-            for (Double coordinate : point) {
+            //creeation des coordonnées mutantes
+            for (Double coordinate : individualPoint) {
                 min = domaine.get(dim);
                 max = domaine.get(dim+1);
                 coordinate = stepMutation(coordinate, Math.random()*(max-min)+min); // creer une nouvelle reference sur Double mais n'écrase pas celle du point
                 dim++;
+                mutantPoint.add(coordinate);
             }
-            return individualP;
+            
+            //mutation de l'individus
+            functionIndividual.setPoint(mutantPoint);
         }
         // IncorrectIndividualException TODO BY ARNAUD
-        return null;
     }
 
     private Double stepMutation(Double number, double randomStep) {

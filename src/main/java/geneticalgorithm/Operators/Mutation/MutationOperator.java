@@ -17,5 +17,5 @@ public abstract class MutationOperator extends Operator {
         super(label);
     };
     
-    public abstract Individual mutate(Individual individual);
+    public abstract void mutate(Individual individual);
 }
