@@ -6,7 +6,6 @@ package geneticalgorithm.Population;
 
 import MvcPattern.Model;
 import geneticalgorithm.Population.Individuals.Individual;
-import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,7 +63,7 @@ public class Population extends Model {
             observableVolume = 1;
         }
         this.observableVolume = observableVolume;
-        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume));
+        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume, this.size()));
         this.notifyViews();
     }
 

@@ -48,6 +48,7 @@ public class PopulationUI extends JPanel implements View, Observer {
         } else */
         if (ev instanceof ObservableVolumeRefreshEvent) {
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
+            this.volumeOption.setMaxValue(event.getMaxValue());
             this.volumeOption.setValue(event.getValue());
         }
 

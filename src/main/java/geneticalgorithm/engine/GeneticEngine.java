@@ -17,8 +17,6 @@ import geneticalgorithm.Problems.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +25,6 @@ import java.util.logging.Logger;
 public class GeneticEngine extends Model implements Runnable {
 
     private Population population;
-    private int initialSize;
     private boolean pause = true;
     private int stepCount = 0;
     private double evolutionCriterion = 1;
@@ -83,7 +80,6 @@ public class GeneticEngine extends Model implements Runnable {
     private void setPopulation(Population population) {
 
         this.population = population;
-        this.initialSize = population.size();
         this.firstStepDone = false;
 
         this.evaluationStep();
@@ -157,7 +153,7 @@ public class GeneticEngine extends Model implements Runnable {
     private void buildNextGeneration() {
 
         this.evaluationStep();
-        Population pop = this.problem.getSelectedSelectionOperator().buildNextGeneration(this.population, this.initialSize);
+        Population pop = this.problem.getSelectedSelectionOperator().buildNextGeneration(this.population, this.problem.getPopulationSize());
         this.population.setIndividuals(pop);
     }
 
