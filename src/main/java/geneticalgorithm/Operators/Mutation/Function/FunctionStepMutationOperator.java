@@ -4,6 +4,7 @@
  */
 package geneticalgorithm.Operators.Mutation.Function;
 
+import Mathematics.Function.Model.Function;
 import Mathematics.Point;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
@@ -36,7 +37,8 @@ public class FunctionStepMutationOperator extends MutationOperator {
 
             int dim = 0;
             double min,max;
-            Point domaine = functionIndividual.getFunction().getDomaine();
+            Function func = functionIndividual.getFunction();
+            Point domaine = func.getDomaine();
             Point mutantPoint = new Point();
             
             //creeation des coordonnées mutantes
@@ -47,6 +49,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
                 dim++;
                 mutantPoint.add(coordinate);
             }
+            func.inDomaine(mutantPoint);
             
             //mutation de l'individus
             functionIndividual.setPoint(mutantPoint);

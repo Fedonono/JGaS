@@ -58,13 +58,14 @@ public abstract class Function extends Model {
         return domaine;
     }
     
-    public void minMax(Double value, double min, double max) {
+    public Double minMax(Double value, double min, double max) {
         if (value < min) {
             value = min;
         }
         if (value > max) {
             value = max;
         }
+        return value;
     }
 
     public abstract double getResult(Point points);

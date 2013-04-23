@@ -34,7 +34,7 @@ public class Function3D extends Function {
 
     @Override
     public void inDomaine(Point points) {
-        super.minMax(points.get(0), domaine.get(0), domaine.get(1));
-        super.minMax(points.get(1), domaine.get(2), domaine.get(3));
+       points.set(0, super.minMax(points.get(0), domaine.get(0), domaine.get(1)));
+       points.set(1, super.minMax(points.get(1), domaine.get(2), domaine.get(3)));
     }
 }

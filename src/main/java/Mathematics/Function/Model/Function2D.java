@@ -29,6 +29,6 @@ public class Function2D extends Function {
 
     @Override
     public void inDomaine(Point points) {
-        super.minMax(points.get(0), domaine.get(0), domaine.get(1));
+        points.set(0, super.minMax(points.get(0), domaine.get(0), domaine.get(1)));
     }
 }
