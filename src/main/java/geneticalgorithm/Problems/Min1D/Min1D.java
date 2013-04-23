@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class Min1D extends Problem {
 
-    private static String strFunc = "x";
+    private static String strFunc = "sin(x)";
     private static String pbLabel = "Min1D Problem";
     protected static double xMin = 0.0;
     protected static double xMax = 10.0;
