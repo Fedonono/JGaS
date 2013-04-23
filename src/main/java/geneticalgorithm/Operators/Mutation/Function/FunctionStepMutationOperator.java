@@ -45,7 +45,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
             for (Double coordinate : individualPoint) {
                 min = domaine.get(dim);
                 max = domaine.get(dim+1);
-                coordinate = stepMutation(coordinate, min, max); // creer une nouvelle reference sur Double mais n'écrase pas celle du point
+                coordinate = stepMutation(coordinate, min, max); 
                 dim++;
                 mutantPoint.add(coordinate);
             }
