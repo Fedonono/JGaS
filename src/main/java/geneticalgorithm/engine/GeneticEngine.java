@@ -109,15 +109,12 @@ public class GeneticEngine extends Model implements Runnable {
             this.evolve();
         }
         this.pause();
+        this.population.notifyViews();
     }
 
     private void engine() {
-        /*using thread to call method run?
             Thread t = new Thread(this);
-            t.start();*/
-        
-        //or not using
-        this.run();
+            t.start();
     }
 
     public Individual getBestSolution() {
@@ -232,16 +229,17 @@ public class GeneticEngine extends Model implements Runnable {
     private void mutationStep() {
 
         MutationOperator mutationOperator = this.problem.getSelectedMutationOperator();
-
+        ArrayList<Individual> mutants = new ArrayList<>();
         ArrayList<Individual> individuals = this.population.getIndividuals();
 
         for (Individual individual : individuals) {
 
             if (Math.random() < this.problem.getMutationProbability()) {
 
-                mutationOperator.mutate(individual);
+                mutants.add(mutationOperator.mutate(individual));
             }
         }
+        this.population.addAll(mutants);
     }
 
     public void evolve() {
@@ -252,8 +250,6 @@ public class GeneticEngine extends Model implements Runnable {
         this.stepCount++;
         
         this.notifyViews();
-        this.population.notifyViews();
-
     }
 
     public void step() {
@@ -261,6 +257,7 @@ public class GeneticEngine extends Model implements Runnable {
             this.chronometer.start();
             this.evolve();
             this.chronometer.stop();
+            this.population.notifyViews();
         }
     }
 

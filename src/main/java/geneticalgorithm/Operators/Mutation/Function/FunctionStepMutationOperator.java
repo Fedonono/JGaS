@@ -23,7 +23,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
     }
     
     @Override
-    public void mutate(Individual individual) {
+    public Individual mutate(Individual individual) {
         
         if (individual instanceof FunctionIndividual) {
             
@@ -47,9 +47,10 @@ public class FunctionStepMutationOperator extends MutationOperator {
             }
             
             //mutation de l'individus
-            functionIndividual.setPoint(mutantPoint);
+            return new FunctionIndividual(functionIndividual.getFunction(), mutantPoint);
         }
         // IncorrectIndividualException TODO BY ARNAUD
+        return null;
     }
 
     private Double stepMutation(Double number, double min, double max) {
