@@ -21,7 +21,7 @@ public class StopCriteriaUI extends IdentifiableComponent implements View, Obser
 
     private static String maxStepCountLabel = "steps";
     private static String timeoutLabel = "timeout(ms)";
-    private static String evolutionCriterionLabel = "evolution criterion";
+    private static String evolutionCriterionLabel = "evolution criterion(%)";
     private CustomSpinner maxStepCount;
     private CustomSpinner timeout;
     private CustomSpinner evolutionCriterion;
@@ -34,7 +34,7 @@ public class StopCriteriaUI extends IdentifiableComponent implements View, Obser
 
         this.maxStepCount = new CustomSpinner(maxStepCountLabel, 0, Integer.MAX_VALUE, 0, 1);
         this.timeout = new CustomSpinner(timeoutLabel, 0, Integer.MAX_VALUE, 0, 1);
-        this.evolutionCriterion = new CustomSpinner(evolutionCriterionLabel, 0, 1, 0, 0.01);
+        this.evolutionCriterion = new CustomSpinner(evolutionCriterionLabel, 0, 100, 0, 1);
 
         this.setLayout(new FlowLayout());
         this.add(this.maxStepCount);
@@ -54,12 +54,12 @@ public class StopCriteriaUI extends IdentifiableComponent implements View, Obser
             StopCriteria source = (StopCriteria)ev.getSource();
             this.maxStepCount.setValue(source.getMaxStepCount());
             this.timeout.setValue(source.getTimeout());
-            this.evolutionCriterion.setValue(source.getEvolutionCriterion());
+            this.evolutionCriterion.setValue(Math.round(source.getEvolutionCriterion()*100));
         }
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        this.controller.applyChanges(new StopCriteriaUserCtrlEvent(this, this.maxStepCount.getValue().intValue(), this.timeout.getValue().intValue(), this.evolutionCriterion.getValue().doubleValue()));
+        this.controller.applyChanges(new StopCriteriaUserCtrlEvent(this, this.maxStepCount.getValue().intValue(), this.timeout.getValue().intValue(), this.evolutionCriterion.getValue().doubleValue()/100));
     }
 }
