@@ -17,8 +17,8 @@ public class FunctionStepMutationOperator extends MutationOperator {
     
     private static String LABEL = "Random abscissa";
     
-    public FunctionStepMutationOperator(double prb) {
-        super(prb, LABEL);
+    public FunctionStepMutationOperator() {
+        super(LABEL);
     }
     
     /**
@@ -32,16 +32,16 @@ public class FunctionStepMutationOperator extends MutationOperator {
         if (individual instanceof FunctionIndividual) {
             
             FunctionIndividual individualP = (FunctionIndividual) individual;
-            Points individualValues = individualP.getPoints();
+            Points point = individualP.getPoints();
 
             int dim = 0;
             double min,max;
             Points domaine = individualP.getFunction().getDomaine();
             
-            for (Double number : individualValues) {
+            for (Double coordinate : point) {
                 min = domaine.get(dim);
                 max = domaine.get(dim+1);
-                number = stepMutation(number, Math.random()*(max-min)+min);
+                coordinate = stepMutation(coordinate, Math.random()*(max-min)+min); // creer une nouvelle reference sur Double mais n'écrase pas celle du point
                 dim++;
             }
             return individualP;

@@ -34,7 +34,7 @@ import javax.swing.JPanel;
  * @author nono
  */
 public class PopulationFunction2DUI extends PopulationFunctionUI {
-
+    
     private Custom2DPlot plot2D;
     private CustomSpinner xMin;
     private CustomSpinner xMax;

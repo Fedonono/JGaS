@@ -166,13 +166,14 @@ public class GeneticEngine extends Model implements Runnable {
      * operator.
      */
     private void crossOverStep() {
+        
         LinkedList<Individual> crossQueue = new LinkedList<>();
         ArrayList<Individual> individuals = this.population.getIndividuals();
 
         CrossOverOperator crossoverOperator = this.problem.getSelectedCrossOverOperation();
         for (Individual individual : individuals) {
-
-            if (Math.random() < crossoverOperator.getProbability()) {
+            
+            if (Math.random() < this.problem.getCrossProbability()) {
 
                 crossQueue.add(individual);
             }
@@ -225,7 +226,7 @@ public class GeneticEngine extends Model implements Runnable {
 
         for (Individual individual : individuals) {
 
-            if (Math.random() < mutationOperator.getProbability()) {
+            if (Math.random() < this.problem.getMutationProbability()) {
 
                 mutationOperator.mutate(individual);
             }

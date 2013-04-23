@@ -16,8 +16,9 @@ import java.util.Iterator;
  */
 public class FunctionAverageCrossOverOperator extends CrossOverOperator {
     private static String LABEL = "average";
-    public FunctionAverageCrossOverOperator(double probability){
-        super(probability, LABEL);
+    
+    public FunctionAverageCrossOverOperator(){
+        super( LABEL);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
                     
                     Double number = (Double) it.next();
                     double fNumber = (double) itF.next();
-                    number = (number.doubleValue()+fNumber)/2;
+                    number = (number.doubleValue()+fNumber)/2;//creer une nouvelle referance mais n'écrase pas l'ancienne
                 }
                 child = new FunctionIndividual(maleP.getFunction(), newPoints);
             } else {

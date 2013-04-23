@@ -35,8 +35,8 @@ public class Min1D extends Problem {
     protected static double xMax = 1.0;
 
     public Min1D() {
-        this.addCrossOverOperator(new FunctionAverageCrossOverOperator(this.getCrossProbability()));
-        this.addMutationOperator(new FunctionStepMutationOperator(this.getMutationProbability()));
+        this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
+        this.addMutationOperator(new FunctionStepMutationOperator());
         this.addEvaluationOperator(new FunctionEvaluationOperator());
         
         this.setLabel(pbLabel);
