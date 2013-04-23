@@ -49,6 +49,11 @@ public abstract class Function extends Model {
         return label;
     }
 
+    public void setDomaine(Point domaine) {
+        this.domaine = domaine;
+        super.notifyViews(new FunctionRefreshEvent(this));
+    }
+
     public Point getDomaine() {
         return domaine;
     }

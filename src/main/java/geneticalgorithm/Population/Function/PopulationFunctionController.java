@@ -38,6 +38,10 @@ public class PopulationFunctionController extends PopulationController {
                 Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (event instanceof DomaineEvent){
+            DomaineEvent ev = (DomaineEvent)event;
+            model.getFunction().setDomaine(ev.getValue());
+        }
     }
     
 }

@@ -29,10 +29,10 @@ import java.util.logging.Logger;
  */
 public class Min1D extends Problem {
 
-    private static String strFunc = "sin(x)";
+    private static String strFunc = "x";
     private static String pbLabel = "Min1D Problem";
     protected static double xMin = 0.0;
-    protected static double xMax = 1.0;
+    protected static double xMax = 10.0;
 
     public Min1D() {
         this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
@@ -52,7 +52,7 @@ public class Min1D extends Problem {
         try {
             function = new Function2D(strFunc, new Point(xMin, xMax));
             pop = new PopulationFunction(function);
-            fDUI = new PopulationFunction2DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
+            fDUI = new PopulationFunction2DUI(strFunc, pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {

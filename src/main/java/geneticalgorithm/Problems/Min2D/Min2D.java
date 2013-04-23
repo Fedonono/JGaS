@@ -53,7 +53,7 @@ public class Min2D extends Min1D {
         try {
             function = new Function3D(strFunc, new Point(xMin, xMax, yMin, yMax));
             pop = new PopulationFunction(function);
-            fDUI = new PopulationFunction3DUI(pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
+            fDUI = new PopulationFunction3DUI(strFunc, pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnparsableExpressionException ex) {

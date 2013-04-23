@@ -39,14 +39,16 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     private CustomSpinner xMin;
     private CustomSpinner xMax;
 
-    public PopulationFunction2DUI(int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+    public PopulationFunction2DUI(String strFunc, int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(sizeView, popSize, controller);
         JPanel panel = new JPanel(new BorderLayout());
-        this.functionChange = new CustomTextField("sin(x)");
+        this.functionChange = new CustomTextField(strFunc);
         PopulationFunction popC = (PopulationFunction) controller.getModel();
-        this.plot2D = new Custom2DPlot((Function2D) popC.getFunction());
-        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
-        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, 0, 0.01);
+        Function2D func = (Function2D) popC.getFunction();
+        this.plot2D = new Custom2DPlot(func);
+        Point domaine = func.getDomaine();
+        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(0), 0.1);
+        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(1), 0.1);
 
         JPanel footer = new JPanel(new GridLayout(2, 1));
 
@@ -82,10 +84,11 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
         super.refresh(ev);
         if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
             Function func = (Function) ev.getSource();
-            
+            Point domaine = func.getDomaine();
+            this.xMin.setValue(domaine.get(0));
+            this.xMax.setValue(domaine.get(1));
             try {
                 this.plot2D.setPlot((Function2D) func);
-                
             } catch (UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }

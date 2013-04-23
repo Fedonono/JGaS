@@ -41,7 +41,7 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
         this.id = 0;
         plot.removeAllPlots();
         Point domaine = function.getDomaine();
-        double[] x = increment(domaine.get(0), 0.1, domaine.get(1)+0.1); // x = 0.0:0.1:1.0
+        double[] x = increment(domaine.get(0), 0.1, domaine.get(1)+0.100001); // x = 0.0:0.1:1.0
 
         // define the legend position
         plot.addLegend("SOUTH");
@@ -58,10 +58,11 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
      */
     public void addIndividu(Function2D function, double x) {
         this.id++;
+        double y = function.getY(x);
         double xp[] = {x};
         double yp[] = {function.getY(x)};
         if (this.id == 1) {
-            plot.addScatterPlot("Best - Individu "+this.id, Color.RED, xp, yp);
+            plot.addScatterPlot("x: "+x+", y :"+y, Color.RED, xp, yp);
         }
         else {
             plot.addScatterPlot("Individu "+this.id, Color.BLUE, xp, yp);
