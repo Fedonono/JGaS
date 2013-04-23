@@ -230,11 +230,12 @@ public class GeneticEngine extends Model implements Runnable {
     }
 
     public void evolve() {
-
-        this.stepCount++;
+        
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();
+        this.stepCount++;
+        
         this.notifyViews();
         this.population.notifyViews();
 
