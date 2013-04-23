@@ -31,10 +31,4 @@ public class Function3D extends Function {
     public double getResult(Point points) {
         return getZ(points.get(0), points.get(1));
     }
-
-    @Override
-    public void inDomaine(Point points) {
-       points.set(0, super.minMax(points.get(0), domaine.get(0), domaine.get(1)));
-       points.set(1, super.minMax(points.get(1), domaine.get(2), domaine.get(3)));
-    }
 }

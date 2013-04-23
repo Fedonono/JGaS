@@ -17,16 +17,11 @@ import geneticalgorithm.Population.Individuals.Individual;
 public class FunctionStepMutationOperator extends MutationOperator {
     
     private static String LABEL = "Random abscissa";
-    
+
     public FunctionStepMutationOperator() {
         super(LABEL);
     }
     
-    /**
-     * 
-     * @param individual
-     * @return
-     */
     @Override
     public void mutate(Individual individual) {
         
@@ -35,7 +30,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
             FunctionIndividual functionIndividual = (FunctionIndividual) individual;
             Point individualPoint = functionIndividual.getPoint();
 
-            int dim = 0;
+            int dim = 1;
             double min,max;
             Function func = functionIndividual.getFunction();
             Point domaine = func.getDomaine();
@@ -43,13 +38,13 @@ public class FunctionStepMutationOperator extends MutationOperator {
             
             //creeation des coordonnées mutantes
             for (Double coordinate : individualPoint) {
-                min = domaine.get(dim);
-                max = domaine.get(dim+1);
-                coordinate = stepMutation(coordinate, min, max); 
-                dim++;
+                min = domaine.get(2*dim-2);
+                max = domaine.get(2*dim-1);
+                coordinate = stepMutation(coordinate, min, max);
+                coordinate = func.minMaxDom(coordinate, min, max);
                 mutantPoint.add(coordinate);
+                dim++;
             }
-            func.inDomaine(mutantPoint);
             
             //mutation de l'individus
             functionIndividual.setPoint(mutantPoint);

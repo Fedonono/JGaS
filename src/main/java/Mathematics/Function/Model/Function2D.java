@@ -26,9 +26,4 @@ public class Function2D extends Function {
     public double getResult(Point points) {
         return getY(points.get(0));
     }
-
-    @Override
-    public void inDomaine(Point points) {
-        points.set(0, super.minMax(points.get(0), domaine.get(0), domaine.get(1)));
-    }
 }

@@ -58,16 +58,27 @@ public abstract class Function extends Model {
         return domaine;
     }
     
-    public Double minMax(Double value, double min, double max) {
-        if (value < min) {
-            value = min;
-        }
-        if (value > max) {
-            value = max;
+    /**
+     * Si dépasse les bornes, on lui attribue un nombre au hasard entre celle-ci
+     * 
+     * @param value
+     * @param min
+     * @param max
+     * @return
+     */
+    public Double minMaxDom(Double value, double min, double max) {
+        if (value < min || value > max) {
+            value = Math.random()*(max-min)+min;
         }
         return value;
     }
 
+    public void inDomaine(Point points) {
+        int dimension = points.size();
+        for (int i = 1; i <= dimension; i++) {
+            points.set(i, minMaxDom(points.get(i), domaine.get(2*i-2), domaine.get(2*i-1)));
+        }
+    }
+    
     public abstract double getResult(Point points);
-    public abstract void inDomaine(Point points);
 }
