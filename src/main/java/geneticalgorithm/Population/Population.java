@@ -85,7 +85,6 @@ public class Population extends Model {
         int size = 0;
         LinkedList<Individual> sample = new LinkedList<>();
         
-        this.sort();
         Iterator<Individual> it = this.iterator();
         
         while (it.hasNext() && size < this.observableVolume){

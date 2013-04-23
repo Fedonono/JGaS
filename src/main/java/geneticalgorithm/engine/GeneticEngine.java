@@ -131,19 +131,34 @@ public class GeneticEngine extends Model implements Runnable {
     private void evaluationStep() {
 
         ArrayList<Individual> individuals = this.population.getIndividuals();
-        double currentTotalScore = 0;
-
+        
         for (Individual individual : individuals) {
             this.problem.getSelectedEvaluationOperator().evaluate(individual);
-            currentTotalScore += individual.getScore();
         }
-
-        if (this.firstStepDone) {
-            this.evolutionCriterion = Math.abs(this.previousTotalScore - currentTotalScore) / (Math.abs(this.previousTotalScore) + Math.abs(currentTotalScore));
-        } else {
+        
+        this.population.sort();
+        this.computeEvolutionCriterion();
+    }
+    
+    
+    private void computeEvolutionCriterion(){
+        
+        int evolutionCriterionFieldOfStudy = (int)Math.round(this.population.size()*0.25);
+        Iterator<Individual> it = this.population.iterator();
+        int i = 0;
+        double totalScore = 0;
+        
+        while(it.hasNext() && i <evolutionCriterionFieldOfStudy){
+            
+            Individual currentIndividual = it.next();
+            totalScore+= currentIndividual.getScore();
+        }
+        if(this.firstStepDone){
+            this.evolutionCriterion = Math.abs(this.previousTotalScore - totalScore)/(Math.abs(totalScore)+Math.abs(this.previousTotalScore));
+        }else{
             this.firstStepDone = true;
         }
-        this.previousTotalScore = currentTotalScore;
+        this.previousTotalScore = totalScore;
     }
 
     /**

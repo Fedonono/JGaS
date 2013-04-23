@@ -34,8 +34,7 @@ public class TruncationSelectionOperator extends SelectionOperator {
         Iterator<Individual> iterator = population.iterator();
         Individual individual;
         int i = 0;
-
-        population.sort();
+        
         while (iterator.hasNext() && i < survivorSize) {
             individual = iterator.next();
             pop.add(individual);
