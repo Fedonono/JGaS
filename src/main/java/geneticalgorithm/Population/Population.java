@@ -72,7 +72,11 @@ public class Population extends Model {
         return observableVolume;
     }
 
-    public void setSolutions(Population population) {
+    /**
+     *
+     * @param population
+     */
+    public void setIndividuals(Population population) {
         this.individuals = new ArrayList<>();
         this.individuals.addAll(population.individuals);
     }
@@ -80,22 +84,21 @@ public class Population extends Model {
     @Override
     public void notifyViews() {
         int size = 0;
-        LinkedList<Individual> sample = new LinkedList<>(); // liste d'individu à refresh
+        LinkedList<Individual> sample = new LinkedList<>();
         
         this.sort();
-        Iterator it = individuals.iterator();
+        Iterator<Individual> it = this.iterator();
         
         while (it.hasNext() && size < this.observableVolume){
-            Individual individual = (Individual) it.next();
+            Individual individual = it.next();
             sample.add(individual);
             size++;
         }
-
         super.notifyViews(new PopulationRefreshEvent(this, sample));
     }
 
     public Individual getAlphaIndividual() {
-        Iterator<Individual> individualIterator = this.individuals.iterator();
+        Iterator<Individual> individualIterator = this.iterator();
         Individual bestIndividual = individualIterator.next();
         Individual currentIndividual;
 

@@ -73,7 +73,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     }
 
     @Override
-    public void addIndividu(FunctionIndividual ind) throws UnknownFunctionException, UnparsableExpressionException {
+    public void addIndividu(FunctionIndividual ind){
         this.plot2D.addIndividu((Function2D) ind.getFunction(), ind.getPoints().get(0));
     }
 
@@ -97,6 +97,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
             FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();
             Function func = funcInd.getFunction();
             
+            
             try {
                 this.plot2D.setPlot((Function2D) func);
                 
@@ -104,7 +105,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             LinkedList<Individual> samples = event.getSample();
-
+            
             for (Individual sample : samples) {
                 sample.notifyViews();
             }

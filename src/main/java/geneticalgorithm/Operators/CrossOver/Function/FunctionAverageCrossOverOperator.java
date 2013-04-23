@@ -8,7 +8,6 @@ import Mathematics.Points;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.Individual;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -23,15 +22,21 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
 
     @Override
     public Individual cross(Individual male, Individual female) {
+        
         if ((male instanceof FunctionIndividual) && (female instanceof FunctionIndividual)) {
+            
             FunctionIndividual child = null;
             FunctionIndividual maleP = (FunctionIndividual) male;
             FunctionIndividual femaleP = (FunctionIndividual) female;
+            
             if (maleP.getDimension() == femaleP.getDimension()) {
+                
                 Points newPoints = new Points(maleP.getPoints());
                 Iterator it = newPoints.iterator();
                 Iterator itF = femaleP.getPoints().iterator();
+                
                 while (it.hasNext()){
+                    
                     Double number = (Double) it.next();
                     double fNumber = (double) itF.next();
                     number = (number.doubleValue()+fNumber)/2;

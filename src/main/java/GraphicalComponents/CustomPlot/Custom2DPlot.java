@@ -16,11 +16,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLayeredPane;
-import javax.swing.OverlayLayout;
-import org.math.plot.Plot2DPanel;
 import static org.math.array.DoubleArray.*;
-import org.math.plot.plots.ScatterPlot;
+import org.math.plot.Plot2DPanel;
 
 /**
  *
@@ -54,14 +51,21 @@ public class Custom2DPlot extends IdentifiableComponent implements View {
         this.add(plot, BorderLayout.CENTER);
     }
     
-    public void addIndividu(Function2D function, double x) throws UnknownFunctionException, UnparsableExpressionException {
+    /**
+     *
+     * @param function
+     * @param x
+     */
+    public void addIndividu(Function2D function, double x) {
         this.id++;
         double xp[] = {x};
         double yp[] = {function.getY(x)};
-        if (this.id == 1)
+        if (this.id == 1) {
             plot.addScatterPlot("Best - Individu "+this.id, Color.RED, xp, yp);
-        else
+        }
+        else {
             plot.addScatterPlot("Individu "+this.id, Color.BLUE, xp, yp);
+        }
     }
 
     public double[] getY(Function2D function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {

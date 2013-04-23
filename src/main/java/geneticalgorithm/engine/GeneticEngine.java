@@ -17,12 +17,14 @@ import geneticalgorithm.Problems.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author simonneau
  */
-public class GeneticEngine extends Model {
+public class GeneticEngine extends Model implements Runnable {
 
     private Population population;
     private int initialSize;
@@ -104,12 +106,22 @@ public class GeneticEngine extends Model {
         this.chronometer.stop();
     }
 
-    private void engine() {
+    @Override
+    public void run() {
         while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
 
             this.evolve();
         }
         this.pause();
+    }
+
+    private void engine() {
+        /*using thread to call method run?
+            Thread t = new Thread(this);
+            t.start();*/
+        
+        //or not using
+        this.run();
     }
 
     public Individual getBestSolution() {
@@ -146,7 +158,7 @@ public class GeneticEngine extends Model {
 
         this.evaluationStep();
         Population pop = this.problem.getSelectedSelectionOperator().buildNextGeneration(this.population, this.initialSize);
-        this.population.setSolutions(pop);
+        this.population.setIndividuals(pop);
     }
 
     /**

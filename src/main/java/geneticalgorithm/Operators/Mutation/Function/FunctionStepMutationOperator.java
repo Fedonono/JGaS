@@ -28,13 +28,16 @@ public class FunctionStepMutationOperator extends MutationOperator {
      */
     @Override
     public Individual mutate(Individual individual) {
+        
         if (individual instanceof FunctionIndividual) {
+            
             FunctionIndividual individualP = (FunctionIndividual) individual;
             Points individualValues = individualP.getPoints();
 
             int dim = 0;
             double min,max;
             Points domaine = individualP.getFunction().getDomaine();
+            
             for (Double number : individualValues) {
                 min = domaine.get(dim);
                 max = domaine.get(dim+1);
