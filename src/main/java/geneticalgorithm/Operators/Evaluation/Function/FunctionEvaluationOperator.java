@@ -24,7 +24,7 @@ public class FunctionEvaluationOperator extends EvaluationOperator {
             FunctionIndividual individualP = (FunctionIndividual) individual;
             Point points = individualP.getPoint();
             individualP.getFunction().inDomaine(points);
-            double score = -individualP.getResult(points);
+            double score = individualP.getResult(points);
             individual.setScore(score);
         }
         // IncorrectIndividualException TODO BY ARNAUD
