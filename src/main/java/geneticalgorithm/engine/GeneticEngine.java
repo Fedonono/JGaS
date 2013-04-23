@@ -143,7 +143,7 @@ public class GeneticEngine extends Model implements Runnable {
     
     private void computeEvolutionCriterion(){
         
-        int evolutionCriterionFieldOfStudy = (int)Math.round(this.population.size()*0.25);
+        int evolutionCriterionFieldOfStudy = (int)Math.round(this.population.size());
         Iterator<Individual> it = this.population.iterator();
         int i = 0;
         double totalScore = 0;

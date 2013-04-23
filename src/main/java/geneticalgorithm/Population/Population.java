@@ -6,6 +6,7 @@ package geneticalgorithm.Population;
 
 import MvcPattern.Model;
 import geneticalgorithm.Population.Individuals.Individual;
+import geneticalgorithm.Population.Individuals.IndividualComparator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -117,7 +118,7 @@ public class Population extends Model {
     }
 
     public void sort() {
-        Collections.sort(individuals);
+        Collections.sort(individuals, new IndividualComparator());
     }
 
     public int size() {
