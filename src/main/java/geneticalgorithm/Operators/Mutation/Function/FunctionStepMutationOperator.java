@@ -45,7 +45,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
             for (Double coordinate : individualPoint) {
                 min = domaine.get(dim);
                 max = domaine.get(dim+1);
-                coordinate = stepMutation(coordinate, Math.random()*(max-min)+min); // creer une nouvelle reference sur Double mais n'écrase pas celle du point
+                coordinate = stepMutation(coordinate, min, max); // creer une nouvelle reference sur Double mais n'écrase pas celle du point
                 dim++;
                 mutantPoint.add(coordinate);
             }
@@ -57,7 +57,12 @@ public class FunctionStepMutationOperator extends MutationOperator {
         // IncorrectIndividualException TODO BY ARNAUD
     }
 
-    private Double stepMutation(Double number, double randomStep) {
+    private Double stepMutation(Double number, double min, double max) {
+        double randomStep = Math.random()*(max-min);
+        
+        if(Math.random()>=0.5){
+            randomStep *= -1;
+        }
         return number.doubleValue()+randomStep;
     }
 }
