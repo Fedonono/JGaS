@@ -28,10 +28,11 @@ public class GeneticEngine extends Model implements Runnable {
     private boolean pause = true;
     private int stepCount = 0;
     private double evolutionCriterion = 1;
-    private double previousTotalScore = 0;
+    private double previousBestScore = 0;
     private boolean firstStepDone = false;
     private Chronometer chronometer;
     private Problem problem;
+    private Thread engine;
 
     public GeneticEngine(Problem problem) {
 
@@ -100,6 +101,12 @@ public class GeneticEngine extends Model implements Runnable {
     public void pause() {
         this.pause = true;
         this.chronometer.stop();
+        
+        if(this.engine != null){
+            this.engine.interrupt();
+        }
+        
+        this.population.notifyViews();
     }
 
     @Override
@@ -108,13 +115,13 @@ public class GeneticEngine extends Model implements Runnable {
 
             this.evolve();
         }
-        this.pause();
-        this.population.notifyViews();
+        
+        //this.population.notifyViews();
     }
 
     private void engine() {
-            Thread t = new Thread(this);
-            t.start();
+            this.engine = new Thread(this);
+            engine.start();
     }
 
     public Individual getBestSolution() {
@@ -140,22 +147,16 @@ public class GeneticEngine extends Model implements Runnable {
     
     private void computeEvolutionCriterion(){
         
-        int evolutionCriterionFieldOfStudy = (int)Math.round(this.population.size());
-        Iterator<Individual> it = this.population.iterator();
-        int i = 0;
-        double totalScore = 0;
+        double bestScore = this.population.getAlphaIndividual().getScore();
         
-        while(it.hasNext() && i <evolutionCriterionFieldOfStudy){
-            
-            Individual currentIndividual = it.next();
-            totalScore+= currentIndividual.getScore();
-        }
         if(this.firstStepDone){
-            this.evolutionCriterion = Math.abs(this.previousTotalScore - totalScore)/(Math.abs(totalScore)+Math.abs(this.previousTotalScore));
+            this.evolutionCriterion = Math.abs(this.previousBestScore - bestScore)/Math.abs(this.previousBestScore);
         }else{
             this.firstStepDone = true;
         }
-        this.previousTotalScore = totalScore;
+        this.previousBestScore = bestScore;     
+        
+        
     }
 
     /**

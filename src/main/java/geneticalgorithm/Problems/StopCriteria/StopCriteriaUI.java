@@ -34,7 +34,7 @@ public class StopCriteriaUI extends IdentifiableComponent implements View, Obser
 
         this.maxStepCount = new CustomSpinner(maxStepCountLabel, 0, Integer.MAX_VALUE, 0, 1);
         this.timeout = new CustomSpinner(timeoutLabel, 0, Integer.MAX_VALUE, 0, 1);
-        this.evolutionCriterion = new CustomSpinner(evolutionCriterionLabel, 0, 100, 0, 1);
+        this.evolutionCriterion = new CustomSpinner(evolutionCriterionLabel, 0, 100, 0, 0.1);
 
         this.setLayout(new FlowLayout());
         this.add(this.maxStepCount);
