@@ -74,7 +74,7 @@ public class PopulationUI extends JPanel implements View {
             
             this.boss = boss;
 
-            this.volumeOption = new OptionLine("Sample size", 1, 1, 20);
+            this.volumeOption = new OptionLine("Sample size", 1, 20, 1);
             this.refresh = new ValidateButton("refresh");
             
             this.setLayout(new FlowLayout());

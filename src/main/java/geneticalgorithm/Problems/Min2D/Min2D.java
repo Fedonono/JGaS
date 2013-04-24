@@ -32,8 +32,8 @@ import java.util.logging.Logger;
  */
 public class Min2D extends Min1D {
 
-    private static String strFunc = "sin(x)";
-    private static String pbLabel = "Min1D Problem";
+    private static String strFunc = "sin(x+y)";
+    private static String pbLabel = "Min2D Problem";
     private static double yMin = 0.0;
     private static double yMax = 1.0;
 
@@ -61,7 +61,7 @@ public class Min2D extends Min1D {
         pop.addView(fDUI);
 
         for (int i = 0; i < popSize; i++) {
-            pop.add(new FunctionIndividual(function, Math.random()*(xMax - xMin)+xMin, Math.random()*(yMax-yMin)+yMin));
+            pop.add(new FunctionIndividual(function, Math.random()*(xMax-xMin)+xMin, Math.random()*(yMax-yMin)+yMin));
         }
         return pop;
     }

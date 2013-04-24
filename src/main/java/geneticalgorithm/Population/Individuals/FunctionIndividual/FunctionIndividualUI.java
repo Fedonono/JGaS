@@ -5,7 +5,7 @@
 package geneticalgorithm.Population.Individuals.FunctionIndividual;
 
 import MvcPattern.RefreshEvent;
-import geneticalgorithm.Population.Function.PopulationFunction2DUI;
+import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import geneticalgorithm.Population.Individuals.IndividualUI;
 
 /**
@@ -18,7 +18,7 @@ public class FunctionIndividualUI extends IndividualUI {
     public void refresh(RefreshEvent ev) {
         
         FunctionIndividual ind = (FunctionIndividual) ev.getSource();
-        PopulationFunction2DUI fUI = (PopulationFunction2DUI) ind.getFunction().getUI();
+        PopulationFunctionUI fUI = (PopulationFunctionUI) ind.getFunction().getUI();
         fUI.addIndividu(ind);
     }
 }

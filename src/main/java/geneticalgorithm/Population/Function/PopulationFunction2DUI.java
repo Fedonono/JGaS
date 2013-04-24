@@ -5,9 +5,9 @@
 package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.CustomPlot.Custom2DPlot;
+import GraphicalComponents.CustomPlot.CustomPlot;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
-import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.SpinnerEvent;
@@ -34,50 +34,37 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class PopulationFunction2DUI extends PopulationFunctionUI implements Observer{
-    
-    private Custom2DPlot plot2D;
-    private CustomSpinner xMin;
-    private CustomSpinner xMax;
-
+public class PopulationFunction2DUI extends PopulationFunctionUI {
     public PopulationFunction2DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
-        super(controller);
+        super(strFunc, controller);
         JPanel panel = new JPanel(new BorderLayout());
-        this.functionChange = new CustomTextField(strFunc);
+        JPanel footer = new JPanel();
         PopulationFunction popC = (PopulationFunction) controller.getModel();
-        Function2D func = (Function2D) popC.getFunction();
-        this.plot2D = new Custom2DPlot(func);
+        Function func = (Function) popC.getFunction();
         Point domaine = func.getDomaine();
-        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(0), 0.1);
-        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(1), 0.1);
+        
+        createPlot(func);
+        setFooter(footer);
+        domaineFooter(footer, domaine);
 
-        JPanel footer = new JPanel(new GridLayout(2, 1));
-
-        JPanel xPanel = new JPanel();
-        JPanel functionPanel = new JPanel();
-
-        xPanel.add(xMin);
-        xPanel.add(xMax);
-
-        functionPanel.add(new JLabel("f(x) = "));
-        functionPanel.add(functionChange);
-
-        footer.add(functionPanel);
-        footer.add(xPanel);
-
-        this.functionChange.addObserver(this);
-        this.xMin.addObserver(this);
-        this.xMax.addObserver(this);
-
-        panel.add(plot2D, BorderLayout.CENTER);
+        panel.add(plot, BorderLayout.CENTER);
         panel.add(footer, BorderLayout.SOUTH);
 
         this.add(panel);
     }
-
+    
     @Override
-    public void addIndividu(FunctionIndividual ind){
-        this.plot2D.addIndividu((Function2D) ind.getFunction(), ind.getPoint().get(0));
+    public void setFooter(JPanel footer) {
+        footer.setLayout(new GridLayout(2, 1));
+        JPanel functionPanel = new JPanel();
+        functionPanel.add(new JLabel("f(x) = "));
+        functionPanel.add(functionChange);
+        footer.add(functionPanel);
+    }
+    
+    @Override
+    public void createPlot(Function func) throws UnknownFunctionException, UnparsableExpressionException {
+        this.plot = new Custom2DPlot(func);
     }
 
     @Override
@@ -86,46 +73,38 @@ public class PopulationFunction2DUI extends PopulationFunctionUI implements Obse
         if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
             Function func = (Function) ev.getSource();
             Point domaine = func.getDomaine();
-            this.xMin.setValue(domaine.get(0));
-            this.xMax.setValue(domaine.get(1));
+            changeDomaineValue(domaine);
             try {
-                this.plot2D.setPlot((Function2D) func);
+                this.plot.setPlot(func);
             } catch (UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (ev instanceof PopulationRefreshEvent) {
-            
-            PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
-            Population pop = (Population) event.getSource();
-            FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();
-            Function func = funcInd.getFunction();
-            
-            
-            try {
-                this.plot2D.setPlot((Function2D) func);
-                
-            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            LinkedList<Individual> samples = event.getSample();
-            
-            for (Individual sample : samples) {
-                sample.notifyViews();
-            }
-        }
+    }
+    
+    @Override
+    public void changeDomaineValue(Point domaine) {
+        this.xMin.setValue(domaine.get(0));
+        this.xMax.setValue(domaine.get(1));
     }
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-
+        super.reactToChanges(ev);
         if (ev instanceof SpinnerEvent) {
             controller.applyChanges(new DomaineEvent(this, new Point(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
         }
-        if (ev instanceof CustomTextFieldEvent) {
-            CustomTextFieldEvent ctfe = (CustomTextFieldEvent) ev;
-            String newFunc = ctfe.getValue();
-            controller.applyChanges(new FunctionEvent(this, newFunc));
-        }
+    }
+
+    @Override
+    public void domaineFooter(JPanel footer, Point domaine) {
+        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(0), 0.1);
+        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(1), 0.1);
+        this.xMin.addObserver(this);
+        this.xMax.addObserver(this);
+        JPanel xPanel = new JPanel();
+        xPanel.add(xMin);
+        xPanel.add(xMax);
+        footer.add(xPanel);
     }
 }
