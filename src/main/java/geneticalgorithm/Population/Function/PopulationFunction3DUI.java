@@ -4,7 +4,6 @@
  */
 package geneticalgorithm.Population.Function;
 
-import GraphicalComponents.ObservationEvent;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -23,11 +22,6 @@ public class PopulationFunction3DUI extends PopulationFunctionUI {
 
     @Override
     public void addIndividu(FunctionIndividual ind) throws UnknownFunctionException, UnparsableExpressionException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void reactToChanges(ObservationEvent ev) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

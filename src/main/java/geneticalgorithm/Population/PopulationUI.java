@@ -4,10 +4,12 @@
  */
 package geneticalgorithm.Population;
 
+import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.OptionLine;
 import GraphicalComponents.OptionLineEvent;
+import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import java.awt.FlowLayout;
@@ -18,19 +20,18 @@ import javax.swing.JPanel;
  *
  * @author simonneau
  */
-public class PopulationUI extends JPanel implements View, Observer {
+public class PopulationUI extends JPanel implements View {
 
-    protected OptionLine volumeOption;
+    protected Header header;
     protected JPanel populationSample;
     protected PopulationController controller;
 
     public PopulationUI(int sizeView, int popSize) {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.volumeOption = new OptionLine("Sample size", 1, popSize, sizeView);
+        this.header = new Header(this, popSize, sizeView);
         this.populationSample = new JPanel(new FlowLayout());
-        this.volumeOption.addObserver(this);
 
-        this.add(volumeOption);
+        this.add(this.header);
         this.add(populationSample);
     }
 
@@ -38,18 +39,18 @@ public class PopulationUI extends JPanel implements View, Observer {
     public void refresh(RefreshEvent ev) {
 
         /*if (ev instanceof PopulationRefreshEvent) {
-            PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
-            LinkedList<Individual> samples = event.getSample();
+         PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
+         LinkedList<Individual> samples = event.getSample();
 
-            for (Individual sample : samples) {
-                sample.notifyViews();
-                //this.populationSample.add(sample.getUI()); POUR TSP TODO BY ARNAUD DELETE ?
-            }
-        } else */
+         for (Individual sample : samples) {
+         sample.notifyViews();
+         //this.populationSample.add(sample.getUI()); POUR TSP TODO BY ARNAUD DELETE ?
+         }
+         } else */
         if (ev instanceof ObservableVolumeRefreshEvent) {
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
-            this.volumeOption.setMaxValue(event.getMaxValue());
-            this.volumeOption.setValue(event.getValue());
+            this.header.setMaxValue(event.getMaxValue());
+            this.header.setValue(event.getValue());
         }
 
     }
@@ -60,15 +61,55 @@ public class PopulationUI extends JPanel implements View, Observer {
 
     public void setController(PopulationController controller) {
         this.controller = controller;
+        this.header.setController(controller);
     }
+    
 
-    @Override
-    public void reactToChanges(ObservationEvent ev) {
+    private class Header extends IdentifiableComponent implements Observer {
+
+        private PopulationUI boss;
+        private PopulationController controller;
+        private OptionLine volumeOption;
+        private ValidateButton refresh;
+
+        public Header(PopulationUI boss, int popSize, int sizeView) {
+            
+            this.boss = boss;
+
+            this.volumeOption = new OptionLine("Sample size", 1, popSize, sizeView);
+            this.refresh = new ValidateButton("refresh");
+            
+            this.setLayout(new FlowLayout());
+            this.add(this.volumeOption);
+            this.add(this.refresh);
+
+            this.volumeOption.addObserver(this);
+            this.refresh.addObserver(this);
+        }
+
+        @Override
+        public void reactToChanges(ObservationEvent ev) {
+
+            int id = ((IdentifiableComponent) ev.getSource()).getId();
+            
+            if(id == this.refresh.getId()){
+                
+                this.controller.applyChanges(new ObservableVolumeUserEvent(boss, this.volumeOption.getValue()));
+                
+            }
+
+        }
         
-        if (ev instanceof OptionLineEvent) {
-
-            OptionLineEvent event = (OptionLineEvent) ev;
-            this.controller.applyChanges(new ObservableVolumeUserEvent(this, event.getValue()));
+        public void setMaxValue(int value){
+            this.volumeOption.setMaxValue(value);
+        }
+        
+        public void setValue(int value){
+            this.volumeOption.setValue(value);
+        }
+        
+        public void setController(PopulationController controller){
+            this.controller = controller;
         }
     }
 }

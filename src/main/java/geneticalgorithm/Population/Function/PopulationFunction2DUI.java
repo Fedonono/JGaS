@@ -9,6 +9,7 @@ import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
+import GraphicalComponents.Observer;
 import GraphicalComponents.SpinnerEvent;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
@@ -33,7 +34,7 @@ import javax.swing.JPanel;
  *
  * @author nono
  */
-public class PopulationFunction2DUI extends PopulationFunctionUI {
+public class PopulationFunction2DUI extends PopulationFunctionUI implements Observer{
     
     private Custom2DPlot plot2D;
     private CustomSpinner xMin;
@@ -117,7 +118,6 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        super.reactToChanges(ev);
 
         if (ev instanceof SpinnerEvent) {
             controller.applyChanges(new DomaineEvent(this, new Point(xMin.getValue().doubleValue(), xMax.getValue().doubleValue())));
