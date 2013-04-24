@@ -14,10 +14,10 @@ import geneticalgorithm.Population.Function.PopulationFunction;
  */
 public class PopulationController implements Controller{
     
-    protected PopulationFunction model;
+    protected PopulationFunction target;
 
     public void setModel(PopulationFunction model) {
-        this.model = model;
+        this.target = model;
     }
     
     @Override
@@ -25,12 +25,15 @@ public class PopulationController implements Controller{
         
         if(event instanceof ObservableVolumeUserEvent){
             ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
-            model.setObservableVolume(ev.getValue());
+            target.setObservableVolume(ev.getValue());
+            
+        }else if(event instanceof UsrAskForRefreshEvent){
+            this.target.notifyViews();
         }
     }
 
     public Population getModel() {
-        return model;
+        return target;
     }
     
 }

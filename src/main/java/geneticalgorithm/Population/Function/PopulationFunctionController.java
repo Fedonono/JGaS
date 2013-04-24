@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 public class PopulationFunctionController extends PopulationController {
 
     public PopulationFunctionController(PopulationFunction model) {
-        this.model = model;
+        this.target = model;
     }
 
     @Override
     public PopulationFunction getModel() {
-        return model;
+        return target;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class PopulationFunctionController extends PopulationController {
         if(event instanceof FunctionEvent){
             FunctionEvent ev = (FunctionEvent)event;
             try {
-                model.getFunction().setFunction(ev.getFunction());
+                target.getFunction().setFunction(ev.getFunction());
             } catch (    UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (event instanceof DomaineEvent){
             DomaineEvent ev = (DomaineEvent)event;
-            model.getFunction().setDomaine(ev.getValue());
+            target.getFunction().setDomaine(ev.getValue());
         }
     }
     

@@ -94,8 +94,10 @@ public class PopulationUI extends JPanel implements View {
             
             if(id == this.refresh.getId()){
                 
-                this.controller.applyChanges(new ObservableVolumeUserEvent(boss, this.volumeOption.getValue()));
+                this.controller.applyChanges(new UsrAskForRefreshEvent(boss));
                 
+            }else if( id == this.volumeOption.getId()){
+                this.controller.applyChanges(new ObservableVolumeUserEvent(boss, this.volumeOption.getValue()));
             }
 
         }
