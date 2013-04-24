@@ -18,8 +18,7 @@ import geneticalgorithm.Population.PopulationUI;
 public abstract class PopulationFunctionUI extends PopulationUI {
     protected CustomTextField functionChange;
     
-    public PopulationFunctionUI(int sizeView, int popSize, PopulationController controller) {
-        super(sizeView, popSize);
+    public PopulationFunctionUI(PopulationController controller) {
         this.setController(controller);
     }
     

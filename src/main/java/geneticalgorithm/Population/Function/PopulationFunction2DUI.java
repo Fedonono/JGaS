@@ -40,8 +40,8 @@ public class PopulationFunction2DUI extends PopulationFunctionUI implements Obse
     private CustomSpinner xMin;
     private CustomSpinner xMax;
 
-    public PopulationFunction2DUI(String strFunc, int sizeView, int popSize, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
-        super(sizeView, popSize, controller);
+    public PopulationFunction2DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+        super(controller);
         JPanel panel = new JPanel(new BorderLayout());
         this.functionChange = new CustomTextField(strFunc);
         PopulationFunction popC = (PopulationFunction) controller.getModel();

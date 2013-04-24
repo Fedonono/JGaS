@@ -16,8 +16,8 @@ import geneticalgorithm.Population.PopulationController;
  */
 public class PopulationFunction3DUI extends PopulationFunctionUI {
 
-    public PopulationFunction3DUI(String strFunc, int sizeView, int popSize, PopulationController controller) {
-        super(sizeView, popSize, controller);
+    public PopulationFunction3DUI(String strFunc, PopulationController controller) {
+        super(controller);
     }
 
     @Override

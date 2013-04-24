@@ -52,10 +52,8 @@ public class Min1D extends Problem {
         try {
             function = new Function2D(strFunc, new Point(xMin, xMax));
             pop = new PopulationFunction(function);
-            fDUI = new PopulationFunction2DUI(strFunc, pop.getObservableVolume(), popSize, new PopulationFunctionController(pop));
-        } catch (UnknownFunctionException ex) {
-            Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnparsableExpressionException ex) {
+            fDUI = new PopulationFunction2DUI(strFunc, new PopulationFunctionController(pop));
+        } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
         function.addView(fDUI); // A DELETE ? TODO BY ARNAUD

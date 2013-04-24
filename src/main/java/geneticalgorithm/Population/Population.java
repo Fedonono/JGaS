@@ -64,7 +64,7 @@ public class Population extends Model {
             observableVolume = 1;
         }
         this.observableVolume = observableVolume;
-        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume, this.size()));
+        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume));
     }
 
     public int getObservableVolume() {
@@ -88,6 +88,7 @@ public class Population extends Model {
         Iterator<Individual> it = this.iterator();
         
         while (it.hasNext() && size < this.observableVolume){
+            
             Individual individual = it.next();
             sample.add(individual);
             size++;

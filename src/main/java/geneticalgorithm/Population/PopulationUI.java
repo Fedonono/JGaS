@@ -8,7 +8,6 @@ import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import GraphicalComponents.OptionLine;
-import GraphicalComponents.OptionLineEvent;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
@@ -22,13 +21,13 @@ import javax.swing.JPanel;
  */
 public class PopulationUI extends JPanel implements View {
 
-    protected Header header;
+    private Header header;
     protected JPanel populationSample;
     protected PopulationController controller;
 
-    public PopulationUI(int sizeView, int popSize) {
+    public PopulationUI() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.header = new Header(this, popSize, sizeView);
+        this.header = new Header(this);
         this.populationSample = new JPanel(new FlowLayout());
 
         this.add(this.header);
@@ -49,7 +48,6 @@ public class PopulationUI extends JPanel implements View {
          } else */
         if (ev instanceof ObservableVolumeRefreshEvent) {
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
-            this.header.setMaxValue(event.getMaxValue());
             this.header.setValue(event.getValue());
         }
 
@@ -72,11 +70,11 @@ public class PopulationUI extends JPanel implements View {
         private OptionLine volumeOption;
         private ValidateButton refresh;
 
-        public Header(PopulationUI boss, int popSize, int sizeView) {
+        public Header(PopulationUI boss) {
             
             this.boss = boss;
 
-            this.volumeOption = new OptionLine("Sample size", 1, popSize, sizeView);
+            this.volumeOption = new OptionLine("Sample size", 1, 1, 20);
             this.refresh = new ValidateButton("refresh");
             
             this.setLayout(new FlowLayout());
@@ -100,10 +98,6 @@ public class PopulationUI extends JPanel implements View {
                 this.controller.applyChanges(new ObservableVolumeUserEvent(boss, this.volumeOption.getValue()));
             }
 
-        }
-        
-        public void setMaxValue(int value){
-            this.volumeOption.setMaxValue(value);
         }
         
         public void setValue(int value){
