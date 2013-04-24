@@ -4,25 +4,18 @@
  */
 package geneticalgorithm.Problems.Min2D;
 
-import geneticalgorithm.Population.Function.PopulationFunctionController;
 import Mathematics.Function.Model.Function;
-import Mathematics.Function.Model.Function2D;
 import Mathematics.Function.Model.Function3D;
-import geneticalgorithm.Population.Function.PopulationFunction2DUI;
-import geneticalgorithm.Population.Function.PopulationFunction3DUI;
-import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import geneticalgorithm.Operators.CrossOver.Function.FunctionAverageCrossOverOperator;
-import geneticalgorithm.Operators.Evaluation.Function.FunctionEvaluationOperator;
-import geneticalgorithm.Operators.Mutation.Function.FunctionStepMutationOperator;
-import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Function.PopulationFunction;
+import geneticalgorithm.Population.Function.PopulationFunction3DUI;
+import geneticalgorithm.Population.Function.PopulationFunctionController;
+import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Min1D.Min1D;
-import geneticalgorithm.Problems.Problem;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

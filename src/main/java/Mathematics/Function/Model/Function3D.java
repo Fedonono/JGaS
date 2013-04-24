@@ -5,12 +5,8 @@
 package Mathematics.Function.Model;
 
 import Mathematics.Point;
-import MvcPattern.RefreshEvent;
-import MvcPattern.View;
-import de.congrace.exp4j.ExpressionBuilder;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import javax.swing.JPanel;
 
 /**
  *

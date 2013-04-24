@@ -9,7 +9,6 @@ import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
-import GraphicalComponents.OptionLine;
 import GraphicalComponents.SelectMenu;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;

@@ -4,14 +4,13 @@
  */
 package Mathematics.Function.Model;
 
-import geneticalgorithm.Population.Function.FunctionRefreshEvent;
 import Mathematics.Point;
 import MvcPattern.Model;
-import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.Calculable;
 import de.congrace.exp4j.ExpressionBuilder;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
+import geneticalgorithm.Population.Function.FunctionRefreshEvent;
 
 /**
  *

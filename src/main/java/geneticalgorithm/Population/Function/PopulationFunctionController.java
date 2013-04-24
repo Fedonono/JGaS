@@ -42,6 +42,7 @@ public class PopulationFunctionController extends PopulationController {
             DomaineEvent ev = (DomaineEvent)event;
             target.getFunction().setDomaine(ev.getValue());
         }
+        System.out.println("lol");
     }
     
 }

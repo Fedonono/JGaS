@@ -4,24 +4,16 @@
  */
 package geneticalgorithm.Population.Function;
 
-import GraphicalComponents.CustomPlot.Custom2DPlot;
 import GraphicalComponents.CustomPlot.Custom3DPlot;
 import GraphicalComponents.CustomSpinner;
-import GraphicalComponents.CustomTextField;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.SpinnerEvent;
 import Mathematics.Function.Model.Function;
-import Mathematics.Function.Model.Function3D;
 import Mathematics.Point;
-import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
-import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.PopulationController;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

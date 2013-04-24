@@ -5,13 +5,12 @@
 package Tools;
 
 /**
+ * Extrait de la librairie qui ne contenait que cette méthode utile.
  *
  * @author Yann RICHET
  */
 public class DoubleArray {
     /**
-     * Extrait de la librairie
-     * 
      * Generates an array of successive values from <em>begin</em> to <em>end</em> with step
      * size <em>pitch</em>.
      * @param begin First value in sequence

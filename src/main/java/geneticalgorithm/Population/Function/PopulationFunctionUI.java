@@ -4,7 +4,6 @@
  */
 package geneticalgorithm.Population.Function;
 
-import GraphicalComponents.CustomPlot.Custom2DPlot;
 import GraphicalComponents.CustomPlot.CustomPlot;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
@@ -12,7 +11,6 @@ import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
 import Mathematics.Function.Model.Function;
-import Mathematics.Function.Model.Function2D;
 import Mathematics.Point;
 import MvcPattern.RefreshEvent;
 import de.congrace.exp4j.UnknownFunctionException;
@@ -23,12 +21,9 @@ import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import geneticalgorithm.Population.PopulationUI;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**

@@ -4,22 +4,16 @@
  */
 package GraphicalComponents.CustomPlot;
 
-import GraphicalComponents.IdentifiableComponent;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
 import Mathematics.Point;
-import MvcPattern.RefreshEvent;
-import MvcPattern.View;
 import Tools.DoubleArray;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.math.plot.Plot2DPanel;
-import org.math.plot.PlotPanel;
 
 /**
  *

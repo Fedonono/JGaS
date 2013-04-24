@@ -4,19 +4,18 @@
  */
 package geneticalgorithm.Problems.Min1D;
 
-import geneticalgorithm.Population.Function.PopulationFunctionController;
 import Mathematics.Function.Model.Function;
 import Mathematics.Function.Model.Function2D;
-import geneticalgorithm.Population.Function.PopulationFunction2DUI;
-import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Operators.CrossOver.Function.FunctionAverageCrossOverOperator;
 import geneticalgorithm.Operators.Evaluation.Function.FunctionEvaluationOperator;
 import geneticalgorithm.Operators.Mutation.Function.FunctionStepMutationOperator;
-import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Function.PopulationFunction;
+import geneticalgorithm.Population.Function.PopulationFunction2DUI;
+import geneticalgorithm.Population.Function.PopulationFunctionController;
+import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Problem;
@@ -56,7 +55,7 @@ public class Min1D extends Problem {
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
         }
-        function.addView(fDUI); // A DELETE ? TODO BY ARNAUD
+        function.addView(fDUI);
         pop.addView(fDUI);
 
         for (int i = 0; i < popSize; i++) {

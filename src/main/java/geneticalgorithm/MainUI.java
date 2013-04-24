@@ -15,7 +15,6 @@ import MvcPattern.Controller;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Problems.Problem;
-import geneticalgorithm.Problems.ProblemUI;
 import geneticalgorithm.engine.GeneticEngineUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
