@@ -68,7 +68,7 @@ public class Custom2DPlot extends CustomPlot {
             plot.addScatterPlot("x="+x+", y="+y, Color.RED, xp, yp);
         }
         else {
-            plot.addScatterPlot("Individu "+this.id, Color.BLUE, xp, yp);
+            plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp);
         }
     }
 

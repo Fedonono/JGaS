@@ -60,7 +60,7 @@ public class PopulationFunction3DUI extends PopulationFunction2DUI {
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        super.reactToChanges(ev);
+        reactEvent(ev);
         if (ev instanceof SpinnerEvent) {
             controller.applyChanges(new DomaineEvent(this, new Point(xMin.getValue().doubleValue(), xMax.getValue().doubleValue(), yMin.getValue().doubleValue(), yMax.getValue().doubleValue())));
         }

@@ -42,7 +42,7 @@ public class Custom3DPlot extends CustomPlot {
             plot.addScatterPlot("x="+x+", y="+y+", z="+z, Color.RED, xp, yp, zp);
         }
         else {
-            plot.addScatterPlot("Individu "+this.id, Color.BLUE, xp, yp, zp);
+            plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp, zp);
         }
     }
 

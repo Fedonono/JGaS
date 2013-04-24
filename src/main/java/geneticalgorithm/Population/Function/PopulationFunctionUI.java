@@ -55,10 +55,9 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     public abstract void setFooter(JPanel footer);
     public abstract void domaineFooter(JPanel footer, Point domaine);
     public abstract void changeDomaineValue(Point domaine);
+    public abstract void reactToChanges(ObservationEvent ev);
 
-
-    @Override
-    public void reactToChanges(ObservationEvent ev) {
+    public void reactEvent(ObservationEvent ev) {
         if (ev instanceof CustomTextFieldEvent) {
             CustomTextFieldEvent ctfe = (CustomTextFieldEvent) ev;
             String newFunc = ctfe.getValue();
