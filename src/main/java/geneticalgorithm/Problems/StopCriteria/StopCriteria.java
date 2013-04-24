@@ -58,7 +58,7 @@ public class StopCriteria extends Model{
         this.evolutionCoeff = minEvolutionCoeff;
     }
      
-    public boolean areReached(int stepCount, int time, double evolutionCoeff){
+    public boolean areReached(int stepCount, long time, double evolutionCoeff){
         boolean areReached = false;
         
         if(this.maxStepCount != 0 && stepCount >= this.maxStepCount){

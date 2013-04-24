@@ -263,6 +263,7 @@ public class GeneticEngine extends Model implements Runnable {
 
     @Override
     public void notifyViews() {
-        super.notifyViews(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount, this.evolutionCriterion));
+        long time = this.chronometer.getTime();
+        super.notifyViews(new EngineRefreshEvent(this, time, this.stepCount, this.evolutionCriterion));
     }
 }

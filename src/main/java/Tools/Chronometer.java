@@ -13,7 +13,8 @@ import java.util.Date;
 public class Chronometer {
 
     private Date date;
-    private int timeCount = 0;
+    private long currentSessionTimeCount = 0;
+    private long previousSessionTimeCount = 0;
     private boolean stoped = true;
 
     /**
@@ -36,7 +37,7 @@ public class Chronometer {
      *
      */
     public void stop() {
-        this.timeCount += new Date().getTime() - this.date.getTime();
+        this.previousSessionTimeCount += new Date().getTime() - this.date.getTime();
         this.stoped = true;
     }
 
@@ -45,17 +46,17 @@ public class Chronometer {
      * @param time
      */
     private void setTime(int time) {
-        this.timeCount = time;
+        this.currentSessionTimeCount = time;
     }
 
     /**
      *
      * @return
      */
-    public int getTime() {
+    public long getTime() {
         if (!this.stoped) {
-            this.timeCount += new Date().getTime() - this.date.getTime();
+            this.currentSessionTimeCount = new Date().getTime() - this.date.getTime();
         }
-        return this.timeCount;
+        return this.currentSessionTimeCount + this.previousSessionTimeCount;
     }
 }

@@ -195,7 +195,7 @@ public abstract class Problem extends Model {
         return this.stopCriteria.getEvolutionCriterion();
     }
     
-    public boolean stopCriteriaAreReached(int stepCount, int time, double evolutionCoeff){
+    public boolean stopCriteriaAreReached(int stepCount, long time, double evolutionCoeff){
         return this.stopCriteria.areReached(stepCount, time, evolutionCoeff);
     }
 }
