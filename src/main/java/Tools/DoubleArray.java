@@ -20,10 +20,10 @@ public class DoubleArray {
      * @return Array of successive values
      */
     public static double[] increment(double begin, double pitch, double end) {
-            double[] array = new double[(int) ((end - begin) / pitch)];
-            for (int i = 0; i < array.length; i++) {
-                    array[i] = begin + i * pitch;
-            }
-            return array;
+        double[] array = new double[(int) (((end - begin) / pitch)+1)];
+        for (int i = 0; i <= array.length; i++) {
+            array[i] = begin + i * pitch;
+        }
+        return array;
     }
 }
