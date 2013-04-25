@@ -114,7 +114,6 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             int id = ((IdentifiableComponent) ev.getSource()).getId();
 
             if (id == this.refresh.getId()) {
-
                 this.notifyObserver();
 
             } else if (id == this.volumeOption.getId()) {

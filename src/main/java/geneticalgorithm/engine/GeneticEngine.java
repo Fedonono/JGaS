@@ -54,7 +54,7 @@ public class GeneticEngine extends Model implements Runnable {
 
     public void refreshPopulation()  {
         if (this.pause) {
-            this.notifyViews();
+            this.population.notifyViews();
         } else {
             this.pause();
             this.resume();

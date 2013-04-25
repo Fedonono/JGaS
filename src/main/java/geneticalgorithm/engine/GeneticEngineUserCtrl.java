@@ -33,7 +33,7 @@ public class GeneticEngineUserCtrl implements Controller {
                 this.target.step();
 
             } else if (event instanceof UsrAskForRefreshEvent) {
-
+                
                 this.target.refreshPopulation();
 
             }
