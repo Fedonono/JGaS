@@ -25,13 +25,13 @@ import java.util.logging.Logger;
  */
 public class Min2D extends Min1D {
 
-    private static String strFunc = "x^2+y^2";
-    private static String pbLabel = "Min2D Problem";
-    private static double xMin = -1.0;
-    private static double xMax = 1.0;
-    private static double yMin = -1.0;
-    private static double yMax = 1.0;
-    private static double plotStep = 0.1;
+    private String strFunc = "x^2+y^2";
+    private String pbLabel = "Min2D Problem";
+    private double xMin = -1.0;
+    private double xMax = 1.0;
+    private double yMin = -1.0;
+    private double yMax = 1.0;
+    private double plotStep = 0.1;
 
     public Min2D() {
         super();

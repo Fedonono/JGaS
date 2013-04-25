@@ -29,19 +29,19 @@ import java.util.logging.Logger;
  */
 public class Min1D extends Problem {
 
-    private static String strFunc = "sin(x)";
-    private static String pbLabel = "Min1D Problem";
-    private static double xMin = -10.0;
-    private static double xMax = 10.0;
-    private static double plotStep = 0.1;
+    private String strFunc = "sin(x)";
+    private String pbLabel = "Min1D Problem";
+    private double xMin = -10.0;
+    private double xMax = 10.0;
+    private double plotStep = 0.1;
     /**
      * Couleur de la courbe.
      */
-    protected static Color plotColor = Color.DARK_GRAY;
+    protected Color plotColor = Color.DARK_GRAY;
     /**
      * Couleur des individus du meilleur jusqu'aux individus moins bons.
      */
-    protected static Color[] indColor = {Color.RED, Color.PINK, Color.ORANGE, Color.GREEN, Color.BLUE};
+    protected Color[] indColor = {Color.RED, Color.PINK, Color.ORANGE, Color.GREEN, Color.BLUE};
 
     public Min1D() {
         this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
