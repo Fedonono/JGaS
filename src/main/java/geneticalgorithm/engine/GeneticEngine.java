@@ -51,9 +51,14 @@ public class GeneticEngine extends Model implements Runnable {
     public boolean isPaused() {
         return this.pause;
     }
-    
-    public void refreshPopulation(){
-        this.population.notifyViews();
+
+    public void refreshPopulation()  {
+        if (this.pause) {
+            this.notifyViews();
+        } else {
+            this.pause();
+            this.resume();
+        }
     }
 
     private void init() {
@@ -102,14 +107,18 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
-    public void pause() {
+    public void pause(){
         this.pause = true;
         this.chronometer.stop();
-        
-        if(this.engine != null){
-            this.engine.interrupt();
+
+        if (this.engine != null) {
+            try {
+                this.engine.join();
+            } catch (InterruptedException e) {
+                //TODO
+            }
         }
-        
+
         this.population.notifyViews();
     }
 
@@ -119,13 +128,13 @@ public class GeneticEngine extends Model implements Runnable {
 
             this.evolve();
         }
-        
+
         //this.population.notifyViews();
     }
 
     private void engine() {
-            this.engine = new Thread(this);
-            engine.start();
+        this.engine = new Thread(this);
+        engine.start();
     }
 
     public Individual getBestSolution() {
@@ -139,28 +148,27 @@ public class GeneticEngine extends Model implements Runnable {
     private void evaluationStep() {
 
         ArrayList<Individual> individuals = this.population.getIndividuals();
-        
+
         for (Individual individual : individuals) {
             this.problem.getSelectedEvaluationOperator().evaluate(individual);
         }
-        
+
         this.population.sort();
         this.computeEvolutionCriterion();
     }
-    
-    
-    private void computeEvolutionCriterion(){
-        
+
+    private void computeEvolutionCriterion() {
+
         double bestScore = this.population.get(0).getScore();
-        
-        if(this.firstStepDone){
-            this.evolutionCriterion = Math.abs(this.previousBestScore - bestScore)/Math.abs(this.previousBestScore);
-        }else{
+
+        if (this.firstStepDone) {
+            this.evolutionCriterion = Math.abs(this.previousBestScore - bestScore) / Math.abs(this.previousBestScore);
+        } else {
             this.firstStepDone = true;
         }
-        this.previousBestScore = bestScore;     
-        
-        
+        this.previousBestScore = bestScore;
+
+
     }
 
     /**
@@ -179,13 +187,13 @@ public class GeneticEngine extends Model implements Runnable {
      * operator.
      */
     private void crossOverStep() {
-        
+
         LinkedList<Individual> crossQueue = new LinkedList<>();
         ArrayList<Individual> individuals = this.population.getIndividuals();
 
         CrossOverOperator crossoverOperator = this.problem.getSelectedCrossOverOperation();
         for (Individual individual : individuals) {
-            
+
             if (Math.random() < this.problem.getCrossProbability()) {
 
                 crossQueue.add(individual);
@@ -248,12 +256,12 @@ public class GeneticEngine extends Model implements Runnable {
     }
 
     public void evolve() {
-        
+
         this.crossOverStep();
         this.mutationStep();
         this.buildNextGeneration();
         this.stepCount++;
-        
+
         this.notifyViews();
     }
 

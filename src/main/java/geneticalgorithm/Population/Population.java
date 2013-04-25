@@ -21,6 +21,7 @@ public class Population extends Model {
 
     private ArrayList<Individual> individuals;
     private int observableVolume = 1;
+    private boolean semaphoreAcess = true;
 
     public Population() {
         this(1);
@@ -47,16 +48,16 @@ public class Population extends Model {
     public void addAll(int index, Collection<? extends Individual> coll) {
         this.individuals.addAll(index, coll);
     }
-    
-    public Iterator<Individual> iterator(){
+
+    public Iterator<Individual> iterator() {
         return this.individuals.iterator();
     }
 
     public ArrayList<Individual> getIndividuals() {
         return individuals;
     }
-    
-    public Individual get(int index){
+
+    public Individual get(int index) {
         return this.individuals.get(index);
     }
 
@@ -64,7 +65,7 @@ public class Population extends Model {
         int size = this.individuals.size();
         if (observableVolume > size) {
             observableVolume = size;
-        }else if(observableVolume < 1){
+        } else if (observableVolume < 1) {
             observableVolume = 1;
         }
         this.observableVolume = observableVolume;
@@ -85,23 +86,29 @@ public class Population extends Model {
     }
 
     @Override
-    public void notifyViews() {
-        int size = 0;
-        LinkedList<Individual> sample = new LinkedList<>();
-        
-        Iterator<Individual> it = this.iterator();
-        
-        while (it.hasNext() && size < this.observableVolume){
-            
-            Individual individual = it.next();
-            sample.add(individual);
-            size++;
+    public final void notifyViews() {
+
+        if (this.semaphoreAcess) {
+            this.semaphoreAcess = false;
+            int size = 0;
+            LinkedList<Individual> sample = new LinkedList<>();
+
+            Iterator<Individual> it = this.iterator();
+
+            while (it.hasNext() && size < this.observableVolume) {
+
+                Individual individual = it.next();
+                sample.add(individual);
+                size++;
+            }
+            super.notifyViews(new PopulationRefreshEvent(this, sample));
+            this.semaphoreAcess = true;
         }
-        super.notifyViews(new PopulationRefreshEvent(this, sample));
+
     }
 
     public Individual getAlphaIndividual() {
-        
+
         Iterator<Individual> individualIterator = this.iterator();
         Individual bestIndividual = individualIterator.next();
         Individual currentIndividual;
@@ -115,7 +122,7 @@ public class Population extends Model {
         }
         return bestIndividual;
     }
-    
+
     public String xmlSerialisation() {
         String serialisedPopulation = "";
         //TODO

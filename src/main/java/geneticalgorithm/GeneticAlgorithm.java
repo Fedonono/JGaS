@@ -75,14 +75,15 @@ public class GeneticAlgorithm extends Model {
     }
 
     protected void start() {
-            this.geneticEngine = new GeneticEngine(this.SelectedProblem);
-            this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
+        this.geneticEngine = new GeneticEngine(this.SelectedProblem);
+        this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
     }
 
     public void quit() {
         this.mainFrame.setVisible(false);
         this.mainFrame = null;
         this.geneticEngine.pause();
+
     }
 
     public static void main(String[] args) {

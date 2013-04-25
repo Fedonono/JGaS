@@ -71,7 +71,18 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     }
     
     @Override
-    public void add(Individual individual){
+    public void populationRefreshEventTreatment(PopulationRefreshEvent event){
+        
+         LinkedList<Individual> samples = event.getSample();
+         
+        
+        for (Individual sample : samples) {
+            this.add(sample);
+        }
+        
+    }
+    
+    private void add(Individual individual){
         
         if(!this.plotReset){
             

@@ -41,26 +41,25 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
     public void refresh(RefreshEvent ev) {
 
         if (ev instanceof PopulationRefreshEvent) {
-            PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
-            LinkedList<Individual> samples = event.getSample();
-
-            for (Individual sample : samples) {
-                this.add(sample);
-            }
+            this.populationRefreshEventTreatment((PopulationRefreshEvent) ev);
             this.notifyObserver(new SpreadRefreshOrderEvent(this, false));
-            
+
+
         } else if (ev instanceof ObservableVolumeRefreshEvent) {
-            
+
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
             this.header.setValue(event.getValue());
         }
 
     }
 
-    public void add(Individual individual) {
+    public void populationRefreshEventTreatment(PopulationRefreshEvent event) {
+        LinkedList<Individual> samples = event.getSample();
 
-        this.populationSample.add(individual.getUI());
-
+        this.populationSample.setLayout(new FlowLayout());
+        for (Individual sample : samples) {
+            this.populationSample.add(sample.getUI());
+        }
     }
 
     public PopulationController getController() {
@@ -76,8 +75,8 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
     public void addObserver(Observer o) {
         this.header.addObserver(o);
     }
-    
-    public void notifyObserver(ObservationEvent ev){
+
+    public void notifyObserver(ObservationEvent ev) {
         this.header.notifyObserver(ev);
     }
 
@@ -141,10 +140,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         public void notifyObserver() {
             this.notifyObserver(new SpreadRefreshOrderEvent(boss, true));
         }
-        
-        public void notifyObserver(ObservationEvent ev){
-            for(Observer o : this.observers){
-                
+
+        public void notifyObserver(ObservationEvent ev) {
+            for (Observer o : this.observers) {
+
                 o.reactToChanges(ev);
             }
         }
