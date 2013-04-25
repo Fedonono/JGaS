@@ -69,7 +69,7 @@ public class Custom3DPlot extends CustomPlot {
     }
 
     // grid version of the function
-    public static double[][] f(Function3D function, double[] x, double[] y) throws UnknownFunctionException, UnparsableExpressionException {
+    public double[][] f(Function3D function, double[] x, double[] y) throws UnknownFunctionException, UnparsableExpressionException {
         double[][] z = new double[y.length][x.length];
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < y.length; j++) {
