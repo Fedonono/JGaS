@@ -21,7 +21,7 @@ public class Population extends Model {
 
     private ArrayList<Individual> individuals;
     private int observableVolume = 1;
-    private boolean semaphoreAcess = true;
+    private boolean semaphoreAccess = true;
 
     public Population() {
         this(1);
@@ -88,8 +88,8 @@ public class Population extends Model {
     @Override
     public final void notifyViews() {
 
-        if (this.semaphoreAcess) {
-            this.semaphoreAcess = false;
+        if (this.semaphoreAccess) {
+            this.semaphoreAccess = false;
             int size = 0;
             LinkedList<Individual> sample = new LinkedList<>();
 
@@ -102,7 +102,7 @@ public class Population extends Model {
                 size++;
             }
             super.notifyViews(new PopulationRefreshEvent(this, sample));
-            this.semaphoreAcess = true;
+            this.semaphoreAccess = true;
         }
 
     }
