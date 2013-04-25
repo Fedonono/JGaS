@@ -25,10 +25,13 @@ import java.util.logging.Logger;
  */
 public class Min2D extends Min1D {
 
-    private static String strFunc = "sin(x+y)";
+    private static String strFunc = "x^2+y^2";
     private static String pbLabel = "Min2D Problem";
-    private static double yMin = 0.0;
+    private static double xMin = -1.0;
+    private static double xMax = 1.0;
+    private static double yMin = -1.0;
     private static double yMax = 1.0;
+    private static double plotStep = 0.1;
 
     public Min2D() {
         super();
@@ -46,7 +49,7 @@ public class Min2D extends Min1D {
         try {
             function = new Function3D(strFunc, new Point(xMin, xMax, yMin, yMax));
             pop = new PopulationFunction(function);
-            fDUI = new PopulationFunction3DUI(strFunc, new PopulationFunctionController(pop));
+            fDUI = new PopulationFunction3DUI(strFunc, new PopulationFunctionController(pop), indColor, plotColor, plotStep);
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(Min2D.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
         }

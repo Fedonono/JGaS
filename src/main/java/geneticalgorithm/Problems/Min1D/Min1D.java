@@ -19,6 +19,7 @@ import geneticalgorithm.Population.Function.PopulationFunctionUI;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problems.Problem;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,8 +31,17 @@ public class Min1D extends Problem {
 
     private static String strFunc = "sin(x)";
     private static String pbLabel = "Min1D Problem";
-    protected static double xMin = 0.0;
-    protected static double xMax = 10.0;
+    private static double xMin = -10.0;
+    private static double xMax = 10.0;
+    private static double plotStep = 0.1;
+    /**
+     * Couleur de la courbe.
+     */
+    protected static Color plotColor = Color.DARK_GRAY;
+    /**
+     * Couleur des individus du meilleur jusqu'aux individus moins bons.
+     */
+    protected static Color[] indColor = {Color.RED, Color.PINK, Color.ORANGE, Color.GREEN, Color.BLUE};
 
     public Min1D() {
         this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
@@ -51,7 +61,7 @@ public class Min1D extends Problem {
         try {
             function = new Function2D(strFunc, new Point(xMin, xMax));
             pop = new PopulationFunction(function);
-            fDUI = new PopulationFunction2DUI(strFunc, new PopulationFunctionController(pop));
+            fDUI = new PopulationFunction2DUI(strFunc, new PopulationFunctionController(pop), indColor, plotColor, plotStep);
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
             Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
         }

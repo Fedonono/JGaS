@@ -15,6 +15,7 @@ import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.PopulationController;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     protected CustomSpinner xMin;
     protected CustomSpinner xMax;
     
-    public PopulationFunction2DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
+    public PopulationFunction2DUI(String strFunc, PopulationController controller, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
         super(strFunc, controller);
         JPanel panel = new JPanel(new BorderLayout());
         JPanel footer = new JPanel();
@@ -37,7 +38,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
         Function func = (Function) popC.getFunction();
         Point domaine = func.getDomaine();
         
-        createPlot(func);
+        createPlot(func, indColor, plotColor, plotStep);
         setFooter(footer);
         domaineFooter(footer, domaine);
 
@@ -57,8 +58,8 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     }
     
     @Override
-    public void createPlot(Function func) throws UnknownFunctionException, UnparsableExpressionException {
-        this.plot = new Custom2DPlot(func);
+    public void createPlot(Function func, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
+        this.plot = new Custom2DPlot(func, indColor, plotColor, plotStep);
     }
 
     @Override

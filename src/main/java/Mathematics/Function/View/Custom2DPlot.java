@@ -22,8 +22,8 @@ import org.math.plot.Plot2DPanel;
 public class Custom2DPlot extends CustomPlot {
     private Plot2DPanel plot;
 
-    public Custom2DPlot(Function function) throws UnknownFunctionException, UnparsableExpressionException {
-        super();
+    public Custom2DPlot(Function function, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
+        super(indColor, plotColor, plotStep);
         plot = new Plot2DPanel();
         this.setPlot(function);
     }
@@ -36,11 +36,11 @@ public class Custom2DPlot extends CustomPlot {
         double xMin, xMax;
         xMin = domaine.get(0);
         xMax = domaine.get(1);
-        double[] x = DoubleArray.increment(xMin, 0.1, xMax);
+        double[] x = DoubleArray.increment(xMin, plotStep, xMax);
 
         // define the legend position
         plot.addLegend("SOUTH");
-        plot.addLinePlot(function.getLabel(), x, this.getY((Function2D)function, x));
+        plot.addLinePlot(function.getLabel(), plotColor, x, this.getY((Function2D)function, x));
 
         this.setPreferredSize(new Dimension(600, 600));
         this.add(plot, BorderLayout.CENTER);
@@ -59,11 +59,11 @@ public class Custom2DPlot extends CustomPlot {
         double xp[] = {x};
         double yp[] = {y};
         int size = getColorSize();
-        if (this.id <= size) {
-            plot.addScatterPlot("x="+x+", y="+y, colorInd[this.id-1], xp, yp);
+        if (this.id < size) {
+            plot.addScatterPlot("x="+x+", y="+y, indColor[this.id-1], xp, yp);
         }
         else {
-            plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp);
+            plot.addScatterPlot("Individu "+this.id, indColor[size-1], xp, yp);
         }
     }
 

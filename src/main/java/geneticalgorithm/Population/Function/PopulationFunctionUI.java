@@ -19,6 +19,7 @@ import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import geneticalgorithm.Population.PopulationUI;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +44,7 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
         this.plot.addIndividual(ind.getFunction(), ind.getPoint());
     }
     
-    public abstract void createPlot(Function func) throws UnknownFunctionException, UnparsableExpressionException;
+    public abstract void createPlot(Function func, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException;
     public abstract void setFooter(JPanel footer);
     public abstract void domaineFooter(JPanel footer, Point domaine);
     public abstract void changeDomaineValue(Point domaine);

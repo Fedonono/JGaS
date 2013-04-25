@@ -23,8 +23,8 @@ public class Custom3DPlot extends CustomPlot {
     
     private Plot3DPanel plot;
     
-    public Custom3DPlot(Function function) throws UnknownFunctionException, UnparsableExpressionException {
-        super();
+    public Custom3DPlot(Function function, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
+        super(indColor, plotColor, plotStep);
         plot = new Plot3DPanel();
         this.setPlot(function);
     }
@@ -39,11 +39,11 @@ public class Custom3DPlot extends CustomPlot {
         double yp[] = {y};
         double zp[] = {z};
         int size = getColorSize();
-        if (this.id <= size) {
-            plot.addScatterPlot("x="+x+", y="+y+", z="+z, colorInd[this.id-1], xp, yp, zp);
+        if (this.id < size) {
+            plot.addScatterPlot("x="+x+", y="+y+", z="+z, indColor[this.id-1], xp, yp, zp);
         }
         else {
-            plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp, zp);
+            plot.addScatterPlot("Individu "+this.id, indColor[size-1], xp, yp, zp);
         }
     }
 
@@ -57,12 +57,12 @@ public class Custom3DPlot extends CustomPlot {
         xMax = domaine.get(1);
         yMin = domaine.get(2);
         yMax = domaine.get(3);
-        double[] x = DoubleArray.increment(xMin, 0.1, xMax);
-        double[] y = DoubleArray.increment(yMin, 0.1, yMax);
+        double[] x = DoubleArray.increment(xMin, plotStep, xMax);
+        double[] y = DoubleArray.increment(yMin, plotStep, yMax);
 
         // define the legend position
         plot.addLegend("SOUTH");
-        plot.addGridPlot(function.getLabel(), x, y, f((Function3D)function,x,y));
+        plot.addGridPlot(function.getLabel(), plotColor, x, y, f((Function3D)function,x,y));
 
         this.setPreferredSize(new Dimension(600, 600));
         this.add(plot, BorderLayout.CENTER);

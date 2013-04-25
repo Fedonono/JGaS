@@ -22,10 +22,15 @@ import javax.swing.JPanel;
  */
 public abstract class CustomPlot extends JPanel implements View {
     protected int id = 0;
-    protected static Color[] colorInd = {Color.RED, Color.PINK, Color.ORANGE, Color.YELLOW};
+    protected Color plotColor;
+    protected Color[] indColor;
+    protected double plotStep;
     
-    protected CustomPlot() {
+    protected CustomPlot(Color[] indColor, Color plotColor, double plotStep) {
         this.setLayout(new BorderLayout());
+        this.plotColor = plotColor;
+        this.indColor = indColor;
+        this.plotStep = plotStep;
     }
 
     public abstract void addIndividual(Function function, Point point);
@@ -41,6 +46,6 @@ public abstract class CustomPlot extends JPanel implements View {
     }
 
     public int getColorSize() {
-        return colorInd.length;
+        return indColor.length;
     }
 }

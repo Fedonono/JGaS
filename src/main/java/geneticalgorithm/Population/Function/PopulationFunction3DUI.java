@@ -13,6 +13,7 @@ import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.PopulationController;
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,8 +26,8 @@ public class PopulationFunction3DUI extends PopulationFunction2DUI {
     protected CustomSpinner yMin;
     protected CustomSpinner yMax;
 
-    public PopulationFunction3DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
-        super(strFunc, controller);
+    public PopulationFunction3DUI(String strFunc, PopulationController controller, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
+        super(strFunc, controller, indColor, plotColor, plotStep);
     }
 
     @Override
@@ -39,8 +40,8 @@ public class PopulationFunction3DUI extends PopulationFunction2DUI {
     }
     
     @Override
-    public void createPlot(Function func) throws UnknownFunctionException, UnparsableExpressionException {
-        this.plot = new Custom3DPlot(func);
+    public void createPlot(Function func, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException {
+        this.plot = new Custom3DPlot(func, indColor, plotColor, plotStep);
     }
 
     @Override
