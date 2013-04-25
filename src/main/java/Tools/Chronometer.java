@@ -37,8 +37,10 @@ public class Chronometer {
      *
      */
     public void stop() {
-        this.previousSessionTimeCount += new Date().getTime() - this.date.getTime();
-        this.stoped = true;
+        if (!this.stoped) {
+            this.previousSessionTimeCount += new Date().getTime() - this.date.getTime();
+            this.stoped = true;
+        }
     }
 
     /**

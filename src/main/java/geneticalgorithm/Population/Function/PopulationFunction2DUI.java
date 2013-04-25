@@ -26,6 +26,7 @@ import javax.swing.JPanel;
  * @author nono
  */
 public class PopulationFunction2DUI extends PopulationFunctionUI {
+    
     public PopulationFunction2DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(strFunc, controller);
         JPanel panel = new JPanel(new BorderLayout());
@@ -61,6 +62,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     @Override
     public void refresh(RefreshEvent ev) {
         super.refresh(ev);
+        
         if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
             Function func = (Function) ev.getSource();
             Point domaine = func.getDomaine();

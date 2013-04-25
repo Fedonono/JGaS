@@ -34,6 +34,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     private Footer footer;
     private Controller controller;
     private ProblemUI problemUI;
+    private int populationUI_id;
     private LinkedList<Observer> observers = new LinkedList<>();
 
     public GeneticEngineUI(GeneticEngine ge, PopulationUI populationUI) {
@@ -46,6 +47,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         this.header.addObserver(this);
         this.footer.addObserver(this);
 
+        this.populationUI_id = populationUI.getId();
         this.init(populationUI);
     }
 
@@ -56,6 +58,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         this.add(this.header, BorderLayout.NORTH);
         this.add(populationUI, BorderLayout.CENTER);
         this.add(this.footer, BorderLayout.SOUTH);
+        
+        populationUI.addObserver(this);
     }
 
     @Override
@@ -106,6 +110,9 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             //footer => configure
             else if (id == this.footer.getId()) {
                 this.problemUI.setVisible(true);
+                
+            }else if(id == this.populationUI_id){
+                this.controller.applyChanges(new UsrAskForRefreshEvent(this));
             }
         }
     }

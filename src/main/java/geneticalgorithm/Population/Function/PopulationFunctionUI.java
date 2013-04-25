@@ -42,14 +42,15 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
         this.functionChange.addObserver(this);
     }
 
-    public void addIndividu(FunctionIndividual ind){
-        this.plot.addIndividu(ind.getFunction(), ind.getPoint());
+    public void addIndividual(FunctionIndividual ind){
+        this.plot.addIndividual(ind.getFunction(), ind.getPoint());
     }
     
     public abstract void createPlot(Function func) throws UnknownFunctionException, UnparsableExpressionException;
     public abstract void setFooter(JPanel footer);
     public abstract void domaineFooter(JPanel footer, Point domaine);
     public abstract void changeDomaineValue(Point domaine);
+    @Override
     public abstract void reactToChanges(ObservationEvent ev);
 
     public void reactEvent(ObservationEvent ev) {
@@ -61,27 +62,7 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     }
     
     @Override
-    public void refresh(RefreshEvent ev) {
-        super.refresh(ev);
-        if (ev instanceof PopulationRefreshEvent) {
-            
-            PopulationRefreshEvent event = (PopulationRefreshEvent) ev;
-            Population pop = (Population) event.getSource();
-            FunctionIndividual funcInd = (FunctionIndividual) pop.getAlphaIndividual();
-            Function func = funcInd.getFunction();
-            
-            
-            try {
-                this.plot.setPlot(func);
-                
-            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-                Logger.getLogger(PopulationFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            LinkedList<Individual> samples = event.getSample();
-            
-            for (Individual sample : samples) {
-                sample.notifyViews();
-            }
-        }
+    public void add(Individual individual){
+        individual.notifyViews();
     }
 }

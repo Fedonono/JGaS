@@ -27,8 +27,6 @@ public class PopulationController implements Controller{
             ObservableVolumeUserEvent ev = (ObservableVolumeUserEvent)event;
             target.setObservableVolume(ev.getValue());
             
-        }else if(event instanceof UsrAskForRefreshEvent){
-            this.target.notifyViews();
         }
     }
 

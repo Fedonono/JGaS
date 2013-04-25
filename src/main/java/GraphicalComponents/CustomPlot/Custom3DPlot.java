@@ -30,7 +30,7 @@ public class Custom3DPlot extends CustomPlot {
     }
 
     @Override
-    public void addIndividu(Function function, Point point) {
+    public void addIndividual(Function function, Point point) {
         this.id++;
         double x = point.get(0);
         double y = point.get(1);

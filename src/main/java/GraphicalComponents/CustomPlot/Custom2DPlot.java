@@ -52,7 +52,7 @@ public class Custom2DPlot extends CustomPlot {
      * @param x
      */
     @Override
-    public void addIndividu(Function function, Point point) {
+    public void addIndividual(Function function, Point point) {
         this.id++;
         double x = point.get(0);
         double y = function.getResult(point);

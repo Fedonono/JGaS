@@ -26,7 +26,7 @@ public abstract class CustomPlot extends IdentifiableComponent implements View {
         this.setLayout(new BorderLayout());
     }
 
-    public abstract void addIndividu(Function function, Point point);
+    public abstract void addIndividual(Function function, Point point);
     public abstract void setPlot(Function function) throws UnknownFunctionException, UnparsableExpressionException;
     @Override
     public void refresh(RefreshEvent ev) {

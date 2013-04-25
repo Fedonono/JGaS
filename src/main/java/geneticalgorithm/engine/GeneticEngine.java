@@ -144,10 +144,19 @@ public class GeneticEngine extends Model implements Runnable {
         this.computeEvolutionCriterion();
     }
     
+    public void refreshPopulation(){
+        if(this.pause){
+            this.population.notifyViews();
+        }else{
+            this.pause();
+            this.resume();
+        }
+    }
+    
     
     private void computeEvolutionCriterion(){
         
-        double bestScore = this.population.getAlphaIndividual().getScore();
+        double bestScore = this.population.get(0).getScore();
         
         if(this.firstStepDone){
             this.evolutionCriterion = Math.abs(this.previousBestScore - bestScore)/Math.abs(this.previousBestScore);

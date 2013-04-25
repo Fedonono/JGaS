@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package geneticalgorithm.Population;
+package geneticalgorithm.engine;
 
 import MvcPattern.UserEvent;
+import MvcPattern.View;
 
 /**
  *
@@ -12,7 +13,7 @@ import MvcPattern.UserEvent;
  */
 public class UsrAskForRefreshEvent extends UserEvent{
     
-    public UsrAskForRefreshEvent(PopulationUI source){
+    public UsrAskForRefreshEvent(View source){
         super(source);
     }
 }
