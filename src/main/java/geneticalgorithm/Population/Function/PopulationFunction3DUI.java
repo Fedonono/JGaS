@@ -60,10 +60,10 @@ public class PopulationFunction3DUI extends PopulationFunction2DUI {
     }
     
     @Override
-    public void domaineFooter(JPanel footer, Point domaine) {
-        super.domaineFooter(footer, domaine);
-        this.yMin = new CustomSpinner("yMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(2), 0.1);
-        this.yMax = new CustomSpinner("yMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(3), 0.1);
+    public void domaineFooter(JPanel footer, Point domaine, double plotStep) {
+        super.domaineFooter(footer, domaine, plotStep);
+        this.yMin = new CustomSpinner("yMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(2), plotStep);
+        this.yMax = new CustomSpinner("yMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(3), plotStep);
         this.yMin.addObserver(this);
         this.yMax.addObserver(this);
         JPanel yPanel = new JPanel();

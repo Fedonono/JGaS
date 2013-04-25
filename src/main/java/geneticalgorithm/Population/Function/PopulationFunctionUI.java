@@ -46,7 +46,7 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     
     public abstract void createPlot(Function func, Color[] indColor, Color plotColor, double plotStep) throws UnknownFunctionException, UnparsableExpressionException;
     public abstract void setFooter(JPanel footer);
-    public abstract void domaineFooter(JPanel footer, Point domaine);
+    public abstract void domaineFooter(JPanel footer, Point domaine, double plotStep);
     public abstract void changeDomaineValue(Point domaine);
     @Override
     public abstract void reactToChanges(ObservationEvent ev);

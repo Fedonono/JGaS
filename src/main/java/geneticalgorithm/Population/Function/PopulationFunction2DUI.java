@@ -40,7 +40,7 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
         
         createPlot(func, indColor, plotColor, plotStep);
         setFooter(footer);
-        domaineFooter(footer, domaine);
+        domaineFooter(footer, domaine, plotStep);
 
         panel.add(plot, BorderLayout.CENTER);
         panel.add(footer, BorderLayout.SOUTH);
@@ -93,9 +93,9 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     }
 
     @Override
-    public void domaineFooter(JPanel footer, Point domaine) {
-        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(0), 0.1);
-        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(1), 0.1);
+    public void domaineFooter(JPanel footer, Point domaine, double plotStep) {
+        this.xMin = new CustomSpinner("xMin", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(0), plotStep);
+        this.xMax = new CustomSpinner("xMax", Integer.MIN_VALUE, Integer.MAX_VALUE, domaine.get(1), plotStep);
         this.xMin.addObserver(this);
         this.xMax.addObserver(this);
         JPanel xPanel = new JPanel();
