@@ -25,7 +25,8 @@ public class FunctionEvaluationOperator extends EvaluationOperator {
             Point points = individualP.getPoint();
             double score = -individualP.getResult(points);
             individual.setScore(score);
+        } else {
+            throw new IllegalArgumentException("Cannot perform function evaluate if the individual is not compatible with this operator.");
         }
-        // IncorrectIndividualException TODO BY ARNAUD
     }
 }

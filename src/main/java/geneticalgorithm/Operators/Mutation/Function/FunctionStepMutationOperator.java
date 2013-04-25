@@ -49,8 +49,7 @@ public class FunctionStepMutationOperator extends MutationOperator {
             //mutation de l'individus
             return new FunctionIndividual(functionIndividual.getFunction(), mutantPoint);
         }
-        // IncorrectIndividualException TODO BY ARNAUD
-        return null;
+        throw new IllegalArgumentException("Cannot perform function step mutation if the individual is not compatible with this operator.");
     }
 
     private Double stepMutation(Double number, double min, double max) {

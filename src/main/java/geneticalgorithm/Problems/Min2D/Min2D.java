@@ -48,7 +48,7 @@ public class Min2D extends Min1D {
             pop = new PopulationFunction(function);
             fDUI = new PopulationFunction3DUI(strFunc, new PopulationFunctionController(pop));
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-            Logger.getLogger(Min1D.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Min2D.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
         }
         function.addView(fDUI);
         pop.addView(fDUI);

@@ -34,8 +34,8 @@ public class PopulationFunctionController extends PopulationController {
             FunctionEvent ev = (FunctionEvent)event;
             try {
                 target.getFunction().setFunction(ev.getFunction());
-            } catch (    UnknownFunctionException | UnparsableExpressionException ex) {
-                Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
+                Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
             }
         }
         if (event instanceof DomaineEvent){

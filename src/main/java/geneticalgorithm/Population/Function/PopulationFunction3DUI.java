@@ -22,8 +22,8 @@ import javax.swing.JPanel;
  * @author nono
  */
 public class PopulationFunction3DUI extends PopulationFunction2DUI {
-    private CustomSpinner yMin;
-    private CustomSpinner yMax;
+    protected CustomSpinner yMin;
+    protected CustomSpinner yMax;
 
     public PopulationFunction3DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(strFunc, controller);

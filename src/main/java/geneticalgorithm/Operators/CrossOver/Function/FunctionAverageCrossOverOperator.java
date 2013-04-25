@@ -36,11 +36,9 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
 
                 return new FunctionIndividual(maleP.getFunction(), newPoints);
             } else {
-                // IncorrectIndividualDataException TODO BY ARNAUD
-                return null;
+                throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
             }
         }
-        // IncorrectIndividualException TODO BY ARNAUD
-        return null;
+        throw new IllegalArgumentException("Cannot perform function average cross-over if the parents aren't compatible with this operator.");
     }
 }

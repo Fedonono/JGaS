@@ -58,8 +58,9 @@ public class Custom2DPlot extends CustomPlot {
         double y = function.getResult(point);
         double xp[] = {x};
         double yp[] = {y};
-        if (this.id == 1) {
-            plot.addScatterPlot("x="+x+", y="+y, Color.RED, xp, yp);
+        int size = getColorSize();
+        if (this.id <= size) {
+            plot.addScatterPlot("x="+x+", y="+y, colorInd[this.id-1], xp, yp);
         }
         else {
             plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp);

@@ -5,7 +5,6 @@
 package geneticalgorithm.Population.Function;
 
 import GraphicalComponents.CustomPlot.CustomPlot;
-import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;
@@ -17,7 +16,6 @@ import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Population.Individuals.FunctionIndividual.FunctionIndividual;
 import geneticalgorithm.Population.Individuals.Individual;
-import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import geneticalgorithm.Population.PopulationUI;
@@ -33,8 +31,6 @@ import javax.swing.JPanel;
 public abstract class PopulationFunctionUI extends PopulationUI implements Observer {
     protected CustomPlot plot;
     protected CustomTextField functionChange;
-    protected CustomSpinner xMin;
-    protected CustomSpinner xMax;
     private boolean plotReset = false;
     
     public PopulationFunctionUI(String strFunc, PopulationController controller) {
@@ -72,10 +68,8 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     
     @Override
     public void populationRefreshEventTreatment(PopulationRefreshEvent event){
-        
-         LinkedList<Individual> samples = event.getSample();
-         
-        
+        LinkedList<Individual> samples = event.getSample();
+
         for (Individual sample : samples) {
             this.add(sample);
         }
@@ -88,9 +82,8 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
             
             try {   
              this.plot.setPlot(((FunctionIndividual)individual).getFunction());   
-             
             } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-                Logger.getLogger(PopulationFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunctionUI.class.getName()).log(Level.SEVERE,  "Incorrect input function.", ex);
             }
             
             this.plotReset = true;

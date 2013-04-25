@@ -12,6 +12,7 @@ import MvcPattern.View;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
  */
 public abstract class CustomPlot extends IdentifiableComponent implements View {
     protected int id = 0;
+    protected static Color[] colorInd = {Color.RED, Color.PINK, Color.ORANGE, Color.YELLOW};
     
     protected CustomPlot() {
         this.setLayout(new BorderLayout());
@@ -34,7 +36,11 @@ public abstract class CustomPlot extends IdentifiableComponent implements View {
         try {
             setPlot(func);
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-            Logger.getLogger(Custom2DPlot.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Custom2DPlot.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
         }
+    }
+
+    public int getColorSize() {
+        return colorInd.length;
     }
 }

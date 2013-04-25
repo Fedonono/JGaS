@@ -38,8 +38,9 @@ public class Custom3DPlot extends CustomPlot {
         double xp[] = {x};
         double yp[] = {y};
         double zp[] = {z};
-        if (this.id == 1) {
-            plot.addScatterPlot("x="+x+", y="+y+", z="+z, Color.RED, xp, yp, zp);
+        int size = getColorSize();
+        if (this.id <= size) {
+            plot.addScatterPlot("x="+x+", y="+y+", z="+z, colorInd[this.id-1], xp, yp, zp);
         }
         else {
             plot.addScatterPlot("Individu "+this.id, Color.GREEN, xp, yp, zp);

@@ -26,6 +26,8 @@ import javax.swing.JPanel;
  * @author nono
  */
 public class PopulationFunction2DUI extends PopulationFunctionUI {
+    protected CustomSpinner xMin;
+    protected CustomSpinner xMax;
     
     public PopulationFunction2DUI(String strFunc, PopulationController controller) throws UnknownFunctionException, UnparsableExpressionException {
         super(strFunc, controller);
@@ -63,15 +65,14 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     public void refresh(RefreshEvent ev) {
         super.refresh(ev);
         
-        if (ev instanceof FunctionRefreshEvent) { 
-            
+        if (ev instanceof FunctionRefreshEvent) {
             Function func = (Function) ev.getSource();
             Point domaine = func.getDomaine();
             changeDomaineValue(domaine);
             try {
                 this.plot.setPlot(func);
             } catch (UnknownFunctionException | UnparsableExpressionException ex) {
-                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PopulationFunction2DUI.class.getName()).log(Level.SEVERE,  "Incorrect input function.", ex);
             }
         }
     }
