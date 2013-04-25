@@ -7,7 +7,6 @@ package geneticalgorithm.Population;
 import MvcPattern.Model;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualComparator;
-import geneticalgorithm.Population.Individuals.IndividualUI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

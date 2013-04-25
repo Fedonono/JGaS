@@ -47,6 +47,8 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             for (Individual sample : samples) {
                 this.add(sample);
             }
+            this.notifyObserver(new SpreadRefreshOrderEvent(this, false));
+            
         } else if (ev instanceof ObservableVolumeRefreshEvent) {
             
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
@@ -73,6 +75,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
     @Override
     public void addObserver(Observer o) {
         this.header.addObserver(o);
+    }
+    
+    public void notifyObserver(ObservationEvent ev){
+        this.header.notifyObserver(ev);
     }
 
     @Override
@@ -133,10 +139,13 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
         @Override
         public void notifyObserver() {
-
-            for (Observer o : this.observers) {
-
-                o.reactToChanges(new SpreadRefreshOrderEvent(boss));
+            this.notifyObserver(new SpreadRefreshOrderEvent(boss, true));
+        }
+        
+        public void notifyObserver(ObservationEvent ev){
+            for(Observer o : this.observers){
+                
+                o.reactToChanges(ev);
             }
         }
     }

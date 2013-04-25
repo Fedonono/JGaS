@@ -63,7 +63,8 @@ public class PopulationFunction2DUI extends PopulationFunctionUI {
     public void refresh(RefreshEvent ev) {
         super.refresh(ev);
         
-        if (ev instanceof FunctionRefreshEvent) { // A DELETE TO BY ARNAUD ?
+        if (ev instanceof FunctionRefreshEvent) { 
+            
             Function func = (Function) ev.getSource();
             Point domaine = func.getDomaine();
             changeDomaineValue(domaine);

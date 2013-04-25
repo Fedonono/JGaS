@@ -13,9 +13,18 @@ import GraphicalComponents.ValidateButtonEvent;
  */
 public class SpreadRefreshOrderEvent extends ValidateButtonEvent{
 
-    public SpreadRefreshOrderEvent(Observable source) {
+    boolean needingRefresh;
+    
+    public SpreadRefreshOrderEvent(Observable source, boolean needingRefresh) {
         super(source);
+        this.needingRefresh = needingRefresh;
     }
+
+    public boolean isNeedingRefresh() {
+        return needingRefresh;
+    }
+
+    
     
     
     

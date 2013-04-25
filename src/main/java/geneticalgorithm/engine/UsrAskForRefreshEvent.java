@@ -11,9 +11,16 @@ import MvcPattern.View;
  *
  * @author simonneau
  */
-public class UsrAskForRefreshEvent extends UserEvent{
-    
-    public UsrAskForRefreshEvent(View source){
+public class UsrAskForRefreshEvent extends UserEvent {
+
+    boolean needingRefresh;
+
+    public UsrAskForRefreshEvent(View source, boolean needingRefresh) {
         super(source);
+        this.needingRefresh = needingRefresh;
+    }
+
+    public boolean isNeedingRefresh() {
+        return this.needingRefresh;
     }
 }

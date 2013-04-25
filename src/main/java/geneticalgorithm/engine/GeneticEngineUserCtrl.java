@@ -14,6 +14,7 @@ import MvcPattern.UserEvent;
 public class GeneticEngineUserCtrl implements Controller {
 
     private GeneticEngine target;
+    private boolean previousEnginePauseState;
 
     public GeneticEngineUserCtrl(GeneticEngine target) {
         this.target = target;
@@ -34,7 +35,25 @@ public class GeneticEngineUserCtrl implements Controller {
             this.target.step();
 
         } else if (event instanceof UsrAskForRefreshEvent) {
-            this.target.refreshPopulation();
+            
+            UsrAskForRefreshEvent ev = (UsrAskForRefreshEvent)event;
+            
+            if(ev.isNeedingRefresh()){
+                this.previousEnginePauseState = this.target.isPaused();
+                
+                if(this.previousEnginePauseState){
+                    this.target.refreshPopulation();
+                }else{
+                    this.target.pause();
+                }
+                
+            }else{
+                if(!this.previousEnginePauseState){
+                    this.target.resume();
+                }
+            }
+            
+            
         }
     }
 }

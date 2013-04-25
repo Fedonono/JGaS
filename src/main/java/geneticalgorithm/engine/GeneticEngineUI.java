@@ -17,6 +17,7 @@ import MvcPattern.Controller;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Population.PopulationUI;
+import geneticalgorithm.Population.SpreadRefreshOrderEvent;
 import geneticalgorithm.Problems.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -112,7 +113,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 this.problemUI.setVisible(true);
                 
             }else if(id == this.populationUI_id){
-                this.controller.applyChanges(new UsrAskForRefreshEvent(this));
+                this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent)ev).isNeedingRefresh()));
             }
         }
     }

@@ -35,6 +35,7 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     protected CustomTextField functionChange;
     protected CustomSpinner xMin;
     protected CustomSpinner xMax;
+    private boolean plotReset = false;
     
     public PopulationFunctionUI(String strFunc, PopulationController controller) {
         this.setController(controller);
@@ -62,7 +63,28 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
     }
     
     @Override
+    public void refresh(RefreshEvent ev) {
+        super.refresh(ev);
+        if (ev instanceof PopulationRefreshEvent) {
+            this.plotReset = false;
+        }
+    }
+    
+    @Override
     public void add(Individual individual){
+        
+        if(!this.plotReset){
+            
+            try {   
+             this.plot.setPlot(((FunctionIndividual)individual).getFunction());   
+             
+            } catch (UnknownFunctionException | UnparsableExpressionException ex) {
+                Logger.getLogger(PopulationFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            this.plotReset = true;
+        }
+        
         individual.notifyViews();
     }
 }

@@ -51,6 +51,10 @@ public class GeneticEngine extends Model implements Runnable {
     public boolean isPaused() {
         return this.pause;
     }
+    
+    public void refreshPopulation(){
+        this.population.notifyViews();
+    }
 
     private void init() {
 
@@ -142,15 +146,6 @@ public class GeneticEngine extends Model implements Runnable {
         
         this.population.sort();
         this.computeEvolutionCriterion();
-    }
-    
-    public void refreshPopulation(){
-        if(this.pause){
-            this.population.notifyViews();
-        }else{
-            this.pause();
-            this.resume();
-        }
     }
     
     
