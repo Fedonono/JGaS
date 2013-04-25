@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Population.Function;
 
-import GraphicalComponents.CustomPlot.CustomPlot;
+import Mathematics.Function.View.CustomPlot;
 import GraphicalComponents.CustomTextField;
 import GraphicalComponents.CustomTextFieldEvent;
 import GraphicalComponents.ObservationEvent;

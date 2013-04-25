@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.Population.Function;
 
-import GraphicalComponents.CustomPlot.Custom2DPlot;
+import Mathematics.Function.View.Custom2DPlot;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.SpinnerEvent;
