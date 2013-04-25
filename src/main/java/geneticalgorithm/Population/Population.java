@@ -69,7 +69,7 @@ public class Population extends Model {
             observableVolume = 1;
         }
         this.observableVolume = observableVolume;
-        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume));
+        super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume, this.size()));
     }
 
     public int getObservableVolume() {
@@ -87,9 +87,11 @@ public class Population extends Model {
 
     @Override
     public final void notifyViews() {
-
         if (this.semaphoreAccess) {
             this.semaphoreAccess = false;
+            
+            super.notifyViews(new ObservableVolumeRefreshEvent(this, this.observableVolume, this.size()));
+            
             int size = 0;
             LinkedList<Individual> sample = new LinkedList<>();
 

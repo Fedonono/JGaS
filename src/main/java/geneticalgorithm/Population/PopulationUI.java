@@ -49,6 +49,7 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
             ObservableVolumeRefreshEvent event = (ObservableVolumeRefreshEvent) ev;
             this.header.setValue(event.getValue());
+            this.header.setmaxValue(event.getMaxValue());
         }
 
     }
@@ -124,6 +125,12 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
         public void setValue(int value) {
             this.volumeOption.setValue(value);
+            this.volumeOption.repaint();
+        }
+        
+        public void setmaxValue(int maxValue){
+            this.volumeOption.setMaxValue(maxValue);
+            this.volumeOption.repaint();
         }
 
         public void setController(PopulationController controller) {
