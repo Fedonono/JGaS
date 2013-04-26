@@ -4,7 +4,9 @@
  */
 package geneticalgorithm.Operators.Selection;
 
+import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
+import java.util.LinkedList;
 
 /**
  *
@@ -34,15 +36,16 @@ public class RandomSelectionOperator extends SelectionOperator{
         }
         
         Population nextPopulation = new Population(population.getObservableVolume());
-        Population p = population.clone();
+        LinkedList<Individual> individuals = new LinkedList<>(population.getIndividuals());
         int survivorCount = 0;
         
-        int size = p.size();
+        int size = individuals.size();
         
         while(survivorCount < survivorSize){
             
-            
-            
+            int index = (int)Math.round(Math.random()*(size-1));
+            nextPopulation.add(individuals.remove(index));
+            size--;
         }        
         
         return nextPopulation;

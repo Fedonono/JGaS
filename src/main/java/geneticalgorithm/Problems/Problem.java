@@ -12,6 +12,7 @@ import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Operators.Selection.ProportionalPerfomanceSelectionOperator;
 import geneticalgorithm.Operators.Selection.ProportionalRankingSelectionOperator;
+import geneticalgorithm.Operators.Selection.RandomSelectionOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Operators.Selection.TournamentSelectionOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
@@ -42,6 +43,7 @@ public abstract class Problem extends Model {
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalRankingSelectionOperator.getInstance());
         this.addSelectionOperator(TournamentSelectionOperator.getInstance());
+        this.addSelectionOperator(RandomSelectionOperator.getInstance());
         
     }
     
