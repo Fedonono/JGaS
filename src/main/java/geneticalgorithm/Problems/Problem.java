@@ -203,4 +203,9 @@ public abstract class Problem extends Model {
     public boolean stopCriteriaAreReached(int stepCount, long time, double evolutionCoeff){
         return this.stopCriteria.areReached(stepCount, time, evolutionCoeff);
     }
+    
+    @Override
+    public final String toString(){
+        return this.getLabel();
+    }
 }

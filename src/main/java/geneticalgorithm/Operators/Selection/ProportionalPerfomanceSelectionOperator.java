@@ -32,6 +32,10 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
 
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
+        
+        if(population.size() == survivorSize){
+            return population;
+        }
 
         double totalScore = this.getTotalScore(population);
 
