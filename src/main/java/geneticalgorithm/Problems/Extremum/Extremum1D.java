@@ -32,8 +32,8 @@ import java.util.logging.Logger;
 public class Extremum1D extends Problem {
 
     private String strFunc = "sin(x)";
-    private String pbLabel = "Min1D Problem";
-    private double xMin = -10.0;
+    private String pbLabel = "Extremum1D Problem";
+    private double xMin = 0.0;
     private double xMax = 10.0;
     private double plotStep = 0.1;
     /**

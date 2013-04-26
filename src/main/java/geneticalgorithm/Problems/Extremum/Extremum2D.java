@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class Extremum2D extends Extremum1D {
 
     private String strFunc = "x^2+y^2";
-    private String pbLabel = "Min2D Problem";
+    private String pbLabel = "Extremum2D Problem";
     private double xMin = -1.0;
     private double xMax = 1.0;
     private double yMin = -1.0;
