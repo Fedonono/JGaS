@@ -77,7 +77,7 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
     
     private double getTotalScore(Population population) {
 
-        this.scores = new ArrayList<>();
+        this.scores = new ArrayList<>(population.size());
         double minScore = this.getminScore(population);
         double totalScore = 0;
         double score;

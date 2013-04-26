@@ -11,6 +11,7 @@ import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Operators.Operators;
 import geneticalgorithm.Operators.Selection.ProportionalPerfomanceSelectionOperator;
+import geneticalgorithm.Operators.Selection.ProportionalRankingSelectionOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Population;
@@ -38,6 +39,8 @@ public abstract class Problem extends Model {
         this.stopCriteria = new StopCriteria();
         this.addSelectionOperator(TruncationSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
+        this.addSelectionOperator(ProportionalRankingSelectionOperator.getInstance());
+        
     }
     
     
