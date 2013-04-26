@@ -31,10 +31,6 @@ public class RandomSelectionOperator extends SelectionOperator{
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
         
-        if(population.size() == survivorSize){
-            return population;
-        }
-        
         Population nextPopulation = new Population(population.getObservableVolume());
         LinkedList<Individual> individuals = new LinkedList<>(population.getIndividuals());
         int survivorCount = 0;

@@ -33,10 +33,6 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
 
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
-        
-        if(population.size() == survivorSize){
-            return population;
-        }
 
         this.madeRanking(population);
 

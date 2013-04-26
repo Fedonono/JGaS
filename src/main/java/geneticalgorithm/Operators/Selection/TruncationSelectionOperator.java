@@ -29,10 +29,6 @@ public class TruncationSelectionOperator extends SelectionOperator {
 
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
-        
-        if(population.size() == survivorSize){
-            return population;
-        }
 
         population.sort();
         

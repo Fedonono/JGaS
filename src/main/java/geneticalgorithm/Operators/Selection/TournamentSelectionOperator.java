@@ -33,10 +33,6 @@ public class TournamentSelectionOperator extends SelectionOperator {
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
         
-        if(population.size() == survivorSize){
-            return population;
-        }
-        
         ArrayList<Individual> individuals = new ArrayList<>();
         this.draft = new LinkedList<>();
         this.draft.addAll(population.getIndividuals());
