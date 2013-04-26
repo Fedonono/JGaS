@@ -158,4 +158,8 @@ public class Population extends Model {
     public Individual remove(int index){
         return this.individuals.remove(index);
     }
+    
+    public boolean isEmpty(){
+        return this.individuals.isEmpty();
+    }
 }

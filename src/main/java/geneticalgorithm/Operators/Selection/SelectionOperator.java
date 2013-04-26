@@ -17,5 +17,5 @@ public abstract class SelectionOperator extends Operator {
         super(label);
     }
 
-    public abstract Population buildNextGeneration(Population population, int size);
+    public abstract Population buildNextGeneration(Population population, int survivorSize);
 }
