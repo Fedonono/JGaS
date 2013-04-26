@@ -7,8 +7,6 @@ package geneticalgorithm.Operators.Selection;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

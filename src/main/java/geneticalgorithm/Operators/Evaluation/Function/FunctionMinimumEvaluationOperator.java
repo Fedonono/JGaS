@@ -13,9 +13,9 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author nono
  */
-public class FunctionEvaluationOperator extends EvaluationOperator {
-    private static String LABEL = "Evaluation";
-    public FunctionEvaluationOperator(){
+public class FunctionMinimumEvaluationOperator extends EvaluationOperator {
+    private static String LABEL = "Minimum";
+    public FunctionMinimumEvaluationOperator(){
         super(LABEL);
     }
     @Override

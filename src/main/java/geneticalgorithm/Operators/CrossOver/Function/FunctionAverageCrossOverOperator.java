@@ -15,7 +15,7 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public class FunctionAverageCrossOverOperator extends CrossOverOperator {
 
-    private static String LABEL = "average";
+    private static String LABEL = "Average";
 
     public FunctionAverageCrossOverOperator() {
         super(LABEL);

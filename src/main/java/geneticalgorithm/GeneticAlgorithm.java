@@ -2,8 +2,8 @@ package geneticalgorithm;
 
 import GraphicalComponents.CustomFrame;
 import MvcPattern.Model;
-import geneticalgorithm.Problems.Min1D.Min1D;
-import geneticalgorithm.Problems.Min2D.Min2D;
+import geneticalgorithm.Problems.Extremum.Extremum1D;
+import geneticalgorithm.Problems.Extremum.Extremum2D;
 import geneticalgorithm.Problems.Problem;
 import geneticalgorithm.Problems.ProblemUI;
 import geneticalgorithm.engine.GeneticEngine;
@@ -88,8 +88,8 @@ public class GeneticAlgorithm extends Model {
 
     public static void main(String[] args) {
         GeneticAlgorithm ga = new GeneticAlgorithm();
-        ga.addProblem(new Min2D());
-        ga.addProblem(new Min1D());
+        ga.addProblem(new Extremum2D());
+        ga.addProblem(new Extremum1D());
         ga.run();
     }
 }
