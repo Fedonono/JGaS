@@ -70,7 +70,7 @@ public class ProblemUI extends JDialog implements View, Observer {
         Container cp = this.getContentPane();
         cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-        int heightPx = 1100;
+        int heightPx = 450;
         int widthPx = 600;
         this.setMinimumSize(new Dimension(widthPx, heightPx));
 
