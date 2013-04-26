@@ -30,6 +30,8 @@ public class TruncationSelectionOperator extends SelectionOperator {
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 
+        population.sort();
+        
         Population pop = new Population(population.getObservableVolume());
         Iterator<Individual> iterator = population.iterator();
         Individual individual;

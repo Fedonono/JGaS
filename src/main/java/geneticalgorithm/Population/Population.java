@@ -22,6 +22,8 @@ public class Population extends Model {
     private ArrayList<Individual> individuals;
     private int observableVolume = 1;
     private boolean semaphoreAccess = true;
+    
+    private Individual alphaIndividual;
 
     public Population() {
         this(1);
@@ -89,9 +91,9 @@ public class Population extends Model {
     public final void notifyViews() {
         if (this.semaphoreAccess) {
             this.semaphoreAccess = false;
-            
             super.notifyViews(new ObservableVolumeRefreshEvent(this, this.observableVolume, this.size()));
             
+            this.sort();
             int size = 0;
             LinkedList<Individual> sample = new LinkedList<>();
 
@@ -109,8 +111,7 @@ public class Population extends Model {
 
     }
 
-    public Individual getAlphaIndividual() {
-
+    private void researchAlphaIndividual(){
         Iterator<Individual> individualIterator = this.iterator();
         Individual bestIndividual = individualIterator.next();
         Individual currentIndividual;
@@ -122,7 +123,13 @@ public class Population extends Model {
                 bestIndividual = currentIndividual;
             }
         }
-        return bestIndividual;
+        this.alphaIndividual= bestIndividual;
+    }
+    
+    public Individual getAlphaIndividual() {
+
+       this.researchAlphaIndividual();
+       return this.alphaIndividual;
     }
 
     public String xmlSerialisation() {
@@ -137,5 +144,18 @@ public class Population extends Model {
 
     public int size() {
         return this.individuals.size();
+    }
+    
+    @Override
+    public Population clone(){
+        
+        Population pop = new Population(this.observableVolume);
+        pop.addAll(this.individuals);
+        
+        return pop;
+    }
+    
+    public Individual remove(int index){
+        return this.individuals.remove(index);
     }
 }
