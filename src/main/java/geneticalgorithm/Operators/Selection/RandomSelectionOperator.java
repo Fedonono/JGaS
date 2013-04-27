@@ -41,8 +41,9 @@ public class RandomSelectionOperator extends SelectionOperator {
             int survivorCount = 0;
 
             int size = individuals.size();
+            int populationSize = population.size();
 
-            while (survivorCount < survivorSize) {
+            while (survivorCount < survivorSize && survivorCount < populationSize) {
 
                 int index = (int) Math.round(Math.random() * (size - 1));
                 nextPopulation.add(individuals.remove(index));

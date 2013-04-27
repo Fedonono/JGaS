@@ -44,7 +44,7 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
             this.madeRanking(population);
 
             Population p = population.clone();
-
+            int populationSize = population.size();
 
             int survivorCount = 0;
             int i;
@@ -52,7 +52,7 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
             int initialSize = p.size();
             double adaptability;
 
-            while (survivorCount < survivorSize) {
+            while (survivorCount < survivorSize && survivorCount < populationSize) {
 
                 i = 0;
                 size = p.size();

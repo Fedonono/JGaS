@@ -49,8 +49,9 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
             int survivorCount = 0;
             int i;
             int size;
+            int populationSize = population.size();
 
-            while (survivorCount < survivorSize) {
+            while (survivorCount < survivorSize && survivorCount < populationSize) {
 
                 i = 0;
                 size = p.size();

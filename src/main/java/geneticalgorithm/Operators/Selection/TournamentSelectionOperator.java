@@ -48,8 +48,9 @@ public class TournamentSelectionOperator extends SelectionOperator {
 
             int survivorCount = 0;
             int size;
+            int populationSize = population.size();
 
-            while (survivorCount < survivorSize) {
+            while (survivorCount < survivorSize && survivorCount < populationSize) {
 
                 individuals.clear();
                 individuals.addAll(this.draft);
