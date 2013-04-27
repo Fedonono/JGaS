@@ -32,69 +32,78 @@ public class TournamentSelectionOperator extends SelectionOperator {
 
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
-        
-        ArrayList<Individual> individuals = new ArrayList<>();
-        this.draft = new LinkedList<>();
-        this.draft.addAll(population.getIndividuals());
 
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        int survivorCount = 0;
-        int size;
+        if (population.size() == survivorSize) {
+            nextPopulation.addAll(population.getIndividuals());
 
-        while (survivorCount < survivorSize) {
+        } else {
 
-            individuals.clear();
-            individuals.addAll(this.draft);
-            this.draft.clear();
+            ArrayList<Individual> individuals = new ArrayList<>();
+            this.draft = new LinkedList<>();
+            this.draft.addAll(population.getIndividuals());
 
-            size = individuals.size();
-            if (size == 1) {
-                nextPopulation.add(individuals.get(0));
-                survivorCount++;
-            }
-            while (size > 1 && survivorCount < survivorSize) {
 
-                int firstChallengerIndex = (int) Math.round(Math.random() * (size - 1));
-                Individual firstChallenger = individuals.remove(firstChallengerIndex);
-                size--;
-                double firstScore = firstChallenger.getScore();
 
-                int secondChallengerIndex = (int) Math.round(Math.random() * (size - 1));
-                Individual secondChallenger = individuals.remove(secondChallengerIndex);
-                size--;
-                double secondScore = secondChallenger.getScore();
+            int survivorCount = 0;
+            int size;
 
-                if (firstScore > secondScore) {
+            while (survivorCount < survivorSize) {
 
-                    nextPopulation.add(firstChallenger);
+                individuals.clear();
+                individuals.addAll(this.draft);
+                this.draft.clear();
+
+                size = individuals.size();
+                if (size == 1) {
+                    nextPopulation.add(individuals.get(0));
                     survivorCount++;
-                    this.draft.add(secondChallenger);
+                }
+                while (size > 1 && survivorCount < survivorSize) {
 
-                } else if (firstScore < secondScore) {
+                    int firstChallengerIndex = (int) Math.round(Math.random() * (size - 1));
+                    Individual firstChallenger = individuals.remove(firstChallengerIndex);
+                    size--;
+                    double firstScore = firstChallenger.getScore();
 
-                    nextPopulation.add(secondChallenger);
-                    survivorCount++;
-                    this.draft.add(firstChallenger);
+                    int secondChallengerIndex = (int) Math.round(Math.random() * (size - 1));
+                    Individual secondChallenger = individuals.remove(secondChallengerIndex);
+                    size--;
+                    double secondScore = secondChallenger.getScore();
 
+                    if (firstScore > secondScore) {
 
-                } else {
+                        nextPopulation.add(firstChallenger);
+                        survivorCount++;
+                        this.draft.add(secondChallenger);
 
-                    nextPopulation.add(firstChallenger);
-                    survivorCount++;
-
-                    if (survivorCount < survivorSize) {
+                    } else if (firstScore < secondScore) {
 
                         nextPopulation.add(secondChallenger);
                         survivorCount++;
+                        this.draft.add(firstChallenger);
+
+
+                    } else {
+
+                        nextPopulation.add(firstChallenger);
+                        survivorCount++;
+
+                        if (survivorCount < survivorSize) {
+
+                            nextPopulation.add(secondChallenger);
+                            survivorCount++;
+                        }
                     }
                 }
+                if (size == 1) {
+                    this.draft.add(individuals.get(0));
+                }
             }
-            if(size == 1){
-                this.draft.add(individuals.get(0));
-            }
+
         }
-        
+
         return nextPopulation;
     }
 }

@@ -13,16 +13,17 @@ import java.util.Iterator;
  * @author simonneau
  */
 public class TruncationSelectionOperator extends SelectionOperator {
+
     private static TruncationSelectionOperator instance;
     private static String LABEL = "Truncation selection";
-    
-    private TruncationSelectionOperator(){
+
+    private TruncationSelectionOperator() {
         super(LABEL);
     }
-    
+
     public static TruncationSelectionOperator getInstance() {
-        if(TruncationSelectionOperator.instance == null){
-           instance = new TruncationSelectionOperator();
+        if (TruncationSelectionOperator.instance == null) {
+            instance = new TruncationSelectionOperator();
         }
         return instance;
     }
@@ -30,19 +31,24 @@ public class TruncationSelectionOperator extends SelectionOperator {
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 
-        population.sort();
-        
-        Population pop = new Population(population.getObservableVolume());
-        Iterator<Individual> iterator = population.iterator();
-        Individual individual;
-        int i = 0;
-        
-        while (iterator.hasNext() && i < survivorSize) {
-            individual = iterator.next();
-            pop.add(individual);
-            i++;
+        Population nextPopulation = new Population(population.getObservableVolume());
+
+        if (population.size() == survivorSize) {
+            nextPopulation.addAll(population.getIndividuals());
+            
+        } else {
+            population.sort();
+            Iterator<Individual> iterator = population.iterator();
+            Individual individual;
+            int i = 0;
+
+            while (iterator.hasNext() && i < survivorSize) {
+                individual = iterator.next();
+                nextPopulation.add(individual);
+                i++;
+            }
         }
 
-        return pop;
+        return nextPopulation;
     }
 }

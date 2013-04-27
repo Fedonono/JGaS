@@ -34,38 +34,44 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 
-        this.madeRanking(population);
-
-        Population p = population.clone();
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        int survivorCount = 0;
-        int i;
-        int size;
-        int initialSize = p.size();
-        double adaptability;
+        if (population.size() == survivorSize) {
+            nextPopulation.addAll(population.getIndividuals());
 
-        while (survivorCount < survivorSize) {
+        } else {
 
-            i = 0;
-            size = p.size();
+            this.madeRanking(population);
 
-            while (i < size && survivorCount < survivorSize) {
-                
-                adaptability = initialSize - this.ranking.get(i) + 1;
-                
-                if (Math.random() <= adaptability / this.poolRange) {
+            Population p = population.clone();
 
-                    nextPopulation.add(p.remove(i));
-                    this.ranking.remove(i);
-                    this.poolRange -= adaptability;
-                    size--;
-                    survivorCount++;
+
+            int survivorCount = 0;
+            int i;
+            int size;
+            int initialSize = p.size();
+            double adaptability;
+
+            while (survivorCount < survivorSize) {
+
+                i = 0;
+                size = p.size();
+
+                while (i < size && survivorCount < survivorSize) {
+
+                    adaptability = initialSize - this.ranking.get(i) + 1;
+
+                    if (Math.random() <= adaptability / this.poolRange) {
+
+                        nextPopulation.add(p.remove(i));
+                        this.ranking.remove(i);
+                        this.poolRange -= adaptability;
+                        size--;
+                        survivorCount++;
+                    }
+                    i++;
                 }
-                i++;
             }
-
-
         }
 
         return nextPopulation;

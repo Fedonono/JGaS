@@ -33,46 +33,51 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 
-        double totalScore = this.getTotalScore(population);
-
-        Population p = population.clone();
         Population nextPopulation = new Population(population.getObservableVolume());
-        
-        double score;
 
-        int survivorCount = 0;
-        int i;
-        int size;
-        
-        while (survivorCount < survivorSize) {
-            
-            i = 0;
-            size = p.size();
+        if (population.size() == survivorSize) {
+            nextPopulation.addAll(population.getIndividuals());
 
-            while (i < size && survivorCount < survivorSize) {
-                
-                score = this.scores.get(i);
+        } else {
 
-                if (Math.random() <= score / totalScore) {
+            double totalScore = this.getTotalScore(population);
 
-                    nextPopulation.add(p.remove(i));
-                    this.scores.remove(i);
-                    size--;
-                    
-                    totalScore -= score;
-                    survivorCount++;
+            Population p = population.clone();
+
+            double score;
+
+            int survivorCount = 0;
+            int i;
+            int size;
+
+            while (survivorCount < survivorSize) {
+
+                i = 0;
+                size = p.size();
+
+                while (i < size && survivorCount < survivorSize) {
+
+                    score = this.scores.get(i);
+
+                    if (Math.random() <= score / totalScore) {
+
+                        nextPopulation.add(p.remove(i));
+                        this.scores.remove(i);
+                        size--;
+
+                        totalScore -= score;
+                        survivorCount++;
+                    }
+                    i++;
                 }
-                i++;
+
+
             }
-
-
         }
 
         return nextPopulation;
     }
 
-    
-    
     private double getTotalScore(Population population) {
 
         this.scores = new ArrayList<>(population.size());
@@ -82,12 +87,12 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
         List<Individual> individuals = population.getIndividuals();
 
         for (Individual individual : individuals) {
-            
+
             score = individual.getScore() - minScore + 1;
             this.scores.add(score);
             totalScore += score;
         }
-        
+
         return totalScore;
     }
 
@@ -99,9 +104,9 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
         double score;
 
         for (Individual individual : individuals) {
-            
+
             score = individual.getScore();
-            
+
             if (score < minScore) {
                 minScore = score;
             }
