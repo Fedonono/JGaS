@@ -25,10 +25,17 @@ public class Population extends Model {
     
     private Individual alphaIndividual;
 
+    /**
+     *
+     */
     public Population() {
         this(1);
     }
 
+    /**
+     *
+     * @param observableVolume
+     */
     public Population(int observableVolume) {
         this.individuals = new ArrayList<>();
         this.observableVolume = observableVolume;
@@ -43,26 +50,52 @@ public class Population extends Model {
         this.individuals.add(s);
     }
 
+    /**
+     * adds all individuals from coll to 'this'.
+     * @param coll
+     */
     public void addAll(Collection<? extends Individual> coll) {
         this.individuals.addAll(coll);
     }
 
+    /**
+     * adds all individuals from coll begining to the index 'index' to 'this'.
+     * @param index
+     * @param coll
+     */
     public void addAll(int index, Collection<? extends Individual> coll) {
         this.individuals.addAll(index, coll);
     }
 
+    /**
+     *
+     * @return an iterator on individuals.
+     */
     public Iterator<Individual> iterator() {
         return this.individuals.iterator();
     }
 
+    /**
+     *
+     * @return 'this' individuals.
+     */
     public ArrayList<Individual> getIndividuals() {
         return individuals;
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public Individual get(int index) {
         return this.individuals.get(index);
     }
 
+    /**
+     * set the obserable volume.
+     * @param observableVolume
+     */
     public void setObservableVolume(int observableVolume) {
         int size = this.individuals.size();
         if (observableVolume > size) {
@@ -74,6 +107,10 @@ public class Population extends Model {
         super.notifyViews(new ObservableVolumeRefreshEvent(this, observableVolume, this.size()));
     }
 
+    /**
+     *
+     * @return
+     */
     public int getObservableVolume() {
         return observableVolume;
     }
@@ -87,6 +124,9 @@ public class Population extends Model {
         this.individuals.addAll(population.individuals);
     }
 
+    /**
+     *
+     */
     @Override
     public final void notifyViews() {
         if (this.semaphoreAccess) {
@@ -126,26 +166,45 @@ public class Population extends Model {
         this.alphaIndividual= bestIndividual;
     }
     
+    /**
+     *
+     * @return the best individuals;
+     */
     public Individual getAlphaIndividual() {
 
        this.researchAlphaIndividual();
        return this.alphaIndividual;
     }
 
+    /**
+     * @deprecated .
+     * @return
+     */
     public String xmlSerialisation() {
         String serialisedPopulation = "";
         //TODO
         return serialisedPopulation;
     }
 
+    /**
+     * sort the individuals from the best to the worst.
+     */
     public void sort() {
         Collections.sort(individuals, new IndividualComparator());
     }
 
+    /**
+     *
+     * @return
+     */
     public int size() {
         return this.individuals.size();
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public Population clone(){
         
@@ -155,10 +214,19 @@ public class Population extends Model {
         return pop;
     }
     
+    /**
+     * remove the individual at the index 'index' in the individuals.
+     * @param index
+     * @return
+     */
     public Individual remove(int index){
         return this.individuals.remove(index);
     }
     
+    /**
+     *
+     * @return true if the popualtion does not contain any individual. False otherwise.
+     */
     public boolean isEmpty(){
         return this.individuals.isEmpty();
     }

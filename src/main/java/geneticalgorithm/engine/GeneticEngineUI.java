@@ -38,6 +38,11 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     private int populationUI_id;
     private LinkedList<Observer> observers = new LinkedList<>();
 
+    /**
+     *
+     * @param ge
+     * @param populationUI
+     */
     public GeneticEngineUI(GeneticEngine ge, PopulationUI populationUI) {
 
         this.controller = new GeneticEngineUserCtrl(ge);
@@ -63,6 +68,10 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         populationUI.addObserver(this);
     }
 
+    /**
+     *
+     * @param ev
+     */
     @Override
     public void refresh(RefreshEvent ev) {
 
@@ -78,7 +87,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             PopulationUI populationUI = ((EnginePopulationRefreshEvent) ev).getPopulationUI();
             this.init(populationUI);
             this.repaint();
-            this.notifyObserver();
+            this.notifyObservers();
 
         } else if (ev instanceof EngineProblemRefreshEvent) {
 
@@ -124,7 +133,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for(Observer o : this.observers){
             o.reactToChanges(new RepaintEvent(this));
         }
@@ -160,7 +169,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         }
 
         @Override
-        public void notifyObserver() {
+        public void notifyObservers() {
             for (Observer o : this.observers) {
                 o.reactToChanges(new ValidateButtonEvent(this));
             }
@@ -168,7 +177,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         @Override
         public void reactToChanges(ObservationEvent ev) {
-            this.notifyObserver();
+            this.notifyObservers();
         }
 
         public void setStepCount(int stepCount) {
@@ -223,7 +232,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         }
 
         @Override
-        public void notifyObserver() {
+        public void notifyObservers() {
             //empty
         }
 

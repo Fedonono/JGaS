@@ -6,7 +6,7 @@ package geneticalgorithm.engine;
 
 import MvcPattern.Model;
 import MvcPattern.View;
-import Tools.Chronometer;
+import Util.Tools.Chronometer;
 import geneticalgorithm.Operators.CrossOver.CrossOverOperator;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
@@ -34,6 +34,10 @@ public class GeneticEngine extends Model implements Runnable {
     private Problem problem;
     private Thread engine;
 
+    /**
+     *
+     * @param problem
+     */
     public GeneticEngine(Problem problem) {
 
         this.setProblem(problem);
@@ -41,6 +45,10 @@ public class GeneticEngine extends Model implements Runnable {
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
     }
 
+    /**
+     *
+     * @param geUI
+     */
     @Override
     public final void addView(View geUI) {
 
@@ -48,10 +56,17 @@ public class GeneticEngine extends Model implements Runnable {
         geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount, this.evolutionCriterion));
     }
 
+    /**
+     *
+     * @return true if the engine is paused. false otherwise.
+     */
     public boolean isPaused() {
         return this.pause;
     }
 
+    /**
+     *
+     */
     public void refreshPopulation()  {
         if (this.pause) {
             this.population.notifyViews();
@@ -67,14 +82,26 @@ public class GeneticEngine extends Model implements Runnable {
         this.chronometer = new Chronometer();
     }
 
+    /**
+     *
+     * @return
+     */
     public Population getPopulation() {
         return population;
     }
 
+    /**
+     *
+     * @return the treated problem.
+     */
     public Problem getProblem() {
         return problem;
     }
 
+    /**
+     *
+     * @param problem
+     */
     public final void setProblem(Problem problem) {
 
         this.problem = problem;
@@ -83,6 +110,10 @@ public class GeneticEngine extends Model implements Runnable {
         this.init();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getStepCount() {
         return stepCount;
     }
@@ -99,6 +130,9 @@ public class GeneticEngine extends Model implements Runnable {
 
     }
 
+    /**
+     * resume this.
+     */
     public void resume() {
         if (this.pause) {
             this.pause = false;
@@ -107,6 +141,9 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
+    /**
+     * pause this.
+     */
     public void pause(){
         this.pause = true;
         this.chronometer.stop();
@@ -122,6 +159,9 @@ public class GeneticEngine extends Model implements Runnable {
         this.population.notifyViews();
     }
 
+    /**
+     * run the engine in an independant thread.
+     */
     @Override
     public void run() {
         while (!this.pause && !this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
@@ -132,11 +172,16 @@ public class GeneticEngine extends Model implements Runnable {
         //this.population.notifyViews();
     }
 
+    
     private void engine() {
         this.engine = new Thread(this);
         engine.start();
     }
 
+    /**
+     *
+     * @return
+     */
     public Individual getBestSolution() {
 
         return this.population.getAlphaIndividual();
@@ -255,6 +300,9 @@ public class GeneticEngine extends Model implements Runnable {
         this.population.addAll(mutants);
     }
 
+    /**
+     * process all the steps of genetic algorithms.
+     */
     public void evolve() {
 
         this.crossOverStep();
@@ -265,6 +313,9 @@ public class GeneticEngine extends Model implements Runnable {
         this.notifyViews();
     }
 
+    /**
+     * process only one step generation.
+     */
     public void step() {
         if (!this.problem.stopCriteriaAreReached(this.stepCount, this.chronometer.getTime(), this.evolutionCriterion)) {
             this.chronometer.start();
@@ -274,6 +325,9 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void notifyViews() {
         long time = this.chronometer.getTime();

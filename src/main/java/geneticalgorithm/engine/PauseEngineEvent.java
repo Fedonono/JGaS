@@ -14,11 +14,20 @@ public class PauseEngineEvent extends UserEvent{
     
     private boolean pause;
     
+    /**
+     *
+     * @param source
+     * @param pause
+     */
     public PauseEngineEvent(GeneticEngineUI source, boolean pause){
         super(source);
         this.pause = pause;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isPaused(){
         return this.pause;
     }

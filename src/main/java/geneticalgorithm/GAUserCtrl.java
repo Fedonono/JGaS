@@ -15,10 +15,18 @@ public class GAUserCtrl implements Controller {
 
     GeneticAlgorithm ag;
     
+    /**
+     * 
+     * @param model
+     */
     public GAUserCtrl(GeneticAlgorithm model){
         this.ag = model;
     }
     
+    /**
+     * set the controller target with ag.
+     * @param ag
+     */
     public void set(GeneticAlgorithm ag){
         this.ag = ag;
     }

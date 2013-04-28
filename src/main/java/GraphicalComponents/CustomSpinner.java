@@ -22,10 +22,24 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     private LinkedList<Observer> observers = new LinkedList<>();
     private Spinner spinner;
 
+    /**
+     *
+     * @param label
+     * @param min
+     * @param max
+     */
     public CustomSpinner(String label, Number min, Number max) {
         this(label, min, max, min, 1);
     }
 
+    /**
+     *
+     * @param label
+     * @param min
+     * @param max
+     * @param defaultValue
+     * @param step
+     */
     public CustomSpinner(String label, Number min, Number max, Number defaultValue, Number step) {
         this.add(new JLabel(label));
         this.spinner = new Spinner(min, max, defaultValue, step);
@@ -34,10 +48,18 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
         this.spinner.addChangeListener(this);
     }
 
+    /**
+     * set the current 'this' value.
+     * @param v
+     */
     public void setValue(Number v) {
         this.spinner.setValue(v);
     }
 
+    /**
+     * 
+     * @return 'this' current value
+     */
     public Number getValue() {
         return (Number)this.spinner.getValue();
     }
@@ -48,15 +70,19 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for (Observer o : observers) {
             o.reactToChanges(new SpinnerEvent(this, this.getValue()));
         }
     }
 
+    /**
+     *
+     * @param ce
+     */
     @Override
     public void stateChanged(ChangeEvent ce) {
-        this.notifyObserver();
+        this.notifyObservers();
     }
 
     

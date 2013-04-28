@@ -25,9 +25,18 @@ import javax.swing.JPanel;
 public class PopulationUI extends IdentifiableComponent implements View, Observable {
 
     private Header header;
+    /**
+     *
+     */
     protected JPanel populationSample;
+    /**
+     *
+     */
     protected PopulationController controller;
 
+    /**
+     *
+     */
     public PopulationUI() {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.header = new Header(this);
@@ -37,6 +46,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         this.add(populationSample);
     }
 
+    /**
+     *
+     * @param ev
+     */
     @Override
     public void refresh(RefreshEvent ev) {
 
@@ -54,6 +67,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
     }
 
+    /**
+     *
+     * @param event
+     */
     public void populationRefreshEventTreatment(PopulationRefreshEvent event) {
         LinkedList<Individual> samples = event.getSample();
 
@@ -63,10 +80,18 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public PopulationController getController() {
         return controller;
     }
 
+    /**
+     *
+     * @param controller
+     */
     public void setController(PopulationController controller) {
         this.controller = controller;
         this.header.setController(controller);
@@ -77,13 +102,17 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         this.header.addObserver(o);
     }
 
+    /**
+     *
+     * @param ev
+     */
     public void notifyObserver(ObservationEvent ev) {
         this.header.notifyObserver(ev);
     }
 
     @Override
-    public void notifyObserver() {
-        this.header.notifyObserver();
+    public void notifyObservers() {
+        this.header.notifyObservers();
     }
 
     private class Header extends IdentifiableComponent implements Observer, Observable {
@@ -115,7 +144,7 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             int id = ((IdentifiableComponent) ev.getSource()).getId();
 
             if (id == this.refresh.getId()) {
-                this.notifyObserver();
+                this.notifyObservers();
 
             } else if (id == this.volumeOption.getId()) {
                 this.controller.applyChanges(new ObservableVolumeUserEvent(boss, this.volumeOption.getValue()));
@@ -143,7 +172,7 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         }
 
         @Override
-        public void notifyObserver() {
+        public void notifyObservers() {
             this.notifyObserver(new SpreadRefreshOrderEvent(boss, true));
         }
 

@@ -18,10 +18,17 @@ public class PauseButton extends ValidateButton{
     
     private boolean isPaused;
     
+    /**
+     *
+     */
     public PauseButton(){
         this( false);
     }
     
+    /**
+     *
+     * @param isPaused
+     */
     public PauseButton(boolean isPaused){
         super("");
         this.isPaused = isPaused;
@@ -34,6 +41,10 @@ public class PauseButton extends ValidateButton{
         this.setText(label);        
     }
     
+    /**
+     * 
+     * @param isPaused
+     */
     public void setState(boolean isPaused){
         if(isPaused){
             this.button.setText(resume);
@@ -48,7 +59,7 @@ public class PauseButton extends ValidateButton{
     }
     
     @Override
-    public void notifyObserver(){
+    public void notifyObservers(){
        for(Observer o: observers){
            o.reactToChanges(new PauseEvent(this, this.isPaused));
        }
@@ -57,9 +68,13 @@ public class PauseButton extends ValidateButton{
     @Override
     public void actionPerformed(ActionEvent ae){
         this.setPause();
-        this.notifyObserver();
+        this.notifyObservers();
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isPaused(){
         return this.isPaused;
     }

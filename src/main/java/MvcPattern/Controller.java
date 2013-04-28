@@ -10,5 +10,9 @@ package MvcPattern;
  */
 public interface Controller {
 
+    /**
+     *
+     * @param event
+     */
     public void applyChanges(UserEvent event);
 }

@@ -19,6 +19,12 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
     private JSlider slider;
     private boolean notifyingDisabled = false;
 
+    /**
+     *
+     * @param min
+     * @param max
+     * @param value
+     */
     public CustomSlider(int min, int max, int value) {
         slider = new JSlider(min, max, value);
         this.add(slider);
@@ -27,6 +33,10 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
 
     }
 
+    /**
+     * Set 'this' current value
+     * @param value
+     */
     public void setValue(int value) {
         this.slider.setValue(value);
     }
@@ -37,7 +47,7 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         if (!this.notifyingDisabled) {
             for (Observer o : this.observers) {
                 o.reactToChanges(new CustomSliderEvent(this, this.slider.getValue()));
@@ -53,24 +63,44 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
         this.notifyingDisabled = false;
     }
 
+    /**
+     * set the maximum value
+     * @param minimum
+     */
     public void setMinimum(int minimum) {
         this.slider.setMinimum(minimum);
     }
 
+    /**
+     * draws ticks on the slider
+     * @param bool
+     */
     public void setPaintTicks(boolean bool) {
         this.slider.setPaintTicks(bool);
     }
 
+    /**
+     * set 'this' label.
+     * @param bool
+     */
     public void setPaintLabels(boolean bool) {
         this.slider.setPaintLabels(bool);
     }
 
+    /**
+     * set the maximum value.
+     * @param maximum
+     */
     public void setMaximum(int maximum) {
         this.slider.setMaximum(maximum);
     }
 
+    /**
+     *
+     * @param ce
+     */
     @Override
     public void stateChanged(ChangeEvent ce) {
-        this.notifyObserver();
+        this.notifyObservers();
     }
 }

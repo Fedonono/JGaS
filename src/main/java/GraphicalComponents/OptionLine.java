@@ -22,6 +22,13 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
     private CustomTextField textField;
     private String label;
 
+    /**
+     *
+     * @param text
+     * @param min
+     * @param max
+     * @param value
+     */
     public OptionLine(String text, int min, int max, int value) {
 
         if (min > max) {
@@ -48,6 +55,10 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
         textField.addObserver(this);
     }
 
+    /**
+     * set 'this' current value.
+     * @param value
+     */
     public void setValue(int value) {
         this.setValue(value, true);
     }
@@ -66,11 +77,19 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
         }
     }
 
+    /**
+     * set 'this' maximum value.
+     * @param maxV
+     */
     public void setMaxValue(int maxV) {
         this.maxValue = maxV;
         this.slider.setMaximum(maxV);
     }
 
+    /**
+     * set 'this' minimum value.
+     * @param minV
+     */
     public void setMinValue(int minV) {
         this.minValue = minV;
         this.slider.setMinimum(minV);
@@ -102,7 +121,7 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
             this.slider.reactToChanges(new CustomSliderEvent(slider, value));
 
         }
-        this.notifyObserver();
+        this.notifyObservers();
     }
 
     @Override
@@ -111,7 +130,7 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
 
         for (Observer o : observers) {
             o.reactToChanges(new OptionLineEvent(this, this.value));
@@ -119,10 +138,18 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
 
     }
 
+    /**
+     *
+     * @return 'this' label.
+     */
     public String getLabel() {
         return this.label;
     }
 
+    /**
+     * 
+     * @return 'this' current value.
+     */
     public int getValue() {
         return this.value;
     }

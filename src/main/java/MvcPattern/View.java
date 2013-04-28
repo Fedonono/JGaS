@@ -10,5 +10,9 @@ package MvcPattern;
  */
 public interface  View {
 
+    /**
+     *
+     * @param ev
+     */
     public  void refresh(RefreshEvent ev);
 }

@@ -10,16 +10,31 @@ package geneticalgorithm.Operators;
  */
 public abstract class Operator{
 
+    /**
+     *
+     */
     protected String label;
     
+    /**
+     *
+     * @param label
+     */
     public Operator(String label){
         this.label = label;
     }
     
+    /**
+     *
+     * @return 'this' label.
+     */
     public String getLabel() {
         return this.label;
     }
     
+    /**
+     *
+     * @return 'this' label.
+     */
     @Override
     public String toString(){
         return this.getLabel();

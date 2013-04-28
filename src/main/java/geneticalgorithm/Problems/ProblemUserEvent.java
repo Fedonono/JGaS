@@ -12,6 +12,10 @@ import MvcPattern.UserEvent;
  */
 public class ProblemUserEvent extends UserEvent{
 
+    /**
+     *
+     * @param source
+     */
     public ProblemUserEvent(ProblemUI source) {
         super(source);
     }

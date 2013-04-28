@@ -6,7 +6,7 @@ package geneticalgorithm.Population;
 
 import MvcPattern.Controller;
 import MvcPattern.UserEvent;
-import geneticalgorithm.Population.Function.PopulationFunction;
+import geneticalgorithm.Extremum.PopulationFunction;
 
 /**
  *
@@ -14,12 +14,23 @@ import geneticalgorithm.Population.Function.PopulationFunction;
  */
 public class PopulationController implements Controller{
     
+    /**
+     *
+     */
     protected PopulationFunction target;
 
+    /**
+     *
+     * @param model
+     */
     public void setModel(PopulationFunction model) {
         this.target = model;
     }
     
+    /**
+     *
+     * @param event
+     */
     @Override
     public void applyChanges(UserEvent event) {
         
@@ -30,6 +41,10 @@ public class PopulationController implements Controller{
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Population getModel() {
         return target;
     }

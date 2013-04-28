@@ -15,10 +15,18 @@ public class GeneticEngineUserCtrl implements Controller {
 
     private GeneticEngine target;
 
+    /**
+     *
+     * @param target
+     */
     public GeneticEngineUserCtrl(GeneticEngine target) {
         this.target = target;
     }
 
+    /**
+     *
+     * @param event
+     */
     @Override
     public void applyChanges(UserEvent event) {
             if (event instanceof PauseEngineEvent) {

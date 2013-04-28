@@ -12,6 +12,10 @@ import MvcPattern.RefreshEvent;
  */
 public class ProblemRefreshEvent extends RefreshEvent {
 
+    /**
+     *
+     * @param source
+     */
     public ProblemRefreshEvent(Problem source) {
         super(source);
     }

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 /**
  *
+ * @param <E> 
  * @author nono
  */
 public class SelectMenu<E> extends IdentifiableComponent implements Observable {
@@ -19,6 +20,10 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
     private LinkedList<Observer> observers = new LinkedList<>();
     private JComboBox<E> comboBox;
 
+    /**
+     *
+     * @param label
+     */
     public SelectMenu(String label) {
 
         super(new FlowLayout());
@@ -34,22 +39,34 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
         this.observers.add(o);
     }
 
+    /**
+     *
+     * @param item
+     */
     public void addItem(E item) {
         this.comboBox.addItem(item);
     }
 
+    /**
+     *
+     * @param collection
+     */
     public void addAll(Collection<E> collection) {
         for (E item : collection) {
             comboBox.addItem(item);
         }
     }
 
+    /**
+     *
+     * @return 'this' current selected Item.
+     */
     public E getSelectedItem() {
         return (E) (this.comboBox.getModel().getSelectedItem());
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for (Observer o : observers) {
             o.reactToChanges(new SelectMenuEvent<>(this, this.getSelectedItem()));
         }

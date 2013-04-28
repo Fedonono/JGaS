@@ -14,14 +14,26 @@ import java.util.Collection;
  */
 public class Point extends ArrayList<Double> {
 
+    /**
+     *
+     * @param doubles
+     */
     public Point(Double... doubles) {
         this.addAll(Arrays.asList(doubles));
     }
 
+    /**
+     *
+     * @param c
+     */
     public Point(Collection<? extends Double> c) {
         super(c);
     }
 
+    /**
+     * set 'this coordonate with average values between this and point.
+     * @param point
+     */
     public void average(Point point) {
         int size = this.size();
         for (int i = 0; i < size; i++) {
@@ -29,6 +41,10 @@ public class Point extends ArrayList<Double> {
         }
     }
 
+    /**
+     * reset 'this' with point values.
+     * @param p
+     */
     public void set(Point p){
         this.clear();
         this.addAll(p);

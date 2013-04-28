@@ -13,7 +13,7 @@ public class CheckBoxEvent extends ObservationEvent {
     private boolean checked;
     
     /**
-     *
+     * Fired by a CustomCheckBox
      * @param source
      * @param checked
      */
@@ -24,7 +24,7 @@ public class CheckBoxEvent extends ObservationEvent {
     
     /**
      *
-     * @return
+     * @return true if the CustomCheckBox is checked. False otherwise.
      */
     public boolean isChecked(){
         return this.checked;

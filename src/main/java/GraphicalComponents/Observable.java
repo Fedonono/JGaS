@@ -11,12 +11,13 @@ package GraphicalComponents;
 public interface Observable {
     
     /**
-     *
+     * add an Observer to this.
      * @param o
      */
     public  void addObserver(Observer o);
+    
     /**
-     *
+     * notify 'this' Observers
      */
-    public void notifyObserver();
+    public void notifyObservers();
 }

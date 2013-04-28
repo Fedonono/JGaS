@@ -16,10 +16,17 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
     private ValidateButton stepButton;
     private LinkedList<Observer> observers;
 
+    /**
+     *
+     */
     public PauseStepPanel() {
         this(false);
     }
 
+    /**
+     *
+     * @param isPaused
+     */
     public PauseStepPanel(boolean isPaused) {
 
         this.observers = new LinkedList<>();
@@ -61,7 +68,7 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         //empty ==> have to be more specific
     }
 
@@ -71,6 +78,10 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
         }
     }
     
+    /**
+     *
+     * @param pause
+     */
     public void setPause(boolean pause){
         this.pauseButton.setState(pause);
         this.stepButton.setVisible(pause);     

@@ -13,7 +13,7 @@ public class CustomSliderEvent extends ObservationEvent {
     private int value;
     
     /**
-     *
+     * Fired by a CustomSlider.
      * @param source
      * @param value
      */

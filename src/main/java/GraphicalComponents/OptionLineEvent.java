@@ -13,7 +13,7 @@ public class OptionLineEvent extends ObservationEvent{
     int value;
     
     /**
-     *
+     * Fired by an OptionLine.
      * @param source
      * @param value
      */
@@ -24,7 +24,7 @@ public class OptionLineEvent extends ObservationEvent{
     
     /**
      *
-     * @return
+     * @return the source value.
      */
     public int getValue(){
         return this.value;

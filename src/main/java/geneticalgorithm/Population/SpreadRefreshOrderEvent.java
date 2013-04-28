@@ -15,11 +15,20 @@ public class SpreadRefreshOrderEvent extends ValidateButtonEvent{
 
     boolean needingRefresh;
     
+    /**
+     *
+     * @param source
+     * @param needingRefresh
+     */
     public SpreadRefreshOrderEvent(Observable source, boolean needingRefresh) {
         super(source);
         this.needingRefresh = needingRefresh;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isNeedingRefresh() {
         return needingRefresh;
     }

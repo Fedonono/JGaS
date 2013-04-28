@@ -21,6 +21,10 @@ public class TruncationSelectionOperator extends SelectionOperator {
         super(LABEL);
     }
 
+    /**
+     *
+     * @return
+     */
     public static TruncationSelectionOperator getInstance() {
         if (TruncationSelectionOperator.instance == null) {
             instance = new TruncationSelectionOperator();
@@ -28,6 +32,12 @@ public class TruncationSelectionOperator extends SelectionOperator {
         return instance;
     }
 
+    /**
+     * select survivorSize individuals form population. select the survivorSize best individuals.
+     * @param population
+     * @param survivorSize
+     * @return
+     */
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 

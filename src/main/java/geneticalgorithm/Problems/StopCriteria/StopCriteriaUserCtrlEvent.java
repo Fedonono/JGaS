@@ -16,6 +16,13 @@ public class StopCriteriaUserCtrlEvent extends UserEvent{
     private int timeout;
     private double evolutionCriterion;
     
+    /**
+     *
+     * @param source
+     * @param stepCount
+     * @param timeout
+     * @param evolutionCriterion
+     */
     public StopCriteriaUserCtrlEvent(StopCriteriaUI source, int stepCount, int timeout, double evolutionCriterion){
         super(source);
         this.stepCount = stepCount;
@@ -23,14 +30,26 @@ public class StopCriteriaUserCtrlEvent extends UserEvent{
         this.evolutionCriterion = evolutionCriterion;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getStepCount() {
         return stepCount;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTimeout() {
         return timeout;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getEvolutionCriterion() {
         return evolutionCriterion;
     }

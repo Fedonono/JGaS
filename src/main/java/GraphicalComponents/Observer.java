@@ -11,7 +11,7 @@ package GraphicalComponents;
 public interface Observer {
     
     /**
-     *
+     * 
      * @param ev
      */
     public void reactToChanges(ObservationEvent ev);

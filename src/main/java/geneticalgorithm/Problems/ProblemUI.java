@@ -57,10 +57,17 @@ public class ProblemUI extends JDialog implements View, Observer {
     private int validateButtonId;
     private StopCriteriaUI stopCriteriaUI;
 
+    /**
+     *
+     */
     public ProblemUI() {
         this(null);
     }
 
+    /**
+     *
+     * @param problem
+     */
     public ProblemUI(Problem problem) {
 
         this.stopCriteriaUI = (StopCriteriaUI) problem.getStopCriteria().getUI();
@@ -186,34 +193,66 @@ public class ProblemUI extends JDialog implements View, Observer {
         return validateButtonId;
     }
 
+    /**
+     *
+     * @return
+     */
     public CrossOverOperator getSelectedCrossOverOperator() {
         return this.availableCrossOverOperators.getSelectedItem();
     }
 
+    /**
+     *
+     * @return
+     */
     public MutationOperator getSelectedMutationOperator() {
         return this.availableMutationOperators.getSelectedItem();
     }
 
+    /**
+     *
+     * @return
+     */
     public SelectionOperator getSelectedSelectionOperator() {
         return this.availableSelectionOperators.getSelectedItem();
     }
 
+    /**
+     *
+     * @return
+     */
     public EvaluationOperator getSelectedEvaluationOperator() {
         return this.availableEvaluationOperators.getSelectedItem();
     }
 
+    /**
+     *
+     * @return
+     */
     public double getMutationProbability() {
         return mutationProbability.getValue().doubleValue();
     }
 
+    /**
+     *
+     * @return
+     */
     public double getCrossProbability() {
         return crossProbability.getValue().doubleValue();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPopulationSize() {
         return populationSize.getValue().intValue();
     }
 
+    /**
+     *
+     * @param controller
+     */
     public void setController(ProblemController controller) {
         this.controller = controller;
     }

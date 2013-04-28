@@ -15,6 +15,10 @@ public class ProblemController implements Controller {
 
     private Problem problem;
 
+    /**
+     *
+     * @param problem
+     */
     public ProblemController(Problem problem){
         this.problem = problem;
     }
@@ -34,6 +38,10 @@ public class ProblemController implements Controller {
         }
     }
 
+    /**
+     *
+     * @param problem
+     */
     public void setProblem(Problem problem) {
         this.problem = problem;
     }

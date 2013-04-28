@@ -15,11 +15,20 @@ public class EnginePopulationRefreshEvent extends RefreshEvent {
     
     private PopulationUI populationUI;
     
+    /**
+     *
+     * @param source
+     * @param populationUI
+     */
     public EnginePopulationRefreshEvent(GeneticEngine source, PopulationUI populationUI){
         super(source);
         this.populationUI = populationUI;
     }
 
+    /**
+     *
+     * @return
+     */
     public PopulationUI getPopulationUI() {
         return populationUI;
     }

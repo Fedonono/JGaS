@@ -13,9 +13,18 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public abstract class MutationOperator extends Operator {
     
+    /**
+     *
+     * @param label
+     */
     public MutationOperator(String label){
         super(label);
     };
     
+    /**
+     * mutate individual.
+     * @param individual
+     * @return the mutant individual coming from individual.
+     */
     public abstract Individual mutate(Individual individual);
 }

@@ -15,11 +15,20 @@ public class ObservableVolumeUserEvent extends UserEvent{
     
     int value;
     
+    /**
+     *
+     * @param source
+     * @param value
+     */
     public ObservableVolumeUserEvent(View source, int value){
         super(source);
         this.value = value;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getValue() {
         return value;
     }

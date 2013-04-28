@@ -13,7 +13,7 @@ public class CustomTextFieldEvent extends ObservationEvent{
     private String value;
     
     /**
-     *
+     * Fired by CustomTextField.
      * @param source
      * @param value
      */

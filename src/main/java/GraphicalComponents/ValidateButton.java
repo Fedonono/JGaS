@@ -15,11 +15,17 @@ import javax.swing.JButton;
  */
 public class ValidateButton extends IdentifiableComponent implements Observable, ActionListener {
 
+    /**
+     *
+     */
     protected LinkedList<Observer> observers = new LinkedList<>();
+    /**
+     *
+     */
     protected JButton button;
 
     /**
-     *
+     * 
      * @param label
      */
     public ValidateButton(String label) {
@@ -37,6 +43,10 @@ public class ValidateButton extends IdentifiableComponent implements Observable,
         observers.add(o);
     }
 
+    /**
+     * set 'this' label.
+     * @param label
+     */
     public void setText(String label) {
         this.button.setText(label);
     }
@@ -46,7 +56,7 @@ public class ValidateButton extends IdentifiableComponent implements Observable,
      *
      */
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for (Observer o : observers) {
             o.reactToChanges(new ValidateButtonEvent(this));
         }
@@ -58,6 +68,6 @@ public class ValidateButton extends IdentifiableComponent implements Observable,
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.notifyObserver();
+        this.notifyObservers();
     }
 }

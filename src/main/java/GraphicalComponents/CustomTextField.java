@@ -19,10 +19,19 @@ public class CustomTextField extends IdentifiableComponent implements Observable
     private JTextField textField;
     private boolean notifyingDisabled = false;
 
+    /**
+     *
+     * @param text
+     */
     public CustomTextField(String text) {
         this(text, 8);
     }
 
+    /**
+     *
+     * @param text
+     * @param columns
+     */
     public CustomTextField(String text, int columns) {
         this.textField = new JTextField(text, columns);
         this.add(textField);
@@ -35,7 +44,7 @@ public class CustomTextField extends IdentifiableComponent implements Observable
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         if (!this.notifyingDisabled) {
             for (Observer o : this.observers) {
                 o.reactToChanges(new CustomTextFieldEvent(this, this.textField.getText()));
@@ -51,8 +60,12 @@ public class CustomTextField extends IdentifiableComponent implements Observable
         this.notifyingDisabled = false;
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.notifyObserver();
+        this.notifyObservers();
     }
 }

@@ -25,14 +25,20 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public class MainUI extends IdentifiableComponent implements View, Observer, Observable {
+public class GeneticAlgorithmUI extends IdentifiableComponent implements View, Observer, Observable {
 
     private Controller controller;
     private GeneticEngineUI geUI;
     private Header header;
     private LinkedList<Observer> observers = new LinkedList<>();
 
-    public MainUI(GeneticAlgorithm ga, GAUserCtrl controller, GeneticEngineUI geUI) {
+    /**
+     *
+     * @param ga
+     * @param controller
+     * @param geUI
+     */
+    public GeneticAlgorithmUI(GeneticAlgorithm ga, GAUserCtrl controller, GeneticEngineUI geUI) {
         this.controller = controller;
         this.setLayout(new BorderLayout());
 
@@ -53,6 +59,10 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
         this.add(geUI, BorderLayout.CENTER);
     }
 
+    /**
+     *
+     * @param controller
+     */
     public void setController(GAUserCtrl controller) {
         this.controller = controller;
     }
@@ -62,7 +72,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
         if (ev instanceof ReadyToStartEvent) {
             this.geUI = ((ReadyToStartEvent) ev).getEngineUI();
             this.reset();
-            this.notifyObserver();
+            this.notifyObservers();
         }
     }
 
@@ -78,7 +88,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
         }
         else if(ev instanceof RepaintEvent){
             this.repaint();
-            this.notifyObserver();
+            this.notifyObservers();
         }
     }
 
@@ -88,7 +98,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for(Observer o : this.observers){
             o.reactToChanges(new RepaintEvent(this));
         }
@@ -127,7 +137,7 @@ public class MainUI extends IdentifiableComponent implements View, Observer, Obs
         }
 
         @Override
-        public void notifyObserver() {
+        public void notifyObservers() {
             //empty
         }
 

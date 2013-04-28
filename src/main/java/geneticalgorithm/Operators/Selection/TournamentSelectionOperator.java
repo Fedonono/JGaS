@@ -23,6 +23,10 @@ public class TournamentSelectionOperator extends SelectionOperator {
         super(LABEL);
     }
 
+    /**
+     *
+     * @return
+     */
     public static TournamentSelectionOperator getInstance() {
         if (TournamentSelectionOperator.instance == null) {
             instance = new TournamentSelectionOperator();
@@ -30,6 +34,12 @@ public class TournamentSelectionOperator extends SelectionOperator {
         return instance;
     }
 
+    /**
+     * select survivorSize individuals form population. each individuals selected win a tournament.
+     * @param population
+     * @param survivorSize
+     * @return
+     */
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 

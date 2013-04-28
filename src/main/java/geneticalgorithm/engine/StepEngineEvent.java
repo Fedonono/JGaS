@@ -13,6 +13,10 @@ import MvcPattern.UserEvent;
 public class StepEngineEvent extends UserEvent{
     
     
+    /**
+     *
+     * @param source
+     */
     public StepEngineEvent(GeneticEngineUI source){
         super(source);
     }

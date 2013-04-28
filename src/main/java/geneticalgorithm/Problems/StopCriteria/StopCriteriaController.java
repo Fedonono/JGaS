@@ -15,6 +15,10 @@ public class StopCriteriaController implements Controller{
     
     private StopCriteria target;
 
+    /**
+     *
+     * @param target
+     */
     public StopCriteriaController(StopCriteria target){
         this.target = target;
     }

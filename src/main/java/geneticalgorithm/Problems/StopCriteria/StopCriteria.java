@@ -16,11 +16,20 @@ public class StopCriteria extends Model{
      private double evolutionCoeff;
      
      
-     public StopCriteria(){
+     /**
+     *
+     */
+    public StopCriteria(){
          this(0,0,0);
      }
      
-     public StopCriteria(int maxStepCount, int timeout, double mineEvolutionCoeff ){
+     /**
+     *
+     * @param maxStepCount
+     * @param timeout
+     * @param mineEvolutionCoeff
+     */
+    public StopCriteria(int maxStepCount, int timeout, double mineEvolutionCoeff ){
          this.maxStepCount = maxStepCount;
          this.timeout = timeout;
          this.evolutionCoeff = mineEvolutionCoeff;
@@ -29,6 +38,10 @@ public class StopCriteria extends Model{
          
      }
 
+    /**
+     *
+     * @return
+     */
     public int getMaxStepCount() {
         return maxStepCount;
     }
@@ -38,26 +51,53 @@ public class StopCriteria extends Model{
         super.notifyViews(new StopCriteriaRefreshEvent(this));
     }
     
+    /**
+     *
+     * @return
+     */
     public int getTimeout() {
         return timeout;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getEvolutionCriterion() {
         return evolutionCoeff;
     }
 
+    /**
+     *
+     * @param maxStepCount
+     */
     public void setMaxStepCount(int maxStepCount) {
         this.maxStepCount = maxStepCount;
     }
 
+    /**
+     *
+     * @param timeout
+     */
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
 
+    /**
+     *
+     * @param minEvolutionCoeff
+     */
     public void setMinEvolutionCriterion(double minEvolutionCoeff) {
         this.evolutionCoeff = minEvolutionCoeff;
     }
      
+    /**
+     *
+     * @param stepCount
+     * @param time
+     * @param evolutionCoeff
+     * @return
+     */
     public boolean areReached(int stepCount, long time, double evolutionCoeff){
         boolean areReached = false;
         

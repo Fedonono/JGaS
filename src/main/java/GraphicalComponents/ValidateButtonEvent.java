@@ -11,7 +11,7 @@ package GraphicalComponents;
 public class ValidateButtonEvent extends ObservationEvent{
 
     /**
-     *
+     * Fired by a ValidateButton.
      * @param source
      */
     public ValidateButtonEvent(Observable source) {

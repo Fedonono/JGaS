@@ -12,6 +12,10 @@ import MvcPattern.RefreshEvent;
  */
 public class StopCriteriaRefreshEvent extends RefreshEvent {
 
+    /**
+     *
+     * @param source
+     */
     public StopCriteriaRefreshEvent(StopCriteria source) {
         super(source);
     }

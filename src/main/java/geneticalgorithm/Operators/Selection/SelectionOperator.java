@@ -13,9 +13,19 @@ import geneticalgorithm.Population.Population;
  */
 public abstract class SelectionOperator extends Operator {
     
+    /**
+     *
+     * @param label
+     */
     public SelectionOperator(String label){
         super(label);
     }
 
+    /**
+     * select survivorSize individuals form population.
+     * @param population
+     * @param survivorSize
+     * @return
+     */
     public abstract Population buildNextGeneration(Population population, int survivorSize);
 }

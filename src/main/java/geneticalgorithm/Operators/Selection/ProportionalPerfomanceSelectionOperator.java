@@ -23,6 +23,10 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
         super(LABEL);
     }
 
+    /**
+     *
+     * @return
+     */
     public static ProportionalPerfomanceSelectionOperator getInstance() {
         if (ProportionalPerfomanceSelectionOperator.instance == null) {
             instance = new ProportionalPerfomanceSelectionOperator();
@@ -30,6 +34,12 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
         return instance;
     }
 
+    /**
+     * select survivorSize individuals from population. each individuals have a cvhance to survivre proportional with his performance.
+     * @param population
+     * @param survivorSize
+     * @return
+     */
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 

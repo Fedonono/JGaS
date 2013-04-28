@@ -21,34 +21,66 @@ public class Operators {
     private SelectionOperator selectionOperator;
     
 
+    /**
+     *
+     * @return 'this' selected CrossoverOperator;
+     */
     public CrossOverOperator getCrossoverOperator() {
         return crossoverOperator;
     }
 
+    /**
+     *
+     * @return 'this' selected EvaluationOperator.
+     */
     public EvaluationOperator getEvaluationOperator() {
         return evaluationOperator;
     }
 
+    /**
+     *
+     * @return 'this' selected MutationOperator.
+     */
     public MutationOperator getMutationOperator() {
         return mutationOperator;
     }
 
+    /**
+     *
+     * @return 'this' selected SelectionOperator.
+     */
     public SelectionOperator getSelectionOperator() {
         return selectionOperator;
     }
 
+    /**
+     * set 'this' selected CrossoverOperator.
+     * @param crossoverOperator
+     */
     public void setCrossoverOperator(CrossOverOperator crossoverOperator) {
         this.crossoverOperator = crossoverOperator;
     }
 
+    /**
+     * set this' selected EvaluationOperator.
+     * @param evaluationOperator
+     */
     public void setEvaluationOperator(EvaluationOperator evaluationOperator) {
         this.evaluationOperator = evaluationOperator;
     }
 
+    /**
+     * set 'this' selected MutationOperator.
+     * @param mutationOperator
+     */
     public void setMutationOperator(MutationOperator mutationOperator) {
         this.mutationOperator = mutationOperator;
     }
 
+    /**
+     * set 'this' selected SelectionOperator.
+     * @param selectionOperator
+     */
     public void setSelectionOperator(SelectionOperator selectionOperator) {
         this.selectionOperator = selectionOperator;
     }

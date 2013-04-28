@@ -10,6 +10,10 @@ package GraphicalComponents;
  */
 public class RepaintEvent extends ObservationEvent{
     
+    /**
+     *
+     * @param source
+     */
     public RepaintEvent(Observable source){
         super(source);
     }

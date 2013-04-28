@@ -12,8 +12,8 @@ public class ObservationEvent {
     private Observable source;
 
     /**
-     *
-     * @param source
+     * Fired by an Observable.
+     * @param  source
      */
     public ObservationEvent(Observable source) {
         this.source = source;

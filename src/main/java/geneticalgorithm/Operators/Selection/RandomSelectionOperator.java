@@ -21,6 +21,10 @@ public class RandomSelectionOperator extends SelectionOperator {
         super(LABEL);
     }
 
+    /**
+     *
+     * @return
+     */
     public static RandomSelectionOperator getInstance() {
         if (RandomSelectionOperator.instance == null) {
             instance = new RandomSelectionOperator();
@@ -28,6 +32,12 @@ public class RandomSelectionOperator extends SelectionOperator {
         return instance;
     }
 
+    /**
+     * select survivorSize individuals randomly from population.
+     * @param population
+     * @param survivorSize
+     * @return
+     */
     @Override
     public Population buildNextGeneration(Population population, int survivorSize) {
 

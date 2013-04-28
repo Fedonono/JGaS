@@ -19,6 +19,11 @@ public class CustomCheckBox extends IdentifiableComponent implements Observable,
     
     private LinkedList<Observer> observers = new LinkedList<>();
     
+    /**
+     *
+     * @param text
+     * @param checked
+     */
     public CustomCheckBox(String text, boolean checked) {        
         this.checkBox = new JCheckBox(text, checked);
         this.checkBox.addActionListener(this);
@@ -32,15 +37,19 @@ public class CustomCheckBox extends IdentifiableComponent implements Observable,
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for(Observer o : observers){
             o.reactToChanges(new CheckBoxEvent(this, this.checkBox.isSelected()));
         }
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.notifyObserver();
+        this.notifyObservers();
     }
     
 }

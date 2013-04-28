@@ -13,8 +13,16 @@ import geneticalgorithm.Population.Individuals.Individual;
  */
 public abstract class EvaluationOperator extends Operator {
 
+    /**
+     *
+     * @param label
+     */
     public EvaluationOperator(String label){
         super(label);
     }
+    /**
+     * evaluate individual.
+     * @param individual
+     */
     public abstract void evaluate(Individual individual);
 }

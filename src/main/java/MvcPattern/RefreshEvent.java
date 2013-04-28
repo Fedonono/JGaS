@@ -12,10 +12,18 @@ public class RefreshEvent {
     
     private Model source;
     
+    /**
+     * Fired by a Model
+     * @param source
+     */
     public RefreshEvent(Model source){
         this.source = source;
     }
 
+    /**
+     * return the source model.
+     * @return
+     */
     public Model getSource(){
         return this.source;
     }

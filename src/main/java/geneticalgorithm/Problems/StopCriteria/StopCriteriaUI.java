@@ -28,6 +28,10 @@ public class StopCriteriaUI extends IdentifiableComponent implements View, Obser
     
     private StopCriteriaController controller;
 
+    /**
+     *
+     * @param controller
+     */
     public StopCriteriaUI(StopCriteriaController controller) {
         
         this.controller = controller;
