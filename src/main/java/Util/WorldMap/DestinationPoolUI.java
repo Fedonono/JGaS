@@ -26,7 +26,6 @@ public class DestinationPoolUI extends IdentifiableComponent implements View{
     public DestinationPoolUI(DestinationPoolController controller){
         this.controller = controller;
         this.map = new JXMapKit();
-        this.map.
         this.setLayout(new BorderLayout());
         this.add(map);
         this.map.setDefaultProvider(JXMapKit.DefaultProviders.OpenStreetMaps);
