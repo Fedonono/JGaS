@@ -33,7 +33,7 @@ public class TruncationSelectionOperator extends SelectionOperator {
 
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        if (population.size() == survivorSize) {
+        if (population.size() <= survivorSize) {
             nextPopulation.addAll(population.getIndividuals());
             
         } else {

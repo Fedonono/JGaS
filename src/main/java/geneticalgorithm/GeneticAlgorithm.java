@@ -9,6 +9,7 @@ import geneticalgorithm.Problems.ProblemUI;
 import geneticalgorithm.engine.GeneticEngine;
 import geneticalgorithm.engine.GeneticEngineUI;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JFrame;

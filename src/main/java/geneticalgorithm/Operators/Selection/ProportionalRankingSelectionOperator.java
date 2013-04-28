@@ -36,7 +36,7 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
 
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        if (population.size() == survivorSize) {
+        if (population.size() <= survivorSize) {
             nextPopulation.addAll(population.getIndividuals());
 
         } else {
@@ -44,7 +44,6 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
             this.madeRanking(population);
 
             Population p = population.clone();
-            int populationSize = population.size();
 
             int survivorCount = 0;
             int i;
@@ -52,7 +51,7 @@ public class ProportionalRankingSelectionOperator extends SelectionOperator {
             int initialSize = p.size();
             double adaptability;
 
-            while (survivorCount < survivorSize && survivorCount < populationSize) {
+            while (survivorCount < survivorSize ) {
 
                 i = 0;
                 size = p.size();

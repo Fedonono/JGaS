@@ -35,7 +35,7 @@ public class TournamentSelectionOperator extends SelectionOperator {
 
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        if (population.size() == survivorSize) {
+        if (population.size() <= survivorSize) {
             nextPopulation.addAll(population.getIndividuals());
 
         } else {
@@ -48,9 +48,8 @@ public class TournamentSelectionOperator extends SelectionOperator {
 
             int survivorCount = 0;
             int size;
-            int populationSize = population.size();
 
-            while (survivorCount < survivorSize && survivorCount < populationSize) {
+            while (survivorCount < survivorSize) {
 
                 individuals.clear();
                 individuals.addAll(this.draft);

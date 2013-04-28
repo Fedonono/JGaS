@@ -35,7 +35,7 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
 
         Population nextPopulation = new Population(population.getObservableVolume());
 
-        if (population.size() == survivorSize) {
+        if (population.size() <= survivorSize) {
             nextPopulation.addAll(population.getIndividuals());
 
         } else {
@@ -49,9 +49,8 @@ public class ProportionalPerfomanceSelectionOperator extends SelectionOperator {
             int survivorCount = 0;
             int i;
             int size;
-            int populationSize = population.size();
 
-            while (survivorCount < survivorSize && survivorCount < populationSize) {
+            while (survivorCount < survivorSize) {
 
                 i = 0;
                 size = p.size();
