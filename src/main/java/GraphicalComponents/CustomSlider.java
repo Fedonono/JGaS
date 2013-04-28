@@ -4,7 +4,6 @@
  */
 package GraphicalComponents;
 
-import java.util.LinkedList;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,9 +12,8 @@ import javax.swing.event.ChangeListener;
  *
  * @author simonneau
  */
-public class CustomSlider extends IdentifiableComponent implements Observable, Observer, ChangeListener {
+public class CustomSlider extends IdentifiableObservableComponent implements Observer, ChangeListener {
 
-    private LinkedList<Observer> observers = new LinkedList<>();
     private JSlider slider;
     private boolean notifyingDisabled = false;
 
@@ -39,11 +37,6 @@ public class CustomSlider extends IdentifiableComponent implements Observable, O
      */
     public void setValue(int value) {
         this.slider.setValue(value);
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override

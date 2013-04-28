@@ -13,11 +13,9 @@ import javax.swing.JCheckBox;
  *
  * @author simonneau
  */
-public class CustomCheckBox extends IdentifiableComponent implements Observable, ActionListener{
+public class CustomCheckBox extends IdentifiableObservableComponent implements ActionListener{
     
     private JCheckBox checkBox;
-    
-    private LinkedList<Observer> observers = new LinkedList<>();
     
     /**
      *
@@ -28,12 +26,6 @@ public class CustomCheckBox extends IdentifiableComponent implements Observable,
         this.checkBox = new JCheckBox(text, checked);
         this.checkBox.addActionListener(this);
         this.add(this.checkBox);
-    }
-
-    
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override

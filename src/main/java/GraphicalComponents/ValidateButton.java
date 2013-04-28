@@ -6,19 +6,14 @@ package GraphicalComponents;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 import javax.swing.JButton;
 
 /**
  *
  * @author simonneau
  */
-public class ValidateButton extends IdentifiableComponent implements Observable, ActionListener {
+public class ValidateButton extends IdentifiableObservableComponent implements ActionListener {
 
-    /**
-     *
-     */
-    protected LinkedList<Observer> observers = new LinkedList<>();
     /**
      *
      */
@@ -32,15 +27,6 @@ public class ValidateButton extends IdentifiableComponent implements Observable,
         this.button = new JButton(label);
         this.add(button);
         this.button.addActionListener(this);
-    }
-
-    /**
-     *
-     * @param o
-     */
-    @Override
-    public void addObserver(Observer o) {
-        observers.add(o);
     }
 
     /**

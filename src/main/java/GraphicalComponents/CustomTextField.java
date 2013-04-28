@@ -6,16 +6,14 @@ package GraphicalComponents;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 import javax.swing.JTextField;
 
 /**
  *
  * @author simonneau
  */
-public class CustomTextField extends IdentifiableComponent implements Observable, Observer, ActionListener {
+public class CustomTextField extends IdentifiableObservableComponent implements Observer, ActionListener {
 
-    private LinkedList<Observer> observers = new LinkedList<>();
     private JTextField textField;
     private boolean notifyingDisabled = false;
 
@@ -36,11 +34,6 @@ public class CustomTextField extends IdentifiableComponent implements Observable
         this.textField = new JTextField(text, columns);
         this.add(textField);
         this.textField.addActionListener(this);
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override

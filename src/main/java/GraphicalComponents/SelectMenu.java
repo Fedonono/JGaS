@@ -6,7 +6,6 @@ package GraphicalComponents;
 
 import java.awt.FlowLayout;
 import java.util.Collection;
-import java.util.LinkedList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -15,9 +14,8 @@ import javax.swing.JLabel;
  * @param <E> 
  * @author nono
  */
-public class SelectMenu<E> extends IdentifiableComponent implements Observable {
+public class SelectMenu<E> extends IdentifiableObservableComponent {
 
-    private LinkedList<Observer> observers = new LinkedList<>();
     private JComboBox<E> comboBox;
 
     /**
@@ -26,17 +24,11 @@ public class SelectMenu<E> extends IdentifiableComponent implements Observable {
      */
     public SelectMenu(String label) {
 
-        super(new FlowLayout());
         this.add(new JLabel(label));
 
         comboBox = new JComboBox<>();
 
         this.add(comboBox, FlowLayout.CENTER);
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     /**

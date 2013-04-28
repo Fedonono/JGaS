@@ -5,7 +5,6 @@
 package GraphicalComponents;
 
 import java.awt.Dimension;
-import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -17,9 +16,8 @@ import javax.swing.event.ChangeListener;
  * @author simonneau
  */
 //TODO ==> use JSpinner NumberEditor to allow floating spinner
-public class CustomSpinner extends IdentifiableComponent implements Observable, ChangeListener {
+public class CustomSpinner extends IdentifiableObservableComponent implements ChangeListener {
 
-    private LinkedList<Observer> observers = new LinkedList<>();
     private Spinner spinner;
 
     /**
@@ -62,11 +60,6 @@ public class CustomSpinner extends IdentifiableComponent implements Observable, 
      */
     public Number getValue() {
         return (Number)this.spinner.getValue();
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override

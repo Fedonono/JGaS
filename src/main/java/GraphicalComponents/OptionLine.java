@@ -5,16 +5,14 @@
 package GraphicalComponents;
 
 import java.awt.FlowLayout;
-import java.util.LinkedList;
 import javax.swing.JLabel;
 
 /**
  *
  * @author nono
  */
-public class OptionLine extends IdentifiableComponent implements Observer, Observable {
+public class OptionLine extends IdentifiableObservableComponent implements Observer {
 
-    private LinkedList<Observer> observers = new LinkedList<>();
     private int maxValue;
     private int minValue;
     private int value;
@@ -122,11 +120,6 @@ public class OptionLine extends IdentifiableComponent implements Observer, Obser
 
         }
         this.notifyObservers();
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override

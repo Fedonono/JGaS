@@ -10,11 +10,10 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public class PauseStepPanel extends IdentifiableComponent implements Observer, Observable {
+public class PauseStepPanel extends IdentifiableObservableComponent implements Observer {
 
     private PauseButton pauseButton;
     private ValidateButton stepButton;
-    private LinkedList<Observer> observers;
 
     /**
      *
@@ -60,11 +59,6 @@ public class PauseStepPanel extends IdentifiableComponent implements Observer, O
 
             this.notifyObserver(new ValidateButtonEvent(this));
         }
-    }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
     }
 
     @Override
