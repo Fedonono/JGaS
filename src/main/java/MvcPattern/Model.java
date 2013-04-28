@@ -46,4 +46,11 @@ public class Model {
     public View getUI(){
         return this.views.get(0);
     }
+    
+    /**
+     * removes all views.
+     */
+    public void clearViews(){
+        this.views.clear();
+    }
 }

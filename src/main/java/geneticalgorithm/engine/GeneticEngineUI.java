@@ -4,6 +4,7 @@
  */
 package geneticalgorithm.engine;
 
+import geneticalgorithm.Problem.CrucialOptionEvent;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
@@ -18,7 +19,7 @@ import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Population.PopulationUI;
 import geneticalgorithm.Population.SpreadRefreshOrderEvent;
-import geneticalgorithm.Problems.ProblemUI;
+import geneticalgorithm.Problem.ProblemUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;
@@ -47,6 +48,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         this.controller = new GeneticEngineUserCtrl(ge);
         this.problemUI = (ProblemUI) ge.getProblem().getUI();
+        this.problemUI.addObserver(this);
 
         this.header = new Header(ge.isPaused());
         this.footer = new Footer();
@@ -59,10 +61,12 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
     private void init(PopulationUI populationUI) {
 
+        this.removeAll();
         this.setLayout(new BorderLayout());
-
+        
         this.add(this.header, BorderLayout.NORTH);
         this.add(populationUI, BorderLayout.CENTER);
+        this.populationUI_id = populationUI.getId();
         this.add(this.footer, BorderLayout.SOUTH);
         
         populationUI.addObserver(this);
@@ -123,7 +127,10 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 
             }else if(id == this.populationUI_id){
                 this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent)ev).isNeedingRefresh()));
-            }
+                
+            }          
+        }else if(ev instanceof CrucialOptionEvent){
+            this.controller.applyChanges(new ResetEvent(this));
         }
     }
 

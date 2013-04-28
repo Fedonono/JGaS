@@ -10,6 +10,8 @@ import MvcPattern.View;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import org.jdesktop.swingx.JXMapKit;
+import org.jdesktop.swingx.mapviewer.GeoPosition;
+import org.jdesktop.swingx.mapviewer.Waypoint;
 
 /**
  *
@@ -31,6 +33,8 @@ public class DestinationPoolUI extends IdentifiableComponent implements View{
         this.map.setDefaultProvider(JXMapKit.DefaultProviders.OpenStreetMaps);
                
     }
+    
+    
     
     /**
      *

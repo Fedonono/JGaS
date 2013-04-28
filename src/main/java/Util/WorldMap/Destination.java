@@ -4,16 +4,17 @@
  */
 package Util.WorldMap;
 
+import org.jdesktop.swingx.mapviewer.GeoPosition;
+import org.jdesktop.swingx.mapviewer.Waypoint;
+
 /**
  *
  * @author simonneau
  */
-public class Destination {
+public class Destination extends Waypoint{
     
     private static int availableId = 0;
     
-    private double x;
-    private double y;
     private String Label;
     
     private int id = availableId++;
@@ -24,26 +25,13 @@ public class Destination {
      * @param x
      * @param y
      */
-    public Destination(String label,int x, int y){
+    public Destination(String label,GeoPosition position){
+        super(position);
         this.Label = label;
-        this.x = x;
-        this.y = y;
     }
-
-    /**
-     *
-     * @return the x coordonate.
-     */
-    public double getX() {
-        return x;
-    }
-
-    /**
-     *
-     * @return the y coordonate.
-     */
-    public double getY() {
-        return y;
+    
+    public Destination(String label, double latitude, double longitude){
+        this(label, new GeoPosition(latitude, longitude));
     }
 
     /**
@@ -61,23 +49,6 @@ public class Destination {
     public int getId() {
         return id;
     }
-
-    /**
-     * set the x coordonate.
-     * @param x
-     */
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    /**
-     * set the ycoordonate.
-     * @param y
-     */
-    public void setY(double y) {
-        this.y = y;
-    }
-
     /**
      * set 'this' label.
      * @param Label

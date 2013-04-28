@@ -17,6 +17,11 @@ public class Chronometer {
     private long previousSessionTimeCount = 0;
     private boolean stoped = true;
 
+    
+    public void reset(){
+        this.stop();
+        this.setTime(0);
+    }    
     /**
      * restart 'this' chronometer.
      */
@@ -49,6 +54,7 @@ public class Chronometer {
      */
     private void setTime(int time) {
         this.currentSessionTimeCount = time;
+        this.previousSessionTimeCount = 0;
     }
 
     /**

@@ -14,7 +14,7 @@ import GraphicalComponents.ValidateButton;
 import MvcPattern.Controller;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
-import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problem.Problem;
 import geneticalgorithm.engine.GeneticEngineUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

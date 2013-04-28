@@ -12,8 +12,8 @@ import geneticalgorithm.Operators.Mutation.MutationOperator;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Population.PopulationUI;
-import geneticalgorithm.Problems.Problem;
-import geneticalgorithm.Problems.ProblemUI;
+import geneticalgorithm.Problem.Problem;
+import geneticalgorithm.Problem.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -76,6 +76,17 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
+    public void reset(){
+        this.pause();
+        this.chronometer.reset();
+        this.evolutionCriterion = 1;
+        this.stepCount = 0;
+        this.setPopulation(this.problem.createInitialPopulation());
+        
+        this.notifyViews();
+        
+    }
+    
     private void init() {
 
         this.setPopulation(this.problem.createInitialPopulation());

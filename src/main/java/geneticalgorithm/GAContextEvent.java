@@ -5,7 +5,7 @@
 package geneticalgorithm;
 
 import MvcPattern.UserEvent;
-import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problem.Problem;
 
 /**
  *

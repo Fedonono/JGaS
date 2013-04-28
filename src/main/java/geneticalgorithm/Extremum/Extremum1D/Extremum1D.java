@@ -18,7 +18,7 @@ import geneticalgorithm.Extremum.PopulationFunction;
 import geneticalgorithm.Extremum.PopulationFunctionController;
 import geneticalgorithm.Extremum.PopulationFunctionUI;
 import geneticalgorithm.Population.Population;
-import geneticalgorithm.Problems.Problem;
+import geneticalgorithm.Problem.Problem;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
