@@ -21,13 +21,11 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapViewer;
@@ -40,7 +38,7 @@ import org.jdesktop.swingx.painter.Painter;
  *
  * @author simonneau
  */
-public class DestinationPoolUI extends IdentifiableComponent implements View, MouseListener, Observer {
+public class DestinationPoolUI extends IdentifiableObservableComponent implements View, MouseListener, Observer {
 
     private DestinationPoolController controller;
     private JXMapKit map;
@@ -73,15 +71,19 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
     public void refresh(RefreshEvent ev) {
 
         if (ev instanceof DestinationPoolRefreshEvent) {
-
+            
             DestinationPool source = (DestinationPool) ev.getSource();
 
             Painter painter = this.buildWaypointPainter(source.getDestinations());
 
             CustomPainter overlay = new CustomPainter();
             overlay.addOverlay(painter);
+            this.notifyObservers();
+            
         }
     }
+    
+    
 
     private Painter buildWaypointPainter(List<Destination> waypoints) {
 
@@ -113,14 +115,6 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
 
         this.map.getMainMap().setOverlayPainter(overlay);
     }
-
-    /*public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(1200, 800);
-        DestinationPool dp = new DestinationPool();
-        frame.add((DestinationPoolUI) dp.getUI());
-        frame.setVisible(true);
-    }*/
 
     @Override
     public void mouseClicked(MouseEvent me) {
@@ -156,6 +150,13 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
         } else if (ev instanceof ClearEvent) {
 
             this.controller.applyChanges(new ClearDestinationsUsrEvent(this));
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : this.observers) {
+            observer.reactToChanges(new WaypointsChanged(this));
         }
     }
 
@@ -217,7 +218,7 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
                 if (id == this.addPoint.getId()) {
 
                     this.notifyObserver(new AddPointEvent(this, new GeoPosition(this.latitude.getValue(), this.longitude.getValue()), this.label.getText()));
-
+                    
                 } else if (id == this.clear.getId()) {
 
                     this.notifyObserver(new ClearEvent(this));

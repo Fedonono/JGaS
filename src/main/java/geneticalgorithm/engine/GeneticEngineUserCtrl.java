@@ -29,23 +29,28 @@ public class GeneticEngineUserCtrl implements Controller {
      */
     @Override
     public void applyChanges(UserEvent event) {
-            if (event instanceof PauseEngineEvent) {
+        
+        if (event instanceof PauseEngineEvent) {
 
-                if (((PauseEngineEvent) event).isPaused()) {
-                    this.target.pause();
-                } else {
-                    this.target.resume();
-                }
-
-            } else if (event instanceof StepEngineEvent) {
-                this.target.step();
-
-            } else if (event instanceof UsrAskForRefreshEvent) {
-                
-                this.target.refreshPopulation();
-
-            }else if(event instanceof ResizePopulation){
-                this.target.resizePop();
+            if (((PauseEngineEvent) event).isPaused()) {
+                this.target.pause();
+            } else {
+                this.target.resume();
             }
+
+        } else if (event instanceof StepEngineEvent) {
+            this.target.step();
+
+        } else if (event instanceof UsrAskForRefreshEvent) {
+
+            this.target.refreshPopulation();
+
+        } else if (event instanceof ResizePopulation) {
+            this.target.resizePop();
+
+        } else if (event instanceof ResetEvent) {
+            
+            this.target.reset();
+        }
     }
 }

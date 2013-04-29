@@ -22,6 +22,7 @@ public class TSPIndividualUI implements View{
         Model source = ev.getSource();
         
         if(source instanceof TSPIndividual){
+            
             TSPIndividual individual = (TSPIndividual)source;
             
             ArrayList<Destination> destinations = individual.getPath();

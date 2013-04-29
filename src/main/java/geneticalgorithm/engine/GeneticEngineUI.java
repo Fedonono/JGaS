@@ -18,6 +18,7 @@ import MvcPattern.RefreshEvent;
 import MvcPattern.View;
 import geneticalgorithm.Population.PopulationUI;
 import geneticalgorithm.Population.SpreadRefreshOrderEvent;
+import geneticalgorithm.Population.SpreadResetOrderEvent;
 import geneticalgorithm.Problem.ProblemUI;
 import geneticalgorithm.Problem.ResizePopulationEvent;
 import java.awt.BorderLayout;
@@ -63,12 +64,12 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
         this.removeAll();
         this.setLayout(new BorderLayout());
-        
+
         this.add(this.header, BorderLayout.NORTH);
         this.add(populationUI, BorderLayout.CENTER);
         this.populationUI_id = populationUI.getId();
         this.add(this.footer, BorderLayout.SOUTH);
-        
+
         populationUI.addObserver(this);
     }
 
@@ -115,22 +116,27 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 if (ev instanceof PauseEvent) {
                     this.controller.applyChanges(new PauseEngineEvent(this, ((PauseEvent) ev).isPaused()));
 
-                } 
-                // step
+                } // step
                 else {
                     this.controller.applyChanges(new StepEngineEvent(this));
                 }
-            }
-            //footer => configure
+            } //footer => configure
             else if (id == this.footer.getId()) {
                 this.problemUI.setVisible(true);
+
+            } else if (id == this.populationUI_id) {
                 
-            }else if(id == this.populationUI_id){
-                this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent)ev).isNeedingRefresh()));
-                
-            }          
-        }else if(ev instanceof ResizePopulationEvent){
+                if (ev instanceof SpreadRefreshOrderEvent) {
+                    this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent) ev).isNeedingRefresh()));
+                    
+                } else if (ev instanceof SpreadResetOrderEvent) {
+                    this.controller.applyChanges(new ResetEvent(this));
+                }
+
+            }
+        } else if (ev instanceof ResizePopulationEvent) {
             this.controller.applyChanges(new ResizePopulation(this));
+
         }
     }
 
@@ -141,7 +147,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
 
     @Override
     public void notifyObservers() {
-        for(Observer o : this.observers){
+        for (Observer o : this.observers) {
             o.reactToChanges(new RepaintEvent(this));
         }
     }
@@ -200,14 +206,14 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             this.timeout = timeout;
             this.refreshLabel();
         }
-        
-        public void setEvolutionCriterion(double evolutionCriterion){
+
+        public void setEvolutionCriterion(double evolutionCriterion) {
             this.evolutionCriterion = evolutionCriterion;
             this.refreshLabel();
         }
 
         private void refreshLabel() {
-            this.label.setText(this.stepLabel + this.stepCount + " / " + timeLabel + this.timeout + "ms"+" / "+this.evolutionLabel+df.format(this.evolutionCriterion*100)+"%");
+            this.label.setText(this.stepLabel + this.stepCount + " / " + timeLabel + this.timeout + "ms" + " / " + this.evolutionLabel + df.format(this.evolutionCriterion * 100) + "%");
         }
     }
 

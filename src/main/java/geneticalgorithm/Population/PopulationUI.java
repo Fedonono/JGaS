@@ -24,7 +24,7 @@ import javax.swing.JPanel;
  */
 public class PopulationUI extends IdentifiableComponent implements View, Observable {
 
-    private Header header;
+    protected Header header;
     /**
      *
      */
@@ -66,12 +66,13 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         }
 
     }
-
+    
     /**
      *
      * @param event
      */
     public void populationRefreshEventTreatment(PopulationRefreshEvent event) {
+        System.out.println("toto");
         LinkedList<Individual> samples = event.getSample();
 
         this.populationSample.setLayout(new FlowLayout());
@@ -115,7 +116,7 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         this.header.notifyObservers();
     }
 
-    private class Header extends IdentifiableComponent implements Observer, Observable {
+    protected class Header extends IdentifiableComponent implements Observer, Observable {
 
         private PopulationUI boss;
         private PopulationController controller;

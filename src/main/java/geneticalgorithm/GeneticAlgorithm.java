@@ -6,6 +6,7 @@ import geneticalgorithm.Extremum.Extremum1D.Extremum1D;
 import geneticalgorithm.Extremum.Extremum2D.Extremum2D;
 import geneticalgorithm.Problem.Problem;
 import geneticalgorithm.Problem.ProblemUI;
+import geneticalgorithm.TSP.TSP;
 import geneticalgorithm.engine.GeneticEngine;
 import geneticalgorithm.engine.GeneticEngineUI;
 import java.awt.BorderLayout;
@@ -125,6 +126,7 @@ public class GeneticAlgorithm extends Model {
      */
     public static void main(String[] args) {
         GeneticAlgorithm ga = new GeneticAlgorithm();
+        ga.addProblem(new TSP());
         ga.addProblem(new Extremum2D());
         ga.addProblem(new Extremum1D());
         ga.run();
