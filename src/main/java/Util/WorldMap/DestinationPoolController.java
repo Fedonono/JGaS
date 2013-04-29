@@ -29,7 +29,16 @@ public class DestinationPoolController implements Controller{
      */
     @Override
     public void applyChanges(UserEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(event instanceof AddDestinationUsrEvent){
+            
+            AddDestinationUsrEvent ev = (AddDestinationUsrEvent)event;
+            
+            this.target.add(ev.getLabel(), ev.getPosition());
+            
+        }else if(event instanceof ClearDestinationsUsrEvent){
+            
+            this.target.clear();
+        }
     }
     
 }

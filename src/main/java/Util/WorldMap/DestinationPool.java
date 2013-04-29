@@ -7,6 +7,7 @@ package Util.WorldMap;
 import MvcPattern.Model;
 import java.util.Collection;
 import java.util.LinkedList;
+import org.jdesktop.swingx.mapviewer.GeoPosition;
 
 /**
  *
@@ -31,14 +32,12 @@ public class DestinationPool extends Model {
      */
     public void clear() {
         this.destinations.clear();
+        this.notifyViews();
     }
     
-    /**
-     * add a destination to this.
-     * @param d
-     */
-    public void add(Destination d) {
-        this.destinations.add(d);
+    public void add(String label, GeoPosition gp){
+        this.destinations.add(new Destination(label, gp));
+        this.notifyViews();
     }
 
     /** add all destinations from destinations to this.
@@ -47,6 +46,7 @@ public class DestinationPool extends Model {
      */
     public void addAll(Collection<Destination> destinations) {
         this.destinations.addAll(destinations);
+        this.notifyViews();
     }
 
     /**
@@ -63,21 +63,11 @@ public class DestinationPool extends Model {
      */
     public void setDestinations(LinkedList<Destination> destinations) {
         this.destinations = destinations;
-    }
-
-    /**
-     * add a destination to 'this'.
-     * @param label
-     * @param x
-     * @param y
-     */
-    public void addDestination(String label, int x, int y) {
-        
-        this.add(new Destination(label, x, y));
+        this.notifyViews();
     }
     
     @Override
     public void notifyViews(){
-        //notifier les vues.
+        super.notifyViews(new DestinationPoolRefreshEvent(this));
     }
 }

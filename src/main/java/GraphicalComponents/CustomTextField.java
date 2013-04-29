@@ -61,4 +61,8 @@ public class CustomTextField extends IdentifiableObservableComponent implements 
     public void actionPerformed(ActionEvent ae) {
         this.notifyObservers();
     }
+    
+    public String getText(){
+        return this.textField.getText();
+    }
 }

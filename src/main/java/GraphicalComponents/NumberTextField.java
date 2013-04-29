@@ -78,4 +78,8 @@ public class NumberTextField extends CustomTextField{
         this.textField.setText(Double.toString(value));
     }
     
+    public double getValue(){
+        return this.value;
+    }
+    
 }

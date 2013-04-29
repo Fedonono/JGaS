@@ -4,7 +4,6 @@
  */
 package GraphicalComponents;
 
-import java.awt.LayoutManager;
 import java.util.LinkedList;
 
 /**
