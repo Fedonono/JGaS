@@ -31,7 +31,7 @@ public class PopulationFunctionController extends PopulationController {
      */
     @Override
     public PopulationFunction getModel() {
-        return target;
+        return (PopulationFunction)target;
     }
 
     /**
@@ -45,14 +45,14 @@ public class PopulationFunctionController extends PopulationController {
         if(event instanceof FunctionEvent){
             FunctionEvent ev = (FunctionEvent)event;
             try {
-                target.getFunction().setFunction(ev.getFunction());
+                ((PopulationFunction)target).getFunction().setFunction(ev.getFunction());
             } catch (UnknownFunctionException | UnparsableExpressionException ex) {
                 Logger.getLogger(PopulationFunctionController.class.getName()).log(Level.SEVERE, "Incorrect input function.", ex);
             }
         }
         if (event instanceof DomaineEvent){
             DomaineEvent ev = (DomaineEvent)event;
-            target.getFunction().setDomaine(ev.getValue());
+            ((PopulationFunction)target).getFunction().setDomaine(ev.getValue());
         }
     }
     

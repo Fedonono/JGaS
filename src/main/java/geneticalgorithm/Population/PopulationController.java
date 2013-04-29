@@ -14,16 +14,24 @@ import geneticalgorithm.Extremum.PopulationFunction;
  */
 public class PopulationController implements Controller{
     
+    protected Population target;
+    
+    public PopulationController(){
+        this(null);
+    }
+    public PopulationController(Population target){
+        this.target = target;
+    }
     /**
      *
      */
-    protected PopulationFunction target;
+    
 
     /**
      *
      * @param model
      */
-    public void setModel(PopulationFunction model) {
+    public void setModel(Population model) {
         this.target = model;
     }
     
