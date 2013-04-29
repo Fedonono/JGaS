@@ -138,6 +138,8 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
 
         @Override
         public void reactToChanges(ObservationEvent ev) {
+            
+            //TODO : ajouter / supprimer waty point.
         }
     }
 }

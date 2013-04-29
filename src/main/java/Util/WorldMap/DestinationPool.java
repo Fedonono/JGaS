@@ -32,7 +32,7 @@ public class DestinationPool extends Model {
     public void clear() {
         this.destinations.clear();
     }
-
+    
     /**
      * add a destination to this.
      * @param d
@@ -74,5 +74,10 @@ public class DestinationPool extends Model {
     public void addDestination(String label, int x, int y) {
         
         this.add(new Destination(label, x, y));
+    }
+    
+    @Override
+    public void notifyViews(){
+        //notifier les vues.
     }
 }

@@ -4,7 +4,6 @@
  */
 package geneticalgorithm.engine;
 
-import geneticalgorithm.CrucialOptionEvent;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
@@ -20,6 +19,7 @@ import MvcPattern.View;
 import geneticalgorithm.Population.PopulationUI;
 import geneticalgorithm.Population.SpreadRefreshOrderEvent;
 import geneticalgorithm.Problem.ProblemUI;
+import geneticalgorithm.Problem.ResizePopulationEvent;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;
@@ -129,8 +129,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent)ev).isNeedingRefresh()));
                 
             }          
-        }else if(ev instanceof CrucialOptionEvent){
-            this.controller.applyChanges(new ResetEvent(this));
+        }else if(ev instanceof ResizePopulationEvent){
+            this.controller.applyChanges(new ResizePopulation(this));
         }
     }
 

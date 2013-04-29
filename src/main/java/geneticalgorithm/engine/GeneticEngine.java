@@ -17,6 +17,7 @@ import geneticalgorithm.Problem.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -62,6 +63,20 @@ public class GeneticEngine extends Model implements Runnable {
      */
     public boolean isPaused() {
         return this.pause;
+    }
+    
+    public void resizePop(){
+        Population pop = this.problem.createInitialPopulation();
+        Iterator<Individual> it = pop.iterator();
+        
+        int newSize = this.problem.getPopulationSize();
+        int currentSize = this.population.size();
+        
+        
+        while(it.hasNext() && currentSize < newSize){
+            this.population.add(it.next());
+            currentSize++;
+        }
     }
 
     /**

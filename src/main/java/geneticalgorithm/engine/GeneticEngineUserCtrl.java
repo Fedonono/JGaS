@@ -44,8 +44,8 @@ public class GeneticEngineUserCtrl implements Controller {
                 
                 this.target.refreshPopulation();
 
-            }else if(event instanceof ResetEvent){
-                this.target.reset();
+            }else if(event instanceof ResizePopulation){
+                this.target.resizePop();
             }
     }
 }

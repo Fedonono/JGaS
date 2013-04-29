@@ -10,8 +10,8 @@ import MvcPattern.UserEvent;
  *
  * @author simonneau
  */
-public class ResetEvent extends UserEvent {
-    public ResetEvent(GeneticEngineUI source){
+public class ResizePopulation extends UserEvent {
+    public ResizePopulation(GeneticEngineUI source){
         super(source);
     }
 }

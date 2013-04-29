@@ -4,7 +4,6 @@
  */
 package geneticalgorithm.Problem;
 
-import geneticalgorithm.CrucialOptionEvent;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
@@ -160,13 +159,13 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
             int id = component.getId();
 
             if (id == this.validateButtonId) {
-                this.setVisible(false);
                 
-                if(this.previousPopulationSize != this.populationSize.getValue()){
+                this.setVisible(false);
+                this.notifyController();
+                
+                if(this.previousPopulationSize < this.populationSize.getValue().doubleValue()){
                     this.notifyObservers();
                 }
-                
-                this.notifyController();
             }
         }
     }
@@ -279,7 +278,7 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : this.observers) {
-            observer.reactToChanges(new CrucialOptionEvent(this));
+            observer.reactToChanges(new ResizePopulationEvent(this));
         }
     }
 }
