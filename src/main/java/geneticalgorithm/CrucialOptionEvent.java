@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package geneticalgorithm.Problem;
+package geneticalgorithm;
 
 import GraphicalComponents.ObservationEvent;
+import geneticalgorithm.Problem.ProblemUI;
 import geneticalgorithm.Problem.ProblemUI;
 
 /**

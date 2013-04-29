@@ -4,7 +4,7 @@
  */
 package geneticalgorithm.engine;
 
-import geneticalgorithm.Problem.CrucialOptionEvent;
+import geneticalgorithm.CrucialOptionEvent;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;

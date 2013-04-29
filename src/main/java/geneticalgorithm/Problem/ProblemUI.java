@@ -4,6 +4,7 @@
  */
 package geneticalgorithm.Problem;
 
+import geneticalgorithm.CrucialOptionEvent;
 import GraphicalComponents.CustomSpinner;
 import GraphicalComponents.IdentifiableComponent;
 import GraphicalComponents.Observable;
