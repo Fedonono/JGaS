@@ -28,7 +28,7 @@ import javax.swing.JDialog;
  *
  * @author simonneau
  */
-public class ProblemUI extends JDialog implements View, Observer,Observable {
+public class ProblemUI extends JDialog implements View, Observer, Observable {
 
     private boolean initialized = false;
     private ProblemController controller;
@@ -57,18 +57,15 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
     protected ValidateButton validateButton;
     private int validateButtonId;
     private StopCriteriaUI stopCriteriaUI;
-    
     private double previousPopulationSize = 0;
     protected LinkedList<Observer> observers;
-
-    
 
     /**
      *
      * @param problem
      */
     public ProblemUI(Problem problem) {
-        
+
         this.observers = new LinkedList<>();
 
         this.stopCriteriaUI = (StopCriteriaUI) problem.getStopCriteria().getUI();
@@ -89,7 +86,7 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
         this.crossProbability = new CustomSpinner(crossProbabilityLabel, 0, 1, 0, 0.01);
         this.crossProbabilityId = this.crossProbability.getId();
         this.add(this.crossProbability);
-        
+
         this.populationSize = new CustomSpinner(populationSizeLabel, 1, Integer.MAX_VALUE, 50, 1);
         this.populationId = this.populationSize.getId();
         this.add(this.populationSize);
@@ -111,7 +108,7 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
         this.add(this.availableSelectionOperators);
 
         this.add(this.stopCriteriaUI);
-        
+
         this.validateButton = new ValidateButton(validateButtonLabel);
         this.validateButtonId = this.validateButton.getId();
         this.add(this.validateButton);
@@ -120,7 +117,24 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
 
 
         this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+
+    }
+
+    private void init(Problem pb) {
         
+        this.availableCrossOverOperators.removeAllItems();
+        this.availableEvaluationOperators.removeAllItems();
+        this.availableMutationOperators.removeAllItems();
+        this.availableSelectionOperators.removeAllItems();
+        this.availableCrossOverOperators.addAll(pb.getAvailableCrossOverOperators());
+        this.availableEvaluationOperators.addAll(pb.getAvailableEvaluationOperator());
+        this.availableMutationOperators.addAll(pb.getAvailableMutationOperators());
+        this.availableSelectionOperators.addAll(pb.getAvailableSelectionOperators());
+        
+        this.mutationProbability.setValue(pb.getMutationProbability());
+        this.crossProbability.setValue(pb.getCrossProbability());
+        this.previousPopulationSize = pb.getPopulationSize();
+        this.populationSize.setValue(this.previousPopulationSize);
     }
 
     @Override
@@ -128,19 +142,7 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
 
         if (ev instanceof ProblemRefreshEvent) {
             Problem source = (Problem) ev.getSource();
-
-            if (!this.initialized) {
-                this.availableCrossOverOperators.addAll(source.getAvailableCrossOverOperators());
-                this.availableEvaluationOperators.addAll(source.getAvailableEvaluationOperator());
-                this.availableMutationOperators.addAll(source.getAvailableMutationOperators());
-                this.availableSelectionOperators.addAll(source.getAvailableSelectionOperators());
-                this.mutationProbability.setValue(source.getMutationProbability());
-                this.crossProbability.setValue(source.getCrossProbability());
-                this.previousPopulationSize = source.getPopulationSize();
-                this.populationSize.setValue(this.previousPopulationSize);
-                
-                this.initialized = true;
-            }
+            this.init(source);
         }
     }
 
@@ -154,11 +156,11 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
             int id = component.getId();
 
             if (id == this.validateButtonId) {
-                
+
                 this.setVisible(false);
                 this.notifyController();
-                
-                if(this.previousPopulationSize < this.populationSize.getValue().doubleValue()){
+
+                if (this.previousPopulationSize < this.populationSize.getValue().doubleValue()) {
                     this.notifyObservers();
                 }
             }

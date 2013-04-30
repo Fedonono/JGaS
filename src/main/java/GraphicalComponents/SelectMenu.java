@@ -64,6 +64,10 @@ public class SelectMenu<E> extends IdentifiableObservableComponent {
         }
     }
     
+    public void removeAllItems(){
+        this.comboBox.removeAllItems();
+    }
+    
     public void setSelectedItem(E item){
         this.comboBox.setSelectedItem(item);
     }

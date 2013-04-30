@@ -35,8 +35,6 @@ public class GeneticAlgorithm extends Model {
     public Problem getSelectedProblem() {
         return SelectedProblem;
     }
-    
-    
 
     /**
      * set the selected problem with selectedProblem.
@@ -130,11 +128,11 @@ public class GeneticAlgorithm extends Model {
      * @param args
      */
     public static void main(String[] args) {
-        
-        GeneticAlgorithm ga = new GeneticAlgorithm();        
+
+        GeneticAlgorithm ga = new GeneticAlgorithm();
+        ga.addProblem(new TSP());
         ga.addProblem(new Extremum1D());
         ga.addProblem(new Extremum2D());
-        ga.addProblem(new TSP());
         ga.run();
     }
 }

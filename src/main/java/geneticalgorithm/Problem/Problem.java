@@ -40,23 +40,21 @@ public abstract class Problem extends Model {
     /**
      *
      */
-    public Problem(){        
+    public Problem() {
         this.stopCriteria = new StopCriteria();
-        this.addView(new ProblemUI(this));
         this.addSelectionOperator(TruncationSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalRankingSelectionOperator.getInstance());
         this.addSelectionOperator(TournamentSelectionOperator.getInstance());
         this.addSelectionOperator(RandomSelectionOperator.getInstance());
-        
+        this.addView(new ProblemUI(this));
     }
-    
-    
+
     /**
      *
      * @return
      */
-    public StopCriteria getStopCriteria(){
+    public StopCriteria getStopCriteria() {
         return this.stopCriteria;
     }
 
@@ -69,7 +67,7 @@ public abstract class Problem extends Model {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public LinkedList<MutationOperator> getAvailableMutationOperators() {
@@ -170,6 +168,7 @@ public abstract class Problem extends Model {
      */
     public void setMutationProbability(double mutationProbability) {
         this.mutationProbability = mutationProbability;
+        this.notifyViews();
     }
 
     /**
@@ -178,6 +177,7 @@ public abstract class Problem extends Model {
      */
     public void setCrossProbability(double crossProbability) {
         this.crossProbability = crossProbability;
+        this.notifyViews();
     }
 
     /**
@@ -186,6 +186,7 @@ public abstract class Problem extends Model {
      */
     public void setSelectedMutationOperator(MutationOperator selectedMutationOperator) {
         this.operators.setMutationOperator(selectedMutationOperator);
+        this.notifyViews();
     }
 
     /**
@@ -194,6 +195,7 @@ public abstract class Problem extends Model {
      */
     public void setSelectedCrossOverOperation(CrossOverOperator selectedCrossOverOperation) {
         this.operators.setCrossoverOperator(selectedCrossOverOperation);
+        this.notifyViews();
     }
 
     /**
@@ -202,6 +204,7 @@ public abstract class Problem extends Model {
      */
     public void setSelectedSelectionOperator(SelectionOperator selectedSelectionOperator) {
         this.operators.setSelectionOperator(selectedSelectionOperator);
+        this.notifyViews();
     }
 
     /**
@@ -210,6 +213,7 @@ public abstract class Problem extends Model {
      */
     public void setSelectedEvaluationOperator(EvaluationOperator selectedEvaluationOperator) {
         this.operators.setEvaluationOperator(selectedEvaluationOperator);
+        this.notifyViews();
     }
 
     /**
@@ -218,6 +222,7 @@ public abstract class Problem extends Model {
      */
     public void setPopulationSize(int populationSize) {
         this.populationSize = populationSize;
+        this.notifyViews();
     }
 
     /**
@@ -279,9 +284,8 @@ public abstract class Problem extends Model {
      */
     public void addMutationOperator(MutationOperator operator) {
         this.availableMutationOperators.add(operator);
-        if(this.getSelectedMutationOperator() == null){
-            this.setSelectedMutationOperator(operator);
-        }
+        this.setSelectedMutationOperator(operator);
+
     }
 
     /**
@@ -290,10 +294,8 @@ public abstract class Problem extends Model {
      */
     public void addCrossOverOperator(CrossOverOperator operator) {
         this.availableCrossOverOperators.add(operator);
-        
-        if(this.getSelectedCrossOverOperation() == null){
-            this.setSelectedCrossOverOperation(operator);
-        }
+        this.setSelectedCrossOverOperation(operator);
+
     }
 
     /**
@@ -302,10 +304,8 @@ public abstract class Problem extends Model {
      */
     public final void addSelectionOperator(SelectionOperator operator) {
         this.availableSelectionOperators.add(operator);
-        
-        if(this.getSelectedSelectionOperator() == null){
-            this.setSelectedSelectionOperator(operator);
-        }
+        this.setSelectedSelectionOperator(operator);
+
     }
 
     /**
@@ -314,10 +314,8 @@ public abstract class Problem extends Model {
      */
     public void addEvaluationOperator(EvaluationOperator operator) {
         this.availableEvaluationOperator.add(operator);
-        
-        if(this.getSelectedEvaluationOperator() == null){
-            this.setSelectedEvaluationOperator(operator);
-        }
+        this.setSelectedEvaluationOperator(operator);
+
     }
 
     @Override
@@ -325,32 +323,32 @@ public abstract class Problem extends Model {
         super.addView(v);
         v.refresh(new ProblemRefreshEvent(this));
     }
-    
+
     /**
      *
      * @return
      */
-    public double getEvolutionCriterion(){
+    public double getEvolutionCriterion() {
         return this.stopCriteria.getEvolutionCriterion();
     }
-    
+
     /**
-     * 
+     *
      * @param stepCount
      * @param time
      * @param evolutionCoeff
      * @return return true if the stop criteria are reached. false other wise.
      */
-    public boolean stopCriteriaAreReached(int stepCount, long time, double evolutionCoeff){
+    public boolean stopCriteriaAreReached(int stepCount, long time, double evolutionCoeff) {
         return this.stopCriteria.areReached(stepCount, time, evolutionCoeff);
     }
-    
+
     /**
      *
      * @return 'this' label.
      */
     @Override
-    public final String toString(){
+    public final String toString() {
         return this.getLabel();
     }
 }
