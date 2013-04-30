@@ -23,12 +23,14 @@ public class TSPIndividual extends Individual<Individual> {
         ArrayList<Destination> destinations = new ArrayList<>(dp.getDestinations());
         ArrayList<Destination> path = new ArrayList<>();
         int size = destinations.size();
+        int destinationSize = size;
 
         if (size > 0) {
             for (int i = 0; i < size; i++) {
 
-                int index = (int) Math.round(Math.random() * (size - 1));
-                path.add(destinations.get(index));
+                int index = (int) Math.round(Math.random() * (destinationSize - 1));
+                path.add(destinations.remove(index));
+                destinationSize--;
             }
             path.add(path.get(0));
         }

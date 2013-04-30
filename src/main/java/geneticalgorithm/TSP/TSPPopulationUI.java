@@ -6,7 +6,7 @@ package geneticalgorithm.TSP;
 
 import GraphicalComponents.IdentifiableComponent;
 import Util.WorldMap.DestinationPoolUI;
-import geneticalgorithm.Population.IndividualRadioButton;
+import geneticalgorithm.Population.IndividualButton;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
@@ -49,15 +49,14 @@ public class TSPPopulationUI extends PopulationUI {
     
     private class Footer extends IdentifiableComponent{
         
+        
         public void refresh(LinkedList<Individual> sample){
             
-            this.removeAll();
             this.setLayout(new FlowLayout());
             int rank = 1;
             
             for (Individual individual : sample) {
-                
-                this.add(new IndividualRadioButton(Integer.toString(rank), individual));
+                this.add(new IndividualButton(Integer.toString(rank), individual));
                 rank++;
             }
         }

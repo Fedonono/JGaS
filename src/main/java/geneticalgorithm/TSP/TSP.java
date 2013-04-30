@@ -40,7 +40,7 @@ public class TSP extends Problem {
 
         for (int i = 0; i < size; i++) {
 
-            pop.add(TSPIndividual.createRandom(dp));
+            pop.add(TSPIndividual.createRandom(destinationPool));
         }
 
         return pop;

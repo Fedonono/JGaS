@@ -14,10 +14,12 @@ import GraphicalComponents.Observer;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
@@ -293,7 +295,9 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
         @Override
         public void paint(Graphics2D g, Object object, int width, int height) {
             Line2D.Double line = new Line2D.Double(this.map.convertGeoPositionToPoint(gp1), this.map.convertGeoPositionToPoint(gp2));
-            ((Graphics2D) g).draw(line);
+            Graphics2D g2D = (Graphics2D) g;
+            g2D.setStroke(new BasicStroke(3));
+            g2D.draw(line);
         }
     }
     
