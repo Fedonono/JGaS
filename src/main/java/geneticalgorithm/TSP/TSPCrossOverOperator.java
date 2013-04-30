@@ -27,8 +27,8 @@ public class TSPCrossOverOperator extends CrossOverOperator {
     @Override
     public Individual cross(Individual male, Individual female) {
 
-        
-        /*TSPIndividual tspMale = (TSPIndividual) male;
+
+        TSPIndividual tspMale = (TSPIndividual) male;
         TSPIndividual tspFemale = (TSPIndividual) female;
 
         ArrayList<Destination> malePath = tspMale.getPath();
@@ -40,35 +40,33 @@ public class TSPCrossOverOperator extends CrossOverOperator {
 
         int middle = (int) Math.round(size / 2);
 
-        for (int i = 0; i < middle; i++) {
+        for (int i = 0; i < size - 1; i += 2) {
             childPath.add(malePath.get(i));
-        }
-        for (int i = middle; i < size; i++) {
-            childPath.add(femalePath.get(i));
+            if (i + 1 < size) {
+                childPath.add(femalePath.get(i + 1));
+            }
         }
 
         DestinationPool dp = tspMale.getDestinations();
 
 
-        return new TSPIndividual(dp, this.repairPath(childPath, dp));*/
-        return TSPIndividual.createRandom(((TSPIndividual)male).getDestinations());
+        return new TSPIndividual(dp, this.repairPath(childPath, dp));
     }
 
-    private ArrayList<Destination> repairPath(ArrayList<Destination> path, DestinationPool dp) {
+    private ArrayList<Destination> removeDoublons(ArrayList<Destination> path) {
 
-        
         ArrayList<Destination> newPath = new ArrayList<>();
-        
+
         //supression des doublons        
         for (Destination destination : path) {
-            
+
             int id = destination.getId();
-            
+
             Iterator<Destination> destinations = newPath.iterator();
             boolean stop = false;
 
             while (destinations.hasNext() && !stop) {
-                if (id != destinations.next().getId()) {
+                if (id == destinations.next().getId()) {
                     stop = true;
                 }
             }
@@ -76,7 +74,11 @@ public class TSPCrossOverOperator extends CrossOverOperator {
                 newPath.add(destination);
             }
         }
-        
+        return newPath;
+
+    }
+
+    private ArrayList<Destination> addMissingDestinations(ArrayList<Destination> path, DestinationPool dp) {
         //rajout des destinations manquabtes
         ArrayList<Destination> destinations = new ArrayList<>(dp.getDestinations());
         int size = destinations.size();
@@ -84,7 +86,7 @@ public class TSPCrossOverOperator extends CrossOverOperator {
         for (int i = 0; i < size; i++) {
 
             int destId = destinations.get(i).getId();
-            Iterator<Destination> waypoints = newPath.iterator();
+            Iterator<Destination> waypoints = path.iterator();
             boolean stop = false;
 
             while (waypoints.hasNext() && !stop) {
@@ -93,16 +95,21 @@ public class TSPCrossOverOperator extends CrossOverOperator {
                 if (id == destId) {
                     destinations.remove(i);
                     size--;
+                    i--;
                     stop = true;
                 }
             }
         }
 
         for (Destination destination : destinations) {
-            newPath.add(destination);
+            path.add(destination);
         }
-        newPath.add(newPath.get(0));
 
+        path.add(path.get(0));
         return path;
+    }
+
+    private ArrayList<Destination> repairPath(ArrayList<Destination> path, DestinationPool dp) {
+        return this.addMissingDestinations(this.removeDoublons(path), dp);
     }
 }
