@@ -25,6 +25,7 @@ public class DestinationPool extends Model {
         
         this.destinations = new LinkedList<>();
         this.addView(new DestinationPoolUI(new DestinationPoolController(this)));
+        this.notifyViews();
     }
 
     /**
@@ -67,7 +68,17 @@ public class DestinationPool extends Model {
     }
     
     @Override
-    public void notifyViews(){
+    public final void notifyViews(){
         super.notifyViews(new DestinationPoolRefreshEvent(this));
+    }
+    
+    @Override
+    public DestinationPool clone(){
+        
+        DestinationPool clone = new DestinationPool();
+        clone.setDestinations(this.destinations);
+        clone.notifyViews();
+        
+        return clone;
     }
 }

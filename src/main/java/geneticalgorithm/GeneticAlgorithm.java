@@ -35,6 +35,7 @@ public class GeneticAlgorithm extends Model {
 
     /**
      * set the selected problem with selectedProblem.
+     *
      * @param SelectedProblem
      */
     public void setSelectedProblem(Problem SelectedProblem) {
@@ -44,19 +45,17 @@ public class GeneticAlgorithm extends Model {
 
     /**
      * add a problem to 'this'.
+     *
      * @param problem
      */
     public void addProblem(Problem problem) {
         this.problems.add(problem);
-        problem.addView(new ProblemUI(problem));
-        if (this.SelectedProblem == null) {
-            this.SelectedProblem = problem;
-        }
-
+        this.SelectedProblem = problem;
     }
 
     /**
      * add all problems from foreignproblems to 'this'.
+     *
      * @param foreignProblems
      */
     public void addAll(Collection<Problem> foreignProblems) {
@@ -67,6 +66,7 @@ public class GeneticAlgorithm extends Model {
 
     /**
      * return 'this' problems.
+     *
      * @return
      */
     public LinkedList<Problem> getProblems() {
@@ -74,7 +74,7 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     * 
+     *
      * @param index
      * @return
      */
@@ -125,10 +125,11 @@ public class GeneticAlgorithm extends Model {
      * @param args
      */
     public static void main(String[] args) {
-        GeneticAlgorithm ga = new GeneticAlgorithm();
-        ga.addProblem(new TSP());
-        ga.addProblem(new Extremum2D());
+        
+        GeneticAlgorithm ga = new GeneticAlgorithm();        
         ga.addProblem(new Extremum1D());
+        ga.addProblem(new Extremum2D());
+        ga.addProblem(new TSP());
         ga.run();
     }
 }

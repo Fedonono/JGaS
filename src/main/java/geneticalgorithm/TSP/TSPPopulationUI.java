@@ -5,16 +5,12 @@
 package geneticalgorithm.TSP;
 
 import GraphicalComponents.IdentifiableComponent;
-import GraphicalComponents.ObservationEvent;
-import GraphicalComponents.Observer;
 import Util.WorldMap.DestinationPoolUI;
-import Util.WorldMap.WaypointsChanged;
 import geneticalgorithm.Population.IndividualRadioButton;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import geneticalgorithm.Population.PopulationUI;
-import geneticalgorithm.Population.SpreadResetOrderEvent;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
@@ -23,7 +19,7 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public class TSPPopulationUI extends PopulationUI implements Observer{
+public class TSPPopulationUI extends PopulationUI {
     
     private Footer footer;
     private DestinationPoolUI center;
@@ -39,17 +35,10 @@ public class TSPPopulationUI extends PopulationUI implements Observer{
         this.add(this.header, BorderLayout.NORTH);
         this.add(this.center, BorderLayout.CENTER);
         this.add(this.footer, BorderLayout.SOUTH);
-        
-        this.center.addObserver(this);
     }
     
     
-    @Override
-    public void reactToChanges(ObservationEvent ev){
-        if(ev instanceof WaypointsChanged){
-            super.notifyObserver(new SpreadResetOrderEvent(this));
-        }
-    }
+    
     
     @Override
     public void populationRefreshEventTreatment(PopulationRefreshEvent event){

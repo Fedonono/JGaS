@@ -54,19 +54,14 @@ public class ProblemUI extends JDialog implements View, Observer,Observable {
     private SelectMenu<EvaluationOperator> availableEvaluationOperators;
     private int availableEvaluationOperatorId;
     private static String validateButtonLabel = "validate";
-    private ValidateButton validateButton;
+    protected ValidateButton validateButton;
     private int validateButtonId;
     private StopCriteriaUI stopCriteriaUI;
     
     private double previousPopulationSize = 0;
-    private LinkedList<Observer> observers;
+    protected LinkedList<Observer> observers;
 
-    /**
-     *
-     */
-    public ProblemUI() {
-        this(null);
-    }
+    
 
     /**
      *

@@ -42,6 +42,7 @@ public abstract class Problem extends Model {
      */
     public Problem(){        
         this.stopCriteria = new StopCriteria();
+        this.addView(new ProblemUI(this));
         this.addSelectionOperator(TruncationSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalRankingSelectionOperator.getInstance());

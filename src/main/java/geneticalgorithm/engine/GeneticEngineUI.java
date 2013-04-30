@@ -136,7 +136,6 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             }
         } else if (ev instanceof ResizePopulationEvent) {
             this.controller.applyChanges(new ResizePopulation(this));
-
         }
     }
 

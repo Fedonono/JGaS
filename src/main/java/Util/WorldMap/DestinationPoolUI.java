@@ -38,7 +38,7 @@ import org.jdesktop.swingx.painter.Painter;
  *
  * @author simonneau
  */
-public class DestinationPoolUI extends IdentifiableObservableComponent implements View, MouseListener, Observer {
+public class DestinationPoolUI extends IdentifiableComponent implements View, MouseListener, Observer {
 
     private DestinationPoolController controller;
     private JXMapKit map;
@@ -78,7 +78,6 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
 
             CustomPainter overlay = new CustomPainter();
             overlay.addOverlay(painter);
-            this.notifyObservers();
             
         }
     }
@@ -140,6 +139,10 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
     public void mouseExited(MouseEvent me) {
     }
 
+    public void setFooterVisible(boolean visible){
+        this.footer.setVisible(visible);
+    }
+    
     @Override
     public void reactToChanges(ObservationEvent ev) {
 
@@ -150,13 +153,6 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
         } else if (ev instanceof ClearEvent) {
 
             this.controller.applyChanges(new ClearDestinationsUsrEvent(this));
-        }
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : this.observers) {
-            observer.reactToChanges(new WaypointsChanged(this));
         }
     }
 
