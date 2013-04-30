@@ -12,11 +12,19 @@ import GraphicalComponents.OptionLine;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
+import com.sun.java.swing.plaf.windows.WindowsBorders;
 import geneticalgorithm.Population.Individuals.Individual;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.metal.MetalBorders;
+import org.jdesktop.swingx.border.DropShadowBorder;
 
 /**
  *

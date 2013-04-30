@@ -22,10 +22,12 @@ import geneticalgorithm.Population.SpreadResetOrderEvent;
 import geneticalgorithm.Problem.ProblemUI;
 import geneticalgorithm.Problem.ResizePopulationEvent;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import javax.swing.JLabel;
+import javax.swing.border.EtchedBorder;
 
 /**
  *
@@ -125,10 +127,10 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
                 this.problemUI.setVisible(true);
 
             } else if (id == this.populationUI_id) {
-                
+
                 if (ev instanceof SpreadRefreshOrderEvent) {
                     this.controller.applyChanges(new UsrAskForRefreshEvent(this, ((SpreadRefreshOrderEvent) ev).isNeedingRefresh()));
-                    
+
                 } else if (ev instanceof SpreadResetOrderEvent) {
                     this.controller.applyChanges(new ResetEvent(this));
                 }
@@ -136,8 +138,8 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
             }
         } else if (ev instanceof ResizePopulationEvent) {
             this.controller.applyChanges(new ResizePopulation(this));
-            
-        }else if(ev instanceof SpreadResetOrderEvent){
+
+        } else if (ev instanceof SpreadResetOrderEvent) {
             this.controller.applyChanges(new ResetEvent(this));
         }
     }
@@ -168,7 +170,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         private DecimalFormat df = new DecimalFormat("0.00");
 
         public Footer() {
-
+            this.setBorder(new EtchedBorder(Color.lightGray, Color.white));
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
             this.refreshLabel();
             this.configure = new ValidateButton("configure");
@@ -225,6 +227,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         private LinkedList<Observer> observers = new LinkedList<>();
 
         public Header(boolean pause) {
+            this.setBorder(new EtchedBorder(Color.lightGray, Color.white));
             this.setLayout(new FlowLayout(FlowLayout.LEFT));
             this.pauseStep = new PauseStepPanel(pause);
 

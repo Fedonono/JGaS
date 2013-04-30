@@ -12,8 +12,12 @@ import geneticalgorithm.Population.PopulationController;
 import geneticalgorithm.Population.PopulationRefreshEvent;
 import geneticalgorithm.Population.PopulationUI;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import org.jdesktop.swingx.border.DropShadowBorder;
 
 /**
  *
@@ -45,6 +49,7 @@ public class TSPPopulationUI extends PopulationUI {
         
         LinkedList<Individual> samples = event.getSample();
         this.footer.refresh(samples);
+        this.footer.repaint();
     }
     
     private class Footer extends IdentifiableComponent{
@@ -52,7 +57,7 @@ public class TSPPopulationUI extends PopulationUI {
         
         public void refresh(LinkedList<Individual> sample){
             
-            this.setLayout(new FlowLayout());
+            this.setLayout(new FlowLayout(FlowLayout.CENTER));
             int rank = 1;
             
             for (Individual individual : sample) {
