@@ -27,7 +27,8 @@ public class TSPCrossOverOperator extends CrossOverOperator {
     @Override
     public Individual cross(Individual male, Individual female) {
 
-        TSPIndividual tspMale = (TSPIndividual) male;
+        
+        /*TSPIndividual tspMale = (TSPIndividual) male;
         TSPIndividual tspFemale = (TSPIndividual) female;
 
         ArrayList<Destination> malePath = tspMale.getPath();
@@ -49,7 +50,8 @@ public class TSPCrossOverOperator extends CrossOverOperator {
         DestinationPool dp = tspMale.getDestinations();
 
 
-        return new TSPIndividual(dp, this.repairPath(childPath, dp));
+        return new TSPIndividual(dp, this.repairPath(childPath, dp));*/
+        return TSPIndividual.createRandom(((TSPIndividual)male).getDestinations());
     }
 
     private ArrayList<Destination> repairPath(ArrayList<Destination> path, DestinationPool dp) {

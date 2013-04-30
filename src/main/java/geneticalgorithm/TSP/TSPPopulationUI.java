@@ -25,6 +25,8 @@ public class TSPPopulationUI extends PopulationUI {
         this.controller = controller;
         this.header.setController(controller);
         this.center = (DestinationPoolUI)source.getDestinationPool().getUI();
+        
+        this.removeAll();
         this.add(this.center, BorderLayout.CENTER);
         
     }
