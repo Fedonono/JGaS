@@ -12,19 +12,11 @@ import GraphicalComponents.OptionLine;
 import GraphicalComponents.ValidateButton;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
-import com.sun.java.swing.plaf.windows.WindowsBorders;
 import geneticalgorithm.Population.Individuals.Individual;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.plaf.metal.MetalBorders;
-import org.jdesktop.swingx.border.DropShadowBorder;
 
 /**
  *
@@ -74,13 +66,13 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         }
 
     }
-    
+
     /**
      *
      * @param event
      */
     public void populationRefreshEventTreatment(PopulationRefreshEvent event) {
-        System.out.println("toto");
+        
         LinkedList<Individual> samples = event.getSample();
 
         this.populationSample.setLayout(new FlowLayout());
@@ -165,8 +157,8 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             this.volumeOption.setValue(value);
             this.volumeOption.repaint();
         }
-        
-        public void setmaxValue(int maxValue){
+
+        public void setmaxValue(int maxValue) {
             this.volumeOption.setMaxValue(maxValue);
             this.volumeOption.repaint();
         }

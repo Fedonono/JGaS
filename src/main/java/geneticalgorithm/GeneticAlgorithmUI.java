@@ -44,6 +44,7 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
 
         this.header = new Header();
         this.header.addItems(ga.getProblems());
+        this.header.setSelectedItem(ga.getSelectedProblem());
         
         this.geUI = geUI;
         this.geUI.addObserver(this);
@@ -145,6 +146,10 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
             for (Observer o : this.observers) {
                 o.reactToChanges(ev);
             }
+        }
+        
+        public void setSelectedItem(Problem p){
+            this.selectMenu.setSelectedItem(p);
         }
 
         @Override

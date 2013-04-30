@@ -5,7 +5,6 @@ import MvcPattern.Model;
 import geneticalgorithm.Extremum.Extremum1D.Extremum1D;
 import geneticalgorithm.Extremum.Extremum2D.Extremum2D;
 import geneticalgorithm.Problem.Problem;
-import geneticalgorithm.Problem.ProblemUI;
 import geneticalgorithm.TSP.TSP;
 import geneticalgorithm.engine.GeneticEngine;
 import geneticalgorithm.engine.GeneticEngineUI;
@@ -32,6 +31,12 @@ public class GeneticAlgorithm extends Model {
         this.problems = new LinkedList<>();
 
     }
+
+    public Problem getSelectedProblem() {
+        return SelectedProblem;
+    }
+    
+    
 
     /**
      * set the selected problem with selectedProblem.

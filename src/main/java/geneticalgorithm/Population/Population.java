@@ -5,6 +5,7 @@
 package geneticalgorithm.Population;
 
 import MvcPattern.Model;
+import MvcPattern.View;
 import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Individuals.IndividualComparator;
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class Population extends Model {
      */
     public void add(Individual s) {
         this.individuals.add(s);
+    }
+    
+    @Override
+    public void addView(View v){
+        super.addView(v);
     }
 
     /**

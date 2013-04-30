@@ -63,4 +63,8 @@ public class SelectMenu<E> extends IdentifiableObservableComponent {
             o.reactToChanges(new SelectMenuEvent<>(this, this.getSelectedItem()));
         }
     }
+    
+    public void setSelectedItem(E item){
+        this.comboBox.setSelectedItem(item);
+    }
 }

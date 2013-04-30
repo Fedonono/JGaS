@@ -36,6 +36,7 @@ public class TSPCrossOverOperator extends CrossOverOperator {
         ArrayList<Destination> childPath = new ArrayList<>();
 
         int size = malePath.size();
+
         int middle = (int) Math.round(size / 2);
 
         for (int i = 0; i < middle; i++) {
@@ -47,54 +48,59 @@ public class TSPCrossOverOperator extends CrossOverOperator {
 
         DestinationPool dp = tspMale.getDestinations();
 
+
         return new TSPIndividual(dp, this.repairPath(childPath, dp));
     }
 
     private ArrayList<Destination> repairPath(ArrayList<Destination> path, DestinationPool dp) {
 
-        //supression des doublons
-        ArrayList<Integer> destinationId = new ArrayList<>();
-        int size = path.size();
-        for (int i = 0; i < size; i++) {
-
-            int id = path.get(i).getId();
-            Iterator<Integer> ids = destinationId.iterator();
+        
+        ArrayList<Destination> newPath = new ArrayList<>();
+        
+        //supression des doublons        
+        for (Destination destination : path) {
+            
+            int id = destination.getId();
+            
+            Iterator<Destination> destinations = newPath.iterator();
             boolean stop = false;
 
-            while (ids.hasNext() && !stop) {
-
-                if (id == ids.next()) {
-                    path.remove(i);
+            while (destinations.hasNext() && !stop) {
+                if (id != destinations.next().getId()) {
                     stop = true;
                 }
-                destinationId.add(id);
+            }
+            if (stop == false) {
+                newPath.add(destination);
             }
         }
-
+        
         //rajout des destinations manquabtes
         ArrayList<Destination> destinations = new ArrayList<>(dp.getDestinations());
-        size = destinations.size();
+        int size = destinations.size();
 
         for (int i = 0; i < size; i++) {
-            
+
             int destId = destinations.get(i).getId();
-            Iterator<Destination> waypoints = path.iterator();
+            Iterator<Destination> waypoints = newPath.iterator();
             boolean stop = false;
 
             while (waypoints.hasNext() && !stop) {
                 int id = waypoints.next().getId();
-                
+
                 if (id == destId) {
                     destinations.remove(i);
+                    size--;
                     stop = true;
                 }
             }
         }
-        
+
         for (Destination destination : destinations) {
-            path.add(destination);
+            newPath.add(destination);
         }
-        
+        newPath.add(newPath.get(0));
+
         return path;
     }
 }
