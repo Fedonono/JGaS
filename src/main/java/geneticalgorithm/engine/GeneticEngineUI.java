@@ -99,6 +99,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         } else if (ev instanceof EngineProblemRefreshEvent) {
 
             this.problemUI = ((EngineProblemRefreshEvent) ev).getProblemUI();
+            this.problemUI.addObserver(this);
 
         }
     }

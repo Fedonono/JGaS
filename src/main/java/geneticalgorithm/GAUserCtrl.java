@@ -33,7 +33,9 @@ public class GAUserCtrl implements Controller {
     
     @Override
     public void applyChanges(UserEvent event) {
+        
         if(event instanceof GAContextEvent){
+            
             GAContextEvent ev = (GAContextEvent)event;
             this.ag.setSelectedProblem(ev.getSelectedProblem());
         }

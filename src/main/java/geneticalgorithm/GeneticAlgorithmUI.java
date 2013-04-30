@@ -83,6 +83,7 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
+        
         if (ev instanceof NewContextEvent) {        
 
             this.notifyController((NewContextEvent) ev);

@@ -47,7 +47,6 @@ public class TSPUI extends ProblemUI {
     }
 
     private void notifyObserver(ObservationEvent ev) {
-
         for (Observer observer : this.observers) {
             observer.reactToChanges(ev);
         }

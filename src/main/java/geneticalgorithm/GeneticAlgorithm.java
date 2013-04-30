@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 public class GeneticAlgorithm extends Model {
 
     private LinkedList<Problem> problems;
-    private Problem SelectedProblem;
+    private Problem selectedProblem;
     private GeneticEngine geneticEngine;
     private CustomFrame mainFrame;
 
@@ -33,7 +33,7 @@ public class GeneticAlgorithm extends Model {
     }
 
     public Problem getSelectedProblem() {
-        return SelectedProblem;
+        return selectedProblem;
     }
 
     /**
@@ -42,7 +42,7 @@ public class GeneticAlgorithm extends Model {
      * @param SelectedProblem
      */
     public void setSelectedProblem(Problem SelectedProblem) {
-        this.SelectedProblem = SelectedProblem;
+        this.selectedProblem = SelectedProblem;
         this.start();
     }
 
@@ -53,7 +53,7 @@ public class GeneticAlgorithm extends Model {
      */
     public void addProblem(Problem problem) {
         this.problems.add(problem);
-        this.SelectedProblem = problem;
+        this.selectedProblem = problem;
     }
 
     /**
@@ -91,7 +91,7 @@ public class GeneticAlgorithm extends Model {
     public void run() {
 
         GAUserCtrl gaController = new GAUserCtrl(this);
-        this.geneticEngine = new GeneticEngine(this.SelectedProblem);
+        this.geneticEngine = new GeneticEngine(this.selectedProblem);
 
         GeneticAlgorithmUI mainUI = new GeneticAlgorithmUI(this, gaController, (GeneticEngineUI) this.geneticEngine.getUI());
         this.addView(mainUI);
@@ -109,7 +109,7 @@ public class GeneticAlgorithm extends Model {
      *
      */
     protected void start() {
-        this.geneticEngine = new GeneticEngine(this.SelectedProblem);
+        this.geneticEngine.setProblem(this.selectedProblem);
         this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
     }
 
