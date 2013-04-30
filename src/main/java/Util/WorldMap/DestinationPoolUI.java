@@ -38,7 +38,7 @@ import org.jdesktop.swingx.painter.Painter;
  *
  * @author simonneau
  */
-public class DestinationPoolUI extends IdentifiableComponent implements View, MouseListener, Observer {
+public class DestinationPoolUI extends IdentifiableObservableComponent implements View, MouseListener, Observer {
 
     private DestinationPoolController controller;
     private JXMapKit map;
@@ -78,6 +78,7 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
 
             CustomPainter overlay = new CustomPainter();
             overlay.addOverlay(painter);
+            this.map.getMainMap().setOverlayPainter(overlay);
             
         }
     }
@@ -149,10 +150,19 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
         if (ev instanceof AddPointEvent) {
             AddPointEvent event = (AddPointEvent) ev;
             this.controller.applyChanges(new AddDestinationUsrEvent(this, event.getPosition(), event.getLabel()));
+            this.notifyObservers();
 
         } else if (ev instanceof ClearEvent) {
 
             this.controller.applyChanges(new ClearDestinationsUsrEvent(this));
+            this.notifyObservers();
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.reactToChanges(new WayPointChangedEvent(this));
         }
     }
 
@@ -212,11 +222,11 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
                 int id = ((IdentifiableComponent) source).getId();
 
                 if (id == this.addPoint.getId()) {
-
+                    
                     this.notifyObserver(new AddPointEvent(this, new GeoPosition(this.latitude.getValue(), this.longitude.getValue()), this.label.getText()));
                     
                 } else if (id == this.clear.getId()) {
-
+                    
                     this.notifyObserver(new ClearEvent(this));
                 }
             }
@@ -286,4 +296,14 @@ public class DestinationPoolUI extends IdentifiableComponent implements View, Mo
             ((Graphics2D) g).draw(line);
         }
     }
+    
+    /*public static void main(String[] args){
+        DestinationPool dp = new DestinationPool();
+        DestinationPoolUI dpUI = (DestinationPoolUI)dp.getUI();
+        
+        JFrame frame = new JFrame();
+        frame.setSize(1200,800);
+        frame.add(dpUI);
+        frame.setVisible(true);
+    }*/
 }

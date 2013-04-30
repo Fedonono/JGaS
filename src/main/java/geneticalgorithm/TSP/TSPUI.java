@@ -25,11 +25,14 @@ public class TSPUI extends ProblemUI {
     private ValidateButton destinationPool;
     private JDialog destinationPoolUI;
     boolean waypointsChanged = false;
+    private int dpUIid;
 
     public TSPUI(TSP tsp) {
         super(tsp);
 
         DestinationPoolUI dpUI = (DestinationPoolUI) tsp.getDestinationPool().getUI();
+        this.dpUIid = dpUI.getId();
+        
         this.destinationPoolUI = new JDialog();
         this.destinationPoolUI.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.destinationPoolUI.setLayout(new BorderLayout());
@@ -40,6 +43,7 @@ public class TSPUI extends ProblemUI {
         this.add(this.destinationPool, FlowLayout.LEADING);
         
         this.destinationPool.addObserver(this);
+        dpUI.addObserver(this);
     }
 
     private void notifyObserver(ObservationEvent ev) {
@@ -64,8 +68,13 @@ public class TSPUI extends ProblemUI {
             } else if (id == this.validateButton.getId()) {
                 
                 if (this.waypointsChanged) {
+                    
                     this.notifyObserver(new SpreadResetOrderEvent(this));
+                    this.waypointsChanged = false;
                 }
+            }else if(id == this.dpUIid){
+                
+                this.waypointsChanged = true;
             }
         }
     }
