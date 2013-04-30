@@ -49,8 +49,8 @@ public class Extremum1D extends Problem {
     public Extremum1D() {
         this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
         this.addMutationOperator(new FunctionStepMutationOperator());
-        this.addEvaluationOperator(new FunctionMinimumEvaluationOperator());
         this.addEvaluationOperator(new FunctionMaximumEvaluationOperator());
+        this.addEvaluationOperator(new FunctionMinimumEvaluationOperator());
         
         this.setLabel(pbLabel);
     }

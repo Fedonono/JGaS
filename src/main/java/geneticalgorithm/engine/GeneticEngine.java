@@ -262,7 +262,7 @@ public class GeneticEngine extends Model implements Runnable {
         LinkedList<Individual> crossQueue = new LinkedList<>();
         ArrayList<Individual> individuals = this.population.getIndividuals();
 
-        CrossOverOperator crossoverOperator = this.problem.getSelectedCrossOverOperation();
+        CrossOverOperator crossoverOperator = this.problem.getSelectedCrossOverOperator();
         for (Individual individual : individuals) {
 
             if (Math.random() < this.problem.getCrossProbability()) {

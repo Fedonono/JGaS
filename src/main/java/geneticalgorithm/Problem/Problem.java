@@ -42,11 +42,12 @@ public abstract class Problem extends Model {
      */
     public Problem() {
         this.stopCriteria = new StopCriteria();
+        this.addSelectionOperator(RandomSelectionOperator.getInstance());
         this.addSelectionOperator(TruncationSelectionOperator.getInstance());
+        this.addSelectionOperator(TournamentSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalPerfomanceSelectionOperator.getInstance());
         this.addSelectionOperator(ProportionalRankingSelectionOperator.getInstance());
-        this.addSelectionOperator(TournamentSelectionOperator.getInstance());
-        this.addSelectionOperator(RandomSelectionOperator.getInstance());
+        
         this.addView(new ProblemUI(this));
     }
 
@@ -142,7 +143,7 @@ public abstract class Problem extends Model {
      *
      * @return 'this' selected CrossOverOperator.
      */
-    public CrossOverOperator getSelectedCrossOverOperation() {
+    public CrossOverOperator getSelectedCrossOverOperator() {
         return operators.getCrossoverOperator();
     }
 
