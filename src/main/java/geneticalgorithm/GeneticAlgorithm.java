@@ -94,6 +94,10 @@ public class GeneticAlgorithm extends Model {
      */
     public void run() {
 
+        this.addProblem(new TSP());
+        this.addProblem(new Extremum1D());
+        this.addProblem(new Extremum2D());
+
         GAUserCtrl gaController = new GAUserCtrl(this);
         this.geneticEngine = new GeneticEngine(this.selectedProblem);
 
@@ -110,7 +114,7 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     *  launch the engine.
+     * launch the engine.
      */
     protected void start() {
         this.geneticEngine.setProblem(this.selectedProblem);
@@ -134,9 +138,6 @@ public class GeneticAlgorithm extends Model {
     public static void main(String[] args) {
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
-        ga.addProblem(new TSP());
-        ga.addProblem(new Extremum1D());
-        ga.addProblem(new Extremum2D());
         ga.run();
     }
 }

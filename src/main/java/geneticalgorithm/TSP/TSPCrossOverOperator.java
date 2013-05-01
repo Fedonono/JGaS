@@ -34,20 +34,29 @@ public class TSPCrossOverOperator extends CrossOverOperator {
         TSPIndividual tspMale = (TSPIndividual) male;
         TSPIndividual tspFemale = (TSPIndividual) female;
 
-        ArrayList<Destination> malePath = tspMale.getPath();
-        ArrayList<Destination> femalePath = tspFemale.getPath();
+        ArrayList<Destination> bestPath;
+        ArrayList<Destination> worstPath;
+
+        if (male.getScore() >= female.getScore()) {
+            bestPath = tspMale.getPath();
+            worstPath = tspFemale.getPath();
+        } else {
+            bestPath = tspFemale.getPath();
+            worstPath = tspMale.getPath();
+        }
 
         ArrayList<Destination> childPath = new ArrayList<>();
 
-        int size = malePath.size();
+        int size = bestPath.size();
 
         int middle = (int) Math.round(size / 2);
 
-        for (int i = 0; i < size - 1; i += 2) {
-            childPath.add(malePath.get(i));
-            if (i + 1 < size) {
-                childPath.add(femalePath.get(i + 1));
-            }
+        for (int i = 0; i < middle; i++) {
+            childPath.add(bestPath.get(i));
+        }
+        for (int i = middle; i < size; i++) {
+            childPath.add(worstPath.get(i));
+
         }
 
         DestinationPool dp = tspMale.getDestinations();
