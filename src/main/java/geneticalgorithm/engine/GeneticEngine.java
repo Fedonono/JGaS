@@ -41,6 +41,7 @@ public class GeneticEngine extends Model implements Runnable {
      */
     public GeneticEngine(Problem problem) {
 
+        this.chronometer = new Chronometer();
         this.setProblem(problem);
 
         this.addView(new GeneticEngineUI(this, (PopulationUI) population.getUI()));
@@ -64,16 +65,16 @@ public class GeneticEngine extends Model implements Runnable {
     public boolean isPaused() {
         return this.pause;
     }
-    
-    public void resizePop(){
+
+    public void resizePop() {
         Population pop = this.problem.createInitialPopulation();
         Iterator<Individual> it = pop.iterator();
-        
+
         int newSize = this.problem.getPopulationSize();
         int currentSize = this.population.size();
-        
-        
-        while(it.hasNext() && currentSize < newSize){
+
+
+        while (it.hasNext() && currentSize < newSize) {
             this.population.add(it.next());
             currentSize++;
         }
@@ -82,7 +83,7 @@ public class GeneticEngine extends Model implements Runnable {
     /**
      *
      */
-    public void refreshPopulation()  {
+    public void refreshPopulation() {
         if (this.pause) {
             this.population.notifyViews();
         } else {
@@ -91,22 +92,18 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
-    public void reset(){
+    public void reset() {
         this.pause();
         this.chronometer.reset();
         this.evolutionCriterion = 1;
         this.stepCount = 0;
         this.setPopulation(this.problem.createInitialPopulation());
-        
-        this.notifyViews();
-        
-    }
-    
-    private void init() {
 
-        this.setPopulation(this.problem.createInitialPopulation());
-        this.chronometer = new Chronometer();
+        this.notifyViews();
+
     }
+
+    
 
     /**
      *
@@ -133,7 +130,7 @@ public class GeneticEngine extends Model implements Runnable {
         this.problem = problem;
         this.pause = true;
         this.notifyViews(new EngineProblemRefreshEvent(this, (ProblemUI) this.problem.getUI()));
-        this.init();
+        this.reset();
     }
 
     /**
@@ -170,19 +167,22 @@ public class GeneticEngine extends Model implements Runnable {
     /**
      * pause this.
      */
-    public void pause(){
-        this.pause = true;
-        this.chronometer.stop();
+    public void pause() {
+        if (!this.pause) {
+            this.pause = true;
+            this.chronometer.stop();
 
-        if (this.engine != null) {
-            try {
-                this.engine.join();
-            } catch (InterruptedException e) {
-                //TODO
+            if (this.engine != null) {
+                try {
+                    this.engine.join();
+                } catch (InterruptedException e) {
+                    //TODO
+                }
             }
-        }
 
-        this.population.notifyViews();
+            this.population.notifyViews();
+
+        }
     }
 
     /**
@@ -198,7 +198,6 @@ public class GeneticEngine extends Model implements Runnable {
         //this.population.notifyViews();
     }
 
-    
     private void engine() {
         this.engine = new Thread(this);
         engine.start();
