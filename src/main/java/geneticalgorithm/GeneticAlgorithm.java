@@ -29,6 +29,9 @@ public class GeneticAlgorithm extends Model {
      */
     public GeneticAlgorithm() {
         this.problems = new LinkedList<>();
+        this.addProblem(new TSP());
+        this.addProblem(new Extremum1D());
+        this.addProblem(new Extremum2D());
 
     }
 
@@ -132,11 +135,9 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     *
-     * @param args
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         GeneticAlgorithm ga = new GeneticAlgorithm();
         ga.run();
     }
