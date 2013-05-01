@@ -58,7 +58,7 @@ public class GeneticAlgorithm extends Model {
      *
      * @param problem
      */
-    public void addProblem(Problem problem) {
+    public final void addProblem(Problem problem) {
         this.problems.add(problem);
         this.selectedProblem = problem;
     }
@@ -96,10 +96,6 @@ public class GeneticAlgorithm extends Model {
      * run the genetic algorithm.
      */
     public void run() {
-
-        this.addProblem(new TSP());
-        this.addProblem(new Extremum1D());
-        this.addProblem(new Extremum2D());
 
         GAUserCtrl gaController = new GAUserCtrl(this);
         this.geneticEngine = new GeneticEngine(this.selectedProblem);
