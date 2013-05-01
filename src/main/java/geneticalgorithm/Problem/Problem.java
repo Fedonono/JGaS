@@ -169,7 +169,6 @@ public abstract class Problem extends Model {
      */
     public void setMutationProbability(double mutationProbability) {
         this.mutationProbability = mutationProbability;
-        this.notifyViews();
     }
 
     /**
@@ -178,7 +177,6 @@ public abstract class Problem extends Model {
      */
     public void setCrossProbability(double crossProbability) {
         this.crossProbability = crossProbability;
-        this.notifyViews();
     }
 
     /**
@@ -187,7 +185,6 @@ public abstract class Problem extends Model {
      */
     public void setSelectedMutationOperator(MutationOperator selectedMutationOperator) {
         this.operators.setMutationOperator(selectedMutationOperator);
-        this.notifyViews();
     }
 
     /**
@@ -196,7 +193,6 @@ public abstract class Problem extends Model {
      */
     public void setSelectedCrossOverOperation(CrossOverOperator selectedCrossOverOperation) {
         this.operators.setCrossoverOperator(selectedCrossOverOperation);
-        this.notifyViews();
     }
 
     /**
@@ -205,7 +201,6 @@ public abstract class Problem extends Model {
      */
     public void setSelectedSelectionOperator(SelectionOperator selectedSelectionOperator) {
         this.operators.setSelectionOperator(selectedSelectionOperator);
-        this.notifyViews();
     }
 
     /**
@@ -214,7 +209,6 @@ public abstract class Problem extends Model {
      */
     public void setSelectedEvaluationOperator(EvaluationOperator selectedEvaluationOperator) {
         this.operators.setEvaluationOperator(selectedEvaluationOperator);
-        this.notifyViews();
     }
 
     /**
@@ -223,7 +217,6 @@ public abstract class Problem extends Model {
      */
     public void setPopulationSize(int populationSize) {
         this.populationSize = populationSize;
-        this.notifyViews();
     }
 
     /**
@@ -286,6 +279,7 @@ public abstract class Problem extends Model {
     public void addMutationOperator(MutationOperator operator) {
         this.availableMutationOperators.add(operator);
         this.setSelectedMutationOperator(operator);
+        this.notifyViews();
 
     }
 
@@ -296,7 +290,7 @@ public abstract class Problem extends Model {
     public void addCrossOverOperator(CrossOverOperator operator) {
         this.availableCrossOverOperators.add(operator);
         this.setSelectedCrossOverOperation(operator);
-
+        this.notifyViews();
     }
 
     /**
@@ -306,7 +300,7 @@ public abstract class Problem extends Model {
     public final void addSelectionOperator(SelectionOperator operator) {
         this.availableSelectionOperators.add(operator);
         this.setSelectedSelectionOperator(operator);
-
+        this.notifyViews();
     }
 
     /**
@@ -316,7 +310,7 @@ public abstract class Problem extends Model {
     public void addEvaluationOperator(EvaluationOperator operator) {
         this.availableEvaluationOperator.add(operator);
         this.setSelectedEvaluationOperator(operator);
-
+        this.notifyViews();
     }
 
     @Override

@@ -121,23 +121,23 @@ public class ProblemUI extends JDialog implements View, Observer, Observable {
     }
 
     private void init(Problem pb) {
-        
+
         this.availableCrossOverOperators.removeAllItems();
         this.availableCrossOverOperators.addAll(pb.getAvailableCrossOverOperators());
         this.availableCrossOverOperators.setSelectedItem(pb.getSelectedCrossOverOperator());
-        
+
         this.availableEvaluationOperators.removeAllItems();
         this.availableEvaluationOperators.addAll(pb.getAvailableEvaluationOperator());
         this.availableEvaluationOperators.setSelectedItem(pb.getSelectedEvaluationOperator());
-        
+
         this.availableMutationOperators.removeAllItems();
         this.availableMutationOperators.addAll(pb.getAvailableMutationOperators());
         this.availableMutationOperators.setSelectedItem(pb.getSelectedMutationOperator());
-        
+
         this.availableSelectionOperators.removeAllItems();
         this.availableSelectionOperators.addAll(pb.getAvailableSelectionOperators());
         this.availableSelectionOperators.setSelectedItem(pb.getSelectedSelectionOperator());
-        
+
         this.mutationProbability.setValue(pb.getMutationProbability());
         this.crossProbability.setValue(pb.getCrossProbability());
         this.previousPopulationSize = pb.getPopulationSize();
