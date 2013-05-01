@@ -25,7 +25,6 @@ public class PopulationRefreshEvent extends RefreshEvent {
         super(source);
         this.sample = sample;
     }
-
     /**
      *
      * @return
@@ -33,5 +32,4 @@ public class PopulationRefreshEvent extends RefreshEvent {
     public LinkedList<Individual> getSample() {
         return sample;
     }
-    
 }
