@@ -66,6 +66,9 @@ public class GeneticEngine extends Model implements Runnable {
         return this.pause;
     }
 
+    /**
+     *
+     */
     public void resizePop() {
         Population pop = this.problem.createInitialPopulation();
         Iterator<Individual> it = pop.iterator();
@@ -92,6 +95,9 @@ public class GeneticEngine extends Model implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     public void reset() {
         this.pause();
         this.chronometer.reset();

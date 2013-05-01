@@ -20,10 +20,19 @@ public class CustomRadioButton extends IdentifiableObservableComponent implement
     private JRadioButton radioButton;
     
     
+    /**
+     *
+     * @param label
+     */
     public CustomRadioButton(String label){
         this(label, false);
     }
     
+    /**
+     *
+     * @param label
+     * @param selected
+     */
     public CustomRadioButton(String label, boolean selected){
         this.label = label;
         this.radioButton = new JRadioButton();
@@ -44,15 +53,27 @@ public class CustomRadioButton extends IdentifiableObservableComponent implement
         }
     }
 
+    /**
+     *
+     * @param ce
+     */
     @Override
     public void stateChanged(ChangeEvent ce) {
         this.notifyObservers();
     }
 
+    /**
+     *
+     * @param selected
+     */
     public void setSelected(boolean selected){
         this.radioButton.setSelected(selected);
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isSelected(){
         return this.radioButton.isSelected();
     }

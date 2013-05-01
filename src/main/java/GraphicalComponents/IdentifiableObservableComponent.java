@@ -12,6 +12,9 @@ import java.util.LinkedList;
  */
 public abstract class IdentifiableObservableComponent extends IdentifiableComponent implements Observable {
 
+    /**
+     *
+     */
     protected LinkedList<Observer> observers = new LinkedList<>();
 
     @Override

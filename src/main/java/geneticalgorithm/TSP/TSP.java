@@ -17,6 +17,9 @@ public class TSP extends Problem {
 
     private DestinationPool dp;
 
+    /**
+     *
+     */
     public TSP() {
         this.setLabel("TSP");
         this.dp = new DestinationPool();
@@ -46,6 +49,10 @@ public class TSP extends Problem {
         return pop;
     }
 
+    /**
+     *
+     * @return
+     */
     public DestinationPool getDestinationPool() {
         return dp;
     }

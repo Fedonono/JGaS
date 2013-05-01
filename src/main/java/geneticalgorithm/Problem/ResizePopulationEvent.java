@@ -12,6 +12,10 @@ import GraphicalComponents.ObservationEvent;
  */
 public class ResizePopulationEvent extends ObservationEvent{
     
+    /**
+     *
+     * @param source
+     */
     public ResizePopulationEvent(ProblemUI source){
         super(source);
     }

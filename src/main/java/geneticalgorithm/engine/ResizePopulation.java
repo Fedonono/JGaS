@@ -11,6 +11,10 @@ import MvcPattern.UserEvent;
  * @author simonneau
  */
 public class ResizePopulation extends UserEvent {
+    /**
+     *
+     * @param source
+     */
     public ResizePopulation(GeneticEngineUI source){
         super(source);
     }

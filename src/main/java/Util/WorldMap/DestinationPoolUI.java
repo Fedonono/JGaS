@@ -98,6 +98,10 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
 
     }
 
+    /**
+     *
+     * @param waypoints
+     */
     public void drawLoopPath(ArrayList<Destination> waypoints) {
 
         int size = waypoints.size();
@@ -118,6 +122,10 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
         this.map.getMainMap().setOverlayPainter(overlay);
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseClicked(MouseEvent me) {
         Point p = me.getPoint();
@@ -126,22 +134,42 @@ public class DestinationPoolUI extends IdentifiableObservableComponent implement
         this.footer.setGeoPosition(gp);
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mousePressed(MouseEvent me) {
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseReleased(MouseEvent me) {
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseEntered(MouseEvent me) {
     }
 
+    /**
+     *
+     * @param me
+     */
     @Override
     public void mouseExited(MouseEvent me) {
     }
 
+    /**
+     *
+     * @param visible
+     */
     public void setFooterVisible(boolean visible){
         this.footer.setVisible(visible);
     }

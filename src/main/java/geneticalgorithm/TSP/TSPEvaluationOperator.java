@@ -14,6 +14,9 @@ import geneticalgorithm.Population.Individuals.Individual;
 public class TSPEvaluationOperator extends EvaluationOperator{
     private static String LABEL = "total distance based evaluation";
     
+    /**
+     *
+     */
     public TSPEvaluationOperator(){
         super(LABEL);
     }

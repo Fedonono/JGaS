@@ -36,6 +36,11 @@ public class DestinationPool extends Model {
         this.notifyViews();
     }
     
+    /**
+     *
+     * @param label
+     * @param gp
+     */
     public void add(String label, GeoPosition gp){
         this.destinations.add(new Destination(label, gp));
         this.notifyViews();
@@ -72,6 +77,10 @@ public class DestinationPool extends Model {
         super.notifyViews(new DestinationPoolRefreshEvent(this));
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public DestinationPool clone(){
         

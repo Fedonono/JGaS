@@ -13,6 +13,10 @@ import GraphicalComponents.ObservationEvent;
  */
 public class SpreadResetOrderEvent extends ObservationEvent {
     
+    /**
+     *
+     * @param source
+     */
     public SpreadResetOrderEvent(Observable source){
         super(source);
     }

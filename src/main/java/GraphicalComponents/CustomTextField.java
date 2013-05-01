@@ -14,6 +14,9 @@ import javax.swing.JTextField;
  */
 public class CustomTextField extends IdentifiableObservableComponent implements Observer, ActionListener {
 
+    /**
+     *
+     */
     protected JTextField textField;
     private boolean notifyingDisabled = false;
 
@@ -62,6 +65,10 @@ public class CustomTextField extends IdentifiableObservableComponent implements 
         this.notifyObservers();
     }
     
+    /**
+     *
+     * @return
+     */
     public String getText(){
         return this.textField.getText();
     }

@@ -12,6 +12,10 @@ import GraphicalComponents.ObservationEvent;
  */
 public class WayPointChangedEvent extends ObservationEvent{
     
+    /**
+     *
+     * @param source
+     */
     public WayPointChangedEvent(DestinationPoolUI source){
         super(source);
     }

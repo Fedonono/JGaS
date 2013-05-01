@@ -20,6 +20,11 @@ public class TSPPopulationUI extends PopulationUI {
     private DestinationPoolUI center;
     
     
+    /**
+     *
+     * @param source
+     * @param controller
+     */
     public TSPPopulationUI(TSPPopulation source, PopulationController controller){
         
         this.controller = controller;

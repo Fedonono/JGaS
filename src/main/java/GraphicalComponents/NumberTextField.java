@@ -18,22 +18,49 @@ public class NumberTextField extends CustomTextField{
     private double maxValue;
     private double minValue;
     
+    /**
+     *
+     */
     public NumberTextField(){
         this("");
     }
     
+    /**
+     *
+     * @param label
+     */
     public NumberTextField(String label){
         this(label, 0);
     }
     
+    /**
+     *
+     * @param label
+     * @param value
+     */
     public NumberTextField(String label, double value){
         this(label,value, Double.MIN_VALUE, Double.MAX_VALUE);
     }
     
+    /**
+     *
+     * @param label
+     * @param value
+     * @param minValue
+     * @param maxValue
+     */
     public NumberTextField(String label, double value, double minValue, double maxValue){
         this(label, value, minValue, maxValue, 10);
     }
     
+    /**
+     *
+     * @param label
+     * @param value
+     * @param minValue
+     * @param maxValue
+     * @param columns
+     */
     public NumberTextField(String label, double value, double minValue, double maxValue, int columns){
         super(Double.toString(value), columns);
         
@@ -67,6 +94,10 @@ public class NumberTextField extends CustomTextField{
         }
     }
     
+    /**
+     *
+     * @param value
+     */
     public final void setValue(double value){
         
         if(value < this.minValue){
@@ -78,6 +109,10 @@ public class NumberTextField extends CustomTextField{
         this.textField.setText(Double.toString(value));
     }
     
+    /**
+     *
+     * @return
+     */
     public double getValue(){
         return this.value;
     }

@@ -11,6 +11,10 @@ import MvcPattern.UserEvent;
  * @author simonneau
  */
 public class ClearDestinationsUsrEvent extends UserEvent {
+    /**
+     *
+     * @param source
+     */
     public ClearDestinationsUsrEvent(DestinationPoolUI source){
         super(source);
     }

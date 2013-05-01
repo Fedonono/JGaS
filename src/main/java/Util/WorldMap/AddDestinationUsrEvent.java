@@ -17,16 +17,30 @@ public class AddDestinationUsrEvent extends UserEvent{
     private String label;
     
     
+    /**
+     *
+     * @param source
+     * @param position
+     * @param label
+     */
     public AddDestinationUsrEvent(DestinationPoolUI source, GeoPosition position, String label){
         super(source);
         this.position = position;
         this.label = label;
     }
 
+    /**
+     *
+     * @return
+     */
     public GeoPosition getPosition() {
         return position;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLabel() {
         return label;
     }

@@ -18,6 +18,9 @@ public class Chronometer {
     private boolean stoped = true;
 
     
+    /**
+     *
+     */
     public void reset(){
         this.stop();
         this.setTime(0);

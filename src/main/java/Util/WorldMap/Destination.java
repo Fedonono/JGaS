@@ -22,14 +22,19 @@ public class Destination extends Waypoint{
     /**
      *
      * @param label
-     * @param x
-     * @param y
+     * @param position 
      */
     public Destination(String label,GeoPosition position){
         super(position);
         this.Label = label;
     }
     
+    /**
+     *
+     * @param label
+     * @param latitude
+     * @param longitude
+     */
     public Destination(String label, double latitude, double longitude){
         this(label, new GeoPosition(latitude, longitude));
     }

@@ -64,10 +64,17 @@ public class SelectMenu<E> extends IdentifiableObservableComponent {
         }
     }
     
+    /**
+     *
+     */
     public void removeAllItems(){
         this.comboBox.removeAllItems();
     }
     
+    /**
+     *
+     * @param item
+     */
     public void setSelectedItem(E item){
         this.comboBox.setSelectedItem(item);
     }

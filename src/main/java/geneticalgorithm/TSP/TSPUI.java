@@ -27,6 +27,10 @@ public class TSPUI extends ProblemUI {
     boolean waypointsChanged = false;
     private int dpUIid;
 
+    /**
+     *
+     * @param tsp
+     */
     public TSPUI(TSP tsp) {
         super(tsp);
 

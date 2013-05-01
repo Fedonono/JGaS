@@ -123,7 +123,6 @@ public abstract class PopulationFunctionUI extends PopulationUI implements Obser
         for (Individual sample : samples) {
             this.add(sample);
         }
-        
     }
     
     private void add(Individual individual){

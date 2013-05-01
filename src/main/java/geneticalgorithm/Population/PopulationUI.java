@@ -24,6 +24,9 @@ import javax.swing.JPanel;
  */
 public class PopulationUI extends IdentifiableComponent implements View, Observable {
 
+    /**
+     *
+     */
     protected Header header;
     /**
      *
@@ -116,6 +119,9 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         this.header.notifyObservers();
     }
 
+    /**
+     *
+     */
     protected class Header extends IdentifiableComponent implements Observer, Observable {
 
         private PopulationUI boss;
@@ -124,6 +130,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         private ValidateButton refresh;
         private LinkedList<Observer> observers = new LinkedList<>();
 
+        /**
+         *
+         * @param boss
+         */
         public Header(PopulationUI boss) {
 
             this.boss = boss;
@@ -153,16 +163,28 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
         }
 
+        /**
+         *
+         * @param value
+         */
         public void setValue(int value) {
             this.volumeOption.setValue(value);
             this.volumeOption.repaint();
         }
 
+        /**
+         *
+         * @param maxValue
+         */
         public void setmaxValue(int maxValue) {
             this.volumeOption.setMaxValue(maxValue);
             this.volumeOption.repaint();
         }
 
+        /**
+         *
+         * @param controller
+         */
         public void setController(PopulationController controller) {
             this.controller = controller;
         }
@@ -177,6 +199,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             this.notifyObserver(new SpreadRefreshOrderEvent(boss, true));
         }
 
+        /**
+         *
+         * @param ev
+         */
         public void notifyObserver(ObservationEvent ev) {
             for (Observer o : this.observers) {
 

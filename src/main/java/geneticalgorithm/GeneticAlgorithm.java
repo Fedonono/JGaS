@@ -32,6 +32,10 @@ public class GeneticAlgorithm extends Model {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Problem getSelectedProblem() {
         return selectedProblem;
     }
@@ -70,7 +74,7 @@ public class GeneticAlgorithm extends Model {
     /**
      * return 'this' problems.
      *
-     * @return
+     * @return 'this' available problems.
      */
     public LinkedList<Problem> getProblems() {
         return this.problems;
@@ -79,7 +83,7 @@ public class GeneticAlgorithm extends Model {
     /**
      *
      * @param index
-     * @return
+     * @return the problem from index 'index in 'this' availables problems.
      */
     public Problem getProblem(int index) {
         return this.problems.get(index);
@@ -106,7 +110,7 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     *
+     *  launch the engine.
      */
     protected void start() {
         this.geneticEngine.setProblem(this.selectedProblem);

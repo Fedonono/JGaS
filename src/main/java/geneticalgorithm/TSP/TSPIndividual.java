@@ -15,9 +15,20 @@ import java.util.ArrayList;
  */
 public class TSPIndividual extends Individual<Individual> {
 
+    /**
+     *
+     */
     protected DestinationPool destinations;
+    /**
+     *
+     */
     protected ArrayList<Destination> path;
 
+    /**
+     *
+     * @param dp
+     * @return
+     */
     public static TSPIndividual createRandom(DestinationPool dp) {
 
         ArrayList<Destination> destinations = new ArrayList<>(dp.getDestinations());
@@ -38,16 +49,29 @@ public class TSPIndividual extends Individual<Individual> {
         return new TSPIndividual(dp, path);
     }
 
+    /**
+     *
+     * @param dp
+     * @param path
+     */
     public TSPIndividual(DestinationPool dp, ArrayList<Destination> path) {
         this.destinations = dp;
         this.path = path;
         this.addView(new TSPIndividualUI());
     }
 
+    /**
+     *
+     * @return
+     */
     public DestinationPool getDestinations() {
         return destinations;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Destination> getPath() {
         return path;
     }
@@ -61,6 +85,10 @@ public class TSPIndividual extends Individual<Individual> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public double getTotalDistance() {
         double distance = 0;
         int size = this.path.size();

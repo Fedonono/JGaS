@@ -16,12 +16,20 @@ public class TSPPopulation extends Population{
     
     private DestinationPool destinationPool;
     
+    /**
+     *
+     * @param destinationPool
+     */
     public TSPPopulation(DestinationPool destinationPool){
         
         this.destinationPool = destinationPool;
         this.addView(new TSPPopulationUI(this, new PopulationController(this)));
     }
 
+    /**
+     *
+     * @return
+     */
     public DestinationPool getDestinationPool() {
         return destinationPool;
     }

@@ -13,6 +13,10 @@ import MvcPattern.View;
  */
 public class ResetEvent extends UserEvent {
     
+    /**
+     *
+     * @param source
+     */
     public ResetEvent(View source){
         super(source);
     }

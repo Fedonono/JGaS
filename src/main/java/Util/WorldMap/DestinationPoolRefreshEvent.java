@@ -12,6 +12,10 @@ import MvcPattern.RefreshEvent;
  */
 public class DestinationPoolRefreshEvent extends RefreshEvent{
     
+    /**
+     *
+     * @param source
+     */
     public DestinationPoolRefreshEvent(DestinationPool source){
         super(source);
     }

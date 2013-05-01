@@ -16,6 +16,9 @@ public class TSPMutationOperator extends MutationOperator {
     
     private static String LABEL ="Random path";
     
+    /**
+     *
+     */
     public TSPMutationOperator(){
         super(LABEL);
     }

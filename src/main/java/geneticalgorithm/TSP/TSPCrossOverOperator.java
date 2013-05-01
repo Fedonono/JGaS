@@ -20,6 +20,9 @@ public class TSPCrossOverOperator extends CrossOverOperator {
 
     private static String LABEL = "Cross paths";
 
+    /**
+     *
+     */
     public TSPCrossOverOperator() {
         super(LABEL);
     }
