@@ -85,7 +85,7 @@ public class DestinationPool extends Model {
     public DestinationPool clone(){
         
         DestinationPool clone = new DestinationPool();
-        clone.setDestinations(this.destinations);
+        clone.addAll(this.destinations);
         clone.notifyViews();
         
         return clone;
