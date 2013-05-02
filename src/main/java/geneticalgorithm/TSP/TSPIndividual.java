@@ -97,17 +97,16 @@ public class TSPIndividual extends Individual<Individual> {
             Destination d1 = this.path.get(i);
             Destination d2 = this.path.get(i + 1);
 
-            
+
+            double R = 6371;
             double lat1 = Math.toRadians(d1.getPosition().getLatitude());
             double lat2 = Math.toRadians(d2.getPosition().getLatitude());
             double lon1 = Math.toRadians(d1.getPosition().getLongitude());
             double lon2 = Math.toRadians(d2.getPosition().getLongitude());
-
-            //calcul précis
-            double dp = 2 * Math.sqrt(Math.pow((lat1 - lat2),2 ) + Math.pow(lon1-lon2, 2));
-
-            //sortie en km
-            distance+=dp;
+            
+            double d = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)) * R;
+            
+            distance += d;
 
         }
 

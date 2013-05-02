@@ -46,6 +46,7 @@ public class Extremum1D extends Problem {
     /**
      *
      */
+    
     public Extremum1D() {
         this.addCrossOverOperator(new FunctionAverageCrossOverOperator());
         this.addMutationOperator(new FunctionStepMutationOperator());
@@ -57,10 +58,11 @@ public class Extremum1D extends Problem {
     
     /**
      * return the initial population.
-     * @return
+     * @return the initial population.
      */
     @Override
     public Population createInitialPopulation() {
+        
         PopulationFunction pop = null;
         Function function = null;
         PopulationFunctionUI fDUI = null;

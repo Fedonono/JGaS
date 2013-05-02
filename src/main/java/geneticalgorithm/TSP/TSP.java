@@ -26,7 +26,8 @@ public class TSP extends Problem {
         
         this.addCrossOverOperator(new TSPCrossOverOperator());
         this.addEvaluationOperator(new TSPEvaluationOperator());
-        this.addMutationOperator(new TSPMutationOperator());
+        this.addMutationOperator(new TSPRandomMutationOperator());
+        this.addMutationOperator(new TSPSwapMutationOperator());
         
         this.clearViews();
         this.addView(new TSPUI(this));

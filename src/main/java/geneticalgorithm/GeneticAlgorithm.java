@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.util.Collection;
 import java.util.LinkedList;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  * Hello world!
@@ -102,7 +103,6 @@ public class GeneticAlgorithm extends Model {
 
         GeneticAlgorithmUI mainUI = new GeneticAlgorithmUI(this, gaController, (GeneticEngineUI) this.geneticEngine.getUI());
         this.addView(mainUI);
-
         this.mainFrame = new CustomFrame();
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

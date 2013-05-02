@@ -12,14 +12,14 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author simonneau
  */
-public class TSPMutationOperator extends MutationOperator {
+public class TSPRandomMutationOperator extends MutationOperator {
     
     private static String LABEL ="Random path";
     
     /**
      *
      */
-    public TSPMutationOperator(){
+    public TSPRandomMutationOperator(){
         super(LABEL);
     }
 
