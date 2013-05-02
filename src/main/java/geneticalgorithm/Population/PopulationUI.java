@@ -5,6 +5,7 @@
 package geneticalgorithm.Population;
 
 import GraphicalComponents.IdentifiableComponent;
+import GraphicalComponents.IdentifiableObservableComponent;
 import GraphicalComponents.Observable;
 import GraphicalComponents.ObservationEvent;
 import GraphicalComponents.Observer;
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  *
  * @author simonneau
  */
-public class PopulationUI extends IdentifiableComponent implements View, Observable {
+public class PopulationUI extends IdentifiableObservableComponent implements View, Observable, Observer {
 
     /**
      *
@@ -101,34 +102,42 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         this.header.setController(controller);
     }
 
-    @Override
-    public void addObserver(Observer o) {
-        this.header.addObserver(o);
-    }
-
     /**
      *
      * @param ev
      */
     public void notifyObserver(ObservationEvent ev) {
-        this.header.notifyObserver(ev);
+        for (Observer o : this.observers) {
+                o.reactToChanges(ev);
+            }
     }
 
     @Override
     public void notifyObservers() {
-        this.header.notifyObservers();
+        this.notifyObserver(new SpreadRefreshOrderEvent(this, true));
+    }
+
+    @Override
+    public void reactToChanges(ObservationEvent ev) {
+        Observable source = ev.getSource();
+        if(source instanceof IdentifiableComponent){
+            int id = ((IdentifiableComponent)source).getId();
+            
+            if(id == this.header.getId()){
+                this.notifyObservers();
+            }
+        }
     }
 
     /**
      *
      */
-    protected class Header extends IdentifiableComponent implements Observer, Observable {
+    protected class Header extends IdentifiableObservableComponent implements Observer, Observable {
 
         private PopulationUI boss;
         private PopulationController controller;
         private OptionLine volumeOption;
         private ValidateButton refresh;
-        private LinkedList<Observer> observers = new LinkedList<>();
 
         /**
          *
@@ -190,13 +199,8 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
         }
 
         @Override
-        public void addObserver(Observer o) {
-            this.observers.add(o);
-        }
-
-        @Override
         public void notifyObservers() {
-            this.notifyObserver(new SpreadRefreshOrderEvent(boss, true));
+            this.notifyObserver(new SpreadRefreshOrderEvent(this, true));
         }
 
         /**
