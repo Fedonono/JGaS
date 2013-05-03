@@ -166,6 +166,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             }
 
         }
+        
+        public void setLabel(String label){
+            this.volumeOption.setLabel(label);
+        }
 
         /**
          *

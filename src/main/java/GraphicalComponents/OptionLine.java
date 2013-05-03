@@ -18,7 +18,7 @@ public class OptionLine extends IdentifiableObservableComponent implements Obser
     private int value;
     private CustomSlider slider;
     private CustomTextField textField;
-    private String label;
+    private JLabel label;
 
     /**
      *
@@ -35,11 +35,11 @@ public class OptionLine extends IdentifiableObservableComponent implements Obser
         this.maxValue = max;
         this.minValue = min;
         this.value = value;
-        this.label = text;
+        this.label = new JLabel(text);
 
         this.setLayout(new FlowLayout());
 
-        this.add(new JLabel(text), FlowLayout.LEFT);
+        this.add(this.label, FlowLayout.LEFT);
 
         this.slider = new CustomSlider(min, max, value);
 
@@ -59,6 +59,10 @@ public class OptionLine extends IdentifiableObservableComponent implements Obser
      */
     public void setValue(int value) {
         this.setValue(value, true);
+    }
+    
+    public void setLabel(String label){
+        this.label.setText(label);
     }
 
     private void setValue(int value, boolean notify) {
@@ -136,7 +140,7 @@ public class OptionLine extends IdentifiableObservableComponent implements Obser
      * @return 'this' label.
      */
     public String getLabel() {
-        return this.label;
+        return this.label.getText();
     }
 
     /**

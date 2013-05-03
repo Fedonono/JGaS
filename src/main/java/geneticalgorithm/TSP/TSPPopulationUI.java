@@ -29,7 +29,7 @@ public class TSPPopulationUI extends PopulationUI {
         
         this.controller = controller;
         this.header.setController(controller);
-        this.header.setVolumeVisible(false);
+        this.header.setLabel("individual rank");
         this.center = (DestinationPoolUI)source.getDestinationPool().getUI();
         
         this.removeAll();
@@ -42,6 +42,6 @@ public class TSPPopulationUI extends PopulationUI {
     public void populationRefreshEventTreatment(PopulationRefreshEvent event){
         
         LinkedList<Individual> samples = event.getSample();
-        samples.peekFirst().notifyViews();
+        samples.getLast().notifyViews();
     }
 }
