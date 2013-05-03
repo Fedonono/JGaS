@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  *
  * @author nono
  */
-public class Extremum1D extends Problem {
+public class Extremum1D extends Problem<FunctionIndividual> {
 
     private String strFunc = "sin(x)";
     private String pbLabel = "Extremum1D Problem";
