@@ -6,8 +6,7 @@ package geneticalgorithm.TSP;
 
 import Util.WorldMap.DestinationPool;
 import Util.WorldMap.DestinationPoolUI;
-import geneticalgorithm.Extremum.FunctionStepMutationOperator;
-import geneticalgorithm.Operators.Selection.TournamentSelectionOperator;
+import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problem.Problem;
 
@@ -32,7 +31,7 @@ public class TSP extends Problem<TSPIndividual> {
         this.addMutationOperator(new TSPSwapMutationOperator());
         
         // adviced configuration
-        this.setSelectedSelectionOperator(TournamentSelectionOperator.getInstance());
+        this.setSelectedSelectionOperator(TruncationSelectionOperator.getInstance());
         this.setPopulationSize(400);
         this.setMutationProbability(1);
         this.setCrossProbability(1);
