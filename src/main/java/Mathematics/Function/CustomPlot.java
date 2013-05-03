@@ -4,7 +4,6 @@
  */
 package Mathematics.Function;
 
-import Mathematics.Function.Function;
 import Mathematics.Point;
 import MvcPattern.RefreshEvent;
 import MvcPattern.View;
