@@ -6,6 +6,7 @@ package geneticalgorithm.TSP;
 
 import Util.WorldMap.DestinationPool;
 import Util.WorldMap.DestinationPoolUI;
+import geneticalgorithm.Extremum.FunctionStepMutationOperator;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problem.Problem;
 
@@ -13,7 +14,7 @@ import geneticalgorithm.Problem.Problem;
  *
  * @author simonneau
  */
-public class TSP extends Problem {
+public class TSP extends Problem<TSPIndividual> {
 
     private DestinationPool dp;
 

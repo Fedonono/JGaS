@@ -6,13 +6,12 @@ package geneticalgorithm.TSP;
 
 import Util.WorldMap.DestinationPool;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
-import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public class TSPRandomMutationOperator extends MutationOperator {
+public class TSPRandomMutationOperator extends MutationOperator<TSPIndividual> {
     
     private static String LABEL ="Random path";
     
@@ -24,8 +23,8 @@ public class TSPRandomMutationOperator extends MutationOperator {
     }
 
     @Override
-    public Individual mutate(Individual individual) {
-        DestinationPool dp = ((TSPIndividual)individual).getDestinations();
+    public TSPIndividual mutate(TSPIndividual individual) {
+        DestinationPool dp = individual.getDestinations();
         return TSPIndividual.createRandom(dp);
     }
 }

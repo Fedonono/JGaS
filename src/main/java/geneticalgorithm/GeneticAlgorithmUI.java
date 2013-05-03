@@ -45,7 +45,7 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
         this.header = new Header();
         this.header.addItems(ga.getProblems());
         this.header.setSelectedItem(ga.getSelectedProblem());
-        
+
         this.geUI = geUI;
         this.geUI.addObserver(this);
 
@@ -53,8 +53,8 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
         this.add(this.geUI, BorderLayout.CENTER);
         this.header.addObserver(this);
     }
-    
-    private void reset(){
+
+    private void reset() {
         this.removeAll();
         this.add(this.header, BorderLayout.NORTH);
         this.add(geUI, BorderLayout.CENTER);
@@ -83,12 +83,11 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
 
     @Override
     public void reactToChanges(ObservationEvent ev) {
-        
-        if (ev instanceof NewContextEvent) {        
+
+        if (ev instanceof NewContextEvent) {
 
             this.notifyController((NewContextEvent) ev);
-        }
-        else if(ev instanceof RepaintEvent){
+        } else if (ev instanceof RepaintEvent) {
             this.repaint();
             this.notifyObservers();
         }
@@ -101,12 +100,11 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
 
     @Override
     public void notifyObservers() {
-        for(Observer o : this.observers){
+        for (Observer o : this.observers) {
             o.reactToChanges(new RepaintEvent(this));
         }
     }
 
-    
     private class Header extends IdentifiableComponent implements Observable, Observer {
 
         private SelectMenu<Problem> selectMenu;
@@ -148,8 +146,8 @@ public class GeneticAlgorithmUI extends IdentifiableComponent implements View, O
                 o.reactToChanges(ev);
             }
         }
-        
-        public void setSelectedItem(Problem p){
+
+        public void setSelectedItem(Problem p) {
             this.selectMenu.setSelectedItem(p);
         }
 

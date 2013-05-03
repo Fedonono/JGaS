@@ -11,7 +11,7 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author simonneau
  */
-public abstract class EvaluationOperator extends Operator {
+public abstract class EvaluationOperator<T extends Individual> extends Operator {
 
     /**
      *
@@ -24,5 +24,5 @@ public abstract class EvaluationOperator extends Operator {
      * evaluate individual.
      * @param individual
      */
-    public abstract void evaluate(Individual individual);
+    public abstract void evaluate(T individual);
 }

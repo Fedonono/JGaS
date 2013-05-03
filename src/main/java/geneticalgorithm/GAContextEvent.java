@@ -11,25 +11,26 @@ import geneticalgorithm.Problem.Problem;
  *
  * @author simonneau
  */
-public class GAContextEvent extends UserEvent{
-    
+public class GAContextEvent extends UserEvent {
+
     Problem selectedProblem;
-    
+
     /**
      * Fired by a GeneticAlgorithmUI.
+     *
      * @param source
      * @param problem
      */
-    public GAContextEvent(GeneticAlgorithmUI source, Problem problem){
+    public GAContextEvent(GeneticAlgorithmUI source, Problem problem) {
         super(source);
         this.selectedProblem = problem;
     }
-    
+
     /**
      *
      * @return the source selected Problem.
      */
-    public Problem getSelectedProblem(){
+    public Problem getSelectedProblem() {
         return this.selectedProblem;
     }
 }

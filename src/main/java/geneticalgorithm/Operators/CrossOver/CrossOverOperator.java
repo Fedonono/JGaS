@@ -11,7 +11,7 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author simonneau
  */
-public abstract class CrossOverOperator extends Operator {
+public abstract class CrossOverOperator<T extends Individual> extends Operator {
 
     /**
      *
@@ -27,5 +27,5 @@ public abstract class CrossOverOperator extends Operator {
      * @param female
      * @return return the crossover between male and female.
      */
-    public abstract Individual cross(Individual male, Individual female);
+    public abstract T cross(T male, T female);
 }

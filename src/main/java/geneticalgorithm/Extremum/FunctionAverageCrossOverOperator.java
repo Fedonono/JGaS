@@ -12,7 +12,7 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author nono
  */
-public class FunctionAverageCrossOverOperator extends CrossOverOperator {
+public class FunctionAverageCrossOverOperator extends CrossOverOperator<FunctionIndividual> {
 
     private static String LABEL = "Average";
 
@@ -25,28 +25,27 @@ public class FunctionAverageCrossOverOperator extends CrossOverOperator {
 
     /**
      * cross male with female doing the average.
+     *
      * @param male
      * @param female
      * @return the male and female average.
      */
     @Override
-    public Individual cross(Individual male, Individual female) {
+    public FunctionIndividual cross(FunctionIndividual male, FunctionIndividual female) {
 
-        if (male instanceof FunctionIndividual && female instanceof FunctionIndividual) {
 
-            FunctionIndividual maleP = (FunctionIndividual) male;
-            FunctionIndividual femaleP = (FunctionIndividual) female;
 
-            if (maleP.getDimension() == femaleP.getDimension()) {
+        FunctionIndividual maleP = (FunctionIndividual) male;
+        FunctionIndividual femaleP = (FunctionIndividual) female;
 
-                Point newPoints = new Point(maleP.getPoint());
-                newPoints.average(femaleP.getPoint());
+        if (maleP.getDimension() == femaleP.getDimension()) {
 
-                return new FunctionIndividual(maleP.getFunction(), newPoints);
-            } else {
-                throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
-            }
+            Point newPoints = new Point(maleP.getPoint());
+            newPoints.average(femaleP.getPoint());
+
+            return new FunctionIndividual(maleP.getFunction(), newPoints);
+        } else {
+            throw new IllegalArgumentException("Cannot perform cross-over with different length parents.");
         }
-        throw new IllegalArgumentException("Cannot perform function average cross-over if the parents aren't compatible with this operator.");
     }
 }

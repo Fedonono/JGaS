@@ -16,6 +16,7 @@ import geneticalgorithm.Operators.Selection.RandomSelectionOperator;
 import geneticalgorithm.Operators.Selection.SelectionOperator;
 import geneticalgorithm.Operators.Selection.TournamentSelectionOperator;
 import geneticalgorithm.Operators.Selection.TruncationSelectionOperator;
+import geneticalgorithm.Population.Individuals.Individual;
 import geneticalgorithm.Population.Population;
 import geneticalgorithm.Problem.StopCriteria.StopCriteria;
 import java.util.LinkedList;
@@ -24,12 +25,12 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public abstract class Problem extends Model {
+public abstract class Problem<T extends Individual> extends Model {
 
-    private LinkedList<MutationOperator> availableMutationOperators = new LinkedList<>();
-    private LinkedList<CrossOverOperator> availableCrossOverOperators = new LinkedList<>();
+    private LinkedList<MutationOperator<T>> availableMutationOperators = new LinkedList<>();
+    private LinkedList<CrossOverOperator<T>> availableCrossOverOperators = new LinkedList<>();
     private LinkedList<SelectionOperator> availableSelectionOperators = new LinkedList<>();
-    private LinkedList<EvaluationOperator> availableEvaluationOperator = new LinkedList<>();
+    private LinkedList<EvaluationOperator<T>> availableEvaluationOperator = new LinkedList<>();
     private int populationSize = 20;
     private String label;
     private double mutationProbability = 0.1;
@@ -71,7 +72,7 @@ public abstract class Problem extends Model {
      *
      * @return
      */
-    public LinkedList<MutationOperator> getAvailableMutationOperators() {
+    public LinkedList<MutationOperator<T>> getAvailableMutationOperators() {
         return availableMutationOperators;
     }
 
@@ -79,7 +80,7 @@ public abstract class Problem extends Model {
      *
      * @return
      */
-    public LinkedList<CrossOverOperator> getAvailableCrossOverOperators() {
+    public LinkedList<CrossOverOperator<T>> getAvailableCrossOverOperators() {
         return availableCrossOverOperators;
     }
 
@@ -95,7 +96,7 @@ public abstract class Problem extends Model {
      *
      * @return
      */
-    public LinkedList<EvaluationOperator> getAvailableEvaluationOperator() {
+    public LinkedList<EvaluationOperator<T>> getAvailableEvaluationOperator() {
         return availableEvaluationOperator;
     }
 
@@ -135,7 +136,7 @@ public abstract class Problem extends Model {
      *
      * @return 'this' selected MutationOperator.
      */
-    public MutationOperator getSelectedMutationOperator() {
+    public MutationOperator<T> getSelectedMutationOperator() {
         return operators.getMutationOperator();
     }
 
@@ -143,7 +144,7 @@ public abstract class Problem extends Model {
      *
      * @return 'this' selected CrossOverOperator.
      */
-    public CrossOverOperator getSelectedCrossOverOperator() {
+    public CrossOverOperator<T> getSelectedCrossOverOperator() {
         return operators.getCrossoverOperator();
     }
 
@@ -159,7 +160,7 @@ public abstract class Problem extends Model {
      *
      * @return 'this' selected EvaluationOperator.
      */
-    public EvaluationOperator getSelectedEvaluationOperator() {
+    public EvaluationOperator<T> getSelectedEvaluationOperator() {
         return operators.getEvaluationOperator();
     }
 
@@ -183,7 +184,7 @@ public abstract class Problem extends Model {
      *
      * @param selectedMutationOperator
      */
-    public void setSelectedMutationOperator(MutationOperator selectedMutationOperator) {
+    public void setSelectedMutationOperator(MutationOperator<T> selectedMutationOperator) {
         this.operators.setMutationOperator(selectedMutationOperator);
     }
 
@@ -191,7 +192,7 @@ public abstract class Problem extends Model {
      *
      * @param selectedCrossOverOperation
      */
-    public void setSelectedCrossOverOperation(CrossOverOperator selectedCrossOverOperation) {
+    public void setSelectedCrossOverOperation(CrossOverOperator<T> selectedCrossOverOperation) {
         this.operators.setCrossoverOperator(selectedCrossOverOperation);
     }
 
@@ -207,7 +208,7 @@ public abstract class Problem extends Model {
      *
      * @param selectedEvaluationOperator
      */
-    public void setSelectedEvaluationOperator(EvaluationOperator selectedEvaluationOperator) {
+    public void setSelectedEvaluationOperator(EvaluationOperator<T> selectedEvaluationOperator) {
         this.operators.setEvaluationOperator(selectedEvaluationOperator);
     }
 
@@ -264,19 +265,13 @@ public abstract class Problem extends Model {
         this.operators = operators;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Operators getSelectedOperators() {
-        return this.operators;
-    }
+    
 
     /**
      *
      * @param operator
      */
-    public void addMutationOperator(MutationOperator operator) {
+    public void addMutationOperator(MutationOperator<T> operator) {
         this.availableMutationOperators.add(operator);
         this.setSelectedMutationOperator(operator);
         this.notifyViews();
@@ -287,7 +282,7 @@ public abstract class Problem extends Model {
      *
      * @param operator
      */
-    public void addCrossOverOperator(CrossOverOperator operator) {
+    public void addCrossOverOperator(CrossOverOperator<T> operator) {
         this.availableCrossOverOperators.add(operator);
         this.setSelectedCrossOverOperation(operator);
         this.notifyViews();
@@ -307,7 +302,7 @@ public abstract class Problem extends Model {
      *
      * @param operator
      */
-    public void addEvaluationOperator(EvaluationOperator operator) {
+    public void addEvaluationOperator(EvaluationOperator<T> operator) {
         this.availableEvaluationOperator.add(operator);
         this.setSelectedEvaluationOperator(operator);
         this.notifyViews();

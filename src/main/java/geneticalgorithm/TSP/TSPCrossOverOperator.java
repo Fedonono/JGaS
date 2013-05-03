@@ -16,7 +16,7 @@ import java.util.LinkedList;
  *
  * @author simonneau
  */
-public class TSPCrossOverOperator extends CrossOverOperator {
+public class TSPCrossOverOperator extends CrossOverOperator<TSPIndividual> {
 
     private static String LABEL = "Cross paths";
 
@@ -28,21 +28,20 @@ public class TSPCrossOverOperator extends CrossOverOperator {
     }
 
     @Override
-    public Individual cross(Individual male, Individual female) {
+    public TSPIndividual cross(TSPIndividual male, TSPIndividual female) {
 
 
-        TSPIndividual tspMale = (TSPIndividual) male;
-        TSPIndividual tspFemale = (TSPIndividual) female;
+        
 
         ArrayList<Destination> bestPath;
         ArrayList<Destination> worstPath;
 
         if (male.getScore() >= female.getScore()) {
-            bestPath = tspMale.getPath();
-            worstPath = tspFemale.getPath();
+            bestPath = male.getPath();
+            worstPath = female.getPath();
         } else {
-            bestPath = tspFemale.getPath();
-            worstPath = tspMale.getPath();
+            bestPath = female.getPath();
+            worstPath = male.getPath();
         }
 
         ArrayList<Destination> childPath = new ArrayList<>();
@@ -59,7 +58,7 @@ public class TSPCrossOverOperator extends CrossOverOperator {
 
         }
 
-        DestinationPool dp = tspMale.getDestinations();
+        DestinationPool dp = male.getDestinations();
 
 
         return new TSPIndividual(dp, this.repairPath(childPath, dp));

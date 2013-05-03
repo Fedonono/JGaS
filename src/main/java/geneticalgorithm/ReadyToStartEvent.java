@@ -12,24 +12,25 @@ import geneticalgorithm.engine.GeneticEngineUI;
  * @author simonneau
  */
 public class ReadyToStartEvent extends RefreshEvent {
-    
+
     private GeneticEngineUI engineUI;
-    
+
     /**
      * Fired by a GeneticAlgorithm.
+     *
      * @param source
      * @param engineUI
      */
-    public ReadyToStartEvent(GeneticAlgorithm source, GeneticEngineUI engineUI){
+    public ReadyToStartEvent(GeneticAlgorithm source, GeneticEngineUI engineUI) {
         super(source);
         this.engineUI = engineUI;
-    }   
-    
+    }
+
     /**
      *
      * @return the source EngineUI.
      */
-    public GeneticEngineUI getEngineUI(){
+    public GeneticEngineUI getEngineUI() {
         return this.engineUI;
     }
 }

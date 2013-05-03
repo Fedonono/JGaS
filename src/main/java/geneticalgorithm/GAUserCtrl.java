@@ -14,31 +14,31 @@ import MvcPattern.UserEvent;
 public class GAUserCtrl implements Controller {
 
     GeneticAlgorithm ag;
-    
+
     /**
-     * 
+     *
      * @param model
      */
-    public GAUserCtrl(GeneticAlgorithm model){
+    public GAUserCtrl(GeneticAlgorithm model) {
         this.ag = model;
     }
-    
+
     /**
      * set the controller target with ag.
+     *
      * @param ag
      */
-    public void set(GeneticAlgorithm ag){
+    public void set(GeneticAlgorithm ag) {
         this.ag = ag;
     }
-    
+
     @Override
     public void applyChanges(UserEvent event) {
-        
-        if(event instanceof GAContextEvent){
-            
-            GAContextEvent ev = (GAContextEvent)event;
+
+        if (event instanceof GAContextEvent) {
+
+            GAContextEvent ev = (GAContextEvent) event;
             this.ag.setSelectedProblem(ev.getSelectedProblem());
         }
     }
-    
 }

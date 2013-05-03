@@ -11,7 +11,7 @@ import geneticalgorithm.Population.Individuals.Individual;
  *
  * @author simonneau
  */
-public abstract class MutationOperator extends Operator {
+public abstract class MutationOperator <T extends Individual> extends Operator {
     
     /**
      *
@@ -26,5 +26,5 @@ public abstract class MutationOperator extends Operator {
      * @param individual
      * @return the mutant individual coming from individual.
      */
-    public abstract Individual mutate(Individual individual);
+    public abstract T mutate(T individual);
 }

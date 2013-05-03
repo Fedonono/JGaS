@@ -5,13 +5,12 @@
 package geneticalgorithm.TSP;
 
 import geneticalgorithm.Operators.Evaluation.EvaluationOperator;
-import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
  * @author simonneau
  */
-public class TSPEvaluationOperator extends EvaluationOperator{
+public class TSPEvaluationOperator extends EvaluationOperator<TSPIndividual>{
     private static String LABEL = "total distance based evaluation";
     
     /**
@@ -22,7 +21,7 @@ public class TSPEvaluationOperator extends EvaluationOperator{
     }
 
     @Override
-    public void evaluate(Individual individual) {
-        individual.setScore(-((TSPIndividual)individual).getTotalDistance());
+    public void evaluate(TSPIndividual individual) {
+        individual.setScore(-individual.getTotalDistance());
     }
 }

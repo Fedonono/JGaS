@@ -6,14 +6,13 @@ package geneticalgorithm.TSP;
 
 import Util.WorldMap.Destination;
 import geneticalgorithm.Operators.Mutation.MutationOperator;
-import geneticalgorithm.Population.Individuals.Individual;
 import java.util.ArrayList;
 
 /**
  *
  * @author simonneau
  */
-public class TSPSwapMutationOperator extends MutationOperator {
+public class TSPSwapMutationOperator extends MutationOperator<TSPIndividual> {
     
     private static String LABEL =  "swap destinations";
     
@@ -22,11 +21,11 @@ public class TSPSwapMutationOperator extends MutationOperator {
     }
 
     @Override
-    public Individual mutate(Individual individual) {
+    public TSPIndividual mutate(TSPIndividual individual) {
         
         
-        TSPIndividual tspIndividual = (TSPIndividual) individual;
-        ArrayList<Destination> path = new ArrayList<>(tspIndividual.getPath());
+        
+        ArrayList<Destination> path = new ArrayList<>(individual.getPath());
         
         int size = path.size();
         path.remove(size - 1);
@@ -49,6 +48,6 @@ public class TSPSwapMutationOperator extends MutationOperator {
         
         path.add(path.get(0));
         
-        return new TSPIndividual(tspIndividual.getDestinations(), path);
+        return new TSPIndividual(individual.getDestinations(), path);
     }
 }
