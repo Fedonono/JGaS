@@ -4,8 +4,6 @@
  */
 package Mathematics.Function;
 
-import Mathematics.Function.Function;
-import Mathematics.Function.Function2D;
 import Mathematics.Point;
 import Util.Tools.DoubleArray;
 import de.congrace.exp4j.UnknownFunctionException;
@@ -55,7 +53,7 @@ public class Custom2DPlot extends CustomPlot {
 
         // define the legend position
         plot.addLegend("SOUTH");
-        plot.addLinePlot(function.getLabel(), plotColor, x, this.getY((Function2D)function, x));
+        plot.addLinePlot(function.getLabel(), plotColor, x, this.getY(function, x));
 
         this.setPreferredSize(new Dimension(600, 600));
         this.add(plot, BorderLayout.CENTER);
@@ -90,10 +88,10 @@ public class Custom2DPlot extends CustomPlot {
      * @throws UnknownFunctionException
      * @throws UnparsableExpressionException
      */
-    public double[] getY(Function2D function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {
+    public double[] getY(Function function, double[] x) throws UnknownFunctionException, UnparsableExpressionException {
         double[] y = new double[x.length];
         for (int i = 0; i < x.length; i++) {
-            y[i] = function.getY(x[i]);
+            y[i] = function.getResult(new Point(x[i]));
         }
         return y;
     }

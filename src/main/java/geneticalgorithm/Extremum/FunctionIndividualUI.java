@@ -4,7 +4,6 @@
  */
 package geneticalgorithm.Extremum;
 
-import Mathematics.Function.Function2D;
 import MvcPattern.RefreshEvent;
 import geneticalgorithm.Extremum.PopulationFunctionUI;
 import geneticalgorithm.Population.Individuals.IndividualUI;

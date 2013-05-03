@@ -16,7 +16,7 @@ import geneticalgorithm.Extremum.FunctionRefreshEvent;
  *
  * @author nono
  */
-public abstract class Function extends Model {
+public class Function extends Model {
 
     private String label = null;
     /**
@@ -35,7 +35,7 @@ public abstract class Function extends Model {
      * @throws UnknownFunctionException
      * @throws UnparsableExpressionException
      */
-    protected Function(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
+    public Function(String function, Point domaine) throws UnknownFunctionException, UnparsableExpressionException {
         this.setFunction(function, domaine);
     }
 
@@ -128,9 +128,26 @@ public abstract class Function extends Model {
     }
     
     /**
+     * Prepare the libary to calculate the result, you must setVariable before to launch calc.calculate()
+     * If you want to do more than 3D calcul, you can override this method and add your own if (size) calc.setVariable (don't forget to call super.prepareCalc if you do that !)
+     */
+    protected void prepareCalc(Point points) {
+        int size=points.size();
+        if (size > 0) {
+            this.calc.setVariable("x", points.get(0));
+        }
+        if (size > 1) {
+            this.calc.setVariable("y", points.get(1));
+        }
+    }
+    
+    /**
      *
      * @param points
      * @return
      */
-    public abstract double getResult(Point points);
+    public double getResult(Point points) {
+        prepareCalc(points);
+        return this.calc.calculate();
+    }
 }

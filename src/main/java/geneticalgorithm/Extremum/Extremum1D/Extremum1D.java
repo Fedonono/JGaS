@@ -5,7 +5,6 @@
 package geneticalgorithm.Extremum.Extremum1D;
 
 import Mathematics.Function.Function;
-import Mathematics.Function.Function2D;
 import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
@@ -69,7 +68,7 @@ public class Extremum1D extends Problem<FunctionIndividual> {
         int popSize = this.getPopulationSize();
 
         try {
-            function = new Function2D(strFunc, new Point(xMin, xMax));
+            function = new Function(strFunc, new Point(xMin, xMax));
             pop = new PopulationFunction(function);
             fDUI = new PopulationFunction1DUI(strFunc, new PopulationFunctionController(pop), indColor, plotColor, plotStep);
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {

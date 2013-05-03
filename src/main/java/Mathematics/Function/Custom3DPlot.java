@@ -4,8 +4,6 @@
  */
 package Mathematics.Function;
 
-import Mathematics.Function.Function;
-import Mathematics.Function.Function3D;
 import Mathematics.Point;
 import Util.Tools.DoubleArray;
 import de.congrace.exp4j.UnknownFunctionException;
@@ -82,7 +80,7 @@ public class Custom3DPlot extends CustomPlot {
 
         // define the legend position
         plot.addLegend("SOUTH");
-        plot.addGridPlot(function.getLabel(), plotColor, x, y, f((Function3D)function,x,y));
+        plot.addGridPlot(function.getLabel(), plotColor, x, y, f(function,x,y));
 
         this.setPreferredSize(new Dimension(600, 600));
         this.add(plot, BorderLayout.CENTER);
@@ -98,11 +96,11 @@ public class Custom3DPlot extends CustomPlot {
      * @throws UnknownFunctionException
      * @throws UnparsableExpressionException
      */
-    public double[][] f(Function3D function, double[] x, double[] y) throws UnknownFunctionException, UnparsableExpressionException {
+    public double[][] f(Function function, double[] x, double[] y) throws UnknownFunctionException, UnparsableExpressionException {
         double[][] z = new double[y.length][x.length];
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < y.length; j++) {
-                z[j][i] = function.getZ(x[i], y[j]);
+                z[j][i] = function.getResult(new Point(x[i], y[j]));
             }
         }
         return z;

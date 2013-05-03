@@ -5,16 +5,15 @@
 package geneticalgorithm.Extremum.Extremum2D;
 
 import Mathematics.Function.Function;
-import Mathematics.Function.Function3D;
 import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
+import geneticalgorithm.Extremum.Extremum1D.Extremum1D;
+import geneticalgorithm.Extremum.FunctionIndividual;
 import geneticalgorithm.Extremum.PopulationFunction;
 import geneticalgorithm.Extremum.PopulationFunctionController;
 import geneticalgorithm.Extremum.PopulationFunctionUI;
-import geneticalgorithm.Extremum.FunctionIndividual;
 import geneticalgorithm.Population.Population;
-import geneticalgorithm.Extremum.Extremum1D.Extremum1D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,7 +52,7 @@ public class Extremum2D extends Extremum1D {
         int popSize = this.getPopulationSize();
 
         try {
-            function = new Function3D(strFunc, new Point(xMin, xMax, yMin, yMax));
+            function = new Function(strFunc, new Point(xMin, xMax, yMin, yMax));
             pop = new PopulationFunction(function);
             fDUI = new PopulationFunction2DUI(strFunc, new PopulationFunctionController(pop), indColor, plotColor, plotStep);
         } catch (UnknownFunctionException | UnparsableExpressionException ex) {
