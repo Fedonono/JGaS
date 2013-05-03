@@ -10,7 +10,6 @@ import Mathematics.Point;
 import de.congrace.exp4j.UnknownFunctionException;
 import de.congrace.exp4j.UnparsableExpressionException;
 import geneticalgorithm.Extremum.PopulationFunction;
-import geneticalgorithm.Extremum.Extremum2D.PopulationFunction2DUI;
 import geneticalgorithm.Extremum.PopulationFunctionController;
 import geneticalgorithm.Extremum.PopulationFunctionUI;
 import geneticalgorithm.Extremum.FunctionIndividual;

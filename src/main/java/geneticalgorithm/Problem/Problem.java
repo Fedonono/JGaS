@@ -31,6 +31,7 @@ public abstract class Problem<T extends Individual> extends Model {
     private LinkedList<CrossOverOperator<T>> availableCrossOverOperators = new LinkedList<>();
     private LinkedList<SelectionOperator> availableSelectionOperators = new LinkedList<>();
     private LinkedList<EvaluationOperator<T>> availableEvaluationOperator = new LinkedList<>();
+    
     private int populationSize = 20;
     private String label;
     private double mutationProbability = 0.1;
