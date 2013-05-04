@@ -23,6 +23,7 @@ import java.util.LinkedList;
 
 /**
  *
+ * @param <T> 
  * @author simonneau
  */
 public abstract class Problem<T extends Individual> extends Model {

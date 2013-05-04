@@ -130,6 +130,7 @@ public class Function extends Model {
     /**
      * Prepare the libary to calculate the result, you must setVariable before to launch calc.calculate()
      * If you want to do more than 3D calcul, you can override this method and add your own if (size) calc.setVariable (don't forget to call super.prepareCalc if you do that !)
+     * @param points 
      */
     protected void prepareCalc(Point points) {
         int size=points.size();

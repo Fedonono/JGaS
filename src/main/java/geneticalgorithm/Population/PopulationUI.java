@@ -149,6 +149,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
             this.refresh.addObserver(this);
         }
         
+        /**
+         *
+         * @param visible
+         */
         public void setVolumeVisible(boolean visible){
             this.volumeOption.setVisible(visible);
         }
@@ -167,6 +171,10 @@ public class PopulationUI extends IdentifiableComponent implements View, Observa
 
         }
         
+        /**
+         *
+         * @param label
+         */
         public void setLabel(String label){
             this.volumeOption.setLabel(label);
         }

@@ -61,6 +61,10 @@ public class OptionLine extends IdentifiableObservableComponent implements Obser
         this.setValue(value, true);
     }
     
+    /**
+     *
+     * @param label
+     */
     public void setLabel(String label){
         this.label.setText(label);
     }

@@ -16,6 +16,9 @@ public class TSPSwapMutationOperator extends MutationOperator<TSPIndividual> {
     
     private static String LABEL =  "swap destinations";
     
+    /**
+     *
+     */
     public TSPSwapMutationOperator(){
         super(LABEL);
     }

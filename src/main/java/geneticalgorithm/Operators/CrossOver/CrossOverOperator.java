@@ -9,6 +9,7 @@ import geneticalgorithm.Population.Individuals.Individual;
 
 /**
  *
+ * @param <T> 
  * @author simonneau
  */
 public abstract class CrossOverOperator<T extends Individual> extends Operator {
