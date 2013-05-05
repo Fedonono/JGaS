@@ -24,7 +24,7 @@ public class GeneticAlgorithm extends Model {
     private Problem selectedProblem;
     private GeneticEngine geneticEngine;
     private CustomFrame mainFrame;
-    private boolean UIvisible = true;
+    private boolean UIvisible = false;
 
     /**
      *
@@ -34,6 +34,7 @@ public class GeneticAlgorithm extends Model {
         this.addProblem(new TSP());
         this.addProblem(new Extremum1D());
         this.addProblem(new Extremum2D());
+        this.init();
 
     }
 
@@ -97,7 +98,7 @@ public class GeneticAlgorithm extends Model {
     /**
      * run the genetic algorithm.
      */
-    public void run() {
+    private void init() {
         if (this.geneticEngine == null) {
             this.geneticEngine = new GeneticEngine(this.selectedProblem);
         } else {
@@ -138,9 +139,9 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     * resume the engine.
+     * run the engine.
      */
-    public void resume() {
+    public void run() {
         if (this.geneticEngine != null && this.geneticEngine.isPaused()) {
             this.geneticEngine.resume();
         }
@@ -161,9 +162,9 @@ public class GeneticAlgorithm extends Model {
     }
 
     /**
-     * launch the engine.
+     * restart the engine.
      */
-    protected void restart() {
+    public void restart() {
         this.geneticEngine.setProblem(this.selectedProblem);
         this.notifyViews(new ReadyToStartEvent(this, (GeneticEngineUI) this.geneticEngine.getUI()));
     }
@@ -183,6 +184,6 @@ public class GeneticAlgorithm extends Model {
      */
     public static void main(String[] args) {
         GeneticAlgorithm ga = new GeneticAlgorithm();
-        ga.run();
+        ga.setUIVisible(true);
     }
 }

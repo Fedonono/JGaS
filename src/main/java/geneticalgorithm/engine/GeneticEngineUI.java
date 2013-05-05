@@ -85,6 +85,7 @@ public class GeneticEngineUI extends IdentifiableComponent implements View, Obse
         if (ev instanceof EngineRefreshEvent) {
 
             EngineRefreshEvent event = (EngineRefreshEvent) ev;
+            this.header.setPause(event.isPaused());
             this.footer.setStepCount(event.getStepCount());
             this.footer.setTimeout(event.getTimeout());
             this.footer.setEvolutionCriterion(event.getEvolutionCriterion());

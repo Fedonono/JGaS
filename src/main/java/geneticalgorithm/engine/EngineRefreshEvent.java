@@ -15,6 +15,7 @@ public class EngineRefreshEvent extends RefreshEvent {
     long timeout;
     int currentStepCount;
     double evolutionCriterion;
+    boolean paused;
 
     /**
      *
@@ -23,12 +24,19 @@ public class EngineRefreshEvent extends RefreshEvent {
      * @param stepCount
      * @param evolutionCriterion
      */
-    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount, double evolutionCriterion) {
+    public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount, double evolutionCriterion, boolean paused) {
         super(source);
         this.timeout = timeout;
         this.currentStepCount = stepCount;
         this.evolutionCriterion = evolutionCriterion;
+        this.paused = paused;
     }
+
+    public boolean isPaused() {
+        return paused;
+    }
+    
+    
 
     /**
      *

@@ -17,7 +17,6 @@ import geneticalgorithm.Problem.ProblemUI;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
@@ -55,7 +54,7 @@ public class GeneticEngine extends Model implements Runnable {
     public final void addView(View geUI) {
 
         super.addView(geUI);
-        geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount, this.evolutionCriterion));
+        geUI.refresh(new EngineRefreshEvent(this, this.chronometer.getTime(), this.stepCount, this.evolutionCriterion,this.pause));
     }
 
     /**
@@ -165,6 +164,7 @@ public class GeneticEngine extends Model implements Runnable {
     public void resume() {
         if (this.pause) {
             this.pause = false;
+            this.notifyViews();
             this.chronometer.start();
             this.engine();
         }
@@ -176,6 +176,7 @@ public class GeneticEngine extends Model implements Runnable {
     public void pause() {
         if (!this.pause) {
             this.pause = true;
+            this.notifyViews();
             this.chronometer.stop();
 
             if (this.engine != null) {
@@ -362,6 +363,6 @@ public class GeneticEngine extends Model implements Runnable {
     @Override
     public void notifyViews() {
         long time = this.chronometer.getTime();
-        super.notifyViews(new EngineRefreshEvent(this, time, this.stepCount, this.evolutionCriterion));
+        super.notifyViews(new EngineRefreshEvent(this, time, this.stepCount, this.evolutionCriterion,this.pause));
     }
 }
