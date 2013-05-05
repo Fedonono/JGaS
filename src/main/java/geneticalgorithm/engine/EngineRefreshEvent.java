@@ -23,6 +23,7 @@ public class EngineRefreshEvent extends RefreshEvent {
      * @param timeout
      * @param stepCount
      * @param evolutionCriterion
+     * @param paused  
      */
     public EngineRefreshEvent(GeneticEngine source, long timeout, int stepCount, double evolutionCriterion, boolean paused) {
         super(source);
@@ -32,6 +33,10 @@ public class EngineRefreshEvent extends RefreshEvent {
         this.paused = paused;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isPaused() {
         return paused;
     }
