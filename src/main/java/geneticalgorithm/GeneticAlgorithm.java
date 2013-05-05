@@ -185,5 +185,6 @@ public class GeneticAlgorithm extends Model {
     public static void main(String[] args) {
         GeneticAlgorithm ga = new GeneticAlgorithm();
         ga.setUIVisible(true);
+        ga.run();
     }
 }

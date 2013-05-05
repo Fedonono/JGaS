@@ -201,8 +201,7 @@ public class GeneticEngine extends Model implements Runnable {
 
             this.evolve();
         }
-
-        //this.population.notifyViews();
+        this.pause();
     }
 
     private void engine() {
