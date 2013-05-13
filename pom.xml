@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>group5</groupId>
-    <artifactId>JGaSolver</artifactId>
+    <artifactId>groupe5</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>JGaSolver</name>
+    <name>groupe5</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>
@@ -50,7 +50,7 @@
         <repository>
             <id> jmathplot_repo </id>
             <name> jmathplot maven repository </name>
-            <url> http://igetdb.sourceforge.net/maven2-repository/jmathplot/jmathplot/1.0/ </url>
+            <url> http://igetdb.sourceforge.net/maven2-repository/ </url> <!-- corrigé par MSO -->
         </repository>
     </repositories>  
 
@@ -72,11 +72,11 @@
             <version>1.0-201002281504</version>
             <type>nbm</type>
         </dependency>
-        <dependency>
-            <groupId>berlios</groupId>
+        <dependency>  <!-- corrigé par MSO -->
+            <groupId>jmathplot</groupId>
             <artifactId>jmathplot</artifactId>
-            <version>39</version>
-            <type>jar</type>
+            <version>1.0</version>
+
         </dependency>
     </dependencies>
 </project>
