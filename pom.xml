@@ -50,7 +50,7 @@
         <repository>
             <id> jmathplot_repo </id>
             <name> jmathplot maven repository </name>
-            <url> http://igetdb.sourceforge.net/maven2-repository/ </url> <!-- corrigé par MSO -->
+            <url> http://igetdb.sourceforge.net/maven2-repository/ </url> <!-- corrigé par MSO -> Malus -->
         </repository>
     </repositories>  
 
@@ -72,7 +72,7 @@
             <version>1.0-201002281504</version>
             <type>nbm</type>
         </dependency>
-        <dependency>  <!-- corrigé par MSO -->
+        <dependency>  <!-- corrigé par MSO -> Malus -->
             <groupId>jmathplot</groupId>
             <artifactId>jmathplot</artifactId>
             <version>1.0</version>
